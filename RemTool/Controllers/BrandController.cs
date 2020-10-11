@@ -6,45 +6,72 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using RemTool.Models;
-using RemTool.Infrastructure.Interfaces.Services;
 using RemTool.Services.SqlSE;
 
 namespace RemTool.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/brands")]
     [ApiController]
-    public class BrandController : ControllerBase, IBrandService
+    public class BrandController : ControllerBase
     {
+        private ApplicationContext db;
 
-
-        public void CreateBrand(Brand brand)
+        public BrandController(ApplicationContext context)
         {
-            throw new NotImplementedException();
+            db = context;
+            if (!db.Brands.Any())
+            {
+                db.Brands.Add(new Brand { Name = "Caterpillar", Description = "Caterpillar description" });
+                db.Brands.Add(new Brand { Name = "StroyBat", Description = "StroyBat description" });
+                db.Brands.Add(new Brand { Name = "FastBuilder", Description = "FastBuilder description" });
+                db.SaveChanges();
+            }
         }
 
-        public void DeleteAllBrands()
+        [HttpGet]
+        public IEnumerable<Brand> Get()
         {
-            throw new NotImplementedException();
+            return db.GetAllBrands();
         }
 
-        public void DeleteBrand(int id)
+        [HttpGet("{id}")]
+        public Brand Get(int id)
         {
-            throw new NotImplementedException();
+            Brand brand = db.ReadBrand(id);
+            return brand;
         }
 
-        public IEnumerable<Brand> GetAllBrands()
+        [HttpPost]
+        public IActionResult Post(Brand brand)
         {
-            throw new NotImplementedException();
+            if (ModelState.IsValid)
+            {
+                db.CreateBrand(brand);
+                return Ok(brand);
+            }
+            return BadRequest(ModelState);
         }
 
-        public Brand ReadBrand(int id)
+        [HttpPut]
+        public IActionResult Put(Brand brand)
         {
-            throw new NotImplementedException();
+            if (ModelState.IsValid)
+            {
+                db.UpdateBrand(brand);
+                return Ok(brand);
+            }
+            return BadRequest(ModelState);
         }
 
-        public void UpdateBrand(Brand brand)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
         {
-            throw new NotImplementedException();
+            Brand brand = db.ReadBrand(id);
+            if (brand != null)
+            {
+                db.DeleteBrand(id);
+            }
+            return Ok(brand);
         }
     }
 }

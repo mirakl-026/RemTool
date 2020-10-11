@@ -6,45 +6,72 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using RemTool.Models;
-using RemTool.Infrastructure.Interfaces.Services;
 using RemTool.Services.SqlSE;
 
 namespace RemTool.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/spareparts")]
     [ApiController]
-    public class SparePartController : ControllerBase, ISparePartService
+    public class SparePartController : ControllerBase
     {
+        private ApplicationContext db;
 
-
-        public void CreateSparePart(SparePart sparePart)
+        public SparePartController(ApplicationContext context)
         {
-            throw new NotImplementedException();
+            db = context;
+            if (!db.SpareParts.Any())
+            {
+                db.SpareParts.Add(new SparePart { Name = "Cooler", Description = "Cooler description" });
+                db.SpareParts.Add(new SparePart { Name = "PowerSupply", Description = "PowerSupply description" });
+                db.SpareParts.Add(new SparePart { Name = "Riser", Description = "Riser description" });
+                db.SaveChanges();
+            }
         }
 
-        public void DeleteAllSpareParts()
+        [HttpGet]
+        public IEnumerable<SparePart> Get()
         {
-            throw new NotImplementedException();
+            return db.GetAllSpareParts();
         }
 
-        public void DeleteSparePart(int id)
+        [HttpGet("{id}")]
+        public SparePart Get(int id)
         {
-            throw new NotImplementedException();
+            SparePart sparePart = db.ReadSparePart(id);
+            return sparePart;
         }
 
-        public IEnumerable<Tool> GetAllSpareParts()
+        [HttpPost]
+        public IActionResult Post(SparePart sparePart)
         {
-            throw new NotImplementedException();
+            if (ModelState.IsValid)
+            {
+                db.CreateSparePart(sparePart);
+                return Ok(sparePart);
+            }
+            return BadRequest(ModelState);
         }
 
-        public SparePart ReadSparePart(int id)
+        [HttpPut]
+        public IActionResult Put(SparePart sparePart)
         {
-            throw new NotImplementedException();
+            if (ModelState.IsValid)
+            {
+                db.UpdateSparePart(sparePart);
+                return Ok(sparePart);
+            }
+            return BadRequest(ModelState);
         }
 
-        public void UpdateSparePart(SparePart sparePart)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
         {
-            throw new NotImplementedException();
+            SparePart sparePart = db.ReadSparePart(id);
+            if (sparePart != null)
+            {
+                db.DeleteSparePart(id);
+            }
+            return Ok(sparePart);
         }
     }
 }

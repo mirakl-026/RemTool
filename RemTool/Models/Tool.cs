@@ -10,11 +10,13 @@ namespace RemTool.Models
     {
         public int Id { get; set; }
 
+        public string Name { get; set; }
+
         public int MainType { get; set; }
 
         public int SecondaryType { get; set; }
 
-        public Brand Brand { get; set; }
+        public string BrandName { get; set; }
 
         public string Specs { get; set; }
 

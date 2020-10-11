@@ -6,46 +6,72 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using RemTool.Models;
-using RemTool.Infrastructure.Interfaces.Services;
 using RemTool.Services.SqlSE;
 
 namespace RemTool.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/tools")]
     [ApiController]
-    public class ToolController : ControllerBase, IToolService
+    public class ToolController : ControllerBase
     {
+        private ApplicationContext db;
 
-
-
-        public void CreateTool(Tool tool)
+        public ToolController(ApplicationContext context)
         {
-            throw new NotImplementedException();
+            db = context;
+            if (!db.Tools.Any())
+            {
+                db.Tools.Add(new Tool { Name = "Lamp F1000", Description = "Lamp F1000 description" });
+                db.Tools.Add(new Tool { Name = "Saw X101", Description = "Saw X101 description" });
+                db.Tools.Add(new Tool { Name = "Bolgarka-1", Description = "Bolgarka-1 description" });
+                db.SaveChanges();
+            }
         }
 
-        public void DeleteAllTools()
+        [HttpGet]
+        public IEnumerable<Tool> Get()
         {
-            throw new NotImplementedException();
+            return db.GetAllTools();
         }
 
-        public void DeleteTool(int id)
+        [HttpGet("{id}")]
+        public Tool Get(int id)
         {
-            throw new NotImplementedException();
+            Tool tool = db.ReadTool(id);
+            return tool;
         }
 
-        public IEnumerable<Tool> GetAllTools()
+        [HttpPost]
+        public IActionResult Post(Tool tool)
         {
-            throw new NotImplementedException();
+            if (ModelState.IsValid)
+            {
+                db.CreateTool(tool);
+                return Ok(tool);
+            }
+            return BadRequest(ModelState);
         }
 
-        public Tool ReadTool(int id)
+        [HttpPut]
+        public IActionResult Put(Tool tool)
         {
-            throw new NotImplementedException();
+            if (ModelState.IsValid)
+            {
+                db.UpdateTool(tool);
+                return Ok(tool);
+            }
+            return BadRequest(ModelState);
         }
 
-        public void UpdateTool(Tool tool)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
         {
-            throw new NotImplementedException();
+            Tool tool = db.ReadTool(id);
+            if (tool != null)
+            {
+                db.DeleteTool(id);
+            }
+            return Ok(tool);
         }
     }
 }
