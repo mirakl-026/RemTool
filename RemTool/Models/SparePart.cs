@@ -12,7 +12,7 @@ namespace RemTool.Models
 
         public string Name { get; set; }
 
-        public Brand Brand { get; set; }
+        public string BrandName { get; set; }
 
         public string Specs { get; set; }
 

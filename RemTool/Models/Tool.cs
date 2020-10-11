@@ -16,7 +16,7 @@ namespace RemTool.Models
 
         public int SecondaryType { get; set; }
 
-        public Brand Brand { get; set; }
+        public string BrandName { get; set; }
 
         public string Specs { get; set; }
 
