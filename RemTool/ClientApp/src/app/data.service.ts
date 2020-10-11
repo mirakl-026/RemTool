@@ -32,7 +32,7 @@ export class DataService {
         return this.http.put(this.urlBrands, brand);
     }
 
-    deleteDelete(id: number) {
+    deleteBrand(id: number) {
         return this.http.delete(this.urlBrands + '/' + id);
     }
 
