@@ -31,6 +31,8 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         this.loadBrands();    // загрузка данных при старте компонента  
+        this.loadTools();
+        this.loadSpareParts();
     }
 
     // Brands

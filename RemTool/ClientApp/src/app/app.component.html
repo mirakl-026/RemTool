@@ -1,0 +1,63 @@
+﻿<h1>Список брендов</h1>
+<input type="button" value="Добавить" class="btn btn-default" (click)="addBrand()" />
+<table *ngIf="tableMode; else createBrand" class="table table-striped">
+    <thead>
+
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<!--шаблон для редактирования брендов-->
+<ng-template #editBrand>
+
+</ng-template>
+
+<!--шаблон для добавления брендов-->
+<ng-template #createBrand>
+
+</ng-template>
+
+
+<h1>Список Инструментов</h1>
+<input type="button" value="Добавить" class="btn btn-default" (click)="addTool()" />
+<table *ngIf="tableMode; else createTool" class="table table-striped">
+    <thead>
+
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<!--шаблон для редактирования инструментов-->
+<ng-template #editTool>
+
+</ng-template>
+
+<!--шаблон для добавления инструментов-->
+<ng-template #createTool>
+
+</ng-template>
+
+
+
+<h1>Список Запчастей</h1>
+<input type="button" value="Добавить" class="btn btn-default" (click)="addSparePart()" />
+<table *ngIf="tableMode; else createSparePart" class="table table-striped">
+    <thead>
+
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+
+<!--шаблон для редактирования запчастей-->
+<ng-template #editSparePart>
+
+</ng-template>
+
+<!--шаблон для добавления запчастей-->
+<ng-template #createSparePart>
+
+</ng-template>
