@@ -73,7 +73,7 @@
 
 <h1>Список Инструментов</h1>
 <input type="button" value="Добавить" class="btn btn-default" (click)="addTool()" />
-<table *ngIf="tableMode; else createToolTemplate" class="table table-striped">
+<table *ngIf="tableModeTool; else createToolTemplate" class="table table-striped">
     <thead>
         <tr>
             <td>Название</td>
@@ -174,7 +174,7 @@
 
 <h1>Список Запчастей</h1>
 <input type="button" value="Добавить" class="btn btn-default" (click)="addSparePart()" />
-<table *ngIf="tableMode; else createSparePartTemplate" class="table table-striped">
+<table *ngIf="tableModeSparePart; else createSparePartTemplate" class="table table-striped">
     <thead>
         <tr>
             <td>Название</td>
