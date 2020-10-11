@@ -9,12 +9,21 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using Microsoft.EntityFrameworkCore;
+using RemTool.Services.SqlSE;
+
 namespace RemTool
 {
     public class Startup
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            string connectionString = "Data Source=DESKTOP-I5UAL1I\\SQLEXPRESS;Database=RemTool;Trusted_Connection=True;";
+
+            services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connectionString));
+
+            services.AddControllers();
+
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
@@ -33,6 +42,13 @@ namespace RemTool
             {
                 app.UseSpaStaticFiles();
             }
+
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
 
             app.UseSpa(spa =>
             {
