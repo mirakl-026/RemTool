@@ -126,7 +126,7 @@ export class AppComponent implements OnInit {
         this.sparePart = new SparePart();
         this.tableModeSparePart = true;
     }
-    delete(sp: SparePart) {
+    deleteSparePart(sp: SparePart) {
         this.dataService.deleteSparePart(sp.id)
             .subscribe(data => this.loadSpareParts());
     }

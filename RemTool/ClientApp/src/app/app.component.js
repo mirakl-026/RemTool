@@ -118,7 +118,7 @@ let AppComponent = class AppComponent {
         this.sparePart = new SparePart();
         this.tableModeSparePart = true;
     }
-    delete(sp) {
+    deleteSparePart(sp) {
         this.dataService.deleteSparePart(sp.id)
             .subscribe(data => this.loadSpareParts());
     }
