@@ -14,17 +14,17 @@ export class AppComponent implements OnInit {
     // Brands
     brand: Brand = new Brand();     // изменяемый бренд
     brands: Brand[];                // массив брендов
+    tableModeBrand: boolean = true;      // табличный режим
 
     // Tools
     tool: Tool = new Tool();
     tools: Tool[];
+    tableModeTool: boolean = true;      // табличный режим
 
     // SpareParts
     sparePart: SparePart = new SparePart();
     spareParts: SparePart[];
-
-    tableMode: boolean = true;      // табличный режим
-
+    tableModeSparePart: boolean = true;      // табличный режим
 
 
     constructor(private dataService: DataService) { }
@@ -57,7 +57,7 @@ export class AppComponent implements OnInit {
     }
     cancelBrand() {
         this.brand = new Brand();
-        this.tableMode = true;
+        this.tableModeBrand = true;
     }
     deleteBrand(b: Brand) {
         this.dataService.deleteBrand(b.id)
@@ -65,7 +65,7 @@ export class AppComponent implements OnInit {
     }
     addBrand() {
         this.cancelBrand();
-        this.tableMode = false;
+        this.tableModeBrand = false;
     }
 
     // Tools
@@ -90,7 +90,7 @@ export class AppComponent implements OnInit {
     }
     cancelTool() {
         this.tool = new Tool();
-        this.tableMode = true;
+        this.tableModeTool = true;
     }
     deleteTool(t: Tool) {
         this.dataService.deleteTool(t.id)
@@ -98,7 +98,7 @@ export class AppComponent implements OnInit {
     }
     addTool() {
         this.cancelTool();
-        this.tableMode = false;
+        this.tableModeTool = false;
     }
 
 
@@ -124,14 +124,14 @@ export class AppComponent implements OnInit {
     }
     cancelSparePart() {
         this.sparePart = new SparePart();
-        this.tableMode = true;
+        this.tableModeSparePart = true;
     }
-    delete(sp: SparePart) {
+    deleteSparePart(sp: SparePart) {
         this.dataService.deleteSparePart(sp.id)
             .subscribe(data => this.loadSpareParts());
     }
-    add() {
+    addSparePart() {
         this.cancelSparePart();
-        this.tableMode = false;
+        this.tableModeSparePart = false;
     }    
 }

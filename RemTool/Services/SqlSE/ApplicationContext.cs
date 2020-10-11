@@ -14,7 +14,7 @@ namespace RemTool.Services.SqlSE
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)
         {
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
 
         #region Brands implementation
@@ -22,27 +22,35 @@ namespace RemTool.Services.SqlSE
 
         public IEnumerable<Brand> GetAllBrands()
         {
-            throw new NotImplementedException();
+            return this.Brands.ToList();
         }
 
         public void CreateBrand(Brand brand)
         {
-            throw new NotImplementedException();
+            this.Brands.Add(brand);
+            this.SaveChanges();
         }
 
         public Brand ReadBrand(int id)
         {
-            throw new NotImplementedException();
+            Brand brand = this.Brands.FirstOrDefault(x => x.Id == id);
+            return brand;
         }
 
         public void UpdateBrand(Brand brand)
         {
-            throw new NotImplementedException();
+            this.Brands.Update(brand);
+            this.SaveChanges();
         }
 
         public void DeleteBrand(int id)
         {
-            throw new NotImplementedException();
+            Brand brand = this.Brands.FirstOrDefault(x => x.Id == id);
+            if (brand != null)
+            {
+                this.Brands.Remove(brand);
+                this.SaveChanges();
+            }
         }
 
         public void DeleteAllBrands()
@@ -59,27 +67,35 @@ namespace RemTool.Services.SqlSE
 
         public IEnumerable<Tool> GetAllTools()
         {
-            throw new NotImplementedException();
+            return this.Tools.ToList();
         }
 
         public void CreateTool(Tool tool)
         {
-            throw new NotImplementedException();
+            this.Tools.Add(tool);
+            this.SaveChanges();
         }
 
         public Tool ReadTool(int id)
         {
-            throw new NotImplementedException();
+            Tool tool = this.Tools.FirstOrDefault(x => x.Id == id);
+            return tool;
         }
 
         public void UpdateTool(Tool tool)
         {
-            throw new NotImplementedException();
+            this.Tools.Update(tool);
+            this.SaveChanges();
         }
 
         public void DeleteTool(int id)
         {
-            throw new NotImplementedException();
+            Tool tool = this.Tools.FirstOrDefault(x => x.Id == id);
+            if (tool != null)
+            {
+                this.Tools.Remove(tool);
+                this.SaveChanges();
+            }
         }
 
         public void DeleteAllTools()
@@ -96,27 +112,35 @@ namespace RemTool.Services.SqlSE
 
         public IEnumerable<SparePart> GetAllSpareParts()
         {
-            throw new NotImplementedException();
+            return this.SpareParts.ToList();
         }
 
         public void CreateSparePart(SparePart sparePart)
         {
-            throw new NotImplementedException();
+            this.SpareParts.Add(sparePart);
+            this.SaveChanges();
         }
 
         public SparePart ReadSparePart(int id)
         {
-            throw new NotImplementedException();
+            SparePart sparePart = this.SpareParts.FirstOrDefault(x => x.Id == id);
+            return sparePart;
         }
 
         public void UpdateSparePart(SparePart sparePart)
         {
-            throw new NotImplementedException();
+            this.SpareParts.Update(sparePart);
+            this.SaveChanges();
         }
 
         public void DeleteSparePart(int id)
         {
-            throw new NotImplementedException();
+            SparePart sparePart = this.SpareParts.FirstOrDefault(x => x.Id == id);
+            if (sparePart != null)
+            {
+                this.SpareParts.Remove(sparePart);
+                this.SaveChanges();
+            }
         }
 
         public void DeleteAllSpareParts()

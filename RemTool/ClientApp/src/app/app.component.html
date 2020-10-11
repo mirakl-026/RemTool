@@ -1,63 +1,254 @@
 ﻿<h1>Список брендов</h1>
 <input type="button" value="Добавить" class="btn btn-default" (click)="addBrand()" />
-<table *ngIf="tableMode; else createBrand" class="table table-striped">
+<table *ngIf="tableModeBrand; else createBrandTemplate" class="table table-striped">
     <thead>
-
+        <tr>
+            <td>Название</td>
+            <td>Описание</td>
+            <td>Ссылка на картинку</td>
+            <td>Домашняя страница</td>
+            <td></td>
+        </tr>
     </thead>
     <tbody>
+        <tr *ngFor="let b of brands">
+            <ng-template [ngIf]="brand?.id != b.id" [ngIfElse]="editBrandTemplate">
+                <td>{{b?.name}}</td>
+                <td>{{b?.description}}</td>
+                <td>{{b?.imgReference}}</td>
+                <td>{{b?.homePage}}</td>
+                <td>
+                    <button class="btn btn-sm btn-primary" (click)="editBrand(b)">Изменить</button>
+                    <button class="btn btn-sm btn-danger" (click)="deleteBrand(b)">Удалить</button>
+                </td>
+            </ng-template>
+        </tr>
     </tbody>
 </table>
 
 <!--шаблон для редактирования брендов-->
-<ng-template #editBrand>
-
+<ng-template #editBrandTemplate>
+    <td>
+        <input type="text" [(ngModel)]="brand.name" class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="brand.description" class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="brand.imgReference" class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="brand.homePage" class="form-control" />
+    </td>
+    <td>
+        <input type="button" value="Сохранить" (click)="saveBrand()" class="btn btn-sm btn-success" />
+        <input type="button" value="Отмена" (click)="cancelBrand()" class="btn btn-sm btn-warning" />
+    </td>
 </ng-template>
 
 <!--шаблон для добавления брендов-->
-<ng-template #createBrand>
-
+<ng-template #createBrandTemplate>
+    <div class="form-group">
+        <label>Название</label>
+        <input type="text" [(ngModel)]="brand.name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Описание</label>
+        <input type="text" [(ngModel)]="brand.description" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Ссылка на картинку</label>
+        <input type="number" [(ngModel)]="brand.imgReference" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Домашняя страница</label>
+        <input type="number" [(ngModel)]="brand.homePage" class="form-control" />
+    </div>
+    <div>
+        <input type="button" value="Сохранить" (click)="saveBrand()" class="btn btn-success" />
+        <input type="button" value="Отмена" (click)="cancelBrand()" class="btn btn-warning" />
+    </div>
 </ng-template>
 
 
 <h1>Список Инструментов</h1>
 <input type="button" value="Добавить" class="btn btn-default" (click)="addTool()" />
-<table *ngIf="tableMode; else createTool" class="table table-striped">
+<table *ngIf="tableModeTool; else createToolTemplate" class="table table-striped">
     <thead>
-
+        <tr>
+            <td>Название</td>
+            <td>Основой тип</td>
+            <td>Второстепенный тип</td>
+            <td>Название бренда</td>
+            <td>Характеристики</td>
+            <td>Описание</td>
+            <td>Ссылка на картинку</td>
+            <td></td>
+        </tr>
     </thead>
     <tbody>
+        <tr *ngFor="let t of tools">
+            <ng-template [ngIf]="tool?.id != t.id" [ngIfElse]="editToolTemplate">
+                <td>{{t?.name}}</td>
+                <td>{{t?.mainType}}</td>
+                <td>{{t?.secondaryType}}</td>
+                <td>{{t?.brandName}}</td>
+                <td>{{t?.specs}}</td>
+                <td>{{t?.description}}</td>
+                <td>{{t?.imgReference}}</td>
+                <td>
+                    <button class="btn btn-sm btn-primary" (click)="editTool(t)">Изменить</button>
+                    <button class="btn btn-sm btn-danger" (click)="deleteTool(t)">Удалить</button>
+                </td>
+            </ng-template>
+        </tr>
     </tbody>
 </table>
 
 <!--шаблон для редактирования инструментов-->
-<ng-template #editTool>
-
+<ng-template #editToolTemplate>
+    <td>
+        <input type="text" [(ngModel)]="tool.name" class="form-control" />
+    </td>
+    <td>
+        <input type="number" [(ngModel)]="tool.mainType" class="form-control" />
+    </td>
+    <td>
+        <input type="number" [(ngModel)]="tool.secondaryType" class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="tool.brandName" class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="tool.specs" class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="tool.description" class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="tool.imgReference" class="form-control" />
+    </td>
+    <td>
+        <input type="button" value="Сохранить" (click)="saveTool()" class="btn btn-sm btn-success" />
+        <input type="button" value="Отмена" (click)="cancelTool()" class="btn btn-sm btn-warning" />
+    </td>
 </ng-template>
 
 <!--шаблон для добавления инструментов-->
-<ng-template #createTool>
-
+<ng-template #createToolTemplate>
+    <div class="form-group">
+        <label>Название</label>
+        <input type="text" [(ngModel)]="tool.name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Основой тип</label>
+        <input type="number" [(ngModel)]="tool.mainType" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Второстепенный тип</label>
+        <input type="number" [(ngModel)]="tool.secondaryType" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Название бренда</label>
+        <input type="text" [(ngModel)]="tool.brandName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Характеристики</label>
+        <input type="text" [(ngModel)]="tool.specs" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Описание</label>
+        <input type="text" [(ngModel)]="tool.description" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Ссылка на картинку</label>
+        <input type="text" [(ngModel)]="tool.imgReference" class="form-control" />
+    </div>
+    <div>
+        <input type="button" value="Сохранить" (click)="saveTool()" class="btn btn-success" />
+        <input type="button" value="Отмена" (click)="cancelTool()" class="btn btn-warning" />
+    </div>
 </ng-template>
 
 
 
 <h1>Список Запчастей</h1>
 <input type="button" value="Добавить" class="btn btn-default" (click)="addSparePart()" />
-<table *ngIf="tableMode; else createSparePart" class="table table-striped">
+<table *ngIf="tableModeSparePart; else createSparePartTemplate" class="table table-striped">
     <thead>
-
+        <tr>
+            <td>Название</td>
+            <td>Название бренда</td>
+            <td>Характеристики</td>
+            <td>Описание</td>
+            <td>Ссылка на картинку</td>
+            <td></td>
+        </tr>
     </thead>
     <tbody>
-
+        <tr *ngFor="let sp of spareParts">
+            <ng-template [ngIf]="sparePart?.id != sp.id" [ngIfElse]="editSparePartTemplate">
+                <td>{{sp?.name}}</td>
+                <td>{{sp?.brandName}}</td>
+                <td>{{sp?.specs}}</td>
+                <td>{{sp?.description}}</td>
+                <td>{{sp?.imgReference}}</td>
+                <td>
+                    <button class="btn btn-sm btn-primary" (click)="editSparePart(sp)">Изменить</button>
+                    <button class="btn btn-sm btn-danger" (click)="deleteSparePart(sp)">Удалить</button>
+                </td>
+            </ng-template>
+        </tr>
     </tbody>
 </table>
 
 <!--шаблон для редактирования запчастей-->
-<ng-template #editSparePart>
-
+<ng-template #editSparePartTemplate>
+    <td>
+        <input type="text" [(ngModel)]="sparePart.name" class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="sparePart.brandName" class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="sparePart.specs" class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="sparePart.description" class="form-control" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="sparePart.imgReference" class="form-control" />
+    </td>
+    <td>
+        <input type="button" value="Сохранить" (click)="saveSparePart()" class="btn btn-sm btn-success" />
+        <input type="button" value="Отмена" (click)="cancelSparePart()" class="btn btn-sm btn-warning" />
+    </td>
 </ng-template>
 
 <!--шаблон для добавления запчастей-->
-<ng-template #createSparePart>
-
+<ng-template #createSparePartTemplate>
+    <div class="form-group">
+        <label>Название</label>
+        <input type="text" [(ngModel)]="sparePart.name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Название бренда</label>
+        <input type="text" [(ngModel)]="sparePart.brandName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Характеристики</label>
+        <input type="text" [(ngModel)]="sparePart.specs" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Описание</label>
+        <input type="text" [(ngModel)]="sparePart.description" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Ссылка на картинку</label>
+        <input type="text" [(ngModel)]="sparePart.imgReference" class="form-control" />
+    </div>
+    <div>
+        <input type="button" value="Сохранить" (click)="saveSparePart()" class="btn btn-success" />
+        <input type="button" value="Отмена" (click)="cancelSparePart()" class="btn btn-warning" />
+    </div>
 </ng-template>
