@@ -10,7 +10,7 @@ using RemTool.Services.SqlSE;
 
 namespace RemTool.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/brands")]
     [ApiController]
     public class BrandController : ControllerBase
     {
