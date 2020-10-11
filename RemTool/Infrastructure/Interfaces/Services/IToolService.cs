@@ -12,7 +12,7 @@ namespace RemTool.Infrastructure.Interfaces.Services
     public interface IToolService
     {
         // синхронные методы
-        public List<Tool> GetAllTools();
+        public IEnumerable<Tool> GetAllTools();
 
         #region CRUD
 
@@ -30,7 +30,7 @@ namespace RemTool.Infrastructure.Interfaces.Services
 
 
         // асинхронные методы
-        //public Task<List<Tool>> GetAllToolsAsync();
+        //public Task<IEnumerable<Tool>> GetAllToolsAsync();
 
         //#region CRUD
 

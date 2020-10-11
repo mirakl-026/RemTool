@@ -11,7 +11,7 @@ namespace RemTool.Infrastructure.Interfaces.Services
     public interface IBrandService
     {
         // синхронные методы
-        public List<Brand> GetAllBrands();
+        public IEnumerable<Brand> GetAllBrands();
 
         #region CRUD
 
@@ -29,7 +29,7 @@ namespace RemTool.Infrastructure.Interfaces.Services
 
 
         // асинхронные методы
-        //public Task<List<Brand>> GetAllBrandsAsync();
+        //public Task<IEnumerable<Brand>> GetAllBrandsAsync();
 
         //#region CRUD
 

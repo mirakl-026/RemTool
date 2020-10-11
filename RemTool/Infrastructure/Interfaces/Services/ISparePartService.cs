@@ -11,7 +11,7 @@ namespace RemTool.Infrastructure.Interfaces.Services
     public interface ISparePartService
     {
         // синхронные методы
-        public List<Tool> GetAllSpareParts();
+        public IEnumerable<Tool> GetAllSpareParts();
 
         #region CRUD
 
@@ -29,7 +29,7 @@ namespace RemTool.Infrastructure.Interfaces.Services
 
 
         // асинхронные методы
-        //public Task<List<SparePart>> GetAllSparePartsAsync();
+        //public Task<IEnumerable<SparePart>> GetAllSparePartsAsync();
 
         //#region CRUD
 
