@@ -94,7 +94,7 @@ namespace RemTool.Services.SqlSE
         #region SpareParts implementation
         public DbSet<SparePart> SpareParts { get; set; }
 
-        public IEnumerable<Tool> GetAllSpareParts()
+        public IEnumerable<SparePart> GetAllSpareParts()
         {
             throw new NotImplementedException();
         }

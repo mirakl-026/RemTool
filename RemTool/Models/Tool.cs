@@ -10,6 +10,8 @@ namespace RemTool.Models
     {
         public int Id { get; set; }
 
+        public string Name { get; set; }
+
         public int MainType { get; set; }
 
         public int SecondaryType { get; set; }
