@@ -1,0 +1,36 @@
+{
+  "compileOnSave": false,
+
+  "compilerOptions": {
+    "baseUrl": "./",
+    //"noImplicitAny": false,
+    //"noEmitOnError": true,
+    //"removeComments": false,
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "target": "ES2015",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "ES2018",
+      "DOM"
+    ]
+  },
+  "files": [
+    "src/main.ts",
+    "src/polyfills.ts"
+  ],
+  "include": [
+    "src/**/*.d.ts"
+  ],
+  
+  "exclude": [
+    "node_modules",
+    "wwwroot"
+  ]
+}
