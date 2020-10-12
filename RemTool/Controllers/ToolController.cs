@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using RemTool.Models;
-using RemTool.Services.SqlSE;
+using RemTool.Infrastructure.Interfaces.Services;
 
 namespace RemTool.Controllers
 {
@@ -14,18 +14,11 @@ namespace RemTool.Controllers
     [ApiController]
     public class ToolController : ControllerBase
     {
-        private ApplicationContext db;
+        private IToolService db;
 
-        public ToolController(ApplicationContext context)
+        public ToolController(IToolService context)
         {
             db = context;
-            if (!db.Tools.Any())
-            {
-                db.Tools.Add(new Tool { Name = "Lamp F1000", Description = "Lamp F1000 description" });
-                db.Tools.Add(new Tool { Name = "Saw X101", Description = "Saw X101 description" });
-                db.Tools.Add(new Tool { Name = "Bolgarka-1", Description = "Bolgarka-1 description" });
-                db.SaveChanges();
-            }
         }
 
         [HttpGet]

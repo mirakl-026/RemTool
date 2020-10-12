@@ -11,9 +11,19 @@ namespace RemTool.Services.SQLExpress
 {
     public class ToolService : IToolService
     {
-        private readonly RemToolContext _db;
+        public RemToolContext _db;
 
-        public ToolService(RemToolContext db) => _db = db;
+        public ToolService(RemToolContext db) 
+        {
+            _db = db;
+            if (!_db.Tools.Any())
+            {
+                _db.Tools.Add(new Tool { Name = "Lamp F1000", Description = "Lamp F1000 description" });
+                _db.Tools.Add(new Tool { Name = "Saw X101", Description = "Saw X101 description" });
+                _db.Tools.Add(new Tool { Name = "Bolgarka-1", Description = "Bolgarka-1 description" });
+                _db.SaveChanges();
+            }
+        }
 
         #region Tools implementation
 

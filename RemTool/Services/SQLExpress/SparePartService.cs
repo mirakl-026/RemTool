@@ -11,9 +11,19 @@ namespace RemTool.Services.SQLExpress
 {
     public class SparePartService : ISparePartService
     {
-        private readonly RemToolContext _db;
+        public RemToolContext _db;
 
-        public SparePartService(RemToolContext db) => _db = db;
+        public SparePartService(RemToolContext db)
+        {
+            _db = db;
+            if (!_db.SpareParts.Any())
+            {
+                _db.SpareParts.Add(new SparePart { Name = "Cooler", Description = "Cooler description" });
+                _db.SpareParts.Add(new SparePart { Name = "PowerSupply", Description = "PowerSupply description" });
+                _db.SpareParts.Add(new SparePart { Name = "Riser", Description = "Riser description" });
+                _db.SaveChanges();
+            }
+        }
 
         #region SpareParts implementation
 

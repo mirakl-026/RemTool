@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using RemTool.Models;
-using RemTool.Services.SqlSE;
+using RemTool.Infrastructure.Interfaces.Services;
 
 namespace RemTool.Controllers
 {
@@ -14,18 +14,11 @@ namespace RemTool.Controllers
     [ApiController]
     public class SparePartController : ControllerBase
     {
-        private ApplicationContext db;
+        private ISparePartService db;
 
-        public SparePartController(ApplicationContext context)
+        public SparePartController(ISparePartService context)
         {
             db = context;
-            if (!db.SpareParts.Any())
-            {
-                db.SpareParts.Add(new SparePart { Name = "Cooler", Description = "Cooler description" });
-                db.SpareParts.Add(new SparePart { Name = "PowerSupply", Description = "PowerSupply description" });
-                db.SpareParts.Add(new SparePart { Name = "Riser", Description = "Riser description" });
-                db.SaveChanges();
-            }
         }
 
         [HttpGet]

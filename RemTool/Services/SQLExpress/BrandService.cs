@@ -9,11 +9,21 @@ using RemTool.DAL.Context.SQLExpress;
 
 namespace RemTool.Services.SQLExpress
 {
-    public class BrandService :IBrandService
+    public class BrandService : IBrandService
     {
-        private readonly RemToolContext _db;
+        public RemToolContext _db;
 
-        public BrandService(RemToolContext db) => _db = db;
+        public BrandService(RemToolContext db)
+        {
+            _db = db;
+            if (!_db.Brands.Any())
+            {
+                _db.Brands.Add(new Brand { Name = "Caterpillar", Description = "Caterpillar description" });
+                _db.Brands.Add(new Brand { Name = "StroyBat", Description = "StroyBat description" });
+                _db.Brands.Add(new Brand { Name = "FastBuilder", Description = "FastBuilder description" });
+                _db.SaveChanges();
+            }
+        }
 
         #region Brands implementation
 
