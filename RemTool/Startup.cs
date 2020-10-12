@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Configuration;
 
 using Microsoft.EntityFrameworkCore;
 using RemTool.Services.SqlSE;
@@ -16,6 +17,13 @@ namespace RemTool
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
             string connectionString = "Data Source=DESKTOP-I5UAL1I\\SQLEXPRESS;Database=RemTool;Trusted_Connection=True;";
