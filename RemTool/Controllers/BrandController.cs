@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using RemTool.Models;
-using RemTool.Services.SqlSE;
+using RemTool.Infrastructure.Interfaces.Services;
 
 namespace RemTool.Controllers
 {
@@ -14,18 +14,11 @@ namespace RemTool.Controllers
     [ApiController]
     public class BrandController : ControllerBase
     {
-        private ApplicationContext db;
+        private IBrandService db;
 
-        public BrandController(ApplicationContext context)
+        public BrandController(IBrandService context)
         {
             db = context;
-            if (!db.Brands.Any())
-            {
-                db.Brands.Add(new Brand { Name = "Caterpillar", Description = "Caterpillar description" });
-                db.Brands.Add(new Brand { Name = "StroyBat", Description = "StroyBat description" });
-                db.Brands.Add(new Brand { Name = "FastBuilder", Description = "FastBuilder description" });
-                db.SaveChanges();
-            }
         }
 
         [HttpGet]
