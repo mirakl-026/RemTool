@@ -46,7 +46,7 @@ namespace RemTool
             });
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, RemToolContext db)
         {
             if (env.IsDevelopment())
             {
