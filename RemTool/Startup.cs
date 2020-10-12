@@ -11,7 +11,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 
 using Microsoft.EntityFrameworkCore;
-using RemTool.Services.SqlSE;
+
+//using RemTool.Services.SqlSE;
+using RemTool.DAL.Context.SQLExpress;
+using RemTool.Infrastructure.Interfaces.Services;
+using RemTool.Services.SQLExpress;
 
 namespace RemTool
 {
@@ -26,9 +30,13 @@ namespace RemTool
 
         public void ConfigureServices(IServiceCollection services)
         {
-            string connectionString = "Data Source=DESKTOP-I5UAL1I\\SQLEXPRESS;Database=RemTool;Trusted_Connection=True;";
+            services.AddDbContext<RemToolContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MS_SQL_Server_Express")));
 
-            services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connectionString));
+            services.AddScoped<IBrandService, BrandService>();
+            services.AddScoped<IToolService, ToolService>();
+            services.AddScoped<ISparePartService, SparePartService>();
+
+
 
             services.AddControllers();
 
