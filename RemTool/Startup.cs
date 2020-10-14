@@ -9,13 +9,16 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
-
+using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 
 //using RemTool.Services.SqlSE;
-using RemTool.DAL.Context.SQLExpress;
+//using RemTool.DAL.Context.SQLExpress;
 using RemTool.Infrastructure.Interfaces.Services;
-using RemTool.Services.SQLExpress;
+//using RemTool.Services.SQLExpress;
+
+using RemTool.Infrastructure.Additional;
+
 
 namespace RemTool
 {
@@ -30,7 +33,14 @@ namespace RemTool
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<RemToolContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MS_SQL_Server_Express")));
+            // Подключение интерфейса для десериализации appsetings.json и вытаскивания connectionString и databaseName
+            services.Configure<RemToolMongoDBsettings>(
+                Configuration.GetSection(nameof(RemToolMongoDBsettings)));
+
+            services.AddSingleton<IRemToolMongoDBsettings>(sp =>
+                sp.GetRequiredService<IOptions<RemToolMongoDBsettings>>().Value);
+
+
 
             services.AddScoped<IBrandService, BrandService>();
             services.AddScoped<IToolService, ToolService>();
