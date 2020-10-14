@@ -28,7 +28,7 @@ namespace RemTool.Controllers
         }
 
         [HttpGet("{id}")]
-        public Tool Get(int id)
+        public Tool Get(string id)
         {
             Tool tool = db.ReadTool(id);
             return tool;
@@ -57,7 +57,7 @@ namespace RemTool.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(string id)
         {
             Tool tool = db.ReadTool(id);
             if (tool != null)

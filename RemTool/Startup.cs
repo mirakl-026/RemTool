@@ -12,12 +12,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 
-//using RemTool.Services.SqlSE;
-//using RemTool.DAL.Context.SQLExpress;
 using RemTool.Infrastructure.Interfaces.Services;
-//using RemTool.Services.SQLExpress;
-
 using RemTool.Infrastructure.Additional;
+using RemTool.Services.MongoDB;
 
 
 namespace RemTool
@@ -42,9 +39,9 @@ namespace RemTool
 
 
 
-            services.AddScoped<IBrandService, BrandService>();
-            services.AddScoped<IToolService, ToolService>();
-            services.AddScoped<ISparePartService, SparePartService>();
+            services.AddSingleton<BrandService>();
+            services.AddSingleton<ToolService>();
+            services.AddSingleton<SparePartService>();
 
 
 
@@ -56,7 +53,7 @@ namespace RemTool
             });
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, RemToolContext db)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
