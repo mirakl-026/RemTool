@@ -28,7 +28,7 @@ namespace RemTool.Controllers
         }
 
         [HttpGet("{id}")]
-        public Brand Get(int id)
+        public Brand Get(string id)
         {
             Brand brand = db.ReadBrand(id);
             return brand;
@@ -57,7 +57,7 @@ namespace RemTool.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(string id)
         {
             Brand brand = db.ReadBrand(id);
             if (brand != null)

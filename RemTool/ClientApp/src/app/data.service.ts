@@ -20,7 +20,7 @@ export class DataService {
         return this.http.get(this.urlBrands);
     }
 
-    getBrand(id: number) {
+    getBrand(id: string) {
         return this.http.get(this.urlBrands + '/' + id);
     }
 
@@ -32,7 +32,7 @@ export class DataService {
         return this.http.put(this.urlBrands, brand);
     }
 
-    deleteBrand(id: number) {
+    deleteBrand(id: string) {
         return this.http.delete(this.urlBrands + '/' + id);
     }
 
@@ -42,7 +42,7 @@ export class DataService {
         return this.http.get(this.urlTools);
     }
 
-    getTool(id: number) {
+    getTool(id: string) {
         return this.http.get(this.urlTools + '/' + id);
     }
 
@@ -54,7 +54,7 @@ export class DataService {
         return this.http.put(this.urlTools, tool);
     }
 
-    deleteTool(id: number) {
+    deleteTool(id: string) {
         return this.http.delete(this.urlTools + '/' + id);
     }
 
@@ -64,7 +64,7 @@ export class DataService {
         return this.http.get(this.urlSpareParts);
     }
 
-    getSparePart(id: number) {
+    getSparePart(id: string) {
         return this.http.get(this.urlSpareParts + '/' + id);
     }
 
@@ -76,7 +76,7 @@ export class DataService {
         return this.http.put(this.urlSpareParts, sparePart);
     }
 
-    deleteSparePart(id: number) {
+    deleteSparePart(id: string) {
         return this.http.delete(this.urlSpareParts + '/' + id);
     }
 

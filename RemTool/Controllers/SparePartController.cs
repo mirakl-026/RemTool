@@ -28,7 +28,7 @@ namespace RemTool.Controllers
         }
 
         [HttpGet("{id}")]
-        public SparePart Get(int id)
+        public SparePart Get(string id)
         {
             SparePart sparePart = db.ReadSparePart(id);
             return sparePart;
@@ -57,7 +57,7 @@ namespace RemTool.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(string id)
         {
             SparePart sparePart = db.ReadSparePart(id);
             if (sparePart != null)

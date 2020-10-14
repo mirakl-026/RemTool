@@ -17,11 +17,11 @@ namespace RemTool.Infrastructure.Interfaces.Services
 
         public void CreateBrand(Brand brand);
 
-        public Brand ReadBrand(int id);
+        public Brand ReadBrand(string id);
 
         public void UpdateBrand(Brand brand);
 
-        public void DeleteBrand(int id);
+        public void DeleteBrand(string id);
 
         #endregion
 
@@ -35,11 +35,11 @@ namespace RemTool.Infrastructure.Interfaces.Services
 
         //public Task CreateBrandAsync(Brand brand);
 
-        //public Task<Brand> ReadBrandAsync(int id);
+        //public Task<Brand> ReadBrandAsync(string id);
 
         //public Task UpdateBrandAsync(Brand brand);
 
-        //public Task DeleteBrandAsync(int id);
+        //public Task DeleteBrandAsync(string id);
 
         //#endregion
 
