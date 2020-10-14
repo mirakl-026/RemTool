@@ -39,9 +39,9 @@ namespace RemTool
 
 
 
-            services.AddSingleton<BrandService>();
-            services.AddSingleton<ToolService>();
-            services.AddSingleton<SparePartService>();
+            services.AddSingleton<IBrandService, BrandService>();
+            services.AddSingleton<IToolService, ToolService>();
+            services.AddSingleton<ISparePartService, SparePartService>();
 
 
 

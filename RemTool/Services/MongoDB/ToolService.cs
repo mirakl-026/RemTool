@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using MongoDB.Bson;
 using MongoDB.Driver;
 using RemTool.Infrastructure.Additional;
 using RemTool.Infrastructure.Interfaces.Services;
@@ -23,33 +24,32 @@ namespace RemTool.Services.MongoDB
         }
 
 
+        public IEnumerable<Tool> GetAllTools()
+        {
+            return _tools.Find(new BsonDocument()).ToList();
+        }
 
         public void CreateTool(Tool tool)
         {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteAllTools()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteTool(string id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Tool> GetAllTools()
-        {
-            throw new NotImplementedException();
+            _tools.InsertOne(tool);
         }
 
         public Tool ReadTool(string id)
         {
-            throw new NotImplementedException();
+            return _tools.Find(tool => tool.Id == id).FirstOrDefault();
         }
 
         public void UpdateTool(Tool tool)
+        {
+            _tools.ReplaceOne(t => t.Id == tool.Id, tool);
+        }
+
+        public void DeleteTool(string id)
+        {
+            _tools.DeleteOne(tool => tool.Id == id);
+        }
+
+        public void DeleteAllTools()
         {
             throw new NotImplementedException();
         }

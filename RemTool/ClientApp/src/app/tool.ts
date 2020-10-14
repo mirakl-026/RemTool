@@ -1,6 +1,6 @@
 ﻿export class Tool {
     constructor(
-        public id?: number,
+        public id?: string,
         public name?: string,
         public mainType?: number,
         public secondaryType?: number,
