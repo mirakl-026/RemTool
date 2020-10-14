@@ -18,11 +18,11 @@ namespace RemTool.Infrastructure.Interfaces.Services
 
         public void CreateTool(Tool tool);
 
-        public Tool ReadTool(int id);
+        public Tool ReadTool(string id);
 
         public void UpdateTool(Tool tool);
 
-        public void DeleteTool(int id);
+        public void DeleteTool(string id);
 
         #endregion
 
@@ -36,11 +36,11 @@ namespace RemTool.Infrastructure.Interfaces.Services
 
         //public Task CreateToolAsync(Tool tool);
 
-        //public Task<Tool> ReadToolAsync(int id);
+        //public Task<Tool> ReadToolAsync(string id);
 
         //public Task UpdateToolAsync(Tool tool);
 
-        //public Task DeleteToolAsync(int id);
+        //public Task DeleteToolAsync(string id);
 
         //#endregion
 

@@ -17,11 +17,11 @@ namespace RemTool.Infrastructure.Interfaces.Services
 
         public void CreateSparePart(SparePart sparePart);
 
-        public SparePart ReadSparePart(int id);
+        public SparePart ReadSparePart(string id);
 
         public void UpdateSparePart(SparePart sparePart);
 
-        public void DeleteSparePart(int id);
+        public void DeleteSparePart(string id);
 
         #endregion
 
@@ -35,11 +35,11 @@ namespace RemTool.Infrastructure.Interfaces.Services
 
         //public Task CreateSparePartAsync(SparePart sparePart);
 
-        //public Task<SparePart> ReadSparePartAsync(int id);
+        //public Task<SparePart> ReadSparePartAsync(string id);
 
         //public Task UpdateSparePartAsync(SparePart sparePart);
 
-        //public Task DeleteSparePartAsync(int id);
+        //public Task DeleteSparePartAsync(string id);
 
         //#endregion
 
