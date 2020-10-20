@@ -1,0 +1,77 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'reset.scss';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
+:root {
+    --dark-color: #131522;
+    --dark-grey-color: #828282;
+    --grey-color: #DCDEEB;
+    --light-color: #F2F2F2;
+    --orange-color: #E2632A;
+}
+
+body {
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 0 16px;
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+    // overflow: hidden;
+    // height: 100%;
+}
+
+.container {
+    max-width: 1218px;
+}
+@media screen and (max-width: 1199px) {
+    .container {
+    }
+}
+
+.button_light {
+    font-family: 'Jost', sans-serif;
+    font-weight: 600;
+    height: 34px;
+    font-size: 14px;
+    color: var(--dark-color);
+    background-color: var(--light-color);
+    border: none;
+    border-radius: 6px;
+    padding: 0 16px;
+    &:hover {
+        color: var(--orange-color);
+    }
+    &:active {
+        background-color: var(--grey-color);
+    }
+    &:focus {
+        color: var(--orange-color);
+        // box-sizing: border-box;
+        border: 2px solid var(--orange-color);
+        padding: 0 14px;
+    }
+}
+
+.navbar, .navbar ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--grey-color);
+    height: 40px;
+}
+
+.navbar {
+    & h1 {
+        margin-left: 26px;
+    }
+    & a {
+        text-decoration: none;
+        color: var(--dark-color);
+        margin-right: 26px;
+        font-size: 16px;
+        font-weight: 600;
+        &:hover {
+            color: var(--orange-color);
+        }
+    }
+}

@@ -1,0 +1,91 @@
+.hero {
+    margin-top: 60px;
+    // width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &__header {
+        width: 34%;
+        font-size: 48px;
+        font-weight: 800;
+        line-height: 70px;
+    }
+    &__slider {
+        width: 66%;
+        height: 340px;
+        background-color: grey;
+    }
+}
+
+.we-repair {
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    & h2 {
+        font-size: 36px;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+}
+
+.row-2-col {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    & * {
+        width: 48%;
+    }
+}
+
+.we-repair__row {
+    &:first-of-type {
+        margin-bottom: 46px;
+    }
+    & a {
+        height: 200px;
+        border-radius: 6px;
+        background-color: grey;
+        background-position: center;
+        // background-size: 110%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        transition: background-size 200ms ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 36px;
+        font-weight: 600;
+        text-decoration: none;
+        color: var(--light-color);
+        &:hover {
+            color: var(--orange-color);
+            // background-size: 100%;
+        }
+        &:nth-child(1) {
+            background-image: url('../../assets/img/electro-tools.jpg');
+            margin-bottom: 46px;
+        }
+        &:nth-child(2) {
+            background-image: url('../../assets/img/benzo-tools.jpg');
+            margin-bottom: 46px;
+        }
+        &:nth-child(3) {
+            background-image: url('../../assets/img/kompressor.jpg');            
+        }
+        &:nth-child(4) {
+            background-image: url('../../assets/img/boat-engine.jpg');
+        }
+    }
+}
+
+.slider {
+
+}
+
+// .swiper-container {
+//     width: 600px;
+//     height: 300px;
+//     background-color: violet;
+// }
