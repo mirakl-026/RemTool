@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text.Json;
 
 using RemTool.Models;
 
@@ -13,6 +14,12 @@ namespace RemTool.Infrastructure.Interfaces.Services
     {
         // синхронные методы
         public IEnumerable<Tool> GetAllTools();
+
+        // получить список имён электро инструментов
+        public string GetElectroList();
+
+        // получить список имён бензо инструментов
+        public string GetFuelList();
 
         #region CRUD
 

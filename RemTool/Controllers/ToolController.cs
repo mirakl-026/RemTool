@@ -21,6 +21,19 @@ namespace RemTool.Controllers
             db = context;
         }
 
+
+        [HttpGet("getelectrotools")]
+        public string GetElectroTools()
+        {
+            return db.GetElectroList();
+        }
+
+        [HttpGet("getfueltools")]
+        public string GetFuelTools()
+        {
+            return db.GetFuelList();
+        }
+
         [HttpGet]
         public IEnumerable<Tool> Get()
         {
