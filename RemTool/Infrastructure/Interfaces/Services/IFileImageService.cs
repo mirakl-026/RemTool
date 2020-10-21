@@ -9,16 +9,16 @@ namespace RemTool.Infrastructure.Interfaces.Services
     public interface IFileImageService
     {
         // получить путь к папке с картинками
-        public string GetFSImagesPath();
+        public string GetImagesRoot();
 
         // добавить файл картинки на сервер
-        public Task AddImage(IFormFile file);
+        public Task AddImage(IFormFile newImage);
 
         // получить список картинок на сервере
-        public string[] GetImagesFilesList();
+        public string[] GetImages();
 
-        // получить список картинок на сервере (пути)
-        //public string[] GetImagesFilesPathsList();
+        // получить ссылку на картинку по имени
+        public string GetImage(string fileName);
 
         // удалить картинку по имени файла
         public void DeleteImage(string fileName);

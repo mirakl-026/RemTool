@@ -1,14 +1,16 @@
-﻿import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Brand } from './brand';
 import { Tool } from './tool';
-import { SparePart } from './sparepart'
+import { SparePart } from './sparepart';
+import { Image } from './image';
 
 @Injectable()
 export class DataService {
     private urlBrands = "api/brands";
     private urlTools = "api/tools";
     private urlSpareParts = "api/spareparts";
+    private urlImages = "Images";
 
     constructor(private http: HttpClient) {
 
@@ -79,5 +81,28 @@ export class DataService {
     deleteSparePart(id: string) {
         return this.http.delete(this.urlSpareParts + '/' + id);
     }
+
+
+    // images
+    getImages() {
+      return this.http.get(this.urlImages + '/GetImages');
+    }
+
+    getImage(fileName: string) {
+      return this.http.get(this.urlImages + '/GetImage/' + fileName);
+    }
+
+    addImage(image: File) {
+      return this.http.post(this.urlImages + '/AddImage' , image);
+    }
+
+    deleteImage(fileName: string) {
+      return this.http.delete(this.urlImages + '/DeleteImage/' + fileName);
+    }
+
+    deleteAllImages() {
+      return this.http.delete(this.urlSpareParts + '/DeleteImages');
+    }
+
 
 }

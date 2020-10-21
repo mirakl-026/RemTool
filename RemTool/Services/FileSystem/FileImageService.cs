@@ -21,15 +21,15 @@ namespace RemTool.Services.FileSystem
             FullServerImagesPath = _appEnvironment.WebRootPath + ImagesPath;
         }
 
-        public async Task AddImage(IFormFile file)
+        public async Task AddImage(IFormFile newImage)
         {
             // Определение пути 
-            string path = FullServerImagesPath + file.FileName;
+            string path = FullServerImagesPath + newImage.FileName;
 
             // Сохранение файла на сервере
             using (var fileStream = new FileStream(path, FileMode.Create))
             {
-                await file.CopyToAsync(fileStream);
+                await newImage.CopyToAsync(fileStream);
             }
         }
 
@@ -63,12 +63,12 @@ namespace RemTool.Services.FileSystem
         }
 
 
-        public string GetFSImagesPath()
+        public string GetImagesRoot()
         {
             return ImagesPath;
         }
 
-        public string[] GetImagesFilesList()
+        public string[] GetImages()
         {
             string[] images = Directory.GetFiles(FullServerImagesPath);
             for (int i = 0; i < images.Length; i++)
@@ -76,6 +76,23 @@ namespace RemTool.Services.FileSystem
                 images[i] = images[i].Substring(_appEnvironment.WebRootPath.Length);
             }
             return images;
+        }
+
+        public string GetImage(string fileName)
+        {
+            // Определение пути
+            string path = FullServerImagesPath + fileName;
+
+            // удаление файла картинки с сервера
+            FileInfo fi = new FileInfo(path);
+            if (fi.Exists)
+            {
+                return path;
+            }
+            else
+            {
+                return "";
+            }
         }
 
         //public string[] GetImagesFilesPathsList()

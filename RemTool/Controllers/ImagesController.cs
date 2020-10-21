@@ -24,37 +24,44 @@ namespace RemTool.Controllers
         #region Image load routing
 
         // загрузить картинку
-        [HttpPost]
+        [HttpPost("AddImage")]
         [RequestSizeLimit(52428800)]
-        public async Task<IActionResult> AddImage(IFormFile uploadedImage)
+        public async Task<IActionResult> AddImage(IFormFile newImage)
         {
-            if (uploadedImage != null)
+            if (newImage != null)
             {
                 // Определение пути 
-                string path = _fsContext.GetFSImagesPath() + uploadedImage.FileName;
+                string path = _fsContext.GetImagesRoot() + newImage.FileName;
 
                 // удаление файла картинки с сервера
-                _fsContext.DeleteImage(uploadedImage.FileName);
+                _fsContext.DeleteImage(newImage.FileName);
 
                 // Сохранение файла на сервере
-                await _fsContext.AddImage(uploadedImage);
+                await _fsContext.AddImage(newImage);
                 return new JsonResult(path);
             }
             return new JsonResult("");
         }
 
         // получить ссылки всех картинок
-        [HttpGet]
+        [HttpGet("GetImages")]
         public IActionResult GetImages()
         {
-            string[] images = _fsContext.GetImagesFilesList();
+            string[] images = _fsContext.GetImages();
             return new JsonResult(images);
+        }
+
+        // получить ссылку по имени картинки
+        [HttpGet("GetImage/{fileName}")]
+        public string GetImage(string fileName)
+        {
+            return _fsContext.GetImage(fileName);
         }
 
 
         // удалить картинку
         // получить ссылки всех картинок
-        [HttpDelete]
+        [HttpDelete("DeleteImage/{fileName}")]
         public IActionResult DeleteImage(string fileName)
         {
             _fsContext.DeleteImage(fileName);
