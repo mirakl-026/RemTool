@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -15,6 +16,7 @@ using Microsoft.EntityFrameworkCore;
 using RemTool.Infrastructure.Interfaces.Services;
 using RemTool.Infrastructure.Additional;
 using RemTool.Services.MongoDB;
+using RemTool.Services.FileSystem;
 
 
 namespace RemTool
@@ -38,7 +40,7 @@ namespace RemTool
                 sp.GetRequiredService<IOptions<RemToolMongoDBsettings>>().Value);
 
 
-
+            services.AddTransient<IFileImageService, FileImageService>();
             services.AddSingleton<IBrandService, BrandService>();
             services.AddSingleton<IToolService, ToolService>();
             services.AddSingleton<ISparePartService, SparePartService>();
@@ -59,6 +61,15 @@ namespace RemTool
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            // добавление папки для хранения ресурсов если она не содана
+            string path = env.WebRootPath;
+            DirectoryInfo di_images = new DirectoryInfo(path + "/images/");
+            if (!di_images.Exists)
+            {
+                di_images.Create();
+            }
+
 
             app.UseStaticFiles();
             if (env.IsDevelopment())
