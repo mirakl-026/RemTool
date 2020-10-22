@@ -8,6 +8,7 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { ToolsPageComponent } from './tools-page/tools-page.component';
 import { BrandsPageComponent } from './brands-page/brands-page.component';
 import { ContactsPageComponent } from './contacts-page/contacts-page.component';
+import { SwiperComponent } from './swiper/swiper.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ContactsPageComponent } from './contacts-page/contacts-page.component';
     MainPageComponent,
     ToolsPageComponent,
     BrandsPageComponent,
-    ContactsPageComponent
+    ContactsPageComponent,
+    SwiperComponent
   ],
   imports: [
     BrowserModule,

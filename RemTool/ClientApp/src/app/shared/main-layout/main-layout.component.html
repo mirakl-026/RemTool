@@ -6,51 +6,77 @@
             Оставить заявку
         </button>
     </div>
-    <nav class="header__nav">
+    <nav class="header__nav nav">
         <ul>
             <li class="header__logo" routerLinkActive='active'>
-                <a [routerLink]="['/']">
+                <a [routerLink]="['/']" onclick="this.blur();">
                     <img src="assets/img/header__logo.svg" alt="logo">
                 </a>
             </li>
-            <li class="header__link drop-link" routerLinkActive='active'>
-                <a class="main-drop" [routerLink]="['tools']">
+            <li class="nav__item" routerLinkActive='active'>
+                <a class="nav__link drop" [routerLink]="['tools']" onclick="this.blur();">
                     Инструменты
                 </a>
-                <svg width="13" height="9" viewBox="0 0 13 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M11.5 2L6.5 7L1.5 2" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                <div class="header__drop drop-menu">
-                    <div class="drop-menu__link">
-                        <a href="#">
-                            Электроинструмент
-                        </a>
-                        <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        <div class="drop-menu__electro">
-                            <a href="">Шуруповерт</a>
-                            <a href="">Перфоратор</a>
+                <div class="arrow-down">
+                    <svg width="13" height="9" viewBox="0 0 13 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M11.5 2L6.5 7L1.5 2" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="drop-menu">
+                    <div>
+                        <div class="drop-menu__item">
+                            <a class="drop-menu__link" [routerLink]="['tools']" onclick="this.blur();">
+                                Электроинструмент
+                            </a>
+                            <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <div class="side-drop-menu">
+                                <a href="">шуруповерт</a>
+                                <a href="">перфоратор</a>
+                                <a href="">шуруповерт</a>
+                                <a href="">перфоратор</a>
+                                <a href="">шуверт</a>
+                                <a href="">перфоратор</a>
+                                <a href="">шурверт</a>
+                                <a href="">перфоратор</a>
+                                <a href="">шуруперт</a>
+                                <a href="">пертор</a>
+                                <a href="">шурупорт</a>
+                                <a href="">перфорат ыкуп ыуор</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="drop-menu__link">
-                        <a href="#">
-                            Бензоинструмент
-                        </a>
-                        <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        <div class="drop-menu__benzo">
-                            Бензо
+                        <div class="drop-menu__item">
+                            <a class="drop-menu__link" [routerLink]="['tools']" onclick="this.blur();">
+                                Бензоинструмент
+                            </a>
+                            <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <div class="side-drop-menu">
+                                <a href="">бензопила</a>
+                                <a href="">Газонокосилка</a>
+                                <a href="">бенпила</a>
+                                <a href="">Гаокоилка</a>
+                                <a href="">бензила</a>
+                                <a href="">Газона</a>
+                                <a href="">Газонилка</a>
+                                <a href="">бенила</a>
+                                <a href="">Газонw fawокосилка</a>
+                                <a href="">бенла</a>
+                                <a href="">Газонокосилка</a>
+                                <a href="">бензола</a>
+                                <a href="">Газонокоw efсилка</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </li>
-            <li class="header__link" routerLinkActive='active'>
-                <a href="#">Бренды</a>
+            <li class="nav__item" routerLinkActive='active'>
+                <a class="nav__link" [routerLink]="['brands']" onclick="this.blur();">Бренды</a>
             </li>
-            <li class="header__link" routerLinkActive='active'>
-                <a href="#">Контакты</a>
+            <li class="nav__item" routerLinkActive='active'>
+                <a class="nav__link" [routerLink]="['contacts']" onclick="this.blur();">Контакты</a>
             </li>
             <li class="header__search">
                 <form action="">

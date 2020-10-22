@@ -1,0 +1,39 @@
+// @import 'swiper/swiper-bundle.css';
+
+.swiper-container {
+    border-radius: 6px;
+}
+
+.swiper-slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    padding: 30px 60px;
+    height: 340px;
+    background-size: cover;
+    background-position: center;
+    box-sizing: border-box;
+    & > h2 {
+        font-size: 36px;
+        font-weight: 800;
+    }
+    & > p {
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 28px;
+    }
+    & > img {
+        width: 100%;
+    }
+}
+
+.consult-slide {
+    color: var(--dark-color);
+    background-image: url('../../assets/img/consult.jpg');
+}
+.diagnostic-slide {
+    text-shadow: 0 2px 8px rgba(0,0,0,1);
+    color: var(--light-color);
+    background-image: url('../../assets/img//diagnostic.jpg');
+}

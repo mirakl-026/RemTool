@@ -20,23 +20,23 @@ export class ToolsPageComponent implements OnInit {
   constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
-    this.loadImages();
+    //this.loadImages();
   }
 
   // Tools
   // получаем данные через сервис
-  loadImages() {
-    this.dataService.getImages()
-      .subscribe((data: string[]) => this.tools = data);
-  }
+  //loadImages() {
+  //  this.dataService.getImages()
+  //    .subscribe((data: string[]) => this.tools = data);
+  //}
 
-  deleteTool(t: Tool) {
-    this.dataService.deleteTool(t.id)
-      .subscribe(data => this.loadTools());
-  }
-  addTool() {
-    this.cancelTool();
-    this.tableModeTool = false;
-  }
+  //deleteTool(t: Tool) {
+  //  this.dataService.deleteTool(t.id)
+  //    .subscribe(data => this.loadTools());
+  //}
+  //addTool() {
+  //  this.cancelTool();
+  //  this.tableModeTool = false;
+  //}
 
 }

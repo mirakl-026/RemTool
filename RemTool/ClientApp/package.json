@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "echo hello && ng serve",
+    "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -19,8 +19,9 @@
     "@angular/platform-browser": "~10.1.0",
     "@angular/platform-browser-dynamic": "~10.1.0",
     "@angular/router": "~10.1.0",
+    "ngx-swiper-wrapper": "^10.0.0",
     "rxjs": "~6.6.0",
-    "swiper": "^6.3.3",
+    "swiper": "^6.3.4",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },

@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import Swiper, { Navigation, Pagination } from 'swiper';
+import { SwiperComponent } from '../swiper/swiper.component';
+
+
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.scss']
+
+  
 })
 export class MainPageComponent implements OnInit {
 
@@ -13,9 +17,3 @@ export class MainPageComponent implements OnInit {
   }
 
 }
-
-// let heroHeader = document.querySelector('.hero__header');
-// // window.addEventListener('resize', () => {
-
-// // });
-// heroHeader.setAttribute('font-size', ) 
