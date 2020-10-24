@@ -32,8 +32,8 @@ export class SwiperComponent implements OnInit {
     
       autoplay: {
         delay: 3000,
-        
-      }
+        disableOnInteraction: false
+      },
     })
     
     

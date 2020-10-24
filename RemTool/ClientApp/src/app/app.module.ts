@@ -6,9 +6,9 @@ import { AppComponent } from './app.component';
 import { MainLayoutComponent } from './shared/main-layout/main-layout.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { ToolsPageComponent } from './tools-page/tools-page.component';
-import { BrandsPageComponent } from './brands-page/brands-page.component';
 import { ContactsPageComponent } from './contacts-page/contacts-page.component';
 import { SwiperComponent } from './swiper/swiper.component';
+import { SwiperBrandsComponent } from './swiper-brands/swiper-brands.component';
 
 @NgModule({
   declarations: [
@@ -16,9 +16,9 @@ import { SwiperComponent } from './swiper/swiper.component';
     MainLayoutComponent,
     MainPageComponent,
     ToolsPageComponent,
-    BrandsPageComponent,
     ContactsPageComponent,
-    SwiperComponent
+    SwiperComponent,
+    SwiperBrandsComponent
   ],
   imports: [
     BrowserModule,

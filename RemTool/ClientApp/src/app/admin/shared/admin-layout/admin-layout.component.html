@@ -1,49 +1,22 @@
-<style>
-    body {
-        font-family: "Lato", sans-serif;
-    }
+<nav class="navbar">
+    <h1>
+        <a routerLink="/">На сайт</a>
+    </h1>
 
-    .sidenav {
-        height: 100%;
-        width: 170px;
-        position: relative;
-        z-index: 1;
-        top: 0;
-        left: 0;
-        background-color: #111;
-        overflow-x: hidden;
-        padding-top: 20px;
-    }
-
-    .sidenav a {
-        padding: 6px 8px 6px 16px;
-        text-decoration: none;
-        font-size: 25px;
-        color: #818181;
-        display: block;
-    }
-
-    .sidenav a:hover {
-        color: #f1f1f1;
-    }
-
-    .main {
-        margin-left: 160px; /* Same as the width of the sidenav */
-        font-size: 28px; /* Increased text to enable scrolling */
-        padding: 0px 10px;
-    }
-
-    @media screen and (max-height: 450px) {
-        .sidenav {padding-top: 15px;}
-        .sidenav a {font-size: 18px;}
-    }
-</style>
-
-<div class="sidenav">
-    <a routerLink="/">На сайт</a>
-    <a [routerLink]="['/admin', 'tools']">Tools</a>
-    <a [routerLink]="['/admin', 'brands']">Brands</a>
-    <a [routerLink]="['/admin', 'spareparts']">SpareParts</a>
-</div>
-
+    <ul>
+        <li routerLinkActive="active">
+            <a [routerLink]="['/admin', 'add']">Добавить инструмент</a>
+        </li>
+        <li routerLinkActive="active">
+            <a [routerLink]="['/admin', '']">Редактировать инструмент</a>
+        </li>
+        <li routerLinkActive="active">
+            <a [routerLink]="['/admin', 'login']">Вход</a>
+        </li>
+        <li routerLinkActive="active">
+            <a [routerLink]="['/admin', '']">Выход</a>
+        </li>
+        
+    </ul>
+</nav>
 <router-outlet></router-outlet>

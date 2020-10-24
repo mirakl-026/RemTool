@@ -1,5 +1,5 @@
 <!-- Slider main container -->
-<div class="swiper-container">
+<div class="swiper-container" onmouseover="this.swiper.autoplay.stop()" onmouseout="this.swiper.autoplay.start()">
     <!-- Additional required wrapper -->
     <div class="swiper-wrapper">
         <!-- Slides -->
@@ -10,7 +10,7 @@
                 помогут определиться с ремонтом <br>
                 и ценами
             </p>
-            <button class="button_light">Оставить заявку</button>
+            <button class="button_light" onclick="this.blur()">Оставить заявку</button>
             <!-- <img src="../../assets/img/consult 1.jpg" alt=""> -->
         </div>
         <div class="swiper-slide diagnostic-slide">
@@ -20,7 +20,7 @@
                 инструмент на все возможные <br>
                 неисправности
             </p>
-            <button class="button_light">Оставить заявку</button>
+            <button class="button_light" onclick="this.blur()">Оставить заявку</button>
             <!-- <img src="../../assets/img/diagnostic.jpg" alt=""> -->
         </div>
     </div>

@@ -16,65 +16,185 @@
     }
 }
 
+.main-h2 {
+    font-size: 36px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
 .we-repair {
-    margin-top: 80px;
-    display: flex;
-    flex-direction: column;
+
     & h2 {
-        font-size: 36px;
-        font-weight: 600;
-        text-align: center;
-        margin-bottom: 30px;
+
     }
 }
 
+.row-4-col {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    & * {
+        width: 23%;
+    }
+}
+.row-3-col {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    & * {
+        width: 31.7%;
+    }
+}
 .row-2-col {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: wrap;
     & * {
-        width: 48%;
+        width: 48.8%;
     }
 }
 
-.we-repair__row {
-    &:first-of-type {
-        margin-bottom: 46px;
+.we-repair {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    &__row {
+        &:first-of-type {
+            & a {
+                height: 160px;
+                font-size: 30px;
+            }
+        }
     }
     & a {
-        height: 200px;
+        margin-bottom: 30px;
+        height: 100px;
         border-radius: 6px;
         background-color: grey;
         background-position: center;
-        // background-size: 110%;
         background-size: cover;
         background-repeat: no-repeat;
         transition: background-size 200ms ease;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 36px;
+        font-size: 24px;
         font-weight: 600;
         text-decoration: none;
         color: var(--light-color);
+        text-shadow: 0 4px 8px rgba($color: #000000, $alpha: 1);
         &:hover {
             color: var(--orange-color);
-            // background-size: 100%;
+            // background-size: 120%;
         }
-        &:nth-child(1) {
-            background-image: url('../../assets/img/electro-tools.jpg');
-            margin-bottom: 46px;
+        
+    }
+    &__electric {
+        background-image: url('../../assets/img/electro-tools.jpg');
+    }
+    &__benzo {
+        background-image: url('../../assets/img/benzo-tools.jpg');
+    }
+    &__welding {
+        background-image: url('../../assets/img/welding.jpg');            
+    }
+    &__generators {
+        background-image: url('../../assets/img/generator.jpg');            
+    }
+    &__compressor {
+        background-image: url('../../assets/img/compressor.jpg');            
+    }
+    &__rest {
+        background-image: url('../../assets/img/boat-engine.jpg');            
+    }
+    &__garden {
+        background-image: url('../../assets/img/garden.jpg');            
+        
+    }
+    &__heater {
+        background-image: url('../../assets/img/heater.jpg');            
+
+    }
+}
+
+.advantage {
+    height: 310px;
+    width: 70%;
+    margin: 0 auto 30px auto;
+    & > h2 {
+        color: var(--light-color);
+        padding-top: 30px;
+    }
+    &__wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+    &__item {
+        width: 178px;
+        font-size: 24px;
+        color: var(--light-color);
+        font-weight: 600;
+        text-align: center;
+        & > img {
+            margin-bottom: 20px;
         }
-        &:nth-child(2) {
-            background-image: url('../../assets/img/benzo-tools.jpg');
-            margin-bottom: 46px;
+    }
+    &::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: inherit;
+        left: 0;
+        background-color: var(--orange-color);
+        z-index: -1;
+    }
+}
+
+.brands {
+    margin-bottom: 40px;
+    overflow: hidden;
+    &__slider {
+        width: 100%;
+        height: 30px;
+        background-color: var(--orange-color);
+    }
+}
+
+.popular {
+    &__row {
+        & a {
+            height: 100px;
+            background-color: var(--grey-color);
+            margin-bottom: 30px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--dark-color);
+            text-align: center;
+            box-sizing: border-box;
+            padding: 16px;
+            font-weight: 600;
         }
-        &:nth-child(3) {
-            background-image: url('../../assets/img/kompressor.jpg');            
-        }
-        &:nth-child(4) {
-            background-image: url('../../assets/img/boat-engine.jpg');
-        }
+    }
+}
+
+.description {
+    margin-bottom: 40px;
+    &__content {
+        display: flex;
+        align-items: center;
+    }
+    &__text {
+        width: 57%;
+        font-size: 24px;
+        line-height: 36px;
+    }
+    &__process {
+        width: 40%;
     }
 }

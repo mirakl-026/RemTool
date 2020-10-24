@@ -1,34 +1,30 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from "@angular/core"
 import { RouterModule } from '@angular/router';
-
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-
-
+import { LoginPageComponent } from './login-page/login-page.component';
 import { AdminLayoutComponent } from './shared/admin-layout/admin-layout.component';
-import { ToolsPageComponent } from '../admin/tools-page/tools-page.component';
-import { BrandsPageComponent } from '../admin/brands-page/brands-page.component';
-import { SparePartsPageComponent } from '../admin/spareparts-page/spareparts-page.component'
-
+import { AddPageComponent } from './add-page/add-page.component';
+import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
+import { EditPageComponent } from './edit-page/edit-page.component';
 
 @NgModule({
     declarations: [
         AdminLayoutComponent,
-        ToolsPageComponent,
-        BrandsPageComponent,
-        SparePartsPageComponent
+        LoginPageComponent,
+        DashboardPageComponent,
+        AddPageComponent,
+        EditPageComponent
     ],
     imports: [
-        FormsModule,
-        HttpClientModule,
         CommonModule,
         RouterModule.forChild([
             {
                 path: '', component: AdminLayoutComponent, children: [
-                    {path: 'tools', component: ToolsPageComponent},
-                    {path: 'brands', component: BrandsPageComponent},
-                    {path: 'spareparts', component: SparePartsPageComponent},
+                    {path: '', redirectTo: '/admin/login', pathMatch: 'full'},
+                    {path: 'login', component: LoginPageComponent},
+                    {path: 'dashboard', component: DashboardPageComponent},
+                    {path: 'add', component: AddPageComponent},
+                    {path: 'tool/:id/edit', component: EditPageComponent},
                 ]
             }
         ])
