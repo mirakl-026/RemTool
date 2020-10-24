@@ -24,7 +24,7 @@ namespace RemTool.Infrastructure.Interfaces.Services
         public string GetWeldingToolsList();
 
         // получить список генераторов
-        public string GetGeneratorssList();
+        public string GetGeneratorsList();
 
         // получить список компрессоров
         public string GetCompressorsList();

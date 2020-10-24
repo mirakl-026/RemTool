@@ -41,9 +41,8 @@ namespace RemTool
 
 
             services.AddTransient<IFileImageService, FileImageService>();
-            services.AddSingleton<IBrandService, BrandService>();
-            services.AddSingleton<IToolService, ToolService>();
             services.AddSingleton<ISparePartService, SparePartService>();
+            services.AddSingleton<IToolTypeService, ToolTypeService>();
 
 
 

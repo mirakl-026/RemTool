@@ -93,7 +93,7 @@ namespace RemTool.Services.MongoDB
 
         public string GetWeldingToolsList() => GetToolTypeList(3);
 
-        public string GetGeneratorssList() => GetToolTypeList(4);
+        public string GetGeneratorsList() => GetToolTypeList(4);
 
         public string GetCompressorsList() => GetToolTypeList(5);
 
