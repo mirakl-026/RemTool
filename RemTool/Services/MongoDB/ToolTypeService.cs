@@ -70,10 +70,10 @@ namespace RemTool.Services.MongoDB
             FilterDefinition<ToolType> f =
                 fb.Eq("MainType", mainType);
 
-            ElectroToolsList ptl = new ElectroToolsList();
-            foreach (var tool in _toolTypes.Find(f).ToList())
+            ToolTypesList ttl = new ToolTypesList();
+            foreach (var toolType in _toolTypes.Find(f).ToList())
             {
-                ptl.ElectroTools.Add(tool.Name);
+                ttl.IncludedTypes.Add(toolType.Name);
             }
 
             var options = new JsonSerializerOptions()
@@ -84,7 +84,7 @@ namespace RemTool.Services.MongoDB
                 WriteIndented = true
             };
 
-            return JsonSerializer.Serialize(ptl, options);
+            return JsonSerializer.Serialize(ttl, options);
         }
 
         public string GetElectroToolsList() => GetToolTypeList(1);
@@ -153,58 +153,9 @@ namespace RemTool.Services.MongoDB
 
 
 
-    public class ElectroToolsList
+    public class ToolTypesList
     {
-        public ElectroToolsList() => ElectroTools = new List<string>();
-        public List<string> ElectroTools { get; set; }
-    }
-
-    public class FuelToolsList
-    {
-        public FuelToolsList() => FuelTools = new List<string>();
-
-        public List<string> FuelTools { get; set; }
-    }
-
-    public class WeldingToolsList
-    {
-        public WeldingToolsList() => WeldingTools = new List<string>();
-
-        public List<string> WeldingTools { get; set; }
-    }
-
-    public class GeneratorsList
-    {
-        public GeneratorsList() => Generators = new List<string>();
-
-        public List<string> Generators { get; set; }
-    }
-
-    public class CompressorsList
-    {
-        public CompressorsList() => Compressors = new List<string>();
-
-        public List<string> Compressors { get; set; }
-    }
-
-    public class RestToolsList
-    {
-        public RestToolsList() => RestTools = new List<string>();
-
-        public List<string> RestTools { get; set; }
-    }
-
-    public class GardenToolsList
-    {
-        public GardenToolsList() => GardenTools = new List<string>();
-
-        public List<string> GardenTools { get; set; }
-    }
-
-    public class HeatGunsList
-    {
-        public HeatGunsList() => HeatGuns = new List<string>();
-
-        public List<string> HeatGuns { get; set; }
+        public ToolTypesList() => IncludedTypes = new List<string>();
+        public List<string> IncludedTypes { get; set; }
     }
 }
