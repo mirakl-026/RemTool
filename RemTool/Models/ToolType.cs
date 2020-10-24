@@ -16,14 +16,19 @@ namespace RemTool.Models
 
         public string Name { get; set; }
 
+        // основной из 8-и типов
         public int MainType { get; set; }
 
+        // второстепенный из основного 
         public int SecondaryType { get; set; }
 
+        // бренды которые включены в тип-инструмента
         public List<string> Brands { get; set; }
 
-        public Dictionary<string, int> ServeCost { get; set; }        
+        // список услуг - название услуги - значение в деньгах 
+        public Dictionary<string, string> ServeCost { get; set; } 
 
-        public string ImgReference { get; set; }
+        // ссылка на картинку (при расширении)
+        public string ImgRefenrence { get; set; }
     }
 }
