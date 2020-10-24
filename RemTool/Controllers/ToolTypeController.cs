@@ -71,6 +71,28 @@ namespace RemTool.Controllers
             return _db.GetHeatGunsList();
         }
 
+        [HttpGet("GetPriceList")]
+        public string GetPriceList(string id)
+        {
+            return _db.GetPriceListOfToolType(id);
+        }
+
+        [HttpGet("GetPriceList")]
+        public string GetPriceList(int mainType, int secondType)
+        {
+            if (mainType >= 1 && mainType <= 8)
+            {
+                return _db.GetPriceListOfToolType(mainType, secondType);
+            }
+            return "";
+        }
+
+        [HttpGet("GetPriceListByFilter")]
+        public string GetPriceListByFilter(string filter)
+        {
+            return _db.GetPriceListOfToolTypeByFilter(filter);
+        }
+
 
         [HttpGet]
         public IEnumerable<ToolType> Get()
