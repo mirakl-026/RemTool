@@ -1,8 +1,7 @@
-﻿import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
-import { Brand } from './brand';
-import { Tool } from './tool';
-import { SparePart } from './sparepart'
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { SparePart } from './sparepart';
+import { ToolType } from './toolType';
 
 @Injectable()
 export class DataService {
@@ -14,49 +13,7 @@ export class DataService {
 
     }
 
-
-    // brands
-    getBrands() {
-        return this.http.get(this.urlBrands);
-    }
-
-    getBrand(id: string) {
-        return this.http.get(this.urlBrands + '/' + id);
-    }
-
-    createBrand(brand: Brand) {
-        return this.http.post(this.urlBrands, brand);
-    }
-
-    updateBrand(brand: Brand) {
-        return this.http.put(this.urlBrands, brand);
-    }
-
-    deleteBrand(id: string) {
-        return this.http.delete(this.urlBrands + '/' + id);
-    }
-
-
-    // tools
-    getTools() {
-        return this.http.get(this.urlTools);
-    }
-
-    getTool(id: string) {
-        return this.http.get(this.urlTools + '/' + id);
-    }
-
-    createTool(tool: Tool) {
-        return this.http.post(this.urlTools, tool);
-    }
-
-    updateTool(tool: Tool) {
-        return this.http.put(this.urlTools, tool);
-    }
-
-    deleteTool(id: string) {
-        return this.http.delete(this.urlTools + '/' + id);
-    }
+    // toolTypes
 
 
     // spareParts

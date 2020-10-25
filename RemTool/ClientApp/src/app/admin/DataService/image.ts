@@ -1,6 +1,6 @@
 export class Image {
   constructor(
-    public name?: string,
-    public path?: string
+    public Name?: string,
+    public Path?: string
   ) { }
 }
