@@ -5,36 +5,137 @@ import { ToolType } from './toolType';
 
 @Injectable()
 export class DataService {
-    private urlBrands = "api/brands";
-    private urlTools = "api/tools";
-    private urlSpareParts = "api/spareparts";
+  private urlSpareParts = "api/spareparts";
+  private urlToolTypes = "api/tooltypes"
+  private urlToolTypePrice = "api/tooltypes/GetPriceList"
 
-    constructor(private http: HttpClient) {
+  constructor(private http: HttpClient) {
 
-    }
+  }
 
-    // toolTypes
+  // toolTypes
+  //[HttpGet("GetElectroTools")]
+  //public string GetElectroTools()
+  getElectroTools() {
+    return this.http.get(this.urlToolTypes + '/' + "GetElectroTools");
+  }
 
+  //[HttpGet("GetFuelTools")]
+  //public string GetFuelTools()
+  getFuelTools() {
+    return this.http.get(this.urlToolTypes + '/' + "GetFuelTools");
+  }
 
-    // spareParts
-    getSpareParts() {
-        return this.http.get(this.urlSpareParts);
-    }
+  //[HttpGet("GetWeldingTools")]
+  //public string GetWeldingTools()
+  getWeldingTools() {
+    return this.http.get(this.urlToolTypes + '/' + "GetWeldingTools");
+  }
 
-    getSparePart(id: string) {
-        return this.http.get(this.urlSpareParts + '/' + id);
-    }
+  //[HttpGet("GetGenerators")]
+  //public string GetGenerators()
+  getGenerators() {
+    return this.http.get(this.urlToolTypes + '/' + "GetWeldingTools");
+  }
 
-    createSparePart(sparePart: SparePart) {
-        return this.http.post(this.urlSpareParts, sparePart);
-    }
+  //[HttpGet("GetCompressors")]
+  //public string GetCompressors()
+  getCompressors() {
+    return this.http.get(this.urlToolTypes + '/' + "GetCompressors");
+  }
 
-    updateSparePart(sparePart: SparePart) {
-        return this.http.put(this.urlSpareParts, sparePart);
-    }
+  //[HttpGet("GetRestTools")]
+  //public string GetRestTools()
+  getRestTools() {
+    return this.http.get(this.urlToolTypes + '/' + "GetRestTools");
+  }
 
-    deleteSparePart(id: string) {
-        return this.http.delete(this.urlSpareParts + '/' + id);
-    }
+  //[HttpGet("GetGardenTools")]
+  //public string GetGardenTools()
+  getGardenTools() {
+    return this.http.get(this.urlToolTypes + '/' + "GetGardenTools");
+  }
 
+  //[HttpGet("GetHeatGuns")]
+  //public string GetHeatGuns()
+  getHeatGuns() {
+    return this.http.get(this.urlToolTypes + '/' + "GetHeatGuns");
+  }
+
+  //[HttpGet("GetPriceList")]
+  //public string GetPriceList(string id)
+  getPriceListById(id: string) {
+    return this.http.get(this.urlToolTypePrice + '/' + id);
+  }
+
+  //[HttpGet("GetPriceList")]
+  //public string GetPriceList(int mainType, int secondType)
+  getPriceListByType(mainType: number, secondType: number) {
+    return this.http.get(this.urlToolTypePrice + '?' + 'mainType=' + mainType + '&secondType=' + secondType);
+  }
+
+  //[HttpGet("GetPriceListByFilter")]
+  //public string GetPriceListByFilter(string filter)
+  getPriceListByFilter(filter: string) {
+    return this.http.get(this.urlToolTypePrice + '?' + 'filter=' + filter);
+  }
+
+  //[HttpGet]
+  //public IEnumerable<ToolType> Get()
+  getToolTypes() {
+    return this.http.get(this.urlToolTypes);
+  }
+
+  //[HttpGet("{id}")]
+  //public ToolType Get(string id)
+  getToolType(id: string) {
+    return this.http.get(this.urlToolTypes + '/' + id);
+  }
+
+  //[HttpPost]
+  //public IActionResult Post(ToolType toolType)
+  createToolType(toolType: ToolType) {
+    return this.http.post(this.urlToolTypes, toolType);
+  }
+
+  //[HttpPut]
+  //public IActionResult Put(ToolType toolType)
+  updateToolType(toolType: ToolType) {
+    return this.http.put(this.urlToolTypes, toolType);
+  }
+
+  //[HttpDelete("{id}")]
+  //public IActionResult Delete(string id)
+  deleteToolType(id: string) {
+    return this.http.delete(this.urlToolTypes + '/' + id);
+  }
+
+  //[HttpDelete("DeleteAllToolTypes")]
+  //public IActionResult DeleteAll()
+  deleteToolTypes() {
+    return this.http.delete(this.urlToolTypes + '/' + "DeleteAllToolTypes");
+  }
+
+    
+
+  // spareParts
+  getSpareParts() {
+    return this.http.get(this.urlSpareParts);
+  }
+
+  getSparePart(id: string) {
+    return this.http.get(this.urlSpareParts + '/' + id);
+  }
+
+  createSparePart(sparePart: SparePart) {
+    return this.http.post(this.urlSpareParts, sparePart);
+  }
+
+  updateSparePart(sparePart: SparePart) {
+    return this.http.put(this.urlSpareParts, sparePart);
+  }
+
+  deleteSparePart(id: string) {
+    return this.http.delete(this.urlSpareParts + '/' + id);
+  }
 }

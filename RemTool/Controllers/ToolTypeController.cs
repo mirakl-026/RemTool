@@ -11,7 +11,7 @@ using RemTool.Infrastructure.Interfaces.Services;
 
 namespace RemTool.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/tooltypes")]
     [ApiController]
     public class ToolTypeController : ControllerBase
     {
