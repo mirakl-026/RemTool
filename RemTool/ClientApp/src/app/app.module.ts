@@ -9,6 +9,8 @@ import { ToolsPageComponent } from './tools-page/tools-page.component';
 import { ContactsPageComponent } from './contacts-page/contacts-page.component';
 import { SwiperComponent } from './swiper/swiper.component';
 import { SwiperBrandsComponent } from './swiper-brands/swiper-brands.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,11 +20,13 @@ import { SwiperBrandsComponent } from './swiper-brands/swiper-brands.component';
     ToolsPageComponent,
     ContactsPageComponent,
     SwiperComponent,
-    SwiperBrandsComponent
+    SwiperBrandsComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

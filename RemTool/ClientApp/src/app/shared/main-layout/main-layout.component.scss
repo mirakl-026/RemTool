@@ -144,12 +144,26 @@
     &:hover .arrow-down{
         transform: rotate(180deg);
     }
-    &:hover .arrow-down > svg > path{
+    &:hover .arrow-down > svg > path {
         stroke: var(--orange-color);
     }
     &:hover .drop-menu {
         visibility: visible;
     }
+    // & a {
+    //     &:focus {
+    //         color: var(--orange-color);
+    //     }
+    //     &:focus + .arrow-down {
+    //         transform: rotate(180deg);
+    //     }
+    //     &:focus + .arrow-down > svg > path {
+    //         stroke: var(--orange-color);
+    //     }
+    //     &:focus ~ .drop-menu {
+    //         visibility: visible;
+    //     }
+    // }
 }
 
 .drop-menu {

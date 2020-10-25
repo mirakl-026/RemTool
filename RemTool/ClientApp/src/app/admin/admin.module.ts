@@ -1,38 +1,35 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from "@angular/core"
 import { RouterModule } from '@angular/router';
-
+import { LoginPageComponent } from './login-page/login-page.component';
 import { AdminLayoutComponent } from './shared/admin-layout/admin-layout.component';
-
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { SparePartsPageComponent } from '../admin/spareparts-page/spareparts-page.component';
-import { ToolTypePageComponent } from '../admin/tooltypes-page/tooltypes-page.component';
-
-
-
-
+import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditToolsComponent } from './edit-tools/edit-tools.component';
 
 @NgModule({
-  declarations: [
-    AdminLayoutComponent,
-    SparePartsPageComponent,
-    ToolTypePageComponent,
-  ],
-  imports: [
-    FormsModule,
-    HttpClientModule,
-    CommonModule,
-    RouterModule.forChild([
-      {
-        path: '', component: AdminLayoutComponent, children: [
-          { path: 'spareparts', component: SparePartsPageComponent },
-          { path: 'tooltypes', component: ToolTypePageComponent },
-        ]
-      }
-    ])
-  ],
-  exports: [RouterModule],
+    declarations: [
+        AdminLayoutComponent,
+        LoginPageComponent,
+        DashboardPageComponent,
+        EditToolsComponent
+    ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule.forChild([
+            {
+                path: '', component: AdminLayoutComponent, children: [
+                    {path: '', redirectTo: '/admin/login', pathMatch: 'full'},
+                    {path: 'login', component: LoginPageComponent},
+                    {path: 'dashboard', component: DashboardPageComponent},
+                    {path: 'edit-tools', component: EditToolsComponent},
+                ]
+            }
+        ])
+    ],
+    exports: [RouterModule],
 })
 
 export class AdminModule {

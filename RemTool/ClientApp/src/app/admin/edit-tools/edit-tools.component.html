@@ -1,0 +1,21 @@
+<div class="tabs">
+    <input type="radio" name="tab-btn" id="tab-btn-1" value="" checked>
+    <label for="tab-btn-1">Добавить инструмент</label>
+    <input type="radio" name="tab-btn" id="tab-btn-2" value="">
+    <label for="tab-btn-2">Редактировать инструмент</label>
+
+    <div id="content-1">
+        <!-- <form [formGroup]="form" (ngSubmit)="submit()"> -->
+        <form [formGroup]="form">
+            <input id="name" formControlName="name" type="text">
+            <label for="name">Название</label>
+            <input id="type" formControlName="type" type="text">
+            <label for="type">Категория</label>
+            <!-- <input id="" type="checkbox">
+            <label for="">Электроинструмент</label> -->
+        </form>
+    </div>
+    <div id="content-2">
+      Содержимое 2...
+    </div>
+  </div>

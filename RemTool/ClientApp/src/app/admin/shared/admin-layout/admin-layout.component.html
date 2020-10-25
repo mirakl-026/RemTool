@@ -1,15 +1,22 @@
 <nav class="navbar">
     <h1>
-      <a routerLink="/">На сайт</a>
+        <a routerLink="/">На сайт</a>
     </h1>
 
     <ul>
         <li routerLinkActive="active">
-          <a [routerLink]="['/admin', 'tooltypes']">ToolTypes</a>
+            <a [routerLink]="['/admin', 'edit-tools']">Редактировать инструменты</a>
+        </li>
+        <!-- <li routerLinkActive="active">
+            <a [routerLink]="['/admin', 'edit']">Редактировать инструмент</a>
+        </li> -->
+        <li routerLinkActive="active">
+            <a [routerLink]="['/admin', 'login']">Вход</a>
         </li>
         <li routerLinkActive="active">
-          <a [routerLink]="['/admin', 'spareparts']">SpareParts</a>
+            <a href="#" (click)="logout($event)">Выход</a>
         </li>
+        
     </ul>
 </nav>
 <router-outlet></router-outlet>
