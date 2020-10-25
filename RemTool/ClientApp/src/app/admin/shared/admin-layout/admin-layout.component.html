@@ -1,22 +1,15 @@
 <nav class="navbar">
     <h1>
-        <a routerLink="/">На сайт</a>
+      <a routerLink="/">На сайт</a>
     </h1>
 
     <ul>
         <li routerLinkActive="active">
-            <a [routerLink]="['/admin', 'add']">Добавить инструмент</a>
+          <a [routerLink]="['/admin', 'tooltypes']">ToolTypes</a>
         </li>
         <li routerLinkActive="active">
-            <a [routerLink]="['/admin', '']">Редактировать инструмент</a>
+          <a [routerLink]="['/admin', 'spareparts']">SpareParts</a>
         </li>
-        <li routerLinkActive="active">
-            <a [routerLink]="['/admin', 'login']">Вход</a>
-        </li>
-        <li routerLinkActive="active">
-            <a [routerLink]="['/admin', '']">Выход</a>
-        </li>
-        
     </ul>
 </nav>
 <router-outlet></router-outlet>

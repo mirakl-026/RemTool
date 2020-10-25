@@ -6,6 +6,8 @@ import { AdminLayoutComponent } from './shared/admin-layout/admin-layout.compone
 
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { SparePartsPageComponent } from '../admin/spareparts-page/spareparts-page.component';
+import { ToolTypePageComponent } from '../admin/tooltypes-page/tooltypes-page.component';
 
 
 
@@ -14,17 +16,20 @@ import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AdminLayoutComponent,
+    SparePartsPageComponent,
+    ToolTypePageComponent,
   ],
   imports: [
     FormsModule,
     HttpClientModule,
     CommonModule,
     RouterModule.forChild([
-        {
-            path: '', component: AdminLayoutComponent, children: [
-
-            ]
-        }
+      {
+        path: '', component: AdminLayoutComponent, children: [
+          { path: 'spareparts', component: SparePartsPageComponent },
+          { path: 'tooltypes', component: ToolTypePageComponent },
+        ]
+      }
     ])
   ],
   exports: [RouterModule],
