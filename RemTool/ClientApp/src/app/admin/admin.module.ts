@@ -6,6 +6,7 @@ import { AdminLayoutComponent } from './shared/admin-layout/admin-layout.compone
 import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditToolsComponent } from './edit-tools/edit-tools.component';
+import { AuthGuard } from '../shared/auth.guard';
 
 @NgModule({
     declarations: [
@@ -23,8 +24,7 @@ import { EditToolsComponent } from './edit-tools/edit-tools.component';
                 path: '', component: AdminLayoutComponent, children: [
                     {path: '', redirectTo: '/admin/login', pathMatch: 'full'},
                     {path: 'login', component: LoginPageComponent},
-                    {path: 'dashboard', component: DashboardPageComponent},
-                    {path: 'edit-tools', component: EditToolsComponent},
+                    {path: 'edit-tools', component: EditToolsComponent, canActivate: [AuthGuard]},
                 ]
             }
         ])
