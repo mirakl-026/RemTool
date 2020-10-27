@@ -6,12 +6,12 @@ export class ToolType {
     public MainType?: number,
     public SecondaryType?: number,
     public Brands?: string[], 
-    public ServeCost?: Dictionary,
+    public ServeCost?: SC_Dictionary,
     public ImgRefenrence?: string
   ) { }
 }
 
-export class Dictionary {
+export class SC_Dictionary {
   constructor(
     public Keys?: string[],
     public Values?: string[]
