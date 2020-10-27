@@ -9,7 +9,8 @@
       <td>Основой тип</td>
       <td>Второстепенный тип</td>
       <td>Бренды</td>
-      <td>Услуги-стоимость</td>
+      <td>Услуги</td>
+      <td>Стоимость</td>
       <td>Ссылка на картинку</td>
       <td></td>
     </tr>
@@ -20,8 +21,19 @@
         <td>{{tt?.Name}}</td>
         <td>{{tt?.MainType}}</td>
         <td>{{tt?.SecondaryType}}</td>
-        <td>{{tt?.Brands}}</td>
-        <td>{{tt?.ServeCost}}</td>
+
+        <td>
+          <div *ngFor="let brand of tt.Brands">
+            {{brand}}
+          </div>
+        </td>
+
+        <!--<td *ngFor="let key of tt.ServeCost.Keys">
+          {{key}}
+        </td>
+        <td *ngFor="let value of tt.ServeCost.Values">
+          {{value}}
+        </td>-->
         <td>{{tt?.ImgRefenrence}}</td>
         <td>
           <button class="btn btn-sm btn-primary" (click)="editTool(t)">Изменить</button>
@@ -117,87 +129,23 @@
   </div>
 
   <!-- Бренды -->
-  <div class="form-group">
-    <label>Бренды</label>
-    <input type="text" [(ngModel)]="toolType.Brands" class="form-control" />
+  <label>Бренды</label>
+  <div *ngFor="let brand of toolType.Brands">
+    {{brand}},
   </div>
-  <!--<script>
-    var i = 0;
-    function addBrand() {
-      var bt = document.getElementById("Brands");
-      var brand = document.createElement("div");
-
-
-      // Name of Brand
-      var brandNameLabel = document.createElement("label");
-      var brandNameLabelText = document.createTextNode("Название бренда " + i);
-      brandNameLabel.appendChild(brandNameLabelText);
-      brand.appendChild(brandNameLabel);
-
-      // Input Name of Brand
-      var brandNameInput = document.createElement("input");
-      brandNameInput.setAttribute("type", "text");
-      brandNameInput.setAttribute("class", "form-control");
-      brandNameInput.setAttribute("name", "toolType.Brands[" + i + "]");
-      brand.appendChild(brandNameInput);
-
-      bt.appendChild(brand);
-      i++;
-    }
-  </script>
-  <button type="button" onclick="addBrand()">Add Brand</button>
-  <div class="form-group" id="Brands">
-
-  </div>-->
+  <hr />
+  <input type="text" [(ngModel)]="currentBrand" class="form-control" />
+  <button class="btn btn-primary m-t-1" (click)="addBrandToToolType()">
+    +Бренд
+  </button>
 
 
   <!-- Услуга-стоимость -->
-  <div class="form-group">
+  <!--<div class="form-group">
     <label>Услуги-стоимость</label>
     <input type="text" [(ngModel)]="toolType.ServeCost" class="form-control" />
-  </div>
-  <!--<script>
-    var j = 0;
-    function addServeCost() {
-      var sc_t = document.getElementById("ServeCost");
-      var sc_pair = document.createElement("div");
-
-
-      // Name of Service
-      var serviceNameLabel = document.createElement("label");
-      var serviceNameLabelText = document.createTextNode("Название сервиса " + j);
-      serviceNameLabel.appendChild(serviceNameLabelText);
-      sc_pair.appendChild(featureNameLabel);
-
-      // Input Name of Service
-      var serviceNameInput = document.createElement("input");
-      serviceNameInput.setAttribute("type", "text");
-      serviceNameInput.setAttribute("class", "form-control");
-      serviceNameInput.setAttribute("name", "toolType.ServeCost.Key[" + j + "]");
-      sc_pair.appendChild(serviceNameInput);
-
-
-      // Cost of Service
-      var costLabel = document.createElement("label");
-      var costLabelText = document.createTextNode("Стоимость" + j);
-      costLabel.appendChild(costLabelText);
-      sc_pair.appendChild(costLabel);
-
-      // Input Cost of Service
-      var costInput = document.createElement("input");
-      costInput.setAttribute("type", "text");
-      costInput.setAttribute("class", "form-control");
-      costInput.setAttribute("name", "toolType.ServeCost.Value[" + j + "]");
-      sc_pair.appendChild(costInput);
-
-      sc_t.appendChild(feature);
-      j++;
-    }
-  </script>
-  <button type="button" onclick="addServeCost()">Add ServeCost</button>
-  <div class="form-group" id="ServeCost">
-
   </div>-->
+
 
   <div class="form-group">
     <label>Ссылка на картинку</label>

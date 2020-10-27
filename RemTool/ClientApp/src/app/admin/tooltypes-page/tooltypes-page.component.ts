@@ -42,7 +42,7 @@ export class ToolTypePageComponent implements OnInit {
     this.resetToolType();
   }
 
-  // редактиврование инструмента
+  // редактирование инструмента
   editToolType(tt: ToolType) {
     this.toolType = tt;
   }
@@ -64,6 +64,26 @@ export class ToolTypePageComponent implements OnInit {
     this.resetToolType();
     this.tableModeToolType = false;
   }
+
+  // добавление бренда
+  currentBrand: string = "";
+
+  addBrandToToolType() {
+    if (this.currentBrand != "") {
+      if (this.toolType.Brands == null)
+        this.toolType.Brands = [];
+
+      this.toolType.Brands.push(this.currentBrand);
+      this.currentBrand = "";
+    }    
+  }
+
+  // добавление пары - услуга+стоимость
+  addServeCostToToolType(serve: string, cost: string) {
+    this.toolType.ServeCost.Keys.push(serve);
+    this.toolType.ServeCost.Values.push(cost);
+  }
+
 
 }
 

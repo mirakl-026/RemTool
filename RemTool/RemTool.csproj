@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <Folder Include="DAL\Context\MongoDB\" />
+    <Folder Include="Models\DTO\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 

@@ -8,12 +8,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditToolsComponent } from './edit-tools/edit-tools.component';
 import { AuthGuard } from '../shared/auth.guard';
 
+import { ToolTypePageComponent } from '../admin/tooltypes-page/tooltypes-page.component';
+import { SparePartsPageComponent } from '../admin/spareparts-page/spareparts-page.component';
+
 @NgModule({
     declarations: [
         AdminLayoutComponent,
         LoginPageComponent,
         DashboardPageComponent,
-        EditToolsComponent
+        EditToolsComponent,
+        ToolTypePageComponent,
+        SparePartsPageComponent,
+        
     ],
     imports: [
         CommonModule,
@@ -24,7 +30,9 @@ import { AuthGuard } from '../shared/auth.guard';
                 path: '', component: AdminLayoutComponent, children: [
                     {path: '', redirectTo: '/admin/login', pathMatch: 'full'},
                     {path: 'login', component: LoginPageComponent},
-                    {path: 'edit-tools', component: EditToolsComponent, canActivate: [AuthGuard]},
+                    { path: 'edit-tools', component: EditToolsComponent, canActivate: [AuthGuard] },
+                    { path: 'spareparts', component: SparePartsPageComponent },
+                    { path: 'tooltypes', component: ToolTypePageComponent },
                 ]
             }
         ])

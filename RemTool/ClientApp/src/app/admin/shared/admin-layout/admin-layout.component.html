@@ -4,15 +4,21 @@
     </h1>
 
     <ul *ngIf="auth.isAuth() else login">
-        <li routerLinkActive="active">
-            <a [routerLink]="['/admin', 'edit-tools']">Редактировать инструменты</a>
-        </li>
-        <!-- <li routerLinkActive="active">
-            <a [routerLink]="['/admin', 'edit']">Редактировать инструмент</a>
-        </li> -->
-        <li routerLinkActive="active">
-            <a href="#" (click)="logout($event)">Выход</a>
-        </li>
+      <li routerLinkActive="active">
+        <a [routerLink]="['/admin', 'edit-tools']">Редактировать инструменты</a>
+      </li>
+      <!-- <li routerLinkActive="active">
+        <a [routerLink]="['/admin', 'edit']">Редактировать инструмент</a>
+      </li> -->
+      <li routerLinkActive="active">
+        <a [routerLink]="['/admin', 'tooltypes']">ToolTypes</a>
+      </li>
+      <li routerLinkActive="active">
+        <a [routerLink]="['/admin', 'spareparts']">SpareParts</a>
+      </li>
+      <li routerLinkActive="active">
+        <a href="#" (click)="logout($event)">Выход</a>
+      </li>
     </ul>
     <ng-template #login>
         <ul>
