@@ -18,26 +18,28 @@
   <tbody>
     <tr *ngFor="let tt of toolTypes">
       <ng-template [ngIf]="toolType?.id != tt.id" [ngIfElse]="editToolTypeTemplate">
-        <td>{{tt?.Name}}</td>
-        <td>{{tt?.MainType}}</td>
-        <td>{{tt?.SecondaryType}}</td>
+        <td>{{tt?.name}}</td>
+        <td>{{tt?.mainType}}</td>
+        <td>{{tt?.secondaryType}}</td>
 
         <td>
-          <div *ngFor="let brand of tt.Brands">
+          <div *ngFor="let brand of tt.brands">
             {{brand}}
           </div>
         </td>
 
-        <!--<td *ngFor="let key of tt.ServeCost.Keys">
+        <td></td>
+        <td>
+        <!--<td *ngFor="let key of tt.serveCost.keys">
           {{key}}
         </td>
-        <td *ngFor="let value of tt.ServeCost.Values">
+        <td *ngFor="let value of tt.serveCost.values">
           {{value}}
         </td>-->
-        <td>{{tt?.ImgRefenrence}}</td>
+        <td>{{tt?.imgRefenrence}}</td>
         <td>
-          <button class="btn btn-sm btn-primary" (click)="editTool(t)">Изменить</button>
-          <button class="btn btn-sm btn-danger" (click)="deleteTool(t)">Удалить</button>
+          <button class="btn btn-sm btn-primary" (click)="editToolType(tt)">Изменить</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteToolType(tt)">Удалить</button>
         </td>
       </ng-template>
     </tr>
@@ -47,22 +49,22 @@
 <!--шаблон для редактирования инструментов-->
 <ng-template #editToolTypeTemplate>
   <td>
-    <input type="text" [(ngModel)]="toolType.Name" class="form-control" />
+    <input type="text" [(ngModel)]="toolType.name" class="form-control" />
   </td>
   <td>
-    <input type="number" [(ngModel)]="toolType.MainType" class="form-control" />
+    <input type="number" [(ngModel)]="toolType.mainType" class="form-control" />
   </td>
   <td>
-    <input type="number" [(ngModel)]="toolType.SecondaryType" class="form-control" />
+    <input type="number" [(ngModel)]="toolType.secondaryType" class="form-control" />
   </td>
   <td>
-    <input type="text" [(ngModel)]="toolType.Brands" class="form-control" />
+    <input type="text" [(ngModel)]="toolType.brands" class="form-control" />
   </td>
   <td>
-    <input type="text" [(ngModel)]="toolType.ServeCost" class="form-control" />
+    <input type="text" [(ngModel)]="toolType.serveCost" class="form-control" />
   </td>
   <td>
-    <input type="text" [(ngModel)]="toolType.ImgRefenrence" class="form-control" />
+    <input type="text" [(ngModel)]="toolType.imgRefenrence" class="form-control" />
   </td>
   <td>
     <input type="button" value="Сохранить" (click)="saveToolType()" class="btn btn-sm btn-success" />
@@ -115,22 +117,22 @@
 <ng-template #createToolTypeTemplate>
   <div class="form-group">
     <label>Название</label>
-    <input type="text" [(ngModel)]="toolType.Name" class="form-control" />
+    <input type="text" [(ngModel)]="toolType.name" class="form-control" />
   </div>
 
   <div class="form-group">
     <label>Основой тип</label>
-    <input type="number" [(ngModel)]="toolType.MainType" class="form-control" />
+    <input type="number" [(ngModel)]="toolType.mainType" class="form-control" />
   </div>
 
   <div class="form-group">
     <label>Второстепенный тип</label>
-    <input type="number" [(ngModel)]="toolType.SecondaryType" class="form-control" />
+    <input type="number" [(ngModel)]="toolType.secondaryType" class="form-control" />
   </div>
 
   <!-- Бренды -->
   <label>Бренды</label>
-  <div *ngFor="let brand of toolType.Brands">
+  <div *ngFor="let brand of toolType.brands">
     {{brand}},
   </div>
   <hr />
@@ -149,7 +151,7 @@
 
   <div class="form-group">
     <label>Ссылка на картинку</label>
-    <input type="text" [(ngModel)]="toolType.ImgRefenrence" class="form-control" />
+    <input type="text" [(ngModel)]="toolType.imgRefenrence" class="form-control" />
   </div>
 
   <div>

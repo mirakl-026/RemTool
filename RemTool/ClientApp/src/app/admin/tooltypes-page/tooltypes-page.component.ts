@@ -32,7 +32,7 @@ export class ToolTypePageComponent implements OnInit {
 
   // сохранение инструмента
   saveToolType() {
-    if (this.toolType.Id == null) {
+    if (this.toolType.id == null) {
       this.dataService.createToolType(this.toolType)
         .subscribe((data: ToolType) => this.toolTypes.push(data));
     } else {
@@ -55,7 +55,7 @@ export class ToolTypePageComponent implements OnInit {
 
   // удаление инструмента 
   deleteToolType(tt: ToolType) {
-    this.dataService.deleteToolType(tt.Id)
+    this.dataService.deleteToolType(tt.id)
       .subscribe(data => this.loadToolTypes());
   }
 
@@ -70,18 +70,18 @@ export class ToolTypePageComponent implements OnInit {
 
   addBrandToToolType() {
     if (this.currentBrand != "") {
-      if (this.toolType.Brands == null)
-        this.toolType.Brands = [];
+      if (this.toolType.brands == null)
+        this.toolType.brands = [];
 
-      this.toolType.Brands.push(this.currentBrand);
+      this.toolType.brands.push(this.currentBrand);
       this.currentBrand = "";
     }    
   }
 
   // добавление пары - услуга+стоимость
   addServeCostToToolType(serve: string, cost: string) {
-    this.toolType.ServeCost.Keys.push(serve);
-    this.toolType.ServeCost.Values.push(cost);
+    this.toolType.serveCost.keys.push(serve);
+    this.toolType.serveCost.values.push(cost);
   }
 
 

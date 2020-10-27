@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using RemTool.Models;
+using RemTool.Models.DTO;
 using RemTool.Infrastructure.Interfaces;
 using RemTool.Infrastructure.Interfaces.Services;
 
@@ -95,9 +96,30 @@ namespace RemTool.Controllers
 
 
         [HttpGet]
-        public IEnumerable<ToolType> Get()
+        public IEnumerable<ToolTypeDTO> Get()
         {
-            return _db.GetAllToolTypes();
+            var tts = _db.GetAllToolTypes();
+
+            List<ToolTypeDTO> tts_dto = new List<ToolTypeDTO>(tts.Count());
+            foreach (var tt in tts)
+            {
+                tts_dto.Add(new ToolTypeDTO
+                {
+                    Id = tt.Id,
+                    Name = tt.Name is null? "" : tt.Name,
+                    MainType = tt.MainType,
+                    SecondaryType = tt.SecondaryType,
+                    Brands = tt.Brands is null ? new string[0] : tt.Brands.ToArray(),
+                    ServeCost = new SC_Dictionary()
+                    { 
+                        Keys = tt.ServeCost is null? new string[0] : tt.ServeCost.Keys.ToArray(), 
+                        Values = tt.ServeCost is null ? new string[0] : tt.ServeCost.Values.ToArray()
+                    
+                    },
+                    ImgRefenrence = tt.ImgRefenrence is null ? "" : tt.ImgRefenrence
+                });
+            }
+            return tts_dto;
         }
 
         [HttpGet("{id}")]
