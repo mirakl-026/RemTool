@@ -37,12 +37,12 @@ export class SparePartsPageComponent implements OnInit {
           this.dataService.updateSparePart(this.sparePart)
               .subscribe(data => this.loadSpareParts());
       }
-      this.cancelSparePart();
+      this.resetSparePart();
   }
   editSparePart(sp: SparePart) {
       this.sparePart = sp;
   }
-  cancelSparePart() {
+  resetSparePart() {
       this.sparePart = new SparePart();
       this.tableModeSparePart = true;
   }
@@ -51,7 +51,7 @@ export class SparePartsPageComponent implements OnInit {
           .subscribe(data => this.loadSpareParts());
   }
   addSparePart() {
-      this.cancelSparePart();
+      this.resetSparePart();
       this.tableModeSparePart = false;
   }    
 

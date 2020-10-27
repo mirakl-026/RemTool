@@ -13,7 +13,7 @@ export class DataService {
 
   }
 
-  // toolTypes
+  // Всё что касается инструментов
   //[HttpGet("GetElectroTools")]
   //public string GetElectroTools()
   getElectroTools() {
@@ -117,7 +117,7 @@ export class DataService {
   }
 
     
-
+  // Запчасти
   // spareParts
   getSpareParts() {
     return this.http.get(this.urlSpareParts);
@@ -138,4 +138,7 @@ export class DataService {
   deleteSparePart(id: string) {
     return this.http.delete(this.urlSpareParts + '/' + id);
   }
+
+  // картинки
+
 }
