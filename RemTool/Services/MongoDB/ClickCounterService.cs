@@ -87,5 +87,10 @@ namespace RemTool.Services.MongoDB
                 ResetCounter(counter.Id);
             }
         }
+
+        public void DeleteAllCounters()
+        {
+            _counters.DeleteMany(new BsonDocument());
+        }
     }
 }

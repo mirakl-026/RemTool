@@ -13,47 +13,59 @@ namespace RemTool.Services.MongoDB
 {
     public class RtRequestService : IRtRequestService
     {
+        private readonly IMongoCollection<RtRequest> _rtRequests;
 
-        public RtRequestService()
+        public RtRequestService(RemToolMongoDBsettings settings)
         {
+            var client = new MongoClient(settings.ConnectionString);
+            var database = client.GetDatabase(settings.DatabaseName);
 
+            _rtRequests = database.GetCollection<RtRequest>("RtRequests");
         }
 
 
-
-        public void CreateRequest(RtRequest rtRequest)
+        #region CRUD
+        public void CreateRtRequest(RtRequest rtRequest)
         {
-            throw new NotImplementedException();
+            _rtRequests.InsertOne(rtRequest);
         }
 
-        public void DeleteAllRequests()
+        public RtRequest ReadRtRequest(string id)
         {
-            throw new NotImplementedException();
+            return _rtRequests.Find(rtreq => rtreq.Id == id).FirstOrDefault();
         }
 
-        public void DeleteRequest(string id)
+        public void UpdateRtRequest(RtRequest rtRequest)
         {
-            throw new NotImplementedException();
+            _rtRequests.ReplaceOne(rtreq => rtreq.Id == rtRequest.Id, rtRequest);
         }
 
-        public void MarkRequest(string id, int mark)
+        public void DeleteRtRequest(string id)
         {
-            throw new NotImplementedException();
+            _rtRequests.DeleteOne(rtreq => rtreq.Id == id);
         }
 
-        public void ReadAllRequests()
+        #endregion
+
+
+        public IEnumerable<RtRequest> ReadAllRtRequests()
         {
-            throw new NotImplementedException();
+            return _rtRequests.Find(new BsonDocument()).ToList();
         }
 
-        public RtRequest ReadRequest(string id)
+        public void MarkRtRequest(string id, int mark)
         {
-            throw new NotImplementedException();
+            RtRequest rtreq = ReadRtRequest(id);
+            if (rtreq != null)
+            {
+                rtreq.Mark = mark;
+                UpdateRtRequest(rtreq);
+            }            
         }
 
-        public void UpdateRequest(RtRequest rtRequest)
+        public void DeleteAllRtRequests()
         {
-            throw new NotImplementedException();
+            _rtRequests.DeleteMany(new BsonDocument());
         }
     }
 }

@@ -13,20 +13,20 @@ namespace RemTool.Infrastructure.Interfaces.Services
 
         #region CRUD
 
-        public void CreateRequest(RtRequest rtRequest);
+        public void CreateRtRequest(RtRequest rtRequest);
 
-        public RtRequest ReadRequest(string id);
+        public RtRequest ReadRtRequest(string id);
 
-        public void UpdateRequest(RtRequest rtRequest);
+        public void UpdateRtRequest(RtRequest rtRequest);
 
-        public void DeleteRequest(string id);
+        public void DeleteRtRequest(string id);
 
         #endregion
 
-        public void MarkRequest(string id, int mark);
+        public void MarkRtRequest(string id, int mark);
 
-        public void ReadAllRequests();
+        public IEnumerable<RtRequest> ReadAllRtRequests();
 
-        public void DeleteAllRequests();
+        public void DeleteAllRtRequests();
     }
 }

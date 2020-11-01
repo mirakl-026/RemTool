@@ -27,5 +27,7 @@ namespace RemTool.Infrastructure.Interfaces.Services
         public void ResetCounter(string counterId);
 
         public void ResetAllCounters();
+
+        public void DeleteAllCounters();
     }
 }

@@ -49,7 +49,7 @@ namespace RemTool.Services.MongoDB
 
         public void DeleteAllSpareParts()
         {
-            throw new NotImplementedException();
+            _spareParts.DeleteMany(new BsonDocument());
         }
     }
 }
