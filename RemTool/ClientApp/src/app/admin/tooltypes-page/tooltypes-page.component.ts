@@ -110,11 +110,10 @@ export class ToolTypePageComponent implements OnInit {
     console.log(this.toolType.serveCost.values);
   }
 
-  // добавление пары - услуга+стоимость
-  addServeCostToToolType(serve: string, cost: string) {
-    console.log(this.toolType.serveCost)
-    this.toolType.serveCost.keys.push(serve);
-    this.toolType.serveCost.values.push(cost);
+  removeRow(i) {
+    this.toolType.serveCost.keys.splice(i, 1);
+    this.toolType.serveCost.values.splice(i, 1);
+    this.serveCostLength.pop();
   }
 
 
