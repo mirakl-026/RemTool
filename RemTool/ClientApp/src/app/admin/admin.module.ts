@@ -10,6 +10,7 @@ import { AuthGuard } from '../shared/auth.guard';
 
 import { ToolTypePageComponent } from '../admin/tooltypes-page/tooltypes-page.component';
 import { SparePartsPageComponent } from '../admin/spareparts-page/spareparts-page.component';
+import { PriceEditorComponent } from './price-editor/price-editor.component';
 
 @NgModule({
     declarations: [
@@ -19,6 +20,7 @@ import { SparePartsPageComponent } from '../admin/spareparts-page/spareparts-pag
         EditToolsComponent,
         ToolTypePageComponent,
         SparePartsPageComponent,
+        PriceEditorComponent,
         
     ],
     imports: [

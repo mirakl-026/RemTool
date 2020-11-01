@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { DataService } from '../DataService/data.service';
-import { ToolType } from '../DataService/toolType';
+import { SC_Dictionary, ToolType } from '../DataService/toolType';
 
 
 @Component({
@@ -15,9 +15,22 @@ export class ToolTypePageComponent implements OnInit {
   // ToolTypes
   toolType: ToolType = new ToolType();
   toolTypes: ToolType[];
-  tableModeToolType: boolean = true;      // табличный режим
+  // tableModeToolType: boolean = true;      // табличный режим
+  addToolFlag: boolean = false;           // флаг добавления нового инструмента
+  categories: string[] = [
+    'Электроинструмент',
+    'Бензоинструмент',
+    'Садовая техника',
+    'Компрессоры',
+    'Генераторы',
+    'Сварочная техника',
+    'Тепловые пушки',
+    'Техника для отдыха'
+  ]
 
-  constructor(private dataService: DataService) { }
+  constructor(
+    private dataService: DataService) { }
+
 
   ngOnInit(): void {
     this.loadToolTypes();
@@ -32,6 +45,7 @@ export class ToolTypePageComponent implements OnInit {
 
   // сохранение инструмента
   saveToolType() {
+    console.log(this.toolType)
     if (this.toolType.id == null) {
       this.dataService.createToolType(this.toolType)
         .subscribe((data: ToolType) => this.toolTypes.push(data));
@@ -50,19 +64,21 @@ export class ToolTypePageComponent implements OnInit {
   // сброс
   resetToolType() {
     this.toolType = new ToolType();
-    this.tableModeToolType = true;
+    // this.tableModeToolType = true;
+    this.addToolFlag = false;
   }
-
+  
   // удаление инструмента 
   deleteToolType(tt: ToolType) {
     this.dataService.deleteToolType(tt.id)
-      .subscribe(data => this.loadToolTypes());
+    .subscribe(data => this.loadToolTypes());
   }
-
+  
   // добавление инструмента
   addToolType() {
     this.resetToolType();
-    this.tableModeToolType = false;
+    // this.tableModeToolType = false;
+    this.addToolFlag = true;
   }
 
   // добавление бренда
@@ -78,8 +94,25 @@ export class ToolTypePageComponent implements OnInit {
     }    
   }
 
+  newKey: string = "";
+  newValue: string = "";
+  serveCostLength: number[] = [];
+  
+  addRowToPrice() {
+    if ((this.newKey != "") && (this.newValue != "")) {
+      this.toolType.serveCost.keys.push(this.newKey);
+      this.toolType.serveCost.values.push(this.newValue);
+      this.newKey = "";
+      this.newValue = "";
+      this.serveCostLength.push(0);
+    }
+    console.log(this.toolType.serveCost.keys);
+    console.log(this.toolType.serveCost.values);
+  }
+
   // добавление пары - услуга+стоимость
   addServeCostToToolType(serve: string, cost: string) {
+    console.log(this.toolType.serveCost)
     this.toolType.serveCost.keys.push(serve);
     this.toolType.serveCost.values.push(cost);
   }

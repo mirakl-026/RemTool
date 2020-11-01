@@ -1,0 +1,168 @@
+<!-- <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css" /> -->
+
+<h1>Список Инструментов</h1>
+<table *ngIf="tableModeToolType; else createToolTypeTemplate" class="table">
+  <thead>
+    <tr>
+      <td>Название</td>
+      <td>Основой тип</td>
+      <td>Второстепенный тип</td>
+      <td>Бренды</td>
+      <td>Услуги</td>
+      <td>Стоимость</td>
+      <td>Ссылка на картинку</td>
+      <td></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let tt of toolTypes">
+      <ng-template [ngIf]="toolType?.id != tt.id" [ngIfElse]="editToolTypeTemplate">
+        <td>{{tt?.name}}</td>
+        <td>{{tt?.mainType}}</td>
+        <td>{{tt?.secondaryType}}</td>
+
+        <td>
+          <div *ngFor="let brand of tt.brands">
+            {{brand}}
+          </div>
+        </td>
+
+        <td></td>
+        <td>
+        <!--<td *ngFor="let key of tt.serveCost.keys">
+          {{key}}
+        </td>
+        <td *ngFor="let value of tt.serveCost.values">
+          {{value}}
+        </td>-->
+        <td>{{tt?.imgRefenrence}}</td>
+        <td>
+          <button class="btn btn-sm btn-primary" (click)="editToolType(tt)">Изменить</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteToolType(tt)">Удалить</button>
+        </td>
+      </ng-template>
+    </tr>
+  </tbody>
+</table>
+<input type="button" value="Добавить" class="addPartBtn" (click)="addToolType()" />
+
+<!--шаблон для редактирования инструментов-->
+<ng-template #editToolTypeTemplate>
+  <td>
+    <input type="text" [(ngModel)]="toolType.name" class="form-control" />
+  </td>
+  <td>
+    <input type="number" [(ngModel)]="toolType.mainType" class="form-control" />
+  </td>
+  <td>
+    <input type="number" [(ngModel)]="toolType.secondaryType" class="form-control" />
+  </td>
+  <td>
+    <input type="text" [(ngModel)]="toolType.brands" class="form-control" />
+  </td>
+  <td>
+    <input type="text" [(ngModel)]="toolType.serveCost" class="form-control" />
+  </td>
+  <td>
+    <input type="text" [(ngModel)]="toolType.imgRefenrence" class="form-control" />
+  </td>
+  <td>
+    <input type="button" value="Сохранить" (click)="saveToolType()" class="btn btn-sm btn-success" />
+    <input type="button" value="Отмена" (click)="resetToolType()" class="btn btn-sm btn-warning" />
+  </td>
+</ng-template>
+
+<!--шаблон для добавления инструментов-->
+<!--<ng-template #createToolTypeTemplate>
+  <div class="form-group">
+    <label>Название</label>
+    <input type="text" [(ngModel)]="toolType.Name" class="form-control" />
+  </div>
+
+  <div class="form-group">
+    <label>Основой тип</label>
+    <input type="number" [(ngModel)]="toolType.MainType" class="form-control" />
+  </div>
+
+  <div class="form-group">
+    <label>Второстепенный тип</label>
+    <input type="number" [(ngModel)]="toolType.SecondaryType" class="form-control" />
+  </div>
+
+  <div class="form-group">
+    <label>Бренды</label>
+    <input type="text" [(ngModel)]="toolType.Brands" class="form-control" />
+  </div>
+
+  <div class="form-group">
+    <label>Услуги-стоимость</label>
+    <input type="text" [(ngModel)]="toolType.ServeCost" class="form-control" />
+  </div>
+
+  <div class="form-group">
+    <label>Ссылка на картинку</label>
+    <input type="text" [(ngModel)]="toolType.ImgRefenrence" class="form-control" />
+  </div>
+
+  <div>
+    <input type="button" value="Сохранить" (click)="saveToolType()" class="btn btn-success" />
+    <input type="button" value="Отмена" (click)="resetToolType()" class="btn btn-warning" />
+  </div>
+</ng-template>-->
+
+
+
+
+
+<ng-template #createToolTypeTemplate>
+  <section class="create-tool">
+    <div class="create-tool__item">
+      <label>Название</label>
+      <input type="text" [(ngModel)]="toolType.name" class="form-control" />
+    </div>
+
+    <div class="create-tool__item">
+      <label>Основой тип</label>
+      <input type="number" [(ngModel)]="toolType.mainType" class="form-control" />
+    </div>
+
+    <div class="create-tool__item">
+      <label>Второстепенный тип</label>
+      <input type="number" [(ngModel)]="toolType.secondaryType" class="form-control" />
+    </div>
+
+    <!-- Бренды -->
+    <label>Бренды</label>
+    <div *ngFor="let brand of toolType.brands">
+      {{brand}},
+    </div>
+    <hr />
+    <input type="text" [(ngModel)]="currentBrand" class="form-control" />
+    <button class="btn btn-primary m-t-1" (click)="addBrandToToolType()">
+      +Бренд
+    </button>
+
+
+    <!-- Услуга-стоимость -->
+    <!--<div class="form-group">
+      <label>Услуги-стоимость</label>
+      <input type="text" [(ngModel)]="toolType.ServeCost" class="form-control" />
+    </div>-->
+
+
+    <div class="form-group">
+      <label>Ссылка на картинку</label>
+      <input type="text" [(ngModel)]="toolType.imgRefenrence" class="form-control" />
+    </div>
+
+    <div>
+      <input type="button" value="Сохранить" (click)="saveToolType()" class="btn btn-success" />
+      <input type="button" value="Отмена" (click)="resetToolType()" class="btn btn-warning" />
+    </div>
+  </section>
+</ng-template>
+
+
+
+
+

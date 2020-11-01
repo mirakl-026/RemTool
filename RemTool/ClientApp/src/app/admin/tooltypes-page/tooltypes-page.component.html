@@ -1,8 +1,5 @@
-<link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css" />
-
 <h1>Список Инструментов</h1>
-<input type="button" value="Добавить" class="btn btn-default" (click)="addToolType()" />
-<table *ngIf="tableModeToolType; else createToolTypeTemplate" class="table table-striped">
+<table class="table">
   <thead>
     <tr>
       <td>Название</td>
@@ -17,7 +14,8 @@
   </thead>
   <tbody>
     <tr *ngFor="let tt of toolTypes">
-      <ng-template [ngIf]="toolType?.id != tt.id" [ngIfElse]="editToolTypeTemplate">
+      <!-- <ng-template [ngIf]="toolType?.id != tt.id" [ngIfElse]="editToolTypeTemplate"> -->
+      <ng-template [ngIf]="toolType?.id != tt.id">
         <td>{{tt?.name}}</td>
         <td>{{tt?.mainType}}</td>
         <td>{{tt?.secondaryType}}</td>
@@ -45,9 +43,10 @@
     </tr>
   </tbody>
 </table>
+<input *ngIf="!addToolFlag;" type="button" value="Добавить" class="addPartBtn" (click)="addToolType()" />
 
 <!--шаблон для редактирования инструментов-->
-<ng-template #editToolTypeTemplate>
+<!-- <ng-template #editToolTypeTemplate>
   <td>
     <input type="text" [(ngModel)]="toolType.name" class="form-control" />
   </td>
@@ -70,7 +69,7 @@
     <input type="button" value="Сохранить" (click)="saveToolType()" class="btn btn-sm btn-success" />
     <input type="button" value="Отмена" (click)="resetToolType()" class="btn btn-sm btn-warning" />
   </td>
-</ng-template>
+</ng-template> -->
 
 <!--шаблон для добавления инструментов-->
 <!--<ng-template #createToolTypeTemplate>
@@ -114,51 +113,109 @@
 
 
 
-<ng-template #createToolTypeTemplate>
-  <div class="form-group">
-    <label>Название</label>
-    <input type="text" [(ngModel)]="toolType.name" class="form-control" />
-  </div>
+<!-- Добавление инструмента -->
+  <section *ngIf="addToolFlag;" class="create-tool">
 
-  <div class="form-group">
-    <label>Основой тип</label>
-    <input type="number" [(ngModel)]="toolType.mainType" class="form-control" />
-  </div>
+    <div class="create-tool__item">
+      <label>Название</label>
+      <input type="text" [(ngModel)]="toolType.name" class="form-control" placeholder="Название инструмента"/>
+    </div>
 
-  <div class="form-group">
-    <label>Второстепенный тип</label>
-    <input type="number" [(ngModel)]="toolType.secondaryType" class="form-control" />
-  </div>
+    <hr>
+    <!-- Категории -->
+    <div class="create-tool__item">
+      <label>Категория</label>
+      <div class="categories">
+        <div *ngFor="let category of categories; index as i" class="categories__item">
+          <input id="type{{i}}" type="checkbox" [(ngModel)]="toolType.mainType[i]">
+          <label for="type{{i}}">{{category}}</label>
+        </div>
+      </div>
+      <!-- <input type="number" [(ngModel)]="toolType.mainType" class="form-control" /> -->
+    </div>
 
-  <!-- Бренды -->
-  <label>Бренды</label>
-  <div *ngFor="let brand of toolType.brands">
-    {{brand}},
-  </div>
-  <hr />
-  <input type="text" [(ngModel)]="currentBrand" class="form-control" />
-  <button class="btn btn-primary m-t-1" (click)="addBrandToToolType()">
-    +Бренд
-  </button>
+    <hr>
+
+    <!-- Бренды -->
+    <div class="create-tool__item brands">
+      <label>Бренды</label>
+      <div class="brand">
+        <div *ngFor="let brand of toolType.brands">
+          {{brand}}
+        </div>
+        <input type="text" [(ngModel)]="currentBrand"/>
+        <button class="" (click)="addBrandToToolType()">
+          Добавить
+        </button>
+      </div>
+    </div>
+
+  <hr>
+
+    <!-- Прайс -->
+    <div class="price">
+      <label>Прайс лист</label>
+      <div class="price__container">
+        <!-- <div *ngFor="let key of priceKeys; index as i" class="price__row old-row">
+          <input type="text" [(ngModel)]="priceKeys[i]">
+          <input type="text" [(ngModel)]="priceValues[i]">
+          <button>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 7.125H21.75V8.625H12V7.125Z" fill="black"/>
+              <path d="M8.25 12H21.75V13.5H8.25V12Z" fill="black"/>
+              <path d="M8.25 16.875H21.75V18.375H8.25V16.875Z" fill="black"/>
+              <path d="M9 7.125H6V4.125H4.5V7.125H1.5V8.625H4.5V11.625H6V8.625H9V7.125Z" fill="black"/>
+            </svg>
+          </button>
+          <button>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5.00293 20C5.00293 21.103 5.89993 22 7.00293 22H17.0029C18.1059 22 19.0029 21.103 19.0029 20V8H21.0029V6H17.0029V4C17.0029 2.897 16.1059 2 15.0029 2H9.00293C7.89993 2 7.00293 2.897 7.00293 4V6H3.00293V8H5.00293V20ZM9.00293 4H15.0029V6H9.00293V4ZM8.00293 8H17.0029L17.0039 20H7.00293V8H8.00293Z" fill="black"/>
+              <path d="M9.00293 10H11.0029V18H9.00293V10ZM13.0029 10H15.0029V18H13.0029V10Z" fill="black"/>
+            </svg>
+          </button>
+        </div> -->
+        <div *ngFor="let key of serveCostLength; index as i" class="price__row old-row">
+          <input type="text" [(ngModel)]="toolType.serveCost.keys[i]">
+          <input type="text" [(ngModel)]="toolType.serveCost.values[i]">
+          <button>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 7.125H21.75V8.625H12V7.125Z" fill="black"/>
+              <path d="M8.25 12H21.75V13.5H8.25V12Z" fill="black"/>
+              <path d="M8.25 16.875H21.75V18.375H8.25V16.875Z" fill="black"/>
+              <path d="M9 7.125H6V4.125H4.5V7.125H1.5V8.625H4.5V11.625H6V8.625H9V7.125Z" fill="black"/>
+            </svg>
+          </button>
+          <button>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5.00293 20C5.00293 21.103 5.89993 22 7.00293 22H17.0029C18.1059 22 19.0029 21.103 19.0029 20V8H21.0029V6H17.0029V4C17.0029 2.897 16.1059 2 15.0029 2H9.00293C7.89993 2 7.00293 2.897 7.00293 4V6H3.00293V8H5.00293V20ZM9.00293 4H15.0029V6H9.00293V4ZM8.00293 8H17.0029L17.0039 20H7.00293V8H8.00293Z" fill="black"/>
+              <path d="M9.00293 10H11.0029V18H9.00293V10ZM13.0029 10H15.0029V18H13.0029V10Z" fill="black"/>
+            </svg>
+          </button>
+        </div>
+        <div class="price__row new-row">
+          <input type="text" [(ngModel)]="newKey">
+          <input type="text" [(ngModel)]="newValue">
+          <button class="" (click)="addRowToPrice()">Добавить</button>
+        </div>
+      </div>
+    </div>
 
 
-  <!-- Услуга-стоимость -->
-  <!--<div class="form-group">
-    <label>Услуги-стоимость</label>
-    <input type="text" [(ngModel)]="toolType.ServeCost" class="form-control" />
-  </div>-->
+    <div class="form-group">
+      <label>Ссылка на картинку</label>
+      <input type="text" [(ngModel)]="toolType.imgRefenrence" class="form-control" />
+    </div>
 
-
-  <div class="form-group">
-    <label>Ссылка на картинку</label>
-    <input type="text" [(ngModel)]="toolType.imgRefenrence" class="form-control" />
-  </div>
-
-  <div>
-    <input type="button" value="Сохранить" (click)="saveToolType()" class="btn btn-success" />
-    <input type="button" value="Отмена" (click)="resetToolType()" class="btn btn-warning" />
-  </div>
-</ng-template>
+    <div>
+      <button (click)="saveToolType()" class="btn btn-success">
+        Сохранить
+      </button>
+      <button (click)="resetToolType()" class="btn btn-warning">
+        Отмена
+      </button>
+    </div>
+  </section>
+<!-- </ng-template> -->
 
 
 
