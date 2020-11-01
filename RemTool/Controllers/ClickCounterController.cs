@@ -34,7 +34,7 @@ namespace RemTool.Controllers
         }
 
         // Put{id} - increase counter
-        [HttpPut("{counterid}/{tooltypeId}")]
+        [HttpPut("{counterId}/{tooltypeId}")]
         public IActionResult Put(string counterId, string tooltypeId)
         {
             if (ModelState.IsValid)
