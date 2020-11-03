@@ -43,9 +43,8 @@ namespace RemTool
             services.AddTransient<IFileImageService, FileImageService>();
             services.AddSingleton<ISparePartService, SparePartService>();
             services.AddSingleton<IToolTypeService, ToolTypeService>();
-            services.AddSingleton<IClickCounterService, ClickCounterService>();
-            services.AddSingleton<IRtRequestService, RtRequestService>();
-
+            //services.AddSingleton<IClickCounterService, ClickCounterService>();
+            //services.AddSingleton<IRtRequestService, RtRequestService>();
 
 
             services.AddControllers();
@@ -53,6 +52,20 @@ namespace RemTool
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
+            });
+
+
+
+            var authOptionsConfiguration = Configuration.GetSection("Auth");
+            services.Configure<AuthOptions>(authOptionsConfiguration);
+
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                    });
             });
         }
 
@@ -79,6 +92,8 @@ namespace RemTool
             }
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseEndpoints(endpoints =>
             {
