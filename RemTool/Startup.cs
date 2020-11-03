@@ -43,12 +43,15 @@ namespace RemTool
             services.AddTransient<IFileImageService, FileImageService>();
             services.AddSingleton<ISparePartService, SparePartService>();
             services.AddSingleton<IToolTypeService, ToolTypeService>();
-            services.AddSingleton<IClickCounterService, ClickCounterService>();
-            services.AddSingleton<IRtRequestService, RtRequestService>();
-
+            //services.AddSingleton<IClickCounterService, ClickCounterService>();
+            //services.AddSingleton<IRtRequestService, RtRequestService>();
 
 
             services.AddControllers();
+
+
+            var authOptionsConfiguration = Configuration.GetSection("Auth");
+            services.Configure<AuthOptions>(authOptionsConfiguration);
 
             services.AddSpaStaticFiles(configuration =>
             {

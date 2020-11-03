@@ -15,7 +15,7 @@ namespace RemTool.Infrastructure.Additional
 
         public string Secret { get; set; }
 
-        public int TokenLifeTime { get; set; }  // seconds
+        public int TokenLifetime { get; set; }  // seconds
 
         public SymmetricSecurityKey GetSymmetricSecurityKey()
         {

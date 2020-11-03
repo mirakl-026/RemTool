@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 using RemTool.Models;
+using RemTool.Infrastructure.Additional;
 
 namespace RemTool.Controllers
 {
@@ -13,6 +15,12 @@ namespace RemTool.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
+        private readonly IOptions<AuthOptions> _options;
+        public AuthController(IOptions<AuthOptions> options)
+        {
+            this._options = options;
+        }
+
         private List<Account> Accounts => new List<Account>
         {
             new Account()
