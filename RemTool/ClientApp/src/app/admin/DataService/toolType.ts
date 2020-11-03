@@ -7,7 +7,8 @@ export class ToolType {
     public secondaryType?: number,
     public brands?: string[], 
     public serveCost?: SC_Dictionary,
-    public imgRefenrence?: string
+    public imgRefenrence?: string,
+    public info?: string
   ) { 
       this.mainType = [false, false, false, false, false, false, false, false];
       this.serveCost = new SC_Dictionary();

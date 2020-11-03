@@ -121,7 +121,7 @@ export class ToolTypePageComponent implements OnInit {
   chooseImg(a) {
     this.chooseImgPop = a;
     //http.get запрос для получения всех картинок на сервере
-    
+
   }
 
   popupClick(e) {

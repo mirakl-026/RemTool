@@ -12,6 +12,7 @@ import { SwiperBrandsComponent } from './swiper-brands/swiper-brands.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { PopupComponent } from './popup/popup.component';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { PopupComponent } from './popup/popup.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    QuillModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
