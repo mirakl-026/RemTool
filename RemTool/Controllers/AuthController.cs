@@ -28,28 +28,28 @@ namespace RemTool.Controllers
         {
             new Account()
             {
-                Id = Guid.Parse("12345678"),
+                Id = Guid.Parse("fb30fd52-de02-4c22-a240-922653eadd57"),
                 Email = "user1@gmail.com",
                 Password = "user1",
                 Roles = new Role[] { Role.User }
             },
             new Account()
             {
-                Id = Guid.Parse("23456789"),
+                Id = Guid.Parse("6bd540c7-5cfe-4876-b471-eaa37c44b1e0"),
                 Email = "user2@gmail.com",
                 Password = "user2",
                 Roles = new Role[] { Role.User }
             },
             new Account()
             {
-                Id = Guid.Parse("34567890"),
+                Id = Guid.Parse("69c05b34-f227-4c9a-b126-53659ac76f90"),
                 Email = "admin@gmail.com",
                 Password = "admin",
                 Roles = new Role[] { Role.Admin }
             }
         };
 
-        [Route("/login")]
+        [Route("login")]
         [HttpPost]
         public IActionResult Login ([FromBody]Login request)
         {
