@@ -11,6 +11,7 @@ import { SwiperComponent } from './swiper/swiper.component';
 import { SwiperBrandsComponent } from './swiper-brands/swiper-brands.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { PopupComponent } from './popup/popup.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { FormsModule } from '@angular/forms';
     ContactsPageComponent,
     SwiperComponent,
     SwiperBrandsComponent,
+    PopupComponent,
   ],
   imports: [
     BrowserModule,

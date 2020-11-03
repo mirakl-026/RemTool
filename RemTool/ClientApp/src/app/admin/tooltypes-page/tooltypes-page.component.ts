@@ -116,6 +116,19 @@ export class ToolTypePageComponent implements OnInit {
     this.serveCostLength.pop();
   }
 
+  chooseImgPop: boolean = false;
 
+  chooseImg(a) {
+    this.chooseImgPop = a;
+    //http.get запрос для получения всех картинок на сервере
+    
+  }
+
+  popupClick(e) {
+    if (e.target == document.querySelector(".popup__body")) {
+      this.chooseImg(false);
+    }
+    // console.log(e.target);
+  }
 }
 

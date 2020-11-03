@@ -156,24 +156,6 @@
     <div class="price">
       <label>Прайс лист</label>
       <div class="price__container">
-        <!-- <div *ngFor="let key of priceKeys; index as i" class="price__row old-row">
-          <input type="text" [(ngModel)]="priceKeys[i]">
-          <input type="text" [(ngModel)]="priceValues[i]">
-          <button>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 7.125H21.75V8.625H12V7.125Z" fill="black"/>
-              <path d="M8.25 12H21.75V13.5H8.25V12Z" fill="black"/>
-              <path d="M8.25 16.875H21.75V18.375H8.25V16.875Z" fill="black"/>
-              <path d="M9 7.125H6V4.125H4.5V7.125H1.5V8.625H4.5V11.625H6V8.625H9V7.125Z" fill="black"/>
-            </svg>
-          </button>
-          <button>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5.00293 20C5.00293 21.103 5.89993 22 7.00293 22H17.0029C18.1059 22 19.0029 21.103 19.0029 20V8H21.0029V6H17.0029V4C17.0029 2.897 16.1059 2 15.0029 2H9.00293C7.89993 2 7.00293 2.897 7.00293 4V6H3.00293V8H5.00293V20ZM9.00293 4H15.0029V6H9.00293V4ZM8.00293 8H17.0029L17.0039 20H7.00293V8H8.00293Z" fill="black"/>
-              <path d="M9.00293 10H11.0029V18H9.00293V10ZM13.0029 10H15.0029V18H13.0029V10Z" fill="black"/>
-            </svg>
-          </button>
-        </div> -->
         <div *ngFor="let key of serveCostLength; index as i" class="price__row old-row">
           <input type="text" [(ngModel)]="toolType.serveCost.keys[i]">
           <input type="text" [(ngModel)]="toolType.serveCost.values[i]">
@@ -200,10 +182,80 @@
       </div>
     </div>
 
+    <hr>
 
-    <div class="form-group">
-      <label>Ссылка на картинку</label>
-      <input type="text" [(ngModel)]="toolType.imgRefenrence" class="form-control" />
+    <div class="add-image">
+      <button (click)="chooseImg(true)">Выбрать картинку</button>
+      <div *ngIf="chooseImgPop" class="popup" (click)="popupClick($event)">
+        <div class="popup__body">
+          <div class="popup__content">
+            <div class="popup__header">
+              <input id="upload-image" type="file" style="display: none;">
+              <label for="upload-image" class="popup__upload">Загрузить картинку</label>
+              <button class="popup__close" (click)="chooseImg(false)">X</button>
+            </div>
+            Выбрать картинку
+            <div class="popup__images">
+              <a href="">
+                <img src="../../../assets/img/tools/angle-grinder.png" alt="">
+              </a>
+              <a href="">
+                <img src="../../../assets/img/tools/drill.png" alt="">
+              </a>
+              <a href="">
+                <img src="../../../assets/img/tools/perforator.png" alt="">
+              </a>
+              <a href="">
+                <img src="../../../assets/img/tools/screwdriver.png" alt="">
+              </a>
+              <a href="">
+                <img src="../../../assets/img/tools/perforator.png" alt="">
+              </a>
+              <a href="">
+                <img src="../../../assets/img/tools/screwdriver.png" alt="">
+              </a>
+              <a href="">
+                <img src="../../../assets/img/tools/angle-grinder.png" alt="">
+              </a>
+              <a href="">
+                <img src="../../../assets/img/tools/drill.png" alt="">
+              </a>
+              <a href="">
+                <img src="../../../assets/img/tools/perforator.png" alt="">
+              </a>
+              <a href="">
+                <img src="../../../assets/img/tools/screwdriver.png" alt="">
+              </a>
+              <a href="">
+                <img src="../../../assets/img/tools/perforator.png" alt="">
+              </a>
+              <a href="">
+                <img src="../../../assets/img/tools/screwdriver.png" alt="">
+              </a>
+              <a href="">
+                <img src="../../../assets/img/tools/angle-grinder.png" alt="">
+              </a>
+              <a href="">
+                <img src="../../../assets/img/tools/drill.png" alt="">
+              </a>
+              <a href="">
+                <img src="../../../assets/img/tools/perforator.png" alt="">
+              </a>
+              <a href="">
+                <img src="../../../assets/img/tools/screwdriver.png" alt="">
+              </a>
+              <a href="">
+                <img src="../../../assets/img/tools/perforator.png" alt="">
+              </a>
+              <a href="">
+                <img src="../../../assets/img/tools/screwdriver.png" alt="">
+              </a>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+      <!-- <input type="text" [(ngModel)]="toolType.imgRefenrence" class="form-control" /> -->
     </div>
 
     <div>
