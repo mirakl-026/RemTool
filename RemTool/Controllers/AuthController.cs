@@ -44,7 +44,7 @@ namespace RemTool.Controllers
             {
                 Id = Guid.Parse("69c05b34-f227-4c9a-b126-53659ac76f90"),
                 Email = "admin@gmail.com",
-                Password = "admin",
+                Password = "adminadmin",
                 Roles = new Role[] { Role.Admin }
             }
         };

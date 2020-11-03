@@ -8,10 +8,15 @@ import { tap } from 'rxjs/operators';
 })
 export class AuthService {
 
+  private urlAuth = "api/auth/login";
+
+  //user1 = new User("admin@gmail.com", "admin");
+
   constructor(private http: HttpClient) { }
 
   login( User ) {
-    return this.http.post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`, User)
+    //return this.http.post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`, User)
+    return this.http.post(this.urlAuth, User)
     .pipe(
       tap(this.setToken)
     )
@@ -43,3 +48,10 @@ export class AuthService {
     return !!this.token;
   }
 }
+
+//export class User {
+//  constructor(
+//    public email?: string,
+//    public password?: string
+//  ) { }
+//}

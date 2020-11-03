@@ -35,8 +35,8 @@ import { QuillModule } from 'ngx-quill';
                     {path: '', redirectTo: '/admin/login', pathMatch: 'full'},
                     {path: 'login', component: LoginPageComponent},
                     { path: 'edit-tools', component: EditToolsComponent, canActivate: [AuthGuard] },
-                    { path: 'spareparts', component: SparePartsPageComponent },
-                    { path: 'tooltypes', component: ToolTypePageComponent },
+                    { path: 'spareparts', component: SparePartsPageComponent, canActivate: [AuthGuard] },
+                    { path: 'tooltypes', component: ToolTypePageComponent, canActivate: [AuthGuard] },
                 ]
             }
         ])

@@ -9,6 +9,7 @@ using RemTool.Models;
 using RemTool.Models.DTO;
 using RemTool.Infrastructure.Interfaces;
 using RemTool.Infrastructure.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RemTool.Controllers
 {
@@ -94,7 +95,7 @@ namespace RemTool.Controllers
             return _db.GetPriceListOfToolTypeByFilter(filter);
         }
 
-
+        //[Authorize]
         [HttpGet]
         public IEnumerable<ToolTypeDTO> Get()
         {

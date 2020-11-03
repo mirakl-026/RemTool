@@ -33,8 +33,7 @@ export class LoginPageComponent implements OnInit {
 
     const user = {
       email: this.form.value.email,
-      password: this.form.value.password,
-      returnSecureToken: true
+      password: this.form.value.password
     }
 
     this.auth.login(user).subscribe( res => {
