@@ -8,6 +8,9 @@ using Microsoft.Extensions.Options;
 
 using RemTool.Models;
 using RemTool.Infrastructure.Additional;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace RemTool.Controllers
 {
@@ -55,6 +58,12 @@ namespace RemTool.Controllers
             if (user != null)
             {
                 // Generate JWT
+                var token = GenerateJWT(user);
+
+                return Ok(new
+                {
+                    access_token = token
+                });
             }
 
             return Unauthorized();
@@ -63,6 +72,33 @@ namespace RemTool.Controllers
         private Account AuthenticateUser(string email, string password)
         {
             return Accounts.SingleOrDefault(u => u.Email == email && u.Password == password);
+        }
+
+        private string GenerateJWT(Account user)
+        {
+            var authParams = _options.Value;
+
+            var securityKey = authParams.GetSymmetricSecurityKey();
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+            var claims = new List<Claim>()
+            {
+                new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString())
+            };
+
+            foreach (var role in user.Roles)
+            {
+                claims.Add(new Claim("role", role.ToString()));
+            }
+
+            var token = new JwtSecurityToken(authParams.Issuer,
+                authParams.Audience,
+                claims,
+                expires: DateTime.Now.AddSeconds(authParams.TokenLifetime),
+                signingCredentials: credentials);
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }
