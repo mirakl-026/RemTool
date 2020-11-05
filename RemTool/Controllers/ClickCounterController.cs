@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using RemTool.Models;
 using RemTool.Infrastructure.Interfaces.Services;
 
+// контроллер для управления счетчиками кликов
+
 namespace RemTool.Controllers
 {
     [Route("api/counters")]
@@ -21,11 +23,12 @@ namespace RemTool.Controllers
             db = context;
         }
 
+        // получить значение счетчика по id
         // Get{id} - get counter value by counter id
         [HttpGet("{id}")]
-        public int Get(string id)
+        public int Get(string counterId)
         {
-            ClickCounter clickCounter = db.ReadClickCounter(id);
+            ClickCounter clickCounter = db.ReadClickCounter(counterId);
             if (clickCounter != null)
             {
                 return clickCounter.Count;
@@ -33,28 +36,25 @@ namespace RemTool.Controllers
             return 0;
         }
 
+        // увеличить значение счётчика по id (ладе если счётчика нет - он создастся)
         // Put{id} - increase counter
         [HttpPut("{counterId}/{tooltypeId}")]
         public IActionResult Put(string counterId, string tooltypeId)
         {
             if (ModelState.IsValid)
             {
-                ClickCounter clickCounter = db.ReadClickCounter(counterId);
-                if (clickCounter != null)
-                {
-                    db.IncreaseCounter(clickCounter.Id, tooltypeId);
-                }                
+                db.IncreaseCounter(counterId, tooltypeId);
                 return Ok();
             }
             return BadRequest(ModelState);
         }
 
-
+        // сбросить значение счётчика по id
         // Delete{id} - reset counter by id
         [HttpDelete("{id}")]
-        public IActionResult Delete(string id)
+        public IActionResult Delete(string counterId)
         {
-            db.ResetCounter(id);
+            db.ResetCounter(counterId);
             return Ok();
         }
     }

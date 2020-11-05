@@ -12,7 +12,9 @@ using RemTool.Infrastructure.Interfaces.Services;
 
 namespace RemTool.Controllers
 {
-    public class ImagesController : Controller
+    [Route("api/images")]
+    [ApiController]
+    public class ImagesController : ControllerBase
     {
         private readonly IFileImageService _fsContext;
 
@@ -20,8 +22,6 @@ namespace RemTool.Controllers
         {
             _fsContext = fsContext;
         }
-
-        #region Image load routing
 
         // загрузить картинку
         [HttpPost("AddImage")]
@@ -74,8 +74,5 @@ namespace RemTool.Controllers
             _fsContext.DeleteAllImages();
             return Ok();
         }
-
-        #endregion
-
     }
 }
