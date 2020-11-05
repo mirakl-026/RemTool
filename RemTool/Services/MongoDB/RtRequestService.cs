@@ -15,7 +15,7 @@ namespace RemTool.Services.MongoDB
     {
         private readonly IMongoCollection<RtRequest> _rtRequests;
 
-        public RtRequestService(RemToolMongoDBsettings settings)
+        public RtRequestService(IRemToolMongoDBsettings settings)
         {
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
