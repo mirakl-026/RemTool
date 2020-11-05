@@ -12,7 +12,7 @@ using RemTool.Infrastructure.Interfaces.Services;
 
 namespace RemTool.Controllers
 {
-    [Route("api/images")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ImagesController : ControllerBase
     {

@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace RemTool.Controllers
 {
-    [Route("api/tooltypes")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ToolTypeController : ControllerBase
     {

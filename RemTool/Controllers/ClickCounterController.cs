@@ -12,7 +12,7 @@ using RemTool.Infrastructure.Interfaces.Services;
 
 namespace RemTool.Controllers
 {
-    [Route("api/counters")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ClickCounterController : ControllerBase
     {
