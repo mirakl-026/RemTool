@@ -10,7 +10,7 @@ using RemTool.Infrastructure.Interfaces.Services;
 
 namespace RemTool.Controllers
 {
-    [Route("api/spareparts")]
+    [Route("api/[controller]")]
     [ApiController]
     public class SparePartController : ControllerBase
     {
