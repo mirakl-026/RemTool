@@ -6,12 +6,17 @@ import { ToolType } from './toolType';
 @Injectable()
 export class DataService {
   private urlSpareParts = "api/spareparts";
-  private urlToolTypes = "api/tooltypes"
-  private urlToolTypePrice = "api/tooltypes/GetPriceList"
+  private urlToolTypes = "api/tooltypes";
+  private urlToolTypePrice = "api/tooltypes/GetPriceList";
 
   constructor(private http: HttpClient) {
 
   }
+
+  getImages(){
+    return this.http.get(this.urlToolTypes + '/' + "GetImages");
+  }
+
 
   // Всё что касается инструментов
   //[HttpGet("GetElectroTools")]

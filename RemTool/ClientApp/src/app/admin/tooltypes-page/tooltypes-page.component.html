@@ -191,6 +191,24 @@
 
     <hr>
 
+    <!-- <form [formGroup]="form">
+      <input type="file" formControlName="newImg" (change)="uploadImage()">
+    </form> -->
+    
+      <form [formGroup]="newImageForm" (ngSubmit)="onSubmit(newImageForm.value)">
+
+        <div>
+            <label for="newImage">
+                new Image
+            </label>
+            <input type="file" formControlName="newImage" (change)="onSelectFile($event)" >
+        </div>
+      
+        <button type="submit">upload</button>
+      
+      </form>
+
+
     <div class="add-image">
       <div *ngIf="!!this.toolType.imgRefenrence">
         <img src={{this.toolType.imgRefenrence}} alt="">
@@ -200,13 +218,14 @@
         <div class="popup__body">
           <div class="popup__content">
             <div class="popup__header">
-              <input id="upload-image" type="file" style="display: none;">
-              <label for="upload-image" class="popup__upload">Загрузить картинку</label>
+
+
               <button class="popup__close" (click)="chooseImg(false)">X</button>
             </div>
             Выбрать картинку
             <div class="popup__images">
-                <img src="../../../assets/img/tools/angle-grinder.png" alt="" (click)='addImage($event)'>
+              <img *ngFor="let img of images" src={{img}} (click)='addImage($event)' alt="">
+                <!-- <img src="../../../assets/img/tools/angle-grinder.png" alt="" (click)='addImage($event)'>
                 <img src="../../../assets/img/tools/drill.png" alt="" (click)='addImage($event)'>
                 <img src="../../../assets/img/tools/perforator.png" alt="" (click)='addImage($event)'>
                 <img src="../../../assets/img/tools/screwdriver.png" alt="">
@@ -223,7 +242,7 @@
                 <img src="../../../assets/img/tools/perforator.png" alt="">
                 <img src="../../../assets/img/tools/screwdriver.png" alt="">
                 <img src="../../../assets/img/tools/perforator.png" alt="">
-                <img src="../../../assets/img/tools/screwdriver.png" alt="">
+                <img src="../../../assets/img/tools/screwdriver.png" alt=""> -->
             </div>
             
           </div>

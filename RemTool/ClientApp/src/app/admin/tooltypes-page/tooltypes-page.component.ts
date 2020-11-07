@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 import { DataService } from '../DataService/data.service';
 import { ToolType } from '../DataService/toolType';
+import { FormControl, FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -10,7 +12,7 @@ import { ToolType } from '../DataService/toolType';
   styleUrls: [
     './tooltypes-page.component.scss',
     './editor.scss'
-    ],
+  ],
   providers: [DataService]
 })
 export class ToolTypePageComponent implements OnInit {
@@ -32,11 +34,19 @@ export class ToolTypePageComponent implements OnInit {
   ]
 
   constructor(
-    private dataService: DataService) { }
+    private dataService: DataService,
+    private http: HttpClient
+  ) { }
 
-
+  newImageForm: FormGroup;
+  
   ngOnInit(): void {
     this.loadToolTypes();
+    this.newImageForm = new FormGroup({
+      newImage: new FormControl(null)
+    });
+
+
   }
 
   // ToolTypes
@@ -59,7 +69,9 @@ export class ToolTypePageComponent implements OnInit {
     }
     this.resetToolType();
   }*/
-  
+
+
+
   saveToolType() {
     this.toolTypes.push(this.toolType);
     this.toolType = new ToolType();
@@ -79,13 +91,13 @@ export class ToolTypePageComponent implements OnInit {
     // this.tableModeToolType = true;
     this.addToolFlag = false;
   }
-  
+
   // удаление инструмента 
   deleteToolType(tt: ToolType) {
     this.dataService.deleteToolType(tt.id)
-    .subscribe(data => this.loadToolTypes());
+      .subscribe(data => this.loadToolTypes());
   }
-  
+
   // добавление инструмента
   addToolType() {
     this.resetToolType();
@@ -103,13 +115,13 @@ export class ToolTypePageComponent implements OnInit {
 
       this.toolType.brands.push(this.currentBrand);
       this.currentBrand = "";
-    }    
+    }
   }
 
   newKey: string = "";
   newValue: string = "";
   serveCostLength: number[] = [];
-  
+
   addRowToPrice() {
     if ((this.newKey != "") && (this.newValue != "")) {
       this.toolType.serveCost.keys.push(this.newKey);
@@ -130,8 +142,15 @@ export class ToolTypePageComponent implements OnInit {
 
   chooseImgPop: boolean = false;
 
+  images: string = "";
   chooseImg(a) {
     this.chooseImgPop = a;
+    // console.log(this.dataService.getImages());
+    if (a) {
+      this.http.get("api/images/getimages").subscribe((data: string) => this.images = data);
+    }
+    console.log(this.images);
+
     //http.get запрос для получения всех картинок на сервере
 
   }
@@ -147,6 +166,26 @@ export class ToolTypePageComponent implements OnInit {
     console.log(String(e.target.currentSrc));
     this.toolType.imgRefenrence = String(e.target.currentSrc);
     this.chooseImg(false);
+  }
+
+  selectedFile: File = null;
+
+  onSelectFile(fileInput: any) {
+    this.selectedFile = <File>fileInput.target.files[0];
+  }
+
+  onSubmit(data) {
+
+    const formData = new FormData();
+    formData.append('newImage', this.selectedFile);
+
+    this.http.post('api/images/addImage', formData)
+      .subscribe(res => {
+
+        alert('Uploaded!!');
+      });
+
+    this.newImageForm.reset();
   }
 }
 
