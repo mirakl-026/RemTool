@@ -1,5 +1,12 @@
 <h1>Список Инструментов</h1>
-<table class="table">
+<div *ngFor="let tt of toolTypes">
+  {{tt.name}}
+  {{tt.mainType}}
+  {{tt.brands}}
+  {{tt.serveCost}}
+  {{tt.info}}
+</div>
+<!-- <table class="table">
   <thead>
     <tr>
       <td>Название</td>
@@ -14,7 +21,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let tt of toolTypes">
-      <!-- <ng-template [ngIf]="toolType?.id != tt.id" [ngIfElse]="editToolTypeTemplate"> -->
+      <ng-template [ngIf]="toolType?.id != tt.id" [ngIfElse]="editToolTypeTemplate">
       <ng-template [ngIf]="toolType?.id != tt.id">
         <td>{{tt?.name}}</td>
         <td>{{tt?.mainType}}</td>
@@ -28,12 +35,12 @@
 
         <td></td>
         <td>
-        <!--<td *ngFor="let key of tt.serveCost.keys">
+        <td *ngFor="let key of tt.serveCost.keys">
           {{key}}
         </td>
         <td *ngFor="let value of tt.serveCost.values">
           {{value}}
-        </td>-->
+        </td>
         <td>{{tt?.imgRefenrence}}</td>
         <td>
           <button class="btn btn-sm btn-primary" (click)="editToolType(tt)">Изменить</button>
@@ -42,7 +49,7 @@
       </ng-template>
     </tr>
   </tbody>
-</table>
+</table> -->
 <input *ngIf="!addToolFlag;" type="button" value="Добавить" class="addPartBtn" (click)="addToolType()" />
 
 <!--шаблон для редактирования инструментов-->
@@ -185,6 +192,9 @@
     <hr>
 
     <div class="add-image">
+      <div *ngIf="!!this.toolType.imgRefenrence">
+        <img src={{this.toolType.imgRefenrence}} alt="">
+      </div>
       <button (click)="chooseImg(true)">Выбрать картинку</button>
       <div *ngIf="chooseImgPop" class="popup" (click)="popupClick($event)">
         <div class="popup__body">
@@ -196,60 +206,24 @@
             </div>
             Выбрать картинку
             <div class="popup__images">
-              <a href="">
+                <img src="../../../assets/img/tools/angle-grinder.png" alt="" (click)='addImage($event)'>
+                <img src="../../../assets/img/tools/drill.png" alt="" (click)='addImage($event)'>
+                <img src="../../../assets/img/tools/perforator.png" alt="" (click)='addImage($event)'>
+                <img src="../../../assets/img/tools/screwdriver.png" alt="">
+                <img src="../../../assets/img/tools/perforator.png" alt="">
+                <img src="../../../assets/img/tools/screwdriver.png" alt="">
                 <img src="../../../assets/img/tools/angle-grinder.png" alt="">
-              </a>
-              <a href="">
                 <img src="../../../assets/img/tools/drill.png" alt="">
-              </a>
-              <a href="">
                 <img src="../../../assets/img/tools/perforator.png" alt="">
-              </a>
-              <a href="">
                 <img src="../../../assets/img/tools/screwdriver.png" alt="">
-              </a>
-              <a href="">
                 <img src="../../../assets/img/tools/perforator.png" alt="">
-              </a>
-              <a href="">
                 <img src="../../../assets/img/tools/screwdriver.png" alt="">
-              </a>
-              <a href="">
                 <img src="../../../assets/img/tools/angle-grinder.png" alt="">
-              </a>
-              <a href="">
                 <img src="../../../assets/img/tools/drill.png" alt="">
-              </a>
-              <a href="">
                 <img src="../../../assets/img/tools/perforator.png" alt="">
-              </a>
-              <a href="">
                 <img src="../../../assets/img/tools/screwdriver.png" alt="">
-              </a>
-              <a href="">
                 <img src="../../../assets/img/tools/perforator.png" alt="">
-              </a>
-              <a href="">
                 <img src="../../../assets/img/tools/screwdriver.png" alt="">
-              </a>
-              <a href="">
-                <img src="../../../assets/img/tools/angle-grinder.png" alt="">
-              </a>
-              <a href="">
-                <img src="../../../assets/img/tools/drill.png" alt="">
-              </a>
-              <a href="">
-                <img src="../../../assets/img/tools/perforator.png" alt="">
-              </a>
-              <a href="">
-                <img src="../../../assets/img/tools/screwdriver.png" alt="">
-              </a>
-              <a href="">
-                <img src="../../../assets/img/tools/perforator.png" alt="">
-              </a>
-              <a href="">
-                <img src="../../../assets/img/tools/screwdriver.png" alt="">
-              </a>
             </div>
             
           </div>

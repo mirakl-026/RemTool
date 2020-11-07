@@ -1,20 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 
 import { DataService } from '../DataService/data.service';
-import { SC_Dictionary, ToolType } from '../DataService/toolType';
+import { ToolType } from '../DataService/toolType';
 
 
 @Component({
   selector: 'tooltypes-page',
   templateUrl: './tooltypes-page.component.html',
-  styleUrls: ['./tooltypes-page.component.scss'],
+  styleUrls: [
+    './tooltypes-page.component.scss',
+    './editor.scss'
+    ],
   providers: [DataService]
 })
 export class ToolTypePageComponent implements OnInit {
 
   // ToolTypes
   toolType: ToolType = new ToolType();
-  toolTypes: ToolType[];
+  toolTypes: ToolType[] = [];
   // tableModeToolType: boolean = true;      // табличный режим
   addToolFlag: boolean = false;           // флаг добавления нового инструмента
   categories: string[] = [
@@ -44,16 +47,25 @@ export class ToolTypePageComponent implements OnInit {
   }
 
   // сохранение инструмента
+  /*
   saveToolType() {
     console.log(this.toolType)
     if (this.toolType.id == null) {
       this.dataService.createToolType(this.toolType)
-        .subscribe((data: ToolType) => this.toolTypes.push(data));
+      .subscribe((data: ToolType) => this.toolTypes.push(data));
     } else {
       this.dataService.updateToolType(this.toolType)
-        .subscribe(data => this.loadToolTypes());
+      .subscribe(data => this.loadToolTypes());
     }
     this.resetToolType();
+  }*/
+  
+  saveToolType() {
+    this.toolTypes.push(this.toolType);
+    this.toolType = new ToolType();
+    console.log(this.toolTypes);
+    this.addToolFlag = false;
+
   }
 
   // редактирование инструмента
@@ -106,8 +118,8 @@ export class ToolTypePageComponent implements OnInit {
       this.newValue = "";
       this.serveCostLength.push(0);
     }
-    console.log(this.toolType.serveCost.keys);
-    console.log(this.toolType.serveCost.values);
+    // console.log(this.toolType.serveCost.keys);
+    // console.log(this.toolType.serveCost.values);
   }
 
   removeRow(i) {
@@ -129,6 +141,12 @@ export class ToolTypePageComponent implements OnInit {
       this.chooseImg(false);
     }
     // console.log(e.target);
+  }
+
+  addImage(e) {
+    console.log(String(e.target.currentSrc));
+    this.toolType.imgRefenrence = String(e.target.currentSrc);
+    this.chooseImg(false);
   }
 }
 

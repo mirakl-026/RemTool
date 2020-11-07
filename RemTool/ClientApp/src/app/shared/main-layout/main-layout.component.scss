@@ -1,3 +1,9 @@
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
 .header {
     z-index: 999;
     margin-bottom: 30px;
@@ -50,6 +56,13 @@
             color: var(--dark-color);
             box-sizing: border-box;
             border: 2px solid white;
+            &::-webkit-search-decoration {
+                appearance: none;
+            }
+            &::-moz-focus-inner {
+                border: 0;
+                padding: 0;
+            }
             &::placeholder {
                 font-size: 16px;
                 font-weight: 400;
@@ -78,6 +91,7 @@
         display: flex;
         flex-direction: row;
         align-items: center;
+        flex-wrap: nowrap;
         // padding-left: 16px;
         & a {
             color: var(--dark-color);
@@ -88,6 +102,27 @@
             width: 28px;
         }
     }
+}
+
+input, textarea, select {
+    appearance: none;
+}
+
+input[type=search]::-webkit-search-cancel-button,
+input[type=search]::-webkit-search-decoration,
+input[type=search]::-webkit-search-results-button,
+input[type=search]::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+input[type=search] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
 }
 
 .nav {
@@ -179,7 +214,7 @@
     background-color: var(--grey-color);
     background: var(--grey-grad);
     &__item {
-        width: 220px;
+        width: 230px;
         display: flex;
         align-items: center;
         justify-content: space-between;

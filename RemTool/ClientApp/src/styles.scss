@@ -4,6 +4,7 @@
 @import 'swiper/swiper-bundle.css';
 @import '~quill/dist/quill.snow.css';
 
+
 :root {
     --dark-color: #131522;
     --dark-grey-color: #828282;
@@ -38,6 +39,7 @@ body {
     border: none;
     border-radius: 6px;
     padding: 0 16px;
+    white-space: nowrap;
     &:hover {
         color: var(--orange-color);
     }
