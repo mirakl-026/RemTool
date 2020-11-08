@@ -26,7 +26,6 @@ namespace RemTool.Services.MongoDB
 
 
         #region CRUD
-
         public void CreateClickCounter(ClickCounter counter)
         {
             _counters.InsertOne(counter);
@@ -46,7 +45,6 @@ namespace RemTool.Services.MongoDB
         {
             _counters.DeleteOne(ct => ct.Id == id);
         }
-
         #endregion
 
 
@@ -91,6 +89,72 @@ namespace RemTool.Services.MongoDB
         public void DeleteAllCounters()
         {
             _counters.DeleteMany(new BsonDocument());
+        }
+
+
+
+
+        public async Task CreateClickCounterAsync(ClickCounter counter)
+        {
+            await _counters.InsertOneAsync(counter);
+        }
+
+        public async Task<ClickCounter> ReadClickCounterAsync(string id)
+        {
+            return await _counters.Find(ct => ct.Id == id).FirstOrDefaultAsync();
+        }
+
+        public async Task UpdateClickCounterAsync(ClickCounter counter)
+        {
+            await _counters.ReplaceOneAsync(ct => ct.Id == counter.Id, counter);
+        }
+
+        public async Task DeleteClickCounterAsync(string id)
+        {
+            await _counters.DeleteOneAsync(ct => ct.Id == id);
+        }
+
+        public async Task DeleteAllCountersAsync()
+        {
+            await _counters.DeleteManyAsync(new BsonDocument());
+        }
+
+        public async Task IncreaseCounterAsync(string counterId, string toolTypeId)
+        {
+            ClickCounter counter = await ReadClickCounterAsync(counterId);
+            if (counter == null)
+            {
+                await CreateClickCounterAsync(new ClickCounter
+                {
+                    Id = counterId,
+                    ToolTypeId = toolTypeId,
+                    Count = 1
+                });
+            }
+            else
+            {
+                counter.Count++;
+                await UpdateClickCounterAsync(counter);
+            }
+        }
+
+        public async Task ResetCounterAsync(string counterId)
+        {
+            ClickCounter counter = await ReadClickCounterAsync(counterId);
+            if (counter != null)
+            {
+                counter.Count = 0;
+                await UpdateClickCounterAsync(counter);
+            }
+        }
+
+        public async Task ResetAllCountersAsync()
+        {
+            List<ClickCounter> allCounters = await _counters.Find(new BsonDocument()).ToListAsync();
+            foreach (var counter in allCounters)
+            {
+                await ResetCounterAsync(counter.Id);
+            }
         }
     }
 }

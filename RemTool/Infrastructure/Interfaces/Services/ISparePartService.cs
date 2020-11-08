@@ -29,20 +29,20 @@ namespace RemTool.Infrastructure.Interfaces.Services
 
 
         // асинхронные методы
-        //public Task<IEnumerable<SparePart>> GetAllSparePartsAsync();
+        public Task<IEnumerable<SparePart>> GetAllSparePartsAsync();
 
-        //#region CRUD
+        #region CRUD
 
-        //public Task CreateSparePartAsync(SparePart sparePart);
+        public Task CreateSparePartAsync(SparePart sparePart);
 
-        //public Task<SparePart> ReadSparePartAsync(string id);
+        public Task<SparePart> ReadSparePartAsync(string id);
 
-        //public Task UpdateSparePartAsync(SparePart sparePart);
+        public Task UpdateSparePartAsync(SparePart sparePart);
 
-        //public Task DeleteSparePartAsync(string id);
+        public Task DeleteSparePartAsync(string id);
 
-        //#endregion
+        #endregion
 
-        //public Task DeleteAllSparePartsAsync();
+        public Task DeleteAllSparePartsAsync();
     }
 }

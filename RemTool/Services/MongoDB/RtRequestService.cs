@@ -44,7 +44,6 @@ namespace RemTool.Services.MongoDB
         {
             _rtRequests.DeleteOne(rtreq => rtreq.Id == id);
         }
-
         #endregion
 
 
@@ -66,6 +65,48 @@ namespace RemTool.Services.MongoDB
         public void DeleteAllRtRequests()
         {
             _rtRequests.DeleteMany(new BsonDocument());
+        }
+
+
+
+
+        public async Task CreateRtRequestAsync(RtRequest rtRequest)
+        {
+            await _rtRequests.InsertOneAsync(rtRequest);
+        }
+
+        public async Task<RtRequest> ReadRtRequestAsync(string id)
+        {
+            return await _rtRequests.Find(rtReq => rtReq.Id == id).FirstOrDefaultAsync();
+        }
+
+        public async Task UpdateRtRequestAsync(RtRequest rtRequest)
+        {
+            await _rtRequests.ReplaceOneAsync(rtReq => rtReq.Id == rtRequest.Id, rtRequest);
+        }
+
+        public async Task DeleteRtRequestAsync(string id)
+        {
+            await _rtRequests.DeleteOneAsync(rtReq => rtReq.Id == id);
+        }
+        public async Task<IEnumerable<RtRequest>> ReadAllRtRequestsAsync()
+        {
+            return await _rtRequests.Find(new BsonDocument()).ToListAsync();
+        }
+
+        public async Task DeleteAllRtRequestsAsync()
+        {
+            await _rtRequests.DeleteManyAsync(new BsonDocument());
+        }
+
+        public async Task MarkRtRequestAsync(string id, int mark)
+        {
+            RtRequest rtreq = await ReadRtRequestAsync(id);
+            if (rtreq != null)
+            {
+                rtreq.Mark = mark;
+                await UpdateRtRequestAsync(rtreq);
+            }
         }
     }
 }
