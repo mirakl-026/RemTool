@@ -5,9 +5,9 @@ import { ToolType } from './toolType';
 
 @Injectable()
 export class DataService {
-  private urlSpareParts = "api/spareparts";
-  private urlToolTypes = "api/tooltypes";
-  private urlToolTypePrice = "api/tooltypes/GetPriceList";
+  private urlSpareParts = "api/sparepart";
+  private urlToolTypes = "api/tooltype";
+  private urlToolTypePrice = "api/tooltype/GetPriceList";
 
   constructor(private http: HttpClient) {
 

@@ -57,7 +57,7 @@ export class ToolTypePageComponent implements OnInit {
   }
 
   // сохранение инструмента
-  /*
+  
   saveToolType() {
     console.log(this.toolType)
     if (this.toolType.id == null) {
@@ -68,17 +68,17 @@ export class ToolTypePageComponent implements OnInit {
       .subscribe(data => this.loadToolTypes());
     }
     this.resetToolType();
-  }*/
-
-
-
-  saveToolType() {
-    this.toolTypes.push(this.toolType);
-    this.toolType = new ToolType();
-    console.log(this.toolTypes);
-    this.addToolFlag = false;
-
   }
+
+
+
+  // saveToolType() {
+  //   this.toolTypes.push(this.toolType);
+  //   this.toolType = new ToolType();
+  //   console.log(this.toolTypes);
+  //   this.addToolFlag = false;
+
+  // }
 
   // редактирование инструмента
   editToolType(tt: ToolType) {
@@ -175,17 +175,28 @@ export class ToolTypePageComponent implements OnInit {
   }
 
   onSubmit(data) {
-
     const formData = new FormData();
     formData.append('newImage', this.selectedFile);
-
     this.http.post('api/images/addImage', formData)
       .subscribe(res => {
-
         alert('Uploaded!!');
+        this.http.get("api/images/getimages").subscribe((data: string) => this.images = data);
       });
-
     this.newImageForm.reset();
   }
+
+  deleteImage(event) {
+    let imgSrc: string = event.target.parentNode.querySelector('img').src;
+    let reg =  /images\//;
+    // var patt1=/[0-9a-z]+$/i;
+    let fileNameIndex: number = imgSrc.match(reg).index + 7;
+    let fileName: string = imgSrc.slice(fileNameIndex);
+    // console.log("api/images/DeleteImage/" + fileName);
+    // console.log(fileName);
+    this.http.delete("api/images/DeleteImage/" + fileName).subscribe(data => this.chooseImg(true));
+    // console.log(fileNameIndex);
+    // console.log(event.target.parentNode.querySelector('img').src);
+  }
+
 }
 
