@@ -11,6 +11,7 @@ namespace RemTool.Infrastructure.Interfaces.Services
     {
         // синхронные методы
 
+        #region Base_Sync
         // получить все типы инструментов
         public IEnumerable<ToolType> GetAllToolTypes();
 
@@ -38,18 +39,16 @@ namespace RemTool.Infrastructure.Interfaces.Services
         // получить список тепловых-пушек
         public string GetHeatGunsList();
 
-
         // получить прайслист
         public string GetPriceListOfToolType(string ToolTypeId);
 
         public string GetPriceListOfToolType(int mainType, int secondType);
 
         public string GetPriceListOfToolTypeByFilter(string filter);
+        #endregion
 
 
-
-
-        #region CRUD
+        #region CRUD_Sync
 
         public void CreateToolType(ToolType toolType);
 
@@ -59,26 +58,60 @@ namespace RemTool.Infrastructure.Interfaces.Services
 
         public void DeleteToolType(string id);
 
+        public void DeleteAllToolTypes();
         #endregion
 
-        public void DeleteAllToolTypes();
+
 
 
         // асинхронные методы
-        //public Task<IEnumerable<ToolType>> GetAllToolTypesAsync();
 
-        //#region CRUD
+        #region Base_Async
+        // получить все типы инструментов
+        public Task<IEnumerable<ToolType>> GetAllToolTypesAsync();
 
-        //public Task CreateToolTypeAsync(ToolType toolType);
+        // получить список электро-инструментов
+        public Task<string> GetElectroToolsListAsync();
 
-        //public Task<ToolType> ReadToolTypeAsync(string id);
+        // получить список бензо-инструментов
+        public Task<string> GetFuelToolsListAsync();
 
-        //public Task UpdateToolTypeAsync(ToolType toolType);
+        // получить список сварочных аппаратов
+        public Task<string> GetWeldingToolsListAsync();
 
-        //public Task DeleteToolTypeAsync(string id);
+        // получить список генераторов
+        public Task<string> GetGeneratorsListAsync();
 
-        //#endregion
+        // получить список компрессоров
+        public Task<string> GetCompressorsListAsync();
 
-        //public Task DeleteAllToolTypesAsync();
+        // получить список техники-для-отдыха
+        public Task<string> GetRestToolsListAsync();
+
+        // получить список садовой-техники
+        public Task<string> GetGardenToolsListAsync();
+
+        // получить список тепловых-пушек
+        public Task<string> GetHeatGunsListAsync();
+
+        // получить прайслист
+        public Task<string> GetPriceListOfToolTypeAsync(string ToolTypeId);
+
+        public Task<string> GetPriceListOfToolTypeAsync(int mainType, int secondType);
+
+        public Task<string> GetPriceListOfToolTypeByFilterAsync(string filter);
+        #endregion
+
+        #region CRUD_Async
+        public Task CreateToolTypeAsync(ToolType toolType);
+
+        public Task<ToolType> ReadToolTypeAsync(string id);
+
+        public Task UpdateToolTypeAsync(ToolType toolType);
+
+        public Task DeleteToolTypeAsync(string id);
+
+        public Task DeleteAllToolTypesAsync();
+        #endregion
     }
 }
