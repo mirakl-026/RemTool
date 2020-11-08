@@ -51,5 +51,38 @@ namespace RemTool.Services.MongoDB
         {
             _spareParts.DeleteMany(new BsonDocument());
         }
+
+
+
+        // асинхронные методы
+        public async Task<IEnumerable<SparePart>> GetAllSparePartsAsync()
+        {
+            return await _spareParts.Find(new BsonDocument()).ToListAsync();
+        }
+
+        public async Task CreateSparePartAsync(SparePart sparePart)
+        {
+            await _spareParts.InsertOneAsync(sparePart);
+        }
+
+        public async Task<SparePart> ReadSparePartAsync(string id)
+        {
+            return await _spareParts.Find(sp => sp.Id == id).FirstOrDefaultAsync();
+        }
+
+        public async Task UpdateSparePartAsync(SparePart sparePart)
+        {
+            await _spareParts.ReplaceOneAsync(sp => sp.Id == sparePart.Id, sparePart);
+        }
+
+        public async Task DeleteSparePartAsync(string id)
+        {
+            await _spareParts.DeleteOneAsync(sp => sp.Id == id);
+        }
+
+        public async Task DeleteAllSparePartsAsync()
+        {
+            await _spareParts.DeleteManyAsync(new BsonDocument());
+        }
     }
 }

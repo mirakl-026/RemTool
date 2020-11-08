@@ -148,6 +148,133 @@ namespace RemTool.Services.MongoDB
         {
             throw new NotImplementedException();
         }
+
+
+
+
+
+
+
+        #region CRUD+D Async
+        public async Task CreateToolTypeAsync(ToolType toolType)
+        {
+            await _toolTypes.InsertOneAsync(toolType);
+        }
+
+        public async Task<ToolType> ReadToolTypeAsync(string id)
+        {
+            return await _toolTypes.Find(toolType => toolType.Id == id).FirstOrDefaultAsync();
+        }
+
+        public async Task UpdateToolTypeAsync(ToolType toolType)
+        {
+            await _toolTypes.ReplaceOneAsync(tt => tt.Id == toolType.Id, toolType);
+        }
+
+        public async Task DeleteToolTypeAsync(string id)
+        {
+            await _toolTypes.DeleteOneAsync(toolType => toolType.Id == id);
+        }
+
+        public async Task DeleteAllToolTypesAsync()
+        {
+            await _toolTypes.DeleteManyAsync(new BsonDocument());
+        }
+        #endregion
+
+
+        public async Task<IEnumerable<ToolType>> GetAllToolTypesAsync()
+        {
+            return await _toolTypes.Find(new BsonDocument()).ToListAsync();
+        }
+
+        private async Task<string> GetToolTypeListAsync(int mainType)
+        {
+            var fb = Builders<ToolType>.Filter;
+
+            FilterDefinition<ToolType> f =
+                fb.Eq("MainType", mainType);
+
+            ToolTypesList ttl = new ToolTypesList();
+            var ttcol = await _toolTypes.Find(f).ToListAsync();
+            foreach (var toolType in ttcol)
+            {
+                ttl.IncludedTypes.Add(toolType.Name);
+            }
+
+            var options = new JsonSerializerOptions()
+            {
+                AllowTrailingCommas = true,
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All), //поможет с кодировкой
+                WriteIndented = true
+            };
+
+            return JsonSerializer.Serialize(ttl, options);
+        }
+
+        public Task<string> GetElectroToolsListAsync() => GetToolTypeListAsync(1);
+
+        public Task<string> GetFuelToolsListAsync() => GetToolTypeListAsync(2);
+
+        public Task<string> GetWeldingToolsListAsync() => GetToolTypeListAsync(3);
+
+        public Task<string> GetGeneratorsListAsync() => GetToolTypeListAsync(4);
+
+        public Task<string> GetCompressorsListAsync() => GetToolTypeListAsync(5);
+
+        public Task<string> GetRestToolsListAsync() => GetToolTypeListAsync(6);
+
+        public Task<string> GetGardenToolsListAsync() => GetToolTypeListAsync(7);
+
+        public Task<string> GetHeatGunsListAsync() => GetToolTypeListAsync(8);
+
+
+
+        public async Task<string> GetPriceListOfToolTypeAsync(string ToolTypeId)
+        {
+            var toolType = await ReadToolTypeAsync(ToolTypeId);
+
+            Dictionary<string, string> toolTypePriceList = toolType.ServeCost;
+
+            var options = new JsonSerializerOptions()
+            {
+                AllowTrailingCommas = true,
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All), //поможет с кодировкой
+                WriteIndented = true
+            };
+
+            return JsonSerializer.Serialize(toolTypePriceList, options);
+        }
+
+        public async Task<string> GetPriceListOfToolTypeAsync(int mainType, int secondType)
+        {
+            var fb = Builders<ToolType>.Filter;
+
+            FilterDefinition<ToolType> f =
+                fb.Eq("MainType", mainType) &
+                fb.Eq("SecondaryType", secondType);
+
+            var tt = await _toolTypes.Find(f).FirstOrDefaultAsync();
+
+            Dictionary<string, string> toolTypePriceList = tt.ServeCost;
+
+            var options = new JsonSerializerOptions()
+            {
+                AllowTrailingCommas = true,
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All), //поможет с кодировкой
+                WriteIndented = true
+            };
+
+            return JsonSerializer.Serialize(toolTypePriceList, options);
+        }
+
+        public Task<string> GetPriceListOfToolTypeByFilterAsync(string filter)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 
