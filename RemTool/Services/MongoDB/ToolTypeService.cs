@@ -308,9 +308,9 @@ namespace RemTool.Services.MongoDB
             //}
             //toolTypePriceList += "}";
             Dictionary<string, string> toolTypePriceList = new Dictionary<string, string>();
-            for (int i = 0; i < toolType.Serves.Length; i++)
+            for (int i = 0; i < tt.Serves.Length; i++)
             {
-                toolTypePriceList.Add(toolType.Serves[i], toolType.Costs[i]);
+                toolTypePriceList.Add(tt.Serves[i], tt.Costs[i]);
             }
 
             var options = new JsonSerializerOptions()
