@@ -10,7 +10,7 @@ h1 {
 
 .create-tool {
     max-width: 700px;
-    margin: 0 auto;
+    margin: 30px auto;
     &__item {
         width: 100%;
         margin: 20px 0;
@@ -152,8 +152,42 @@ h1 {
     }
 }
 
+.saved-tools {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1em;
+    grid-auto-rows: auto;
+    grid-auto-columns: auto;
+    justify-items: start;
+    margin-bottom: 60px;
+}
+
 .saved-tool {
+    border-radius: 6px;
+    padding: 10px;
+    position: relative;
     width: 282px;
     height: 200px;
     background-color: var(--grey-color);
+    overflow: hidden;
+    align-content: center;
+    text-align: center;
+    &__img {
+        // width: 80%;
+        max-height: 160px;
+    }
+    &__name {
+        margin-top: 10px;
+        // position: absolute;
+        // bottom: 20px;
+    }
+    &__btns {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        & button:first-of-type {
+            margin-right: 10px;
+        }
+
+    }
 }

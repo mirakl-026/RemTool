@@ -39,8 +39,8 @@ export class ToolTypePageComponent implements OnInit {
     newTT.brands = ['bosch', 'makita'];
     newTT.serves = ['fix rotor', 'fix stator'];
     newTT.costs = ['100р', '200р'];
-    // newTT.imgRefenrence = ['']
-    this.toolTypes.push();
+    newTT.imgRefenrence = 'images/drill.png';
+    this.toolTypes.push(newTT);
   }
 
   newImageForm: FormGroup;
@@ -83,7 +83,6 @@ export class ToolTypePageComponent implements OnInit {
     console.log(this.toolTypes);
     this.addToolFlag = false;
     this.resetToolType();
-    
   }
 
   // редактирование инструмента
