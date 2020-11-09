@@ -242,7 +242,7 @@
             <div class="popup__images">
               <div *ngFor="let img of images" >
                 <button (click)="deleteImage($event)">X</button>
-                <img src={{img}} alt="" (click)="addImage($event)">
+                <img src={{img}} alt="" (click)="addImage($event, img)">
               </div>
                 <!-- <img src="../../../assets/img/tools/angle-grinder.png" alt="" (click)='addImage($event)'>
                 <img src="../../../assets/img/tools/drill.png" alt="" (click)='addImage($event)'>

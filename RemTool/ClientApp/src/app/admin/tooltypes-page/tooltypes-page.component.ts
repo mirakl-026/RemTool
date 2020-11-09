@@ -178,9 +178,9 @@ export class ToolTypePageComponent implements OnInit {
     // console.log(e.target);
   }
 
-  addImage(e) {
+  addImage(e, img) {
     console.log(String(e.target.currentSrc));
-    this.toolType.imgRefenrence = String(e.target.currentSrc);
+    this.toolType.imgRefenrence = String(img);
     this.chooseImg(false);
   }
 
