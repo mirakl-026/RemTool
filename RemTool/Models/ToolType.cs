@@ -17,13 +17,21 @@ namespace RemTool.Models
         public string Name { get; set; }
 
         // основной из 8-и типов
-        public int MainType { get; set; }
+        // 'Электроинструмент',
+        // 'Бензоинструмент',
+        // 'Садовая техника',
+        // 'Компрессоры',
+        // 'Генераторы',
+        // 'Сварочная техника',
+        // 'Тепловые пушки',
+        // 'Техника для отдыха'
+        public bool[] MainType { get; set; }
 
         // второстепенный из основного 
         public int SecondaryType { get; set; }
 
         // бренды которые включены в тип-инструмента
-        public List<string> Brands { get; set; }
+        public string[] Brands { get; set; }
 
         // список услуг - название услуги - значение в деньгах 
         public string[] Serves { get; set; } 

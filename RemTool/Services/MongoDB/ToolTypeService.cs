@@ -65,15 +65,13 @@ namespace RemTool.Services.MongoDB
         // например 1 - ЭлектроИнструмент, вернёт - шуруповёрт, перфоратор и т.д.
         private string GetToolTypeList (int mainType)
         {
-            var fb = Builders<ToolType>.Filter;
-
-            FilterDefinition<ToolType> f =
-                fb.Eq("MainType", mainType);
-
             ToolTypesList ttl = new ToolTypesList();
-            foreach (var toolType in _toolTypes.Find(f).ToList())
+            foreach (var tt in GetAllToolTypes().ToList())
             {
-                ttl.IncludedTypes.Add(toolType.Name);
+                if (tt.MainType[mainType] == true)
+                {
+                    ttl.IncludedTypes.Add(tt.Name);
+                }
             }
 
             var options = new JsonSerializerOptions()
@@ -87,21 +85,21 @@ namespace RemTool.Services.MongoDB
             return JsonSerializer.Serialize(ttl, options);
         }
 
-        public string GetElectroToolsList() => GetToolTypeList(1);
+        public string GetElectroToolsList() => GetToolTypeList(0);
 
-        public string GetFuelToolsList() => GetToolTypeList(2);
+        public string GetFuelToolsList() => GetToolTypeList(1);
 
-        public string GetWeldingToolsList() => GetToolTypeList(3);
+        public string GetWeldingToolsList() => GetToolTypeList(2);
 
-        public string GetGeneratorsList() => GetToolTypeList(4);
+        public string GetGeneratorsList() => GetToolTypeList(3);
 
-        public string GetCompressorsList() => GetToolTypeList(5);
+        public string GetCompressorsList() => GetToolTypeList(4);
 
-        public string GetRestToolsList() => GetToolTypeList(6);
+        public string GetRestToolsList() => GetToolTypeList(5);
 
-        public string GetGardenToolsList() => GetToolTypeList(7);
+        public string GetGardenToolsList() => GetToolTypeList(6);
 
-        public string GetHeatGunsList() => GetToolTypeList(8);
+        public string GetHeatGunsList() => GetToolTypeList(7);
 
 
 
@@ -109,15 +107,6 @@ namespace RemTool.Services.MongoDB
         public string GetPriceListOfToolType(string ToolTypeId)
         {
             var toolType = ReadToolType(ToolTypeId);
-
-            //int toolTypePriceListLength = toolType.Serves.Length;
-            //string toolTypePriceList = "{";
-            //for (int i = 0; i < toolTypePriceListLength; i++)
-            //{
-            //    toolTypePriceList += "\"" + toolType.Serves[i] + "\":";
-            //    toolTypePriceList += "\"" + toolType.Costs[i] + "\",";
-            //}
-            //toolTypePriceList += "}";
 
             Dictionary<string, string> toolTypePriceList = new Dictionary<string, string>();
             for (int i = 0; i < toolType.Serves.Length; i++)
@@ -136,24 +125,15 @@ namespace RemTool.Services.MongoDB
             return JsonSerializer.Serialize(toolTypePriceList, options);
         }
 
-        public string GetPriceListOfToolType(int mainType, int secondType)
+        public string GetPriceListOfToolTypeByName(string Name)
         {
             var fb = Builders<ToolType>.Filter;
 
             FilterDefinition<ToolType> f =
-                fb.Eq("MainType", mainType) &
-                fb.Eq("SecondaryType", secondType);
+                fb.Eq("Name", Name);
 
             var toolType = _toolTypes.Find(f).FirstOrDefault();
 
-            //int toolTypePriceListLength = toolType.Serves.Length;
-            //string toolTypePriceList = "{";
-            //for (int i = 0; i < toolTypePriceListLength; i++)
-            //{
-            //    toolTypePriceList += "\"" + toolType.Serves[i] + "\":";
-            //    toolTypePriceList += "\"" + toolType.Costs[i] + "\",";
-            //}
-            //toolTypePriceList += "}";
 
             Dictionary<string, string> toolTypePriceList = new Dictionary<string, string>();
             for (int i = 0; i < toolType.Serves.Length; i++)
@@ -218,16 +198,14 @@ namespace RemTool.Services.MongoDB
 
         private async Task<string> GetToolTypeListAsync(int mainType)
         {
-            var fb = Builders<ToolType>.Filter;
-
-            FilterDefinition<ToolType> f =
-                fb.Eq("MainType", mainType);
-
             ToolTypesList ttl = new ToolTypesList();
-            var ttcol = await _toolTypes.Find(f).ToListAsync();
-            foreach (var toolType in ttcol)
+            var ttFiltered = await GetAllToolTypesAsync();
+            foreach (var tt in ttFiltered)
             {
-                ttl.IncludedTypes.Add(toolType.Name);
+                if (tt.MainType[mainType] == true)
+                {
+                    ttl.IncludedTypes.Add(tt.Name);
+                }
             }
 
             var options = new JsonSerializerOptions()
@@ -241,36 +219,27 @@ namespace RemTool.Services.MongoDB
             return JsonSerializer.Serialize(ttl, options);
         }
 
-        public Task<string> GetElectroToolsListAsync() => GetToolTypeListAsync(1);
+        public Task<string> GetElectroToolsListAsync() => GetToolTypeListAsync(0);
 
-        public Task<string> GetFuelToolsListAsync() => GetToolTypeListAsync(2);
+        public Task<string> GetFuelToolsListAsync() => GetToolTypeListAsync(1);
 
-        public Task<string> GetWeldingToolsListAsync() => GetToolTypeListAsync(3);
+        public Task<string> GetWeldingToolsListAsync() => GetToolTypeListAsync(2);
 
-        public Task<string> GetGeneratorsListAsync() => GetToolTypeListAsync(4);
+        public Task<string> GetGeneratorsListAsync() => GetToolTypeListAsync(3);
 
-        public Task<string> GetCompressorsListAsync() => GetToolTypeListAsync(5);
+        public Task<string> GetCompressorsListAsync() => GetToolTypeListAsync(4);
 
-        public Task<string> GetRestToolsListAsync() => GetToolTypeListAsync(6);
+        public Task<string> GetRestToolsListAsync() => GetToolTypeListAsync(5);
 
-        public Task<string> GetGardenToolsListAsync() => GetToolTypeListAsync(7);
+        public Task<string> GetGardenToolsListAsync() => GetToolTypeListAsync(6);
 
-        public Task<string> GetHeatGunsListAsync() => GetToolTypeListAsync(8);
+        public Task<string> GetHeatGunsListAsync() => GetToolTypeListAsync(7);
 
 
 
         public async Task<string> GetPriceListOfToolTypeAsync(string ToolTypeId)
         {
             var toolType = await ReadToolTypeAsync(ToolTypeId);
-
-            //int toolTypePriceListLength = toolType.Serves.Length;
-            //string toolTypePriceList = "{";
-            //for (int i = 0; i < toolTypePriceListLength; i++)
-            //{
-            //    toolTypePriceList += "\"" + toolType.Serves[i] + "\":";
-            //    toolTypePriceList += "\"" + toolType.Costs[i] + "\",";
-            //}
-            //toolTypePriceList += "}";
 
             Dictionary<string, string> toolTypePriceList = new Dictionary<string, string>();
             for (int i = 0; i < toolType.Serves.Length; i++)
@@ -289,25 +258,16 @@ namespace RemTool.Services.MongoDB
             return JsonSerializer.Serialize(toolTypePriceList, options);
         }
 
-        public async Task<string> GetPriceListOfToolTypeAsync(int mainType, int secondType)
+        public async Task<string> GetPriceListOfToolTypeByNameAsync(string Name)
         {
             var fb = Builders<ToolType>.Filter;
 
             FilterDefinition<ToolType> f =
-                fb.Eq("MainType", mainType) &
-                fb.Eq("SecondaryType", secondType);
+                fb.Eq("Name", Name);
 
             var tt = await _toolTypes.Find(f).FirstOrDefaultAsync();
 
-            //int toolTypePriceListLength = tt.Serves.Length;
-            //string toolTypePriceList = "{";
-            //for (int i = 0; i < toolTypePriceListLength; i++)
-            //{
-            //    toolTypePriceList += "\"" + tt.Serves[i] + "\":";
-            //    toolTypePriceList += "\"" + tt.Costs[i] + "\",";
-            //}
-            //toolTypePriceList += "}";
-            Dictionary<string, string> toolTypePriceList = new Dictionary<string, string>();
+             Dictionary<string, string> toolTypePriceList = new Dictionary<string, string>();
             for (int i = 0; i < tt.Serves.Length; i++)
             {
                 toolTypePriceList.Add(tt.Serves[i], tt.Costs[i]);
