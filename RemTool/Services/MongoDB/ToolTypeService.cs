@@ -89,17 +89,17 @@ namespace RemTool.Services.MongoDB
 
         public string GetFuelToolsList() => GetToolTypeList(1);
 
-        public string GetWeldingToolsList() => GetToolTypeList(2);
+        public string GetGardenToolsList() => GetToolTypeList(2);
 
-        public string GetGeneratorsList() => GetToolTypeList(3);
+        public string GetCompressorsList() => GetToolTypeList(3);
 
-        public string GetCompressorsList() => GetToolTypeList(4);
+        public string GetGeneratorsList() => GetToolTypeList(4);
 
-        public string GetRestToolsList() => GetToolTypeList(5);
+        public string GetWeldingToolsList() => GetToolTypeList(5);
 
-        public string GetGardenToolsList() => GetToolTypeList(6);
+        public string GetHeatGunsList() => GetToolTypeList(6);
 
-        public string GetHeatGunsList() => GetToolTypeList(7);
+        public string GetRestToolsList() => GetToolTypeList(7);
 
 
 
@@ -223,19 +223,17 @@ namespace RemTool.Services.MongoDB
 
         public Task<string> GetFuelToolsListAsync() => GetToolTypeListAsync(1);
 
-        public Task<string> GetWeldingToolsListAsync() => GetToolTypeListAsync(2);
+        public Task<string> GetGardenToolsListAsync() => GetToolTypeListAsync(2);
 
-        public Task<string> GetGeneratorsListAsync() => GetToolTypeListAsync(3);
+        public Task<string> GetCompressorsListAsync() => GetToolTypeListAsync(3);
 
-        public Task<string> GetCompressorsListAsync() => GetToolTypeListAsync(4);
+        public Task<string> GetGeneratorsListAsync() => GetToolTypeListAsync(4);
 
-        public Task<string> GetRestToolsListAsync() => GetToolTypeListAsync(5);
+        public Task<string> GetWeldingToolsListAsync() => GetToolTypeListAsync(5);
 
-        public Task<string> GetGardenToolsListAsync() => GetToolTypeListAsync(6);
+        public Task<string> GetHeatGunsListAsync() => GetToolTypeListAsync(6);
 
-        public Task<string> GetHeatGunsListAsync() => GetToolTypeListAsync(7);
-
-
+        public Task<string> GetRestToolsListAsync() => GetToolTypeListAsync(7);
 
         public async Task<string> GetPriceListOfToolTypeAsync(string ToolTypeId)
         {

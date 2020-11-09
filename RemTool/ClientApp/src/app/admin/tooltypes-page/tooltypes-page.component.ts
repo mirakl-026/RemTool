@@ -62,28 +62,28 @@ export class ToolTypePageComponent implements OnInit {
 
   // сохранение инструмента
   
-  // saveToolType() {
-  //   this.toolType.info = this.quillValue;
-  //   console.log(this.toolType)
-  //   if (this.toolType.id == null) {
-  //     this.dataService.createToolType(this.toolType)
-  //     .subscribe((data: ToolType) => this.toolTypes.push(data));
-  //   } else {
-  //     this.dataService.updateToolType(this.toolType)
-  //     .subscribe(data => this.loadToolTypes());
-  //   }
-  //   this.resetToolType();
-  // }
+   saveToolType() {
+     this.toolType.info = this.quillValue;
+     console.log(this.toolType)
+     if (this.toolType.id == null) {
+       this.dataService.createToolType(this.toolType)
+       .subscribe((data: ToolType) => this.toolTypes.push(data));
+     } else {
+       this.dataService.updateToolType(this.toolType)
+       .subscribe(data => this.loadToolTypes());
+     }
+     this.resetToolType();
+   }
   
   
   
-  saveToolType() {
-    this.toolTypes.push(this.toolType);
-    this.toolType = new ToolType();
-    console.log(this.toolTypes);
-    this.addToolFlag = false;
-    this.resetToolType();
-  }
+  //saveToolType() {
+  //  this.toolTypes.push(this.toolType);
+  //  this.toolType = new ToolType();
+  //  console.log(this.toolTypes);
+  //  this.addToolFlag = false;
+  //  this.resetToolType();
+  //}
 
   // редактирование инструмента
   editToolType(tt: ToolType) {
