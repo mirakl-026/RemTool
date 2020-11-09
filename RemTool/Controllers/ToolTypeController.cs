@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using RemTool.Models;
-using RemTool.Models.DTO;
 using RemTool.Infrastructure.Interfaces;
 using RemTool.Infrastructure.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -26,73 +25,73 @@ namespace RemTool.Controllers
 
 
         [HttpGet("GetElectroTools")]
-        public string GetElectroTools()
+        public async Task<string> GetElectroTools()
         {
-            return _db.GetElectroToolsList();
+            return await _db.GetElectroToolsListAsync();
         }
 
         [HttpGet("GetFuelTools")]
-        public string GetFuelTools()
+        public async Task<string> GetFuelTools()
         {
-            return _db.GetFuelToolsList();
+            return await _db.GetFuelToolsListAsync();
         }
 
         [HttpGet("GetWeldingTools")]
-        public string GetWeldingTools()
+        public async Task<string> GetWeldingTools()
         {
-            return _db.GetWeldingToolsList();
+            return await _db.GetWeldingToolsListAsync();
         }
 
         [HttpGet("GetGenerators")]
-        public string GetGenerators()
+        public async Task<string> GetGenerators()
         {
-            return _db.GetGeneratorsList();
+            return await _db.GetGeneratorsListAsync();
         }
 
         [HttpGet("GetCompressors")]
-        public string GetCompressors()
+        public async Task<string> GetCompressors()
         {
-            return _db.GetCompressorsList();
+            return await _db.GetCompressorsListAsync();
         }
 
         [HttpGet("GetRestTools")]
-        public string GetRestTools()
+        public async Task<string> GetRestTools()
         {
-            return _db.GetRestToolsList();
+            return await _db.GetRestToolsListAsync();
         }
 
         [HttpGet("GetGardenTools")]
-        public string GetGardenTools()
+        public async Task<string> GetGardenTools()
         {
-            return _db.GetGardenToolsList();
+            return await _db.GetGardenToolsListAsync();
         }
 
         [HttpGet("GetHeatGuns")]
-        public string GetHeatGuns()
+        public async Task<string> GetHeatGuns()
         {
-            return _db.GetHeatGunsList();
+            return await _db.GetHeatGunsListAsync();
         }
 
         [HttpGet("GetPriceList")]
-        public string GetPriceList(string id)
+        public async Task<string> GetPriceList(string id)
         {
-            return _db.GetPriceListOfToolType(id);
+            return await _db.GetPriceListOfToolTypeAsync(id);
         }
 
         [HttpGet("GetPriceList")]
-        public string GetPriceList(int mainType, int secondType)
+        public async Task<string> GetPriceList(int mainType, int secondType)
         {
             if (mainType >= 1 && mainType <= 8)
             {
-                return _db.GetPriceListOfToolType(mainType, secondType);
+                return await _db.GetPriceListOfToolTypeAsync(mainType, secondType);
             }
             return "";
         }
 
         [HttpGet("GetPriceListByFilter")]
-        public string GetPriceListByFilter(string filter)
+        public async Task<string> GetPriceListByFilter(string filter)
         {
-            return _db.GetPriceListOfToolTypeByFilter(filter);
+            return await _db.GetPriceListOfToolTypeByFilterAsync(filter);
         }
 
         //[Authorize]
@@ -104,9 +103,9 @@ namespace RemTool.Controllers
         }
 
         [HttpGet("{id}")]
-        public ToolType Get(string id)
+        public async Task<ToolType> Get(string id)
         {
-            ToolType toolType = _db.ReadToolType(id);
+            ToolType toolType = await _db.ReadToolTypeAsync(id);
             return toolType;
         }
 
