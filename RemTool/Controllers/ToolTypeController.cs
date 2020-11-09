@@ -81,7 +81,7 @@ namespace RemTool.Controllers
         [HttpGet("GetPriceListByName")]
         public async Task<string> GetPriceListByName(string name)
         {
-            return await _db.GetPriceListOfToolTypeAsync(name);
+            return await _db.GetPriceListOfToolTypeByNameAsync(name);
         }
 
         [HttpGet("GetPriceListByFilter")]
