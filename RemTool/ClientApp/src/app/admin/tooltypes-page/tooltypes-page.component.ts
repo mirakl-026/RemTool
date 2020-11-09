@@ -41,6 +41,16 @@ export class ToolTypePageComponent implements OnInit {
     newTT.costs = ['100р', '200р'];
     newTT.imgRefenrence = 'images/drill.png';
     this.toolTypes.push(newTT);
+    this.toolTypes.push(newTT);
+    this.toolTypes.push(newTT);
+    this.toolTypes.push(newTT);
+    this.toolTypes.push(newTT);
+    this.toolTypes.push(newTT);
+    this.toolTypes.push(newTT);
+    this.toolTypes.push(newTT);
+    this.toolTypes.push(newTT);
+    this.toolTypes.push(newTT);
+    this.toolTypes.push(newTT);
   }
 
   newImageForm: FormGroup;
