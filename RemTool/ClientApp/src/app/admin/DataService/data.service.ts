@@ -73,10 +73,10 @@ export class DataService {
     return this.http.get(this.urlToolTypePrice + '/' + id);
   }
 
-  //[HttpGet("GetPriceList")]
-  //public string GetPriceList(int mainType, int secondType)
-  getPriceListByType(mainType: number, secondType: number) {
-    return this.http.get(this.urlToolTypePrice + '?' + 'mainType=' + mainType + '&secondType=' + secondType);
+  //[HttpGet("GetPriceListByName")]
+  //public async Task<string> GetPriceListByName(string name)
+  getPriceListByName(name: string) {
+    return this.http.get(this.urlToolTypePrice + '?' + 'name=' + name);
   }
 
   //[HttpGet("GetPriceListByFilter")]
