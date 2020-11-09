@@ -110,14 +110,20 @@ namespace RemTool.Services.MongoDB
         {
             var toolType = ReadToolType(ToolTypeId);
 
-            int toolTypePriceListLength = toolType.Serves.Length;
-            string toolTypePriceList = "{";
-            for (int i = 0; i < toolTypePriceListLength; i++)
+            //int toolTypePriceListLength = toolType.Serves.Length;
+            //string toolTypePriceList = "{";
+            //for (int i = 0; i < toolTypePriceListLength; i++)
+            //{
+            //    toolTypePriceList += "\"" + toolType.Serves[i] + "\":";
+            //    toolTypePriceList += "\"" + toolType.Costs[i] + "\",";
+            //}
+            //toolTypePriceList += "}";
+
+            Dictionary<string, string> toolTypePriceList = new Dictionary<string, string>();
+            for (int i = 0; i < toolType.Serves.Length; i++)
             {
-                toolTypePriceList += "\"" + toolType.Serves[i] + "\":";
-                toolTypePriceList += "\"" + toolType.Costs[i] + "\",";
+                toolTypePriceList.Add(toolType.Serves[i], toolType.Costs[i]);
             }
-            toolTypePriceList += "}";
 
             var options = new JsonSerializerOptions()
             {
@@ -140,14 +146,20 @@ namespace RemTool.Services.MongoDB
 
             var toolType = _toolTypes.Find(f).FirstOrDefault();
 
-            int toolTypePriceListLength = toolType.Serves.Length;
-            string toolTypePriceList = "{";
-            for (int i = 0; i < toolTypePriceListLength; i++)
+            //int toolTypePriceListLength = toolType.Serves.Length;
+            //string toolTypePriceList = "{";
+            //for (int i = 0; i < toolTypePriceListLength; i++)
+            //{
+            //    toolTypePriceList += "\"" + toolType.Serves[i] + "\":";
+            //    toolTypePriceList += "\"" + toolType.Costs[i] + "\",";
+            //}
+            //toolTypePriceList += "}";
+
+            Dictionary<string, string> toolTypePriceList = new Dictionary<string, string>();
+            for (int i = 0; i < toolType.Serves.Length; i++)
             {
-                toolTypePriceList += "\"" + toolType.Serves[i] + "\":";
-                toolTypePriceList += "\"" + toolType.Costs[i] + "\",";
+                toolTypePriceList.Add(toolType.Serves[i], toolType.Costs[i]);
             }
-            toolTypePriceList += "}";
 
             var options = new JsonSerializerOptions()
             {
@@ -251,14 +263,20 @@ namespace RemTool.Services.MongoDB
         {
             var toolType = await ReadToolTypeAsync(ToolTypeId);
 
-            int toolTypePriceListLength = toolType.Serves.Length;
-            string toolTypePriceList = "{";
-            for (int i = 0; i < toolTypePriceListLength; i++)
+            //int toolTypePriceListLength = toolType.Serves.Length;
+            //string toolTypePriceList = "{";
+            //for (int i = 0; i < toolTypePriceListLength; i++)
+            //{
+            //    toolTypePriceList += "\"" + toolType.Serves[i] + "\":";
+            //    toolTypePriceList += "\"" + toolType.Costs[i] + "\",";
+            //}
+            //toolTypePriceList += "}";
+
+            Dictionary<string, string> toolTypePriceList = new Dictionary<string, string>();
+            for (int i = 0; i < toolType.Serves.Length; i++)
             {
-                toolTypePriceList += "\"" + toolType.Serves[i] + "\":";
-                toolTypePriceList += "\"" + toolType.Costs[i] + "\",";
+                toolTypePriceList.Add(toolType.Serves[i], toolType.Costs[i]);
             }
-            toolTypePriceList += "}";
 
             var options = new JsonSerializerOptions()
             {
@@ -281,14 +299,19 @@ namespace RemTool.Services.MongoDB
 
             var tt = await _toolTypes.Find(f).FirstOrDefaultAsync();
 
-            int toolTypePriceListLength = tt.Serves.Length;
-            string toolTypePriceList = "{";
-            for (int i = 0; i < toolTypePriceListLength; i++)
+            //int toolTypePriceListLength = tt.Serves.Length;
+            //string toolTypePriceList = "{";
+            //for (int i = 0; i < toolTypePriceListLength; i++)
+            //{
+            //    toolTypePriceList += "\"" + tt.Serves[i] + "\":";
+            //    toolTypePriceList += "\"" + tt.Costs[i] + "\",";
+            //}
+            //toolTypePriceList += "}";
+            Dictionary<string, string> toolTypePriceList = new Dictionary<string, string>();
+            for (int i = 0; i < toolType.Serves.Length; i++)
             {
-                toolTypePriceList += "\"" + tt.Serves[i] + "\":";
-                toolTypePriceList += "\"" + tt.Costs[i] + "\",";
+                toolTypePriceList.Add(toolType.Serves[i], toolType.Costs[i]);
             }
-            toolTypePriceList += "}";
 
             var options = new JsonSerializerOptions()
             {
