@@ -9,8 +9,7 @@ namespace RemTool.Models.DTO
 {
     public class ToolTypeDTO
     {
-        public string? Id { get; set; }
-
+        public string Id { get; set; }
         public string Name { get; set; }
         public int MainType { get; set; }
         public int SecondaryType { get; set; }

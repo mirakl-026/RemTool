@@ -8,7 +8,6 @@ import { AuthGuard } from '../shared/auth.guard';
 import { ToolTypePageComponent } from '../admin/tooltypes-page/tooltypes-page.component';
 import { SparePartsPageComponent } from '../admin/spareparts-page/spareparts-page.component';
 import { QuillModule } from 'ngx-quill';
-import { ToolComponent } from './tool/tool.component';
 
 @NgModule({
     declarations: [
@@ -16,7 +15,6 @@ import { ToolComponent } from './tool/tool.component';
         LoginPageComponent,
         ToolTypePageComponent,
         SparePartsPageComponent,
-        ToolComponent,
         
     ],
     imports: [

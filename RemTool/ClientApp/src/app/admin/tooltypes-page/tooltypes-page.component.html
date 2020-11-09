@@ -1,5 +1,5 @@
 <h1>Список Инструментов</h1>
-<div *ngFor="let tt of toolTypes">
+<div class="saved-tool" *ngFor="let tt of toolTypes">
   <img *ngIf="!!tt.imgRefenrence" src={{tt.imgRefenrence}} alt="">
   <p>
     {{tt.name}}
@@ -167,8 +167,8 @@
       <label>Прайс лист</label>
       <div class="price__container">
         <div *ngFor="let key of serveCostLength; index as i" class="price__row old-row">
-          <input type="text" [(ngModel)]="toolType.serveCost.keys[i]">
-          <input type="text" [(ngModel)]="toolType.serveCost.values[i]">
+          <input type="text" [(ngModel)]="toolType.serves[i]">
+          <input type="text" [(ngModel)]="toolType.costs[i]">
           <!-- <button>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 7.125H21.75V8.625H12V7.125Z" fill="black"/>
@@ -257,7 +257,8 @@
 
     <hr>
 
-    <quill-editor></quill-editor>
+    <quill-editor [(ngModel)]="quillValue"></quill-editor>
+    <!-- <pre>{{quillValue}}</pre> -->
 
     <div>
       <button (click)="saveToolType()" class="btn btn-success">

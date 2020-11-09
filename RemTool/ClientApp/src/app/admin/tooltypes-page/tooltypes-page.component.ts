@@ -9,10 +9,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 @Component({
   selector: 'tooltypes-page',
   templateUrl: './tooltypes-page.component.html',
-  styleUrls: [
-    './tooltypes-page.component.scss',
-    './editor.scss'
-  ],
+  styleUrls: ['./tooltypes-page.component.scss'],
   providers: [DataService]
 })
 export class ToolTypePageComponent implements OnInit {
@@ -36,17 +33,24 @@ export class ToolTypePageComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private http: HttpClient
-  ) { }
+  ) {
+    let newTT: ToolType = new ToolType();
+    newTT.name = 'Шуруповерт';
+    newTT.brands = ['bosch', 'makita'];
+    newTT.serves = ['fix rotor', 'fix stator'];
+    newTT.costs = ['100р', '200р'];
+    // newTT.imgRefenrence = ['']
+    this.toolTypes.push();
+  }
 
   newImageForm: FormGroup;
-  
+  quillValue: string;
+
   ngOnInit(): void {
     this.loadToolTypes();
     this.newImageForm = new FormGroup({
       newImage: new FormControl(null)
     });
-
-
   }
 
   // ToolTypes
@@ -58,27 +62,29 @@ export class ToolTypePageComponent implements OnInit {
 
   // сохранение инструмента
   
-  saveToolType() {
-    console.log(this.toolType)
-    if (this.toolType.id == null) {
-      this.dataService.createToolType(this.toolType)
-      .subscribe((data: ToolType) => this.toolTypes.push(data));
-    } else {
-      this.dataService.updateToolType(this.toolType)
-      .subscribe(data => this.loadToolTypes());
-    }
-    this.resetToolType();
-  }
-
-
-
   // saveToolType() {
-  //   this.toolTypes.push(this.toolType);
-  //   this.toolType = new ToolType();
-  //   console.log(this.toolTypes);
-  //   this.addToolFlag = false;
-
+  //   this.toolType.info = this.quillValue;
+  //   console.log(this.toolType)
+  //   if (this.toolType.id == null) {
+  //     this.dataService.createToolType(this.toolType)
+  //     .subscribe((data: ToolType) => this.toolTypes.push(data));
+  //   } else {
+  //     this.dataService.updateToolType(this.toolType)
+  //     .subscribe(data => this.loadToolTypes());
+  //   }
+  //   this.resetToolType();
   // }
+  
+  
+  
+  saveToolType() {
+    this.toolTypes.push(this.toolType);
+    this.toolType = new ToolType();
+    console.log(this.toolTypes);
+    this.addToolFlag = false;
+    this.resetToolType();
+    
+  }
 
   // редактирование инструмента
   editToolType(tt: ToolType) {
@@ -90,6 +96,7 @@ export class ToolTypePageComponent implements OnInit {
     this.toolType = new ToolType();
     // this.tableModeToolType = true;
     this.addToolFlag = false;
+    this.serveCostLength = [];
   }
 
   // удаление инструмента 
@@ -124,8 +131,8 @@ export class ToolTypePageComponent implements OnInit {
 
   addRowToPrice() {
     if ((this.newKey != "") && (this.newValue != "")) {
-      this.toolType.serveCost.keys.push(this.newKey);
-      this.toolType.serveCost.values.push(this.newValue);
+      this.toolType.serves.push(this.newKey);
+      this.toolType.costs.push(this.newValue);
       this.newKey = "";
       this.newValue = "";
       this.serveCostLength.push(0);
@@ -135,8 +142,8 @@ export class ToolTypePageComponent implements OnInit {
   }
 
   removeRow(i) {
-    this.toolType.serveCost.keys.splice(i, 1);
-    this.toolType.serveCost.values.splice(i, 1);
+    this.toolType.serves.splice(i, 1);
+    this.toolType.costs.splice(i, 1);
     this.serveCostLength.pop();
   }
 
@@ -197,6 +204,8 @@ export class ToolTypePageComponent implements OnInit {
     // console.log(fileNameIndex);
     // console.log(event.target.parentNode.querySelector('img').src);
   }
+
+
 
 }
 
