@@ -26,9 +26,9 @@ namespace RemTool.Controllers
         // получить значение счетчика по id
         // Get{id} - get counter value by counter id
         [HttpGet("{id}")]
-        public int Get(string counterId)
+        public async Task<int> Get(string counterId)
         {
-            ClickCounter clickCounter = db.ReadClickCounter(counterId);
+            ClickCounter clickCounter = await db.ReadClickCounterAsync(counterId);
             if (clickCounter != null)
             {
                 return clickCounter.Count;

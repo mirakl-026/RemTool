@@ -23,16 +23,16 @@ namespace RemTool.Controllers
 
         // Get - get all requests
         [HttpGet]
-        public IEnumerable<RtRequest> Get()
+        public async Task<IEnumerable<RtRequest>> Get()
         {
-            return db.ReadAllRtRequests();
+            return await db.ReadAllRtRequestsAsync();
         }
 
         // Get{id} - get request by id
         [HttpGet("{id}")]
-        public RtRequest Get(string id)
+        public async Task<RtRequest> Get(string id)
         {
-            RtRequest rtreq = db.ReadRtRequest(id);
+            RtRequest rtreq = await db.ReadRtRequestAsync(id);
             return rtreq;
         }
 

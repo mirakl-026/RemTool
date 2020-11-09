@@ -22,15 +22,15 @@ namespace RemTool.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<SparePart> Get()
+        public async Task<IEnumerable<SparePart>> Get()
         {
-            return db.GetAllSpareParts();
+            return await db.GetAllSparePartsAsync();
         }
 
         [HttpGet("{id}")]
-        public SparePart Get(string id)
+        public async Task<SparePart> Get(string id)
         {
-            SparePart sparePart = db.ReadSparePart(id);
+            SparePart sparePart = await db.ReadSparePartAsync(id);
             return sparePart;
         }
 
