@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DAL\Context\MongoDB\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 

@@ -26,9 +26,13 @@ namespace RemTool.Models
         public List<string> Brands { get; set; }
 
         // список услуг - название услуги - значение в деньгах 
-        public Dictionary<string, string> ServeCost { get; set; } 
+        public string[] Serves { get; set; } 
+        public string[] Costs { get; set; }
 
         // ссылка на картинку (при расширении)
         public string ImgRefenrence { get; set; }
+
+        // описание инструмента
+        public string Info { get; set; }
     }
 }

@@ -97,30 +97,10 @@ namespace RemTool.Controllers
 
         //[Authorize]
         [HttpGet]
-        public IEnumerable<ToolTypeDTO> Get()
+        public async Task<IEnumerable<ToolType>> Get()
         {
-            var tts = _db.GetAllToolTypes();
-
-            List<ToolTypeDTO> tts_dto = new List<ToolTypeDTO>(tts.Count());
-            foreach (var tt in tts)
-            {
-                tts_dto.Add(new ToolTypeDTO
-                {
-                    Id = tt.Id,
-                    Name = tt.Name is null? "" : tt.Name,
-                    MainType = tt.MainType,
-                    SecondaryType = tt.SecondaryType,
-                    Brands = tt.Brands is null ? new string[0] : tt.Brands.ToArray(),
-                    ServeCost = new SC_Dictionary()
-                    { 
-                        Keys = tt.ServeCost is null? new string[0] : tt.ServeCost.Keys.ToArray(), 
-                        Values = tt.ServeCost is null ? new string[0] : tt.ServeCost.Values.ToArray()
-                    
-                    },
-                    ImgRefenrence = tt.ImgRefenrence is null ? "" : tt.ImgRefenrence
-                });
-            }
-            return tts_dto;
+            var tools = await _db.GetAllToolTypesAsync();
+            return tools;
         }
 
         [HttpGet("{id}")]
