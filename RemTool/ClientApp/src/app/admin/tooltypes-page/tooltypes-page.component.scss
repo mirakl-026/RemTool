@@ -156,7 +156,7 @@ h1 {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-gap: 1em;
+    grid-gap: 30px;
     grid-auto-rows: auto;
     grid-auto-columns: auto;
     justify-items: start;
@@ -173,6 +173,7 @@ h1 {
     overflow: hidden;
     align-content: center;
     text-align: center;
+    box-sizing: border-box;
     &__img {
         // width: 80%;
         height: 80%;

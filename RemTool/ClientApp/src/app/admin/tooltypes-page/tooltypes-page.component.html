@@ -1,4 +1,5 @@
 <h1>Список инструментов</h1>
+<!-- Список сохраненных инструментов -->
 <div class="saved-tools">
   <div class="saved-tool" *ngFor="let tt of toolTypes">
     <img class="saved-tool__img" *ngIf="!!tt.imgRefenrence" src={{tt.imgRefenrence}} alt="">
@@ -6,11 +7,13 @@
       {{tt.name}}
     </p>
     <div class="saved-tool__btns">
+      <!-- Кнопка редактирования инструмента -->
       <button class="saved-tools__edit" (click)="editToolType(tt)">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M20.625 19.5938H3.375C2.96016 19.5938 2.625 19.9289 2.625 20.3438V21.1875C2.625 21.2906 2.70937 21.375 2.8125 21.375H21.1875C21.2906 21.375 21.375 21.2906 21.375 21.1875V20.3438C21.375 19.9289 21.0398 19.5938 20.625 19.5938ZM6.03984 17.625C6.08672 17.625 6.13359 17.6203 6.18047 17.6133L10.1227 16.9219C10.1695 16.9125 10.2141 16.8914 10.2469 16.8563L20.182 6.92109C20.2038 6.89941 20.221 6.87366 20.2328 6.8453C20.2445 6.81695 20.2506 6.78656 20.2506 6.75586C20.2506 6.72516 20.2445 6.69477 20.2328 6.66642C20.221 6.63806 20.2038 6.61231 20.182 6.59063L16.2867 2.69297C16.2422 2.64844 16.1836 2.625 16.1203 2.625C16.057 2.625 15.9984 2.64844 15.9539 2.69297L6.01875 12.6281C5.98359 12.6633 5.9625 12.7055 5.95312 12.7523L5.26172 16.6945C5.23892 16.8201 5.24707 16.9493 5.28545 17.071C5.32384 17.1927 5.39132 17.3032 5.48203 17.393C5.63672 17.543 5.83125 17.625 6.03984 17.625V17.625Z" fill="black"/>
         </svg>      
       </button>
+      <!-- Кнопка удаления инструмента -->
       <button class="saved-tools__delete" (click)="deleteToolType(tt)">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M5.00293 20C5.00293 21.103 5.89993 22 7.00293 22H17.0029C18.1059 22 19.0029 21.103 19.0029 20V8H21.0029V6H17.0029V4C17.0029 2.897 16.1059 2 15.0029 2H9.00293C7.89993 2 7.00293 2.897 7.00293 4V6H3.00293V8H5.00293V20ZM9.00293 4H15.0029V6H9.00293V4ZM8.00293 8H17.0029L17.0039 20H7.00293V8H8.00293Z" fill="black"/>
@@ -18,93 +21,21 @@
         </svg>
       </button>
     </div>
-    <!-- {{tt.mainType}}
-    {{tt.brands}}
-    {{tt.serveCost}}
-    {{tt.info}} -->
   </div>
 </div>
 
 <!-- Создание инструмента -->
 <input *ngIf="!addToolFlag;" type="button" value="Создать инструмент" class="addPartBtn" (click)="addToolType()" />
 
-<!--шаблон для редактирования инструментов-->
-<!-- <ng-template #editToolTypeTemplate>
-  <td>
-    <input type="text" [(ngModel)]="toolType.name" class="form-control" />
-  </td>
-  <td>
-    <input type="number" [(ngModel)]="toolType.mainType" class="form-control" />
-  </td>
-  <td>
-    <input type="number" [(ngModel)]="toolType.secondaryType" class="form-control" />
-  </td>
-  <td>
-    <input type="text" [(ngModel)]="toolType.brands" class="form-control" />
-  </td>
-  <td>
-    <input type="text" [(ngModel)]="toolType.serveCost" class="form-control" />
-  </td>
-  <td>
-    <input type="text" [(ngModel)]="toolType.imgRefenrence" class="form-control" />
-  </td>
-  <td>
-    <input type="button" value="Сохранить" (click)="saveToolType()" class="btn btn-sm btn-success" />
-    <input type="button" value="Отмена" (click)="resetToolType()" class="btn btn-sm btn-warning" />
-  </td>
-</ng-template> -->
-
-<!--шаблон для добавления инструментов-->
-<!--<ng-template #createToolTypeTemplate>
-  <div class="form-group">
-    <label>Название</label>
-    <input type="text" [(ngModel)]="toolType.Name" class="form-control" />
-  </div>
-
-  <div class="form-group">
-    <label>Основой тип</label>
-    <input type="number" [(ngModel)]="toolType.MainType" class="form-control" />
-  </div>
-
-  <div class="form-group">
-    <label>Второстепенный тип</label>
-    <input type="number" [(ngModel)]="toolType.SecondaryType" class="form-control" />
-  </div>
-
-  <div class="form-group">
-    <label>Бренды</label>
-    <input type="text" [(ngModel)]="toolType.Brands" class="form-control" />
-  </div>
-
-  <div class="form-group">
-    <label>Услуги-стоимость</label>
-    <input type="text" [(ngModel)]="toolType.ServeCost" class="form-control" />
-  </div>
-
-  <div class="form-group">
-    <label>Ссылка на картинку</label>
-    <input type="text" [(ngModel)]="toolType.ImgRefenrence" class="form-control" />
-  </div>
-
-  <div>
-    <input type="button" value="Сохранить" (click)="saveToolType()" class="btn btn-success" />
-    <input type="button" value="Отмена" (click)="resetToolType()" class="btn btn-warning" />
-  </div>
-</ng-template>-->
-
-
-
-
-
-<!-- Добавление инструмента -->
+<!-- Форма добавления инструмента -->
   <section *ngIf="addToolFlag;" class="create-tool">
-
     <div class="create-tool__item">
       <label>Название</label>
       <input type="text" [(ngModel)]="toolType.name" class="form-control" placeholder="Название инструмента"/>
     </div>
 
     <hr>
+
     <!-- Категории -->
     <div class="create-tool__item">
       <label>Категория</label>
@@ -114,7 +45,6 @@
           <label for="type{{i}}">{{category}}</label>
         </div>
       </div>
-      <!-- <input type="number" [(ngModel)]="toolType.mainType" class="form-control" /> -->
     </div>
 
     <hr>
@@ -135,7 +65,7 @@
 
   <hr>
 
-    <!-- Прайс -->
+    <!-- Прайслист -->
     <div class="price">
       <label>Прайс лист</label>
       <div class="price__container">
@@ -159,13 +89,7 @@
 
     <hr>
 
-    <!-- <form [formGroup]="form">
-      <input type="file" formControlName="newImg" (change)="uploadImage()">
-    </form> -->
-    
-      
-
-
+    <!-- Добавление картинки -->
     <div class="add-image">
       <div class="tool-image" *ngIf="!!this.toolType.imgRefenrence">
         <img src={{this.toolType.imgRefenrence}} alt="">
@@ -175,12 +99,11 @@
         <div class="popup__body">
           <div class="popup__content">
             <div class="popup__header">
-
+              <!-- Загрузка картинки на сервер -->
               <form [formGroup]="newImageForm" (change)="onSubmit(newImageForm.value)">
                 <label class="popup__upload" for="newImage">Загрузить картинку</label>
                 <input type="file" id="newImage" formControlName="newImage" (change)="onSelectFile($event)" style="display: none;">
               </form>
-
               <button class="popup__close" (click)="chooseImg(false)">X</button>
             </div>
             Выбрать картинку
@@ -193,13 +116,12 @@
           </div>
         </div>
       </div>
-      <!-- <input type="text" [(ngModel)]="toolType.imgRefenrence" class="form-control" /> -->
     </div>
 
     <hr>
 
+    <!-- Добавление инфо об инструменте -->
     <quill-editor [(ngModel)]="this.toolType.info"></quill-editor>
-    <!-- <pre>{{quillValue}}</pre> -->
 
     <div>
       <button (click)="saveToolType()" class="btn btn-success">
@@ -210,9 +132,3 @@
       </button>
     </div>
   </section>
-<!-- </ng-template> -->
-
-
-
-
-

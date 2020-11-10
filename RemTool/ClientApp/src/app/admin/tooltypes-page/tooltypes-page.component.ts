@@ -33,25 +33,7 @@ export class ToolTypePageComponent implements OnInit {
   constructor(
     private dataService: DataService,
     private http: HttpClient
-  ) {
-    let newTT: ToolType = new ToolType();
-    newTT.name = 'Шуруповерт';
-    newTT.brands = ['bosch', 'makita'];
-    newTT.serves = ['fix rotor', 'fix stator'];
-    newTT.costs = ['100р', '200р'];
-    newTT.imgRefenrence = 'images/drill.png';
-    this.toolTypes.push(newTT);
-    this.toolTypes.push(newTT);
-    this.toolTypes.push(newTT);
-    this.toolTypes.push(newTT);
-    this.toolTypes.push(newTT);
-    this.toolTypes.push(newTT);
-    this.toolTypes.push(newTT);
-    this.toolTypes.push(newTT);
-    this.toolTypes.push(newTT);
-    this.toolTypes.push(newTT);
-    this.toolTypes.push(newTT);
-  }
+  ) { }
 
   newImageForm: FormGroup;
 
@@ -70,7 +52,6 @@ export class ToolTypePageComponent implements OnInit {
   }
 
   // сохранение инструмента
-  
    saveToolType() {
      if (this.toolType.id == null) {
        this.dataService.createToolType(this.toolType)
@@ -82,30 +63,16 @@ export class ToolTypePageComponent implements OnInit {
      this.resetToolType();
    }
   
-  
-  
-  //saveToolType() {
-  //  this.toolTypes.push(this.toolType);
-  //  this.toolType = new ToolType();
-  //  console.log(this.toolTypes);
-  //  this.addToolFlag = false;
-  //  this.resetToolType();
-  //}
-
   // редактирование инструмента
   editToolType(tt: ToolType) {
     this.addToolType();
     this.toolType = tt;
-    console.log(tt);
-    console.log(this.toolType);
     for (let i of tt.serves) {
       this.serveCostLength.push(0);
     }
-    // console.log(this.toolType.serves);
-    // console.log(this.toolType.costs);
   }
 
-  // сброс
+  // сброс инструмента
   resetToolType() {
     this.toolType = new ToolType();
     this.addToolFlag = false;
@@ -126,7 +93,6 @@ export class ToolTypePageComponent implements OnInit {
 
   // добавление бренда
   currentBrand: string = "";
-
   addBrandToToolType() {
     if (this.currentBrand != "") {
       if (this.toolType.brands == null)
@@ -137,10 +103,10 @@ export class ToolTypePageComponent implements OnInit {
     }
   }
 
+  // Добавление строки в прайслист
   newKey: string = "";
   newValue: string = "";
   serveCostLength: number[] = [];
-
   addRowToPrice() {
     if ((this.newKey != "") && (this.newValue != "")) {
       this.toolType.serves.push(this.newKey);
@@ -149,50 +115,44 @@ export class ToolTypePageComponent implements OnInit {
       this.newValue = "";
       this.serveCostLength.push(0);
     }
-    // console.log(this.toolType.serveCost.keys);
-    // console.log(this.toolType.serveCost.values);
   }
 
+  // Удаление строки из прайслиста 
   removeRow(i) {
     this.toolType.serves.splice(i, 1);
     this.toolType.costs.splice(i, 1);
     this.serveCostLength.pop();
   }
-
   chooseImgPop: boolean = false;
-
   images: string = "";
   chooseImg(a) {
     this.chooseImgPop = a;
-    // console.log(this.dataService.getImages());
     if (a) {
       this.http.get("api/images/getimages").subscribe((data: string) => this.images = data);
     }
-    console.log(this.images);
-
-    //http.get запрос для получения всех картинок на сервере
-
   }
 
+  // Открыть попап с картинками
   popupClick(e) {
     if (e.target == document.querySelector(".popup__body")) {
       this.chooseImg(false);
     }
-    // console.log(e.target);
   }
 
+  // Добавиить картинку к инструменту
   addImage(e, img) {
     console.log(String(e.target.currentSrc));
     this.toolType.imgRefenrence = String(img);
     this.chooseImg(false);
   }
 
+  // Выбор картинки дл язагрузки на сервер
   selectedFile: File = null;
-
   onSelectFile(fileInput: any) {
     this.selectedFile = <File>fileInput.target.files[0];
   }
 
+  // Отправка картинки на сервер
   onSubmit(data) {
     const formData = new FormData();
     formData.append('newImage', this.selectedFile);
@@ -204,17 +164,13 @@ export class ToolTypePageComponent implements OnInit {
     this.newImageForm.reset();
   }
 
+  // Удаление картинки с сервера
   deleteImage(event) {
     let imgSrc: string = event.target.parentNode.querySelector('img').src;
     let reg =  /images\//;
-    // var patt1=/[0-9a-z]+$/i;
     let fileNameIndex: number = imgSrc.match(reg).index + 7;
     let fileName: string = imgSrc.slice(fileNameIndex);
-    // console.log("api/images/DeleteImage/" + fileName);
-    // console.log(fileName);
     this.http.delete("api/images/DeleteImage/" + fileName).subscribe(data => this.chooseImg(true));
-    // console.log(fileNameIndex);
-    // console.log(event.target.parentNode.querySelector('img').src);
   }
 
 
