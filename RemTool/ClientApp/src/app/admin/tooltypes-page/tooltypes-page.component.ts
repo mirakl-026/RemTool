@@ -97,13 +97,20 @@ export class ToolTypePageComponent implements OnInit {
 
   // редактирование инструмента
   editToolType(tt: ToolType) {
+    this.addToolType();
     this.toolType = tt;
+    console.log(tt);
+    console.log(this.toolType);
+    for (let i of tt.serves) {
+      this.serveCostLength.push(0);
+    }
+    // console.log(this.toolType.serves);
+    // console.log(this.toolType.costs);
   }
 
   // сброс
   resetToolType() {
     this.toolType = new ToolType();
-    // this.tableModeToolType = true;
     this.addToolFlag = false;
     this.serveCostLength = [];
   }
@@ -117,7 +124,6 @@ export class ToolTypePageComponent implements OnInit {
   // добавление инструмента
   addToolType() {
     this.resetToolType();
-    // this.tableModeToolType = false;
     this.addToolFlag = true;
   }
 
