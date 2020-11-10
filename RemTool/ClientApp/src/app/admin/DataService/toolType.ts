@@ -16,13 +16,3 @@ export class ToolType {
       this.costs = [];
    }
 }
-
-export class SC_Dictionary {
-  constructor(
-    public keys?: string[],
-    public values?: string[]
-  ) { 
-    this.keys = [];
-    this.values = [];
-  }
-}

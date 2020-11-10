@@ -54,7 +54,6 @@ export class ToolTypePageComponent implements OnInit {
   }
 
   newImageForm: FormGroup;
-  quillValue: string;
 
   ngOnInit(): void {
     this.loadToolTypes();
@@ -73,8 +72,6 @@ export class ToolTypePageComponent implements OnInit {
   // сохранение инструмента
   
    saveToolType() {
-     this.toolType.info = this.quillValue;
-     console.log(this.toolType)
      if (this.toolType.id == null) {
        this.dataService.createToolType(this.toolType)
        .subscribe((data: ToolType) => this.toolTypes.push(data));
