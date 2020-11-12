@@ -106,6 +106,7 @@ namespace RemTool.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Post(ToolType toolType)
         {
             if (ModelState.IsValid)
