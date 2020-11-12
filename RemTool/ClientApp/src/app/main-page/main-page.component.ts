@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SwiperComponent } from '../swiper/swiper.component';
 
 
 @Component({
@@ -15,5 +14,4 @@ export class MainPageComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

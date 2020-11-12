@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { DataService } from '../DataService/data.service';
-import { SparePart } from '../DataService/sparepart';
+import { DataService } from '../../DataService/data.service';
+import { SparePart } from '../../DataService/sparepart';
 
 @Component({
   selector: 'spareparts-page',

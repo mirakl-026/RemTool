@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { DataService } from '../DataService/data.service';
-import { ToolType } from '../DataService/toolType';
+import { DataService } from '../../DataService/data.service';
+import { ToolType } from '../../DataService/toolType';
 import { FormControl, FormGroup } from '@angular/forms';
 
 

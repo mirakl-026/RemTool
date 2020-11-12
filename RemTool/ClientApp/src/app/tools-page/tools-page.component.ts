@@ -1,32 +1,33 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
+import { DataService } from '../DataService/data.service';
+import { ToolType } from '../DataService/toolType';
 
 @Component({
   selector: 'app-tools-page',
   templateUrl: './tools-page.component.html',
-  styleUrls: ['./tools-page.component.scss']
+  styleUrls: ['./tools-page.component.scss'],
+  providers: [DataService]
 })
 export class ToolsPageComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) {
-  }
-
+  constructor(
+  private route: ActivatedRoute,
+  private dataService: DataService) { }
+    
+  type: string;
+  res$;
   ngOnInit(): void {
-    // var requestURL = 'https://github.com/nnovofastovskiy/remtool/blob/master/src/assets/tools/electro.json';
-    // var request = new XMLHttpRequest();
-    // request.open('GET', requestURL);
-    // request.responseType = 'json';
-    // request.send();
-    // request.onload = function() {
-    //   var tools = request.response;
-    //   console.log(tools);
-    // }
-    // console.log(toolsJson);
     const container = document.querySelector('.container');
     this.route.queryParams.subscribe(params => {
-      // console.log(params.type);
+      this.type = String(params.type);
       container.innerHTML = String(params.type);
+      if (this.type == "electro") {
+        this.dataService.getElectroTools().subscribe((data) => this.res$ = data["includedTypes"]);
+      } else if (this.type == "benzo") {
+        this.dataService.getFuelTools().subscribe((data) => this.res$ = data["includedTypes"]);
+      }
     });
   }
-
 }

@@ -10,7 +10,6 @@ export class DataService {
   private urlToolTypePrice = "api/tooltype/GetPriceList";
 
   constructor(private http: HttpClient) {
-
   }
 
   getImages(){
