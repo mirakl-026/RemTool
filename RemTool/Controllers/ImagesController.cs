@@ -9,6 +9,7 @@ using System.IO;
 using Microsoft.AspNetCore.Hosting;
 
 using RemTool.Infrastructure.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RemTool.Controllers
 {
@@ -26,6 +27,7 @@ namespace RemTool.Controllers
         // загрузить картинку
         [HttpPost("AddImage")]
         [RequestSizeLimit(52428800)]
+        [Authorize]
         public async Task<IActionResult> AddImage(IFormFile newImage)
         {
             if (newImage != null)
@@ -62,6 +64,7 @@ namespace RemTool.Controllers
         // удалить картинку
         // получить ссылки всех картинок
         [HttpDelete("DeleteImage/{fileName}")]
+        [Authorize]
         public IActionResult DeleteImage(string fileName)
         {
             _fsContext.DeleteImage(fileName);
@@ -69,6 +72,7 @@ namespace RemTool.Controllers
         }
 
         [HttpDelete("DeleteAllImages")]
+        [Authorize]
         public IActionResult DeleteAllImages()
         {
             _fsContext.DeleteAllImages();

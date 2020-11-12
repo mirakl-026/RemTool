@@ -118,6 +118,7 @@ namespace RemTool.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public IActionResult Put(ToolType toolType)
         {
             if (ModelState.IsValid)
@@ -129,6 +130,7 @@ namespace RemTool.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public IActionResult Delete(string id)
         {
             ToolType toolType = _db.ReadToolType(id);
@@ -140,6 +142,7 @@ namespace RemTool.Controllers
         }
 
         [HttpDelete("DeleteAllToolTypes")]
+        [Authorize]
         public IActionResult DeleteAll()
         {
             _db.DeleteAllToolTypes();

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using RemTool.Models;
 using RemTool.Infrastructure.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RemTool.Controllers
 {
@@ -35,6 +36,7 @@ namespace RemTool.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Post(SparePart sparePart)
         {
             if (ModelState.IsValid)
@@ -46,6 +48,7 @@ namespace RemTool.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public IActionResult Put(SparePart sparePart)
         {
             if (ModelState.IsValid)
@@ -57,6 +60,7 @@ namespace RemTool.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public IActionResult Delete(string id)
         {
             SparePart sparePart = db.ReadSparePart(id);
