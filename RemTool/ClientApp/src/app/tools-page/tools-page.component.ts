@@ -17,16 +17,22 @@ export class ToolsPageComponent implements OnInit {
   private dataService: DataService) { }
     
   type: string;
-  res$;
+  res$: {
+    names: string[],
+    ids: string[]
+  };
   ngOnInit(): void {
     const container = document.querySelector('.container');
     this.route.queryParams.subscribe(params => {
       this.type = String(params.type);
       container.innerHTML = String(params.type);
       if (this.type == "electro") {
-        this.dataService.getElectroTools().subscribe((data) => this.res$ = data["includedTypes"]);
+        this.dataService.getElectroTools().subscribe((data) => {
+          this.res$.names = data["includedTypes"];
+          this.res$.ids = data["includedIds"];
+        });
       } else if (this.type == "benzo") {
-        this.dataService.getFuelTools().subscribe((data) => this.res$ = data["includedTypes"]);
+        // this.dataService.getFuelTools().subscribe((data) => this.res$ = data["includedTypes"]);
       }
     });
   }

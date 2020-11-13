@@ -9,10 +9,11 @@ import { ToolsPageComponent } from './tools-page/tools-page.component';
 import { ContactsPageComponent } from './contacts-page/contacts-page.component';
 import { SwiperComponent } from './swiper/swiper.component';
 import { SwiperBrandsComponent } from './swiper-brands/swiper-brands.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { PopupComponent } from './popup/popup.component';
 import { QuillModule } from 'ngx-quill';
+import { AuthInterceptor } from './shared/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,13 @@ import { QuillModule } from 'ngx-quill';
     FormsModule,
     QuillModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      multi: true,
+      useClass: AuthInterceptor
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
