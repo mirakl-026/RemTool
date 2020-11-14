@@ -71,7 +71,8 @@ namespace RemTool.Services.MongoDB
                 if (tt.MainType[mainType] == true)
                 {
                     ttl.IncludedTypes.Add(tt.Name);
-                    ttl.IncludedIds.Add(tt.Name);
+                    ttl.IncludedIds.Add(tt.Id);
+                    ttl.IncludedImages.Add(tt.ImgRefenrence);
                 }
             }
 
@@ -207,6 +208,7 @@ namespace RemTool.Services.MongoDB
                 {
                     ttl.IncludedTypes.Add(tt.Name);
                     ttl.IncludedIds.Add(tt.Id);
+                    ttl.IncludedImages.Add(tt.ImgRefenrence);
                 }
             }
 
@@ -299,8 +301,11 @@ namespace RemTool.Services.MongoDB
         {
             IncludedTypes = new List<string>();
             IncludedIds = new List<string>();
+            IncludedImages = new List<string>();
         }
         public List<string> IncludedTypes { get; set; }
         public List<string> IncludedIds { get; set; }
+
+        public List<string> IncludedImages { get; set; }
     }
 }
