@@ -35,7 +35,6 @@ namespace RemTool
 
         public void ConfigureServices(IServiceCollection services)
         {
-            // Подключение интерфейса для десериализации appsetings.json и вытаскивания connectionString и databaseName
             services.Configure<RemToolMongoDBsettings>(
                 Configuration.GetSection(nameof(RemToolMongoDBsettings)));
 
@@ -97,7 +96,6 @@ namespace RemTool
                 app.UseDeveloperExceptionPage();
             }
 
-            // добавление папки для хранения ресурсов если она не содана
             string path = env.WebRootPath;
             DirectoryInfo di_images = new DirectoryInfo(path + "/images/");
             if (!di_images.Exists)
