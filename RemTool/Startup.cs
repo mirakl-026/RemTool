@@ -96,13 +96,7 @@ namespace RemTool
                 app.UseDeveloperExceptionPage();
             }
 
-            string path = env.WebRootPath;
-            DirectoryInfo di_images = new DirectoryInfo(path + "/images/");
-            if (!di_images.Exists)
-            {
-                di_images.Create();
-            }
-
+            InitWwwrootFolders(env.WebRootPath);
 
             app.UseStaticFiles();
             if (env.IsDevelopment())
@@ -131,8 +125,25 @@ namespace RemTool
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+        }
 
+        public void InitWwwrootFolders(string webRootPath)
+        {
+            string path = webRootPath;
 
+            // images folder
+            DirectoryInfo di_images = new DirectoryInfo(path + "/images/");
+            if (!di_images.Exists)
+            {
+                di_images.Create();
+            }
+
+            // backUpFolder
+            DirectoryInfo di_backUp = new DirectoryInfo(path + "/backup/");
+            if (!di_backUp.Exists)
+            {
+                di_backUp.Create();
+            }
         }
     }
 }
