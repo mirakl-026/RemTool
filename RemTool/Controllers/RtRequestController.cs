@@ -52,6 +52,20 @@ namespace RemTool.Controllers
             return BadRequest(ModelState);
         }
 
+        // Put - update rtrequest (mark)
+        [HttpPut]
+        [Authorize]
+        public IActionResult Put(RtRequest updatedRtreq)
+        {
+            if (ModelState.IsValid)
+            {
+                db.UpdateRtRequest(updatedRtreq);
+                return Ok();
+            }
+            return BadRequest(ModelState);
+        }
+
+
         // Delete{id} - delete request
         [HttpDelete("{id}")]
         [Authorize]
