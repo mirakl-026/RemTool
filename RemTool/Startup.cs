@@ -47,6 +47,7 @@ namespace RemTool
             services.AddSingleton<IToolTypeService, ToolTypeService>();
             services.AddSingleton<IClickCounterService, ClickCounterService>();
             services.AddSingleton<IRtRequestService, RtRequestService>();
+            services.AddSingleton<IBackUpService, BackUpService>();
 
 
             services.AddControllers();
@@ -96,13 +97,7 @@ namespace RemTool
                 app.UseDeveloperExceptionPage();
             }
 
-            string path = env.WebRootPath;
-            DirectoryInfo di_images = new DirectoryInfo(path + "/images/");
-            if (!di_images.Exists)
-            {
-                di_images.Create();
-            }
-
+            InitWwwrootFolders(env.WebRootPath);
 
             app.UseStaticFiles();
             if (env.IsDevelopment())
@@ -131,8 +126,49 @@ namespace RemTool
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+        }
 
+        public void InitWwwrootFolders(string webRootPath)
+        {
+            string path = webRootPath;
 
+            // images folder
+            DirectoryInfo di_images = new DirectoryInfo(path + "/images/");
+            if (!di_images.Exists)
+            {
+                di_images.Create();
+            }
+
+            // backUpFolder
+            DirectoryInfo di_backUp = new DirectoryInfo(path + "/backup/");
+            if (!di_backUp.Exists)
+            {
+                di_backUp.Create();
+            }
+
+            DirectoryInfo di_backUpTemp = new DirectoryInfo(path + "/backup/" + "/temp/");
+            if (!di_backUpTemp.Exists)
+            {
+                di_backUpTemp.Create();
+            }
+
+            DirectoryInfo di_backUpTempImg = new DirectoryInfo(path + "/backup/" + "/temp/" + "/images/");
+            if (!di_backUpTempImg.Exists)
+            {
+                di_backUpTempImg.Create();
+            }
+
+            DirectoryInfo di_backUpTempJson = new DirectoryInfo(path + "/backup/" + "/temp/" + "/json/");
+            if (!di_backUpTempJson.Exists)
+            {
+                di_backUpTempJson.Create();
+            }
+
+            DirectoryInfo di_backUpArch = new DirectoryInfo(path + "/backup/" + "/archive/");
+            if (!di_backUpArch.Exists)
+            {
+                di_backUpArch.Create();
+            }
         }
     }
 }
