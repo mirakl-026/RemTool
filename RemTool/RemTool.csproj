@@ -26,6 +26,9 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="wwwroot\backup\archive\" />
+    <Folder Include="wwwroot\backup\temp\images\" />
+    <Folder Include="wwwroot\backup\temp\json\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
