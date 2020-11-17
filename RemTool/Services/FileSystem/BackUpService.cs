@@ -55,6 +55,28 @@ namespace RemTool.Services.FileSystem
 
         public async Task SaveServerToZip()
         {
+            // чистка папки temp
+            string[] tempFilesImages = Directory.GetFiles(PathToBackUpTemp + "/images/");
+            foreach (var tempFile in tempFilesImages)
+            {
+                FileInfo fi = new FileInfo(tempFile);
+                if (fi.Exists)
+                {
+                    fi.Delete();
+                }
+            }
+
+            string[] tempFilesJson = Directory.GetFiles(PathToBackUpTemp + "/json/");
+            foreach (var tempFile in tempFilesJson)
+            {
+                FileInfo fi = new FileInfo(tempFile);
+                if (fi.Exists)
+                {
+                    fi.Delete();
+                }
+            }
+
+
             // копируем файлы картинок в temp бэкапа
             // получение списка всех файлов
             foreach (var imgPath in GetAllImagesPaths())
@@ -90,9 +112,37 @@ namespace RemTool.Services.FileSystem
 
             string zipFile = PathToBackUpZip + "backup.zip";
             FileInfo fiZip = new FileInfo(PathToBackUpZip + "backup.zip");
-
+            if (fiZip.Exists)
+            {
+                fiZip.Delete();
+            }
             ZipFile.CreateFromDirectory(sourceFolder, zipFile);
 
+            // чистка папки temp
+            tempFilesImages = Directory.GetFiles(PathToBackUpTemp + "/images/");
+            foreach (var tempFile in tempFilesImages)
+            {
+                FileInfo fi = new FileInfo(tempFile);
+                if (fi.Exists)
+                {
+                    fi.Delete();
+                }
+            }
+
+            tempFilesJson = Directory.GetFiles(PathToBackUpTemp + "/json/");
+            foreach (var tempFile in tempFilesJson)
+            {
+                FileInfo fi = new FileInfo(tempFile);
+                if (fi.Exists)
+                {
+                    fi.Delete();
+                }
+            }
+        }
+
+
+        public async Task UnZipToServer()
+        {
             // чистка папки temp
             string[] tempFilesImages = Directory.GetFiles(PathToBackUpTemp + "/images/");
             foreach (var tempFile in tempFilesImages)
@@ -113,14 +163,9 @@ namespace RemTool.Services.FileSystem
                     fi.Delete();
                 }
             }
-        }
-
-
-        public async Task UnZipToServer()
-        {
-            string zipFile = PathToBackUpZip + "backup.zip";
 
             // распаковываем из архива
+            string zipFile = PathToBackUpZip + "backup.zip";
             ZipFile.ExtractToDirectory(zipFile, PathToBackUpTemp);
 
             // получаем картинки и .json файлы 
@@ -136,13 +181,13 @@ namespace RemTool.Services.FileSystem
             }
 
             // по json записываем данные в коллекции
-            string jsonToolType = PathToBackUpTemp + "/json/" + "tooltype.json";
+            string jsonToolType = PathToBackUpTemp + "/json/" + "toolTypes.json";
             FileInfo fiTt = new FileInfo(jsonToolType);
             if (fiTt.Exists)
             {
                 using (FileStream fs = new FileStream(jsonToolType, FileMode.OpenOrCreate))
                 {
-                    IEnumerable<ToolType> toolTypes = await JsonSerializer.DeserializeAsync<IEnumerable<ToolType>>(fs);
+                    ToolType[] toolTypes = await JsonSerializer.DeserializeAsync<ToolType[]>(fs);
                     if (toolTypes != null)
                     {
                         foreach (var tt in toolTypes)
@@ -159,7 +204,7 @@ namespace RemTool.Services.FileSystem
             {
                 using (FileStream fs = new FileStream(jsonCounter, FileMode.OpenOrCreate))
                 {
-                    IEnumerable<ClickCounter> counters = await JsonSerializer.DeserializeAsync<IEnumerable<ClickCounter>>(fs);
+                    ClickCounter[] counters = await JsonSerializer.DeserializeAsync<ClickCounter[]>(fs);
                     if (counters != null)
                     {
                         foreach (var ct in counters)
@@ -176,7 +221,7 @@ namespace RemTool.Services.FileSystem
             {
                 using (FileStream fs = new FileStream(jsonRtReq, FileMode.OpenOrCreate))
                 {
-                    IEnumerable<RtRequest> requests = await JsonSerializer.DeserializeAsync<IEnumerable<RtRequest>>(fs);
+                    RtRequest[] requests = await JsonSerializer.DeserializeAsync<RtRequest[]>(fs);
                     if (requests != null)
                     {
                         foreach (var rt in requests)
@@ -193,7 +238,7 @@ namespace RemTool.Services.FileSystem
             {
                 using (FileStream fs = new FileStream(jsonSpareParts, FileMode.OpenOrCreate))
                 {
-                    IEnumerable<SparePart> spareParts = await JsonSerializer.DeserializeAsync<IEnumerable<SparePart>>(fs);
+                    SparePart[] spareParts = await JsonSerializer.DeserializeAsync<SparePart[]>(fs);
                     if (spareParts != null)
                     {
                         foreach (var sp in spareParts)
@@ -205,7 +250,7 @@ namespace RemTool.Services.FileSystem
             }
 
             // чистим папку temp
-            string[] tempFilesImages = Directory.GetFiles(PathToBackUpTemp + "/images/");
+            tempFilesImages = Directory.GetFiles(PathToBackUpTemp + "/images/");
             foreach (var tempFile in tempFilesImages)
             {
                 FileInfo fi = new FileInfo(tempFile);
@@ -215,7 +260,7 @@ namespace RemTool.Services.FileSystem
                 }
             }
 
-            string[] tempFilesJson = Directory.GetFiles(PathToBackUpTemp + "/json/");
+            tempFilesJson = Directory.GetFiles(PathToBackUpTemp + "/json/");
             foreach (var tempFile in tempFilesJson)
             {
                 FileInfo fi = new FileInfo(tempFile);
