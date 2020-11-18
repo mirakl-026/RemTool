@@ -97,7 +97,7 @@ namespace RemTool
                 app.UseDeveloperExceptionPage();
             }
 
-            InitWwwrootFolders(env.WebRootPath);
+            InitWwwrootFolders(env.WebRootPath, env.ContentRootPath);
 
             app.UseStaticFiles();
             if (env.IsDevelopment())
@@ -128,9 +128,10 @@ namespace RemTool
             });
         }
 
-        public void InitWwwrootFolders(string webRootPath)
+        public void InitWwwrootFolders(string webRootPath, string appPath)
         {
             string path = webRootPath;
+            string pathToApp = appPath;
 
             // images folder
             DirectoryInfo di_images = new DirectoryInfo(path + "/images/");
@@ -140,31 +141,31 @@ namespace RemTool
             }
 
             // backUpFolder
-            DirectoryInfo di_backUp = new DirectoryInfo(path + "/backup/");
+            DirectoryInfo di_backUp = new DirectoryInfo(pathToApp + "/backup/");
             if (!di_backUp.Exists)
             {
                 di_backUp.Create();
             }
 
-            DirectoryInfo di_backUpTemp = new DirectoryInfo(path + "/backup/" + "/temp/");
+            DirectoryInfo di_backUpTemp = new DirectoryInfo(pathToApp + "/backup/" + "/temp/");
             if (!di_backUpTemp.Exists)
             {
                 di_backUpTemp.Create();
             }
 
-            DirectoryInfo di_backUpTempImg = new DirectoryInfo(path + "/backup/" + "/temp/" + "/images/");
+            DirectoryInfo di_backUpTempImg = new DirectoryInfo(pathToApp + "/backup/" + "/temp/" + "/images/");
             if (!di_backUpTempImg.Exists)
             {
                 di_backUpTempImg.Create();
             }
 
-            DirectoryInfo di_backUpTempJson = new DirectoryInfo(path + "/backup/" + "/temp/" + "/json/");
+            DirectoryInfo di_backUpTempJson = new DirectoryInfo(pathToApp + "/backup/" + "/temp/" + "/json/");
             if (!di_backUpTempJson.Exists)
             {
                 di_backUpTempJson.Create();
             }
 
-            DirectoryInfo di_backUpArch = new DirectoryInfo(path + "/backup/" + "/archive/");
+            DirectoryInfo di_backUpArch = new DirectoryInfo(pathToApp + "/backup/" + "/archive/");
             if (!di_backUpArch.Exists)
             {
                 di_backUpArch.Create();

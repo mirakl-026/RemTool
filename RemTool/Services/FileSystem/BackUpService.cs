@@ -38,8 +38,8 @@ namespace RemTool.Services.FileSystem
 
             // настройка путей
             PathToImages = _appEnvironment.WebRootPath + ImagesPath;
-            PathToBackUpTemp = _appEnvironment.WebRootPath + BackUpTemp;
-            PathToBackUpZip = _appEnvironment.WebRootPath + BackUpZip;
+            PathToBackUpTemp = _appEnvironment.ContentRootPath + BackUpTemp;
+            PathToBackUpZip = _appEnvironment.ContentRootPath + BackUpZip;
 
 
 
