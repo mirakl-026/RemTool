@@ -55,27 +55,11 @@ namespace RemTool.Services.FileSystem
 
         public async Task SaveServerToZip()
         {
+            // удостоверяемся что ключевые папки на месте, если нет - создаём
+            CheckNCreateMainFolders();
+
             // чистка папки temp
-            string[] tempFilesImages = Directory.GetFiles(PathToBackUpTemp + "/images/");
-            foreach (var tempFile in tempFilesImages)
-            {
-                FileInfo fi = new FileInfo(tempFile);
-                if (fi.Exists)
-                {
-                    fi.Delete();
-                }
-            }
-
-            string[] tempFilesJson = Directory.GetFiles(PathToBackUpTemp + "/json/");
-            foreach (var tempFile in tempFilesJson)
-            {
-                FileInfo fi = new FileInfo(tempFile);
-                if (fi.Exists)
-                {
-                    fi.Delete();
-                }
-            }
-
+            ClearTemp();
 
             // копируем файлы картинок в temp бэкапа
             // получение списка всех файлов
@@ -119,50 +103,22 @@ namespace RemTool.Services.FileSystem
             ZipFile.CreateFromDirectory(sourceFolder, zipFile);
 
             // чистка папки temp
-            tempFilesImages = Directory.GetFiles(PathToBackUpTemp + "/images/");
-            foreach (var tempFile in tempFilesImages)
-            {
-                FileInfo fi = new FileInfo(tempFile);
-                if (fi.Exists)
-                {
-                    fi.Delete();
-                }
-            }
-
-            tempFilesJson = Directory.GetFiles(PathToBackUpTemp + "/json/");
-            foreach (var tempFile in tempFilesJson)
-            {
-                FileInfo fi = new FileInfo(tempFile);
-                if (fi.Exists)
-                {
-                    fi.Delete();
-                }
-            }
+            ClearTemp();
         }
 
 
         public async Task UnZipToServer()
         {
-            // чистка папки temp
-            string[] tempFilesImages = Directory.GetFiles(PathToBackUpTemp + "/images/");
-            foreach (var tempFile in tempFilesImages)
+            //
+            int checkResult = CheckNCreateMainFolders();
+            if (checkResult == -1)
             {
-                FileInfo fi = new FileInfo(tempFile);
-                if (fi.Exists)
-                {
-                    fi.Delete();
-                }
+                // папки с архивом не было, значит распаковывать нечего
+                return;
             }
 
-            string[] tempFilesJson = Directory.GetFiles(PathToBackUpTemp + "/json/");
-            foreach (var tempFile in tempFilesJson)
-            {
-                FileInfo fi = new FileInfo(tempFile);
-                if (fi.Exists)
-                {
-                    fi.Delete();
-                }
-            }
+            // чистка папки temp
+            ClearTemp();
 
             // распаковываем из архива
             string zipFile = PathToBackUpZip + "backup.zip";
@@ -250,7 +206,15 @@ namespace RemTool.Services.FileSystem
             }
 
             // чистим папку temp
-            tempFilesImages = Directory.GetFiles(PathToBackUpTemp + "/images/");
+            ClearTemp();
+        }
+
+
+
+        // метод очистки папки temp
+        public void ClearTemp()
+        {
+            string[] tempFilesImages = Directory.GetFiles(PathToBackUpTemp + "/images/");
             foreach (var tempFile in tempFilesImages)
             {
                 FileInfo fi = new FileInfo(tempFile);
@@ -260,7 +224,7 @@ namespace RemTool.Services.FileSystem
                 }
             }
 
-            tempFilesJson = Directory.GetFiles(PathToBackUpTemp + "/json/");
+            string[] tempFilesJson = Directory.GetFiles(PathToBackUpTemp + "/json/");
             foreach (var tempFile in tempFilesJson)
             {
                 FileInfo fi = new FileInfo(tempFile);
@@ -271,11 +235,43 @@ namespace RemTool.Services.FileSystem
             }
         }
 
+        public int CheckNCreateMainFolders()
+        {
+            string pathToApp = _appEnvironment.ContentRootPath;
 
+            // backUpFolder
+            DirectoryInfo di_backUp = new DirectoryInfo(pathToApp + "/backup/");
+            if (!di_backUp.Exists)
+            {
+                di_backUp.Create();
+            }
 
+            DirectoryInfo di_backUpTemp = new DirectoryInfo(pathToApp + "/backup/" + "/temp/");
+            if (!di_backUpTemp.Exists)
+            {
+                di_backUpTemp.Create();
+            }
 
+            DirectoryInfo di_backUpTempImg = new DirectoryInfo(pathToApp + "/backup/" + "/temp/" + "/images/");
+            if (!di_backUpTempImg.Exists)
+            {
+                di_backUpTempImg.Create();
+            }
 
+            DirectoryInfo di_backUpTempJson = new DirectoryInfo(pathToApp + "/backup/" + "/temp/" + "/json/");
+            if (!di_backUpTempJson.Exists)
+            {
+                di_backUpTempJson.Create();
+            }
 
+            DirectoryInfo di_backUpArch = new DirectoryInfo(pathToApp + "/backup/" + "/archive/");
+            if (!di_backUpArch.Exists)
+            {
+                di_backUpArch.Create();
+                return -1;
+            }
+            return 0;
+        }
 
         public IEnumerable<string> GetAllImagesPaths()
         {

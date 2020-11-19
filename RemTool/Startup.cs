@@ -97,7 +97,7 @@ namespace RemTool
                 app.UseDeveloperExceptionPage();
             }
 
-            InitWwwrootFolders(env.WebRootPath, env.ContentRootPath);
+            InitMainFolders(env.WebRootPath, env.ContentRootPath);
 
             app.UseStaticFiles();
             if (env.IsDevelopment())
@@ -128,7 +128,7 @@ namespace RemTool
             });
         }
 
-        public void InitWwwrootFolders(string webRootPath, string appPath)
+        public void InitMainFolders(string webRootPath, string appPath)
         {
             string path = webRootPath;
             string pathToApp = appPath;
