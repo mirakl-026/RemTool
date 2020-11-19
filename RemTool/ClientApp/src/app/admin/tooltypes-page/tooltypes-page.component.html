@@ -93,6 +93,7 @@
     <div class="add-image">
       <div class="tool-image" *ngIf="!!this.toolType.imgRefenrence">
         <img src={{this.toolType.imgRefenrence}} alt="">
+        <button (click)="imgReset()">X</button>
       </div>
       <button (click)="chooseImg(true)">Выбрать картинку</button>
       <div *ngIf="chooseImgPop" class="popup" (click)="popupClick($event)">

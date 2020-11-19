@@ -1,3 +1,35 @@
 // input[type="radio"] {
 //     display: none;
 // }
+.tools-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 30px;
+    grid-auto-rows: auto;
+    grid-auto-columns: auto;
+    justify-items: start;
+    margin-bottom: 60px;
+}
+
+.tool {
+    width: 282px;
+    height: 200px;
+    background-color: var(--grey-color);
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    text-decoration: none;
+    color: var(--dark-color);
+    &__title {
+        font-size: 18px;
+    }
+    &__image {
+        width: auto;
+        height: 80%;
+    }
+    // display: block;
+}

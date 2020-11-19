@@ -11,8 +11,14 @@ export class ToolType {
     public imgRefenrence?: string,
     public info?: string
   ) { 
+      // this.id = "";
+      this.name = "";
       this.mainType = [false, false, false, false, false, false, false, false];
+      this.secondaryType = 0;
+      this.brands = [];
       this.serves = [];
       this.costs = [];
+      this.imgRefenrence = "";
+      this.info = "";
    }
 }

@@ -1,0 +1,19 @@
+<div *ngIf="!res$">
+    <app-preloader></app-preloader>
+</div>
+<div *ngIf="!!res$" class="tool-page">
+    <h2 class="tool-page__title">
+        {{res$.name}}
+    </h2>
+    <img src={{res$.imgRefenrence}} alt="">
+    <div class="tool-page__pricelist">
+        <div class="pricelist-column">
+            Услуга
+            <p *ngFor="let serve of res$.serves">{{serve}}</p>
+        </div>
+        <div class="pricelist-column">
+            Стоимость
+            <p *ngFor="let cost of res$.costs">{{cost}}</p>
+        </div>
+    </div>
+</div>

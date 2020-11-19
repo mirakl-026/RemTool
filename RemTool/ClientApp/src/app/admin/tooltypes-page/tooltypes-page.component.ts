@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { DataService } from '../../DataService/data.service';
 import { ToolType } from '../../DataService/toolType';
 import { FormControl, FormGroup } from '@angular/forms';
+import { AuthService } from 'src/app/shared/auth.service';
 
 
 @Component({
@@ -32,10 +33,14 @@ export class ToolTypePageComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
-    private http: HttpClient
+    private http: HttpClient,
+    private auth: AuthService
   ) { }
 
   newImageForm: FormGroup;
+  newKey: string = "";
+  newValue: string = "";
+  serveCostLength: number[] = [];
 
   ngOnInit(): void {
     this.loadToolTypes();
@@ -66,10 +71,17 @@ export class ToolTypePageComponent implements OnInit {
   // редактирование инструмента
   editToolType(tt: ToolType) {
     this.addToolType();
-    this.toolType = tt;
+    this.dataService.getToolType(tt.id).subscribe(data => this.toolType = data);
+    // let currectTt = tt;
+    // this.toolType = currectTt;
     for (let i of tt.serves) {
       this.serveCostLength.push(0);
     }
+  }
+
+  // сброс картинки
+  imgReset() {
+    this.toolType.imgRefenrence = "";
   }
 
   // сброс инструмента
@@ -104,9 +116,7 @@ export class ToolTypePageComponent implements OnInit {
   }
 
   // Добавление строки в прайслист
-  newKey: string = "";
-  newValue: string = "";
-  serveCostLength: number[] = [];
+
   addRowToPrice() {
     if ((this.newKey != "") && (this.newValue != "")) {
       this.toolType.serves.push(this.newKey);
@@ -129,6 +139,7 @@ export class ToolTypePageComponent implements OnInit {
     this.chooseImgPop = a;
     if (a) {
       this.http.get("api/images/getimages").subscribe((data: string) => this.images = data);
+      // this.dataService.getImages();
     }
   }
 
@@ -137,6 +148,7 @@ export class ToolTypePageComponent implements OnInit {
     if (e.target == document.querySelector(".popup__body")) {
       this.chooseImg(false);
     }
+    this.auth.isAuth();
   }
 
   // Добавиить картинку к инструменту
@@ -146,7 +158,7 @@ export class ToolTypePageComponent implements OnInit {
     this.chooseImg(false);
   }
 
-  // Выбор картинки дл язагрузки на сервер
+  // Выбор картинки для загрузки на сервер
   selectedFile: File = null;
   onSelectFile(fileInput: any) {
     this.selectedFile = <File>fileInput.target.files[0];
@@ -172,8 +184,4 @@ export class ToolTypePageComponent implements OnInit {
     let fileName: string = imgSrc.slice(fileNameIndex);
     this.http.delete("api/images/DeleteImage/" + fileName).subscribe(data => this.chooseImg(true));
   }
-
-
-
 }
-

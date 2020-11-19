@@ -27,10 +27,10 @@ import { QuillModule } from 'ngx-quill';
                 path: '', component: AdminLayoutComponent, children: [
                     {path: '', redirectTo: '/admin/login', pathMatch: 'full'},
                     {path: 'login', component: LoginPageComponent},
-                    { path: 'spareparts', component: SparePartsPageComponent },
-                    { path: 'tooltypes', component: ToolTypePageComponent },
-                    // { path: 'spareparts', component: SparePartsPageComponent, canActivate: [AuthGuard] },
-                    // { path: 'tooltypes', component: ToolTypePageComponent, canActivate: [AuthGuard] },
+                    // { path: 'spareparts', component: SparePartsPageComponent },
+                    // { path: 'tooltypes', component: ToolTypePageComponent },
+                    { path: 'spareparts', component: SparePartsPageComponent, canActivate: [AuthGuard] },
+                    { path: 'tooltypes', component: ToolTypePageComponent, canActivate: [AuthGuard] },
                 ]
             }
         ])

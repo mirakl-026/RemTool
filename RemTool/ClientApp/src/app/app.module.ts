@@ -14,6 +14,9 @@ import { FormsModule } from '@angular/forms';
 import { PopupComponent } from './popup/popup.component';
 import { QuillModule } from 'ngx-quill';
 import { AuthInterceptor } from './shared/auth.interceptor';
+import { ToolPageComponent } from './tool-page/tool-page.component';
+import { PreloaderComponent } from './preloader/preloader.component';
+import { DataService } from './DataService/data.service';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,8 @@ import { AuthInterceptor } from './shared/auth.interceptor';
     SwiperComponent,
     SwiperBrandsComponent,
     PopupComponent,
+    ToolPageComponent,
+    PreloaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +43,8 @@ import { AuthInterceptor } from './shared/auth.interceptor';
       provide: HTTP_INTERCEPTORS,
       multi: true,
       useClass: AuthInterceptor
-    }
+    },
+    DataService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,50 @@
-<div class="container">
+<!-- <div class="container">
     {{type}}
+</div> -->
+<div *ngIf="!res$">
+    <app-preloader></app-preloader>
 </div>
-    <div *ngFor="let toolName of res$.names">
-        {{toolName}}
-    </div>
+<section class="tools-container">
+    <a *ngFor="let toolName of toolNames$; index as i">
+        <a [routerLink]="['/tool']" [queryParams]="{id: toolIds$[i]}" class="tool">
+            <h4 class="tool__title">{{toolName}}</h4>
+            <img class="tool__image" src={{toolImages$[i]}} alt="">
+        </a>
+    </a>
+    <a *ngFor="let toolName of toolNames$; index as i">
+        <a [routerLink]="['/tool']" [queryParams]="{id: toolIds$[i]}" class="tool">
+            <h4 class="tool__title">{{toolName}}</h4>
+            <img class="tool__image" src={{toolImages$[i]}} alt="">
+        </a>
+    </a>
+    <a *ngFor="let toolName of toolNames$; index as i">
+        <a [routerLink]="['/tool']" [queryParams]="{id: toolIds$[i]}" class="tool">
+            <h4 class="tool__title">{{toolName}}</h4>
+            <img class="tool__image" src={{toolImages$[i]}} alt="">
+        </a>
+    </a>
+    <a *ngFor="let toolName of toolNames$; index as i">
+        <a [routerLink]="['/tool']" [queryParams]="{id: toolIds$[i]}" class="tool">
+            <h4 class="tool__title">{{toolName}}</h4>
+            <img class="tool__image" src={{toolImages$[i]}} alt="">
+        </a>
+    </a>
+    <a *ngFor="let toolName of toolNames$; index as i">
+        <a [routerLink]="['/tool']" [queryParams]="{id: toolIds$[i]}" class="tool">
+            <h4 class="tool__title">{{toolName}}</h4>
+            <img class="tool__image" src={{toolImages$[i]}} alt="">
+        </a>
+    </a>
+    <a *ngFor="let toolName of toolNames$; index as i">
+        <a [routerLink]="['/tool']" [queryParams]="{id: toolIds$[i]}" class="tool">
+            <h4 class="tool__title">{{toolName}}</h4>
+            <img class="tool__image" src={{toolImages$[i]}} alt="">
+        </a>
+    </a>
+    <a *ngFor="let toolName of toolNames$; index as i">
+        <a [routerLink]="['/tool']" [queryParams]="{id: toolIds$[i]}" class="tool">
+            <h4 class="tool__title">{{toolName}}</h4>
+            <img class="tool__image" src={{toolImages$[i]}} alt="">
+        </a>
+    </a>
+</section>

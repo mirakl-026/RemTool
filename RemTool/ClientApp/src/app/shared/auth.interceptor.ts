@@ -13,7 +13,7 @@ export class AuthInterceptor implements HttpInterceptor{
         private router: Router
     ){}
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        if (this.auth.isAuth()) {
+        if (this.auth.isToken()) {
             req = req.clone({
                 setHeaders: {
                     Authorization: "Bearer " + this.auth.token
