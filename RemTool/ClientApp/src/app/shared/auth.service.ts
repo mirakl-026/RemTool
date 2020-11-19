@@ -53,8 +53,9 @@ export class AuthService {
     return !!this.token;
   }
   isAuth (){
-    this.dataService.checkAuth().subscribe(data => console.log(data));
-
+    this.dataService.checkAuth().subscribe(data => {
+      
+    })
   }
 }
 
