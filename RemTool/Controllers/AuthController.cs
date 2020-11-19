@@ -12,6 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RemTool.Controllers
 {
@@ -19,6 +20,14 @@ namespace RemTool.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     { 
+
+        [Route("CheckAuth")]
+        [HttpGet]
+        [Authorize]
+        public IActionResult CheckAuth()
+        {
+            return Ok();
+        }
 
         [Route("login")]
         [HttpPost]
