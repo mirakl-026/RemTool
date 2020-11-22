@@ -52,10 +52,14 @@ export class AuthService {
   isToken () {
     return !!this.token;
   }
-  isAuth (){
+  isAuth(): number {
+    let status: number;
+    // console.log("isAuth");
     this.dataService.checkAuth().subscribe(data => {
-      
+      // console.log(data["status"]);
+      status = data["status"];
     })
+    return status;
   }
 }
 

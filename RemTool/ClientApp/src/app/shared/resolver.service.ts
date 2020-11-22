@@ -15,8 +15,7 @@ export class ResolverService implements Resolve<ToolType> {
     
     resolve(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable<ToolType> | Promise<ToolType> | ToolType {
+    state: RouterStateSnapshot): Observable<ToolType> | Promise<ToolType> | ToolType {
     let id = route.queryParams['id'];
     let tool = this.dataService.getToolType(id);
     // console.log(tool);

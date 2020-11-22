@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { SparePart } from './sparepart';
 import { ToolType } from './toolType';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class DataService {
@@ -18,8 +20,7 @@ export class DataService {
   }
 
   checkAuth(){
-    return this.http.get(this.urlAuth + '/' + "CheckAuth");
-
+    return this.http.get(this.urlAuth + '/' + "CheckAuth", {observe: 'response'});
   }
 
   // Всё что касается инструментов
