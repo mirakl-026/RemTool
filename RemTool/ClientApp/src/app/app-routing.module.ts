@@ -15,12 +15,12 @@ const routes: Routes = [
       {path: '', redirectTo: '/', pathMatch: 'full'},
       {path: '', component: MainPageComponent},
       {
-        path: ':type',
+        path: 'tools/:type',
         component: ToolsPageComponent,
         resolve: {res: ResolverService}
       },
       {
-        path: ':type/:id',
+        path: 'tools/:type/:id',
         component: ToolPageComponent,
         resolve: { res: ResolverService }
       },
