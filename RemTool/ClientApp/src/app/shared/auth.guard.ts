@@ -30,7 +30,7 @@ export class AuthGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     return this.dataService.checkAuth().pipe(
       map(res => {
-        if(res["status"] == 200) {
+        if (res["status"] == 200) {
           return true;
         } else {
           this.router.navigate(['/admin', 'login']);

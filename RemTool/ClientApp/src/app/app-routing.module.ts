@@ -14,11 +14,15 @@ const routes: Routes = [
     path: '', component: MainLayoutComponent, children: [
       {path: '', redirectTo: '/', pathMatch: 'full'},
       {path: '', component: MainPageComponent},
-      {path: 'tools', component: ToolsPageComponent},
       {
-        path: 'tool',
+        path: ':type',
+        component: ToolsPageComponent,
+        resolve: {res: ResolverService}
+      },
+      {
+        path: ':type/:id',
         component: ToolPageComponent,
-        resolve: { tool: ResolverService }
+        resolve: { res: ResolverService }
       },
       {path: 'delivery', component: DeliveryPageComponent},
       {path: 'contacts', component: ContactsPageComponent},

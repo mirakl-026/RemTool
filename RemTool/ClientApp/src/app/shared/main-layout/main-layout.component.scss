@@ -149,6 +149,7 @@ input[type=search] {
         font-weight: 600;
         line-height: 60px;
         margin: 0 16px;
+        white-space: nowrap;
         &:hover {
             // color: var(--orange-color);
         }

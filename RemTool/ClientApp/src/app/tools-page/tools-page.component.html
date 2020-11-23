@@ -5,10 +5,8 @@
     <app-preloader></app-preloader>
 </div>
 <section class="tools-container">
-    <a *ngFor="let toolName of toolNames$; index as i">
-        <a [routerLink]="['/tool']" [queryParams]="{id: toolIds$[i]}" class="tool">
-            <h4 class="tool__title">{{toolName}}</h4>
-            <img class="tool__image" src={{toolImages$[i]}} alt="">
-        </a>
+    <a *ngFor="let tool of numOfTools; index as i" [routerLink]="[toolIds$[i]]" class="tool">
+        <h4 class="tool__title">{{toolNames$[i]}}</h4>
+        <img class="tool__image" src={{toolImages$[i]}} alt="">
     </a>
 </section>

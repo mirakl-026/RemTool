@@ -21,7 +21,7 @@ export class ToolPageComponent implements OnInit {
   ngOnInit(): void {
     this.route.data.subscribe(data => {
       // console.log(data["tool"]);
-      this.res$ = data["tool"];
+      this.res$ = data["res"];
     });
     // this.route.queryParams.subscribe(params => {
     //   this.id = String(params.id);
