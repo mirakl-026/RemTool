@@ -23,8 +23,7 @@ namespace RemTool.Models
 
         public string ReqInfo { get; set; }
 
-        // пометка - выполнено, прочитано, под вопросом и т.д.
-        public int Mark { get; set; }
+        public string SendedTime { get; set; }
     }
 }
 
