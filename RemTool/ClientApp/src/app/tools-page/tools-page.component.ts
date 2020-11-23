@@ -12,7 +12,7 @@ import { DataService } from '../DataService/data.service';
 export class ToolsPageComponent implements OnInit {
 
   constructor(
-  public route: ActivatedRoute,
+  private route: ActivatedRoute,
   private dataService: DataService
   ) { }
 
@@ -56,7 +56,7 @@ export class ToolsPageComponent implements OnInit {
       this.toolImages$ = this.res$["includedImages"];
       // this.numOfTools = this.toolNames$.length;
       this.numOfTools = new Array(this.toolNames$.length)
-      console.log(this.numOfTools)
+      // console.log(this.numOfTools)
     })
   }
 }

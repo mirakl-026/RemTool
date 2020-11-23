@@ -33,18 +33,9 @@
                                 <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                             <div class="side-drop-menu">
-                                <a href="">шуруповерт</a>
-                                <a href="">перфоратор</a>
-                                <a href="">шуруповерт</a>
-                                <a href="">перфоратор</a>
-                                <a href="">шуверт</a>
-                                <a href="">перфоратор</a>
-                                <a href="">шурверт</a>
-                                <a href="">перфоратор</a>
-                                <a href="">шуруперт</a>
-                                <a href="">пертор</a>
-                                <a href="">шурупорт</a>
-                                <a href="">перфорат ыкуп ыуор</a>
+                                <a *ngFor="let tool of this.tools.electro.includedTypes">
+                                    {{tool}}
+                                </a>
                             </div>
                         </div>
                         <div class="drop-menu__item">
@@ -55,19 +46,9 @@
                                 <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                             <div class="side-drop-menu">
-                                <a href="">бензопила</a>
-                                <a href="">Газонокосилка</a>
-                                <a href="">бенпила</a>
-                                <a href="">Гаокоилка</a>
-                                <a href="">бензила</a>
-                                <a href="">Газона</a>
-                                <a href="">Газонилка</a>
-                                <a href="">бенила</a>
-                                <a href="">Газонw fawокосилка</a>
-                                <a href="">бенла</a>
-                                <a href="">Газонокосилка</a>
-                                <a href="">бензола</a>
-                                <a href="">Газонокоw efсилка</a>
+                                <a *ngFor="let tool of this.tools.benzo.includedTypes">
+                                    {{tool}}
+                                </a>
                             </div>
                         </div>
                         <div class="drop-menu__item">
@@ -77,8 +58,11 @@
                             <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
-                            <!-- <div class="side-drop-menu">
-                            </div> -->
+                            <div class="side-drop-menu">
+                                <a *ngFor="let tool of this.tools.garden.includedTypes">
+                                    {{tool}}
+                                </a>
+                            </div>
                         </div>
                         <div class="drop-menu__item">
                             <a class="drop-menu__link" [routerLink]="['tools', 'compressor']">
@@ -87,8 +71,11 @@
                             <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
-                            <!-- <div class="side-drop-menu">
-                            </div> -->
+                            <div class="side-drop-menu">
+                                <a *ngFor="let tool of this.tools.compressors.includedTypes">
+                                    {{tool}}
+                                </a>
+                            </div>
                         </div>
                         <div class="drop-menu__item">
                             <a class="drop-menu__link" [routerLink]="['tools', 'generator']">
@@ -97,8 +84,11 @@
                             <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
-                            <!-- <div class="side-drop-menu">
-                            </div> -->
+                            <div class="side-drop-menu">
+                                <a *ngFor="let tool of this.tools.generators.includedTypes">
+                                    {{tool}}
+                                </a>
+                            </div>
                         </div>
                         <div class="drop-menu__item">
                             <a class="drop-menu__link" [routerLink]="['tools', 'welding']">
@@ -107,8 +97,11 @@
                             <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
-                            <!-- <div class="side-drop-menu">
-                            </div> -->
+                            <div class="side-drop-menu">
+                                <a *ngFor="let tool of this.tools.welding.includedTypes">
+                                    {{tool}}
+                                </a>
+                            </div>
                         </div>
                         <div class="drop-menu__item">
                             <a class="drop-menu__link" [routerLink]="['tools', 'heatgun']">
@@ -117,8 +110,11 @@
                             <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
-                            <!-- <div class="side-drop-menu">
-                            </div> -->
+                            <div class="side-drop-menu">
+                                <a *ngFor="let tool of this.tools.heatguns.includedTypes">
+                                    {{tool}}
+                                </a>
+                            </div>
                         </div>
                         <div class="drop-menu__item">
                             <a class="drop-menu__link" [routerLink]="['tools', 'rest']">
@@ -127,8 +123,11 @@
                             <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
-                            <!-- <div class="side-drop-menu">
-                            </div> -->
+                            <div class="side-drop-menu">
+                                <a *ngFor="let tool of this.tools.rest.includedTypes">
+                                    {{tool}}
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

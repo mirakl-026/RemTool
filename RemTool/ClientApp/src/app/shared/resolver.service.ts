@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { DataService } from '../DataService/data.service';
 import { ToolType } from '../DataService/toolType';
 
@@ -8,6 +9,9 @@ import { ToolType } from '../DataService/toolType';
   providedIn: 'root',
   // providers: [DataService]
 })
+
+
+
 export class ResolverService implements Resolve<ToolType> {
   constructor(
     private dataService: DataService
@@ -15,12 +19,13 @@ export class ResolverService implements Resolve<ToolType> {
     
     res;
     type;
+    tools: MainTools = new MainTools();
     resolve(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<ToolType> | Promise<ToolType> | ToolType {
+    state: RouterStateSnapshot): Promise<any> | Observable<any> | any | Observable<ToolType> | Promise<ToolType> | ToolType | Observable<MainTools> | MainTools | Promise<MainTools> | Observable<object> | ToolType[]{
     (console.log(route));
     this.type = String(route.params["type"]);
-    console.log(this.type);
+    // console.log(this.type);
     if (route.routeConfig["path"] == "tools/:type") {
       if (this.type == "electro") {
         this.res = this.dataService.getElectroTools();
@@ -40,16 +45,59 @@ export class ResolverService implements Resolve<ToolType> {
         this.res = this.dataService.getRestTools();
       }
     } else if (route.routeConfig["path"] == "tools/:type/:id") {
-      // let id = route.queryParams['id'];
       this.res = this.dataService.getToolType(route.params['id']);
+    } else if (route.routeConfig["path"] == "") {
+      // this.tools.electro = this.dataService.getElectroTools();
+      this.dataService.getElectroTools().subscribe(data => {
+        this.tools.electro = data;
+      });
+      this.dataService.getFuelTools().subscribe(data => {
+        this.tools.benzo = data;
+      });
+      this.dataService.getGardenTools().subscribe(data => {
+        this.tools.garden = data;
+      });
+      this.dataService.getCompressors().subscribe(data => {
+        this.tools.compressors = data;
+      });
+      this.dataService.getGenerators().subscribe(data => {
+        this.tools.generators = data;
+      });
+      this.dataService.getWeldingTools().subscribe(data => {
+        this.tools.welding = data;
+      });
+      this.dataService.getHeatGuns().subscribe(data => {
+        this.tools.heatguns = data;
+      });
+      this.dataService.getRestTools().subscribe(data => {
+        this.tools.rest = data;
+      });
+      this.res = this.dataService.getElectroTools();
+      console.log('MAIN')
+      return this.tools;
     }
-    // console.log(tool);
-
-    // const observable: Observable<ToolType> = Observable.create(observer => {
-    //   observer.next(tool);
-    //   observer.complete();
-    // });
-
     return this.res;
+  }
+}
+
+export class MainTools {
+  constructor (
+    public electro?: any,
+    public benzo?: any,
+    public garden?: any,
+    public compressors?: any,
+    public generators?: any,
+    public welding?: any,
+    public heatguns?: any,
+    public rest?: any
+  ){
+    this.electro = {};
+    this.benzo = {};
+    this.garden = {};
+    this.compressors = {};
+    this.generators = {};
+    this.welding = {};
+    this.heatguns = {};
+    this.rest = {};
   }
 }

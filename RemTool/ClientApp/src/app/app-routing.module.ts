@@ -11,9 +11,21 @@ import { AuthGuard } from './shared/auth.guard';
 
 const routes: Routes = [
   {
-    path: '', component: MainLayoutComponent, children: [
-      {path: '', redirectTo: '/', pathMatch: 'full'},
-      {path: '', component: MainPageComponent},
+    path: '',
+    component: MainLayoutComponent,
+    resolve: {res: ResolverService},
+    children: [
+      {
+        path: '',
+        redirectTo: '/',
+        pathMatch: 'full',
+        // resolve: {res: ResolverService}
+      },
+      {
+        path: '',
+        component: MainPageComponent,
+        // resolve: {res: ResolverService}
+      },
       {
         path: 'tools/:type',
         component: ToolsPageComponent,
