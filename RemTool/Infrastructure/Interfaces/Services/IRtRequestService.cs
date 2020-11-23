@@ -21,11 +21,11 @@ namespace RemTool.Infrastructure.Interfaces.Services
         public void DeleteRtRequest(string id);
         #endregion
 
-        public void MarkRtRequest(string id, int mark);
-
         public IEnumerable<RtRequest> ReadAllRtRequests();
 
         public void DeleteAllRtRequests();
+
+        public RtRequest ReadRtRequestByPhone(string phone);
 
 
         // асинхронные методы
@@ -39,10 +39,10 @@ namespace RemTool.Infrastructure.Interfaces.Services
         public Task DeleteRtRequestAsync(string id);
         #endregion
 
-        public Task MarkRtRequestAsync(string id, int mark);
-
         public Task<IEnumerable<RtRequest>> ReadAllRtRequestsAsync();
 
         public Task DeleteAllRtRequestsAsync();
+
+        public Task<RtRequest> ReadRtRequestByPhoneAsync(string phone);
     }
 }

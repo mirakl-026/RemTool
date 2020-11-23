@@ -52,21 +52,15 @@ namespace RemTool.Services.MongoDB
             return _rtRequests.Find(new BsonDocument()).ToList();
         }
 
-        public void MarkRtRequest(string id, int mark)
-        {
-            RtRequest rtreq = ReadRtRequest(id);
-            if (rtreq != null)
-            {
-                rtreq.Mark = mark;
-                UpdateRtRequest(rtreq);
-            }            
-        }
-
         public void DeleteAllRtRequests()
         {
             _rtRequests.DeleteMany(new BsonDocument());
         }
 
+        public RtRequest ReadRtRequestByPhone(string phone)
+        {
+            return _rtRequests.Find(rtreq => rtreq.Phone == phone).FirstOrDefault();
+        }
 
 
 
@@ -99,14 +93,9 @@ namespace RemTool.Services.MongoDB
             await _rtRequests.DeleteManyAsync(new BsonDocument());
         }
 
-        public async Task MarkRtRequestAsync(string id, int mark)
+        public async Task<RtRequest> ReadRtRequestByPhoneAsync(string phone)
         {
-            RtRequest rtreq = await ReadRtRequestAsync(id);
-            if (rtreq != null)
-            {
-                rtreq.Mark = mark;
-                await UpdateRtRequestAsync(rtreq);
-            }
+            return await _rtRequests.Find(rtReq => rtReq.Phone == phone).FirstOrDefaultAsync();
         }
     }
 }
