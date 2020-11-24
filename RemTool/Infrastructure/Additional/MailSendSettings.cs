@@ -15,7 +15,7 @@ namespace RemTool.Infrastructure.Additional
 
         public string Credentials_Pass { get; set; }
 
-        public string EnableSsl { get; set; }
+        public string Mvh_Name { get; set; }
     }
 
     public interface IMailSendSettings
@@ -28,6 +28,6 @@ namespace RemTool.Infrastructure.Additional
 
         public string Credentials_Pass { get; set; }
 
-        public string EnableSsl { get; set; }
+        public string Mvh_Name { get; set; }
     }
 }

@@ -89,7 +89,8 @@ namespace RemTool.Controllers
                                     SendedTime = newRtreq.SendedTime
                                 });
 
-                                sendMail(newRtreq.Email);
+                                //sendMail(newRtreq.Email);
+                                sendMailToMvh(newRtreq);
                             }
                             else
                             {
@@ -104,7 +105,8 @@ namespace RemTool.Controllers
                 }
                 else
                 {
-                    sendMail(newRtreq.Email);
+                    //sendMail(newRtreq.Email);
+                    sendMailToMvh(newRtreq);
                     db.CreateRtRequest(newRtreq);
                     return Ok(newRtreq);
                 }
@@ -140,36 +142,88 @@ namespace RemTool.Controllers
         }
 
 
-        public void sendMail(string clientEmail)
+        public void sendMail(RtRequest request)
         {
-            // отправитель - устанавливаем адрес и отображаемое в письме имя
-            MailAddress from = new MailAddress(mailSendSettings.Credentials_Name, "RemTool");
+            try
+            {
+                // отправитель - устанавливаем адрес и отображаемое в письме имя
+                MailAddress from = new MailAddress(mailSendSettings.Credentials_Name, "RemTool");
 
-            // кому отправляем
-            MailAddress to = new MailAddress(clientEmail);
+                // кому отправляем
+                MailAddress to = new MailAddress(request.Email);
 
-            // создаем объект сообщения
-            MailMessage m = new MailMessage(from, to);
+                // адрес smtp-сервера и порт, с которого будем отправлять письмо
+                SmtpClient smtp = new SmtpClient(mailSendSettings.Host, 25);
 
-            // тема письма
-            m.Subject = "Запрос";
+                // создаем объект сообщения
+                using (MailMessage m = new MailMessage(from, to))
+                {
+                    // тема письма
+                    m.Subject = "Запрос";
 
-            // текст письма
-            m.Body = "<h3>Ваш запрос передан, с Вами свяжутся...</h3>";
+                    // текст письма
+                    m.Body = "<h3>Ваш запрос передан, с Вами свяжутся...</h3>";
 
-            // письмо представляет код html
-            m.IsBodyHtml = true;
+                    // письмо представляет код html
+                    m.IsBodyHtml = true;
 
-            // адрес smtp-сервера и порт, с которого будем отправлять письмо
-            SmtpClient smtp = new SmtpClient(mailSendSettings.Host, 25);
 
-            // логин и пароль
-            smtp.Credentials = new NetworkCredential(mailSendSettings.Credentials_Name, mailSendSettings.Credentials_Pass);
 
-            smtp.EnableSsl = true;
-            //smtp.EnableSsl = false;
-            
-            smtp.Send(m);
+                    // логин и пароль
+                    smtp.Credentials = new NetworkCredential(mailSendSettings.Credentials_Name, mailSendSettings.Credentials_Pass);
+
+                    smtp.EnableSsl = true;
+                    //smtp.EnableSsl = false;
+
+                    smtp.Send(m);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error :" + ex);
+            }
+        }
+
+        public void sendMailToMvh(RtRequest request)
+        {
+            try
+            {
+                // отправитель - устанавливаем адрес и отображаемое в письме имя
+                MailAddress from = new MailAddress(mailSendSettings.Credentials_Name, "RemTool");
+
+                // кому отправляем
+                MailAddress to = new MailAddress(mailSendSettings.Mvh_Name);
+
+                // адрес smtp-сервера и порт, с которого будем отправлять письмо
+                SmtpClient smtp = new SmtpClient(mailSendSettings.Host, 25);
+
+                // создаем объект сообщения
+                using(MailMessage m = new MailMessage(from, to))
+                {
+                    // тема письма
+                    m.Subject = "Запрос";
+
+                    // текст письма
+                    m.Body = $"<h3>RemTool, запрос от {request.Name}, тел:{request.Phone}: </h3><p>{request.ReqInfo}</p><p>Email:{request.Email}, {request.SendedTime}</p>";
+
+                    // письмо представляет код html
+                    m.IsBodyHtml = true;
+
+
+
+                    // логин и пароль
+                    smtp.Credentials = new NetworkCredential(mailSendSettings.Credentials_Name, mailSendSettings.Credentials_Pass);
+
+                    smtp.EnableSsl = true;
+                    //smtp.EnableSsl = false;
+
+                    smtp.Send(m);
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Error :" + ex);
+            }
         }
     }
 }
