@@ -269,7 +269,7 @@ namespace RemTool.Services.MongoDB
 
             var tt = await _toolTypes.Find(f).FirstOrDefaultAsync();
 
-             Dictionary<string, string> toolTypePriceList = new Dictionary<string, string>();
+            Dictionary<string, string> toolTypePriceList = new Dictionary<string, string>();
             for (int i = 0; i < tt.Serves.Length; i++)
             {
                 toolTypePriceList.Add(tt.Serves[i], tt.Costs[i]);
@@ -286,9 +286,36 @@ namespace RemTool.Services.MongoDB
             return JsonSerializer.Serialize(toolTypePriceList, options);
         }
 
-        public Task<string> GetPriceListOfToolTypeByFilterAsync(string filter)
+        public async Task<string> GetPriceListOfToolTypeByFilterAsync(string filter)
         {
-            throw new NotImplementedException();
+            var fb = Builders<ToolType>.Filter;
+
+
+
+            FilterDefinition<ToolType> f =
+                fb.Eq("Name", filter) |
+                //fb.Eq("MainType", filter) |
+                fb.All("Brands", new List<string>() { filter }) |
+                fb.All("Serves", new List<string>() { filter }) |
+                fb.Where( e => e.Info.Contains(filter));
+
+            var tt = await _toolTypes.Find(f).ToListAsync();
+
+            List<string> FindedToolTypes = new List<string>();
+            foreach (var t in tt)
+            {
+                FindedToolTypes.Add(t.Name);
+            }
+
+            var options = new JsonSerializerOptions()
+            {
+                AllowTrailingCommas = true,
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All), //поможет с кодировкой
+                WriteIndented = true
+            };
+
+            return JsonSerializer.Serialize(FindedToolTypes, options);
         }
     }
 
