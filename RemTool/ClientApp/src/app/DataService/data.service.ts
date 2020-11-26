@@ -45,7 +45,7 @@ export class DataService {
   //[HttpGet("GetGenerators")]
   //public string GetGenerators()
   getGenerators() {
-    return this.http.get(this.urlToolTypes + '/' + "GetWeldingTools");
+    return this.http.get(this.urlToolTypes + '/' + "getGenerators");
   }
 
   //[HttpGet("GetCompressors")]

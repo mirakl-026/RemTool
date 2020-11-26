@@ -7,7 +7,7 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { MainLayoutComponent } from './shared/main-layout/main-layout.component';
 import { ToolPageComponent } from './tool-page/tool-page.component';
 import { ToolsPageComponent } from './tools-page/tools-page.component';
-import { AuthGuard } from './shared/auth.guard';
+import { AllToolsPageComponent } from './all-tools-page/all-tools-page.component';
 
 const routes: Routes = [
   {
@@ -25,6 +25,10 @@ const routes: Routes = [
         path: '',
         component: MainPageComponent,
         // resolve: {res: ResolverService}
+      },
+      {
+        path: 'tools',
+        component: AllToolsPageComponent
       },
       {
         path: 'tools/:type',

@@ -13,12 +13,27 @@ export class MainLayoutComponent implements OnInit {
     private route: ActivatedRoute
   ) { }
 
+  fragment;
   tools: MainTools = new MainTools();
   ngOnInit(): void {
     this.route.data.subscribe(data => {
       this.tools = data["res"];
       console.log(data["res"]);
-    })
+    });
+    this.route.fragment.subscribe(fragment => {
+      this.fragment = fragment;
+      console.log(this.fragment);
+    });
+
+  }
+
+  ngAfterViewChecked(): void {
+    try {
+        if(this.fragment) {
+          console.log(this.fragment);
+          document.querySelector('#' + this.fragment).scrollIntoView();
+        }
+    } catch (e) { }
   }
 
 }

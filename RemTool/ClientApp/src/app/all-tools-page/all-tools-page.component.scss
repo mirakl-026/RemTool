@@ -1,0 +1,105 @@
+.main-h2 {
+    font-size: 36px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.we-repair {
+
+    & h2 {
+
+    }
+}
+
+.row-4-col {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    & * {
+        width: 23%;
+    }
+}
+.row-3-col {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    & * {
+        width: 31.7%;
+    }
+}
+.row-2-col {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    & * {
+        width: 48.8%;
+    }
+}
+
+.we-repair {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    &__row {
+        &:first-of-type {
+            & a {
+                height: 160px;
+                font-size: 30px;
+            }
+        }
+    }
+    & a {
+        margin-bottom: 30px;
+        height: 100px;
+        border-radius: 6px;
+        background-color: grey;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        transition: background-size 200ms ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        font-weight: 600;
+        text-decoration: none;
+        color: var(--light-color);
+        text-shadow: 0 4px 8px rgba($color: #000000, $alpha: 1);
+        &:hover {
+            color: var(--orange-color);
+            // background-size: 120%;
+        }
+        
+    }
+    &__electric {
+        background-image: url('../../assets/img/electro-tools.jpg');
+    }
+    &__benzo {
+        background-image: url('../../assets/img/benzo-tools.jpg');
+    }
+    &__welding {
+        background-image: url('../../assets/img/welding.jpg');            
+    }
+    &__generators {
+        background-image: url('../../assets/img/generator.jpg');            
+    }
+    &__compressor {
+        background-image: url('../../assets/img/compressor.jpg');            
+    }
+    &__rest {
+        background-image: url('../../assets/img/boat-engine.jpg');            
+    }
+    &__garden {
+        background-image: url('../../assets/img/garden.jpg');            
+        
+    }
+    &__heater {
+        background-image: url('../../assets/img/heater.jpg');            
+
+    }
+}

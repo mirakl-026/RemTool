@@ -17,6 +17,7 @@ import { AuthInterceptor } from './shared/auth.interceptor';
 import { ToolPageComponent } from './tool-page/tool-page.component';
 import { PreloaderComponent } from './preloader/preloader.component';
 import { DataService } from './DataService/data.service';
+import { AllToolsPageComponent } from './all-tools-page/all-tools-page.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { DataService } from './DataService/data.service';
     PopupComponent,
     ToolPageComponent,
     PreloaderComponent,
+    AllToolsPageComponent,
   ],
   imports: [
     BrowserModule,

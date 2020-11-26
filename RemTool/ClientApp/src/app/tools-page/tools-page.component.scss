@@ -2,6 +2,7 @@
 //     display: none;
 // }
 .tools-container {
+    margin-top: 60px;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -15,6 +16,7 @@
 .tool {
     width: 282px;
     height: 200px;
+    box-sizing: border-box;
     background-color: var(--grey-color);
     border-radius: 6px;
     display: flex;

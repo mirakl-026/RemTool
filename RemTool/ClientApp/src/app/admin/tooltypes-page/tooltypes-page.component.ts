@@ -86,6 +86,8 @@ export class ToolTypePageComponent implements OnInit {
 
   // сброс инструмента
   resetToolType() {
+    this.newKey = '';
+    this.newValue = '';
     this.toolType = new ToolType();
     this.addToolFlag = false;
     this.serveCostLength = [];
@@ -126,7 +128,9 @@ export class ToolTypePageComponent implements OnInit {
       this.serveCostLength.push(0);
     }
   }
-
+  removeBrand(i) {
+    this.toolType.brands.splice(i, 1);
+  }
   // Удаление строки из прайслиста 
   removeRow(i) {
     this.toolType.serves.splice(i, 1);
