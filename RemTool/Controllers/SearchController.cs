@@ -16,7 +16,7 @@ namespace RemTool.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet("Find")]
         public async Task<string> Find(string userInput)
         {
             return await _context.SearchAsync(userInput);

@@ -323,17 +323,19 @@ namespace RemTool.Services.MongoDB
             foreach(var tts in ttss)
             {
                 // если пользовательский ввод - часть названия - уже добавить
-                if(tts.Name.IndexOf(userInput) > 0 || tts.Name.Equals(userInput))
+                if(tts.Name.IndexOf(userInput) >= 0 || tts.Name.Equals(userInput))
                 {
-                    findedToolTypes.Add(tts.Name);
+                    if (!findedToolTypes.Contains(tts.Name))
+                        findedToolTypes.Add(tts.Name);
                 }
                 else
                 {
                     foreach(var word in tts.KeyWords)
                     {
-                        if (word.IndexOf(userInput) > 0 || word.Equals(userInput))
+                        if (word.IndexOf(userInput) >= 0 || word.Equals(userInput))
                         {
-                            findedToolTypes.Add(tts.Name);
+                            if (!findedToolTypes.Contains(tts.Name))
+                                findedToolTypes.Add(tts.Name);
                         }
                     }
                 }
