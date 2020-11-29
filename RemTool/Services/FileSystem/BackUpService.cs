@@ -215,7 +215,7 @@ namespace RemTool.Services.FileSystem
             FileInfo fiTts = new FileInfo(jsonToolTypesSearch);
             if (fiTts.Exists)
             {
-                using (FileStream fs = new FileStream(jsonSpareParts, FileMode.OpenOrCreate))
+                using (FileStream fs = new FileStream(jsonToolTypesSearch, FileMode.OpenOrCreate))
                 {
                     ToolTypeSearch[] ttss = await JsonSerializer.DeserializeAsync<ToolTypeSearch[]>(fs);
                     if (ttss != null)
