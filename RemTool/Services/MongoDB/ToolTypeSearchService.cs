@@ -349,5 +349,10 @@ namespace RemTool.Services.MongoDB
 
             return JsonSerializer.Serialize(findedToolTypes, options);
         }
+
+        public void DeleteAllToolTypeSearch()
+        {
+            _toolTypesSearch.DeleteMany(new BsonDocument());
+        }
     }
 }

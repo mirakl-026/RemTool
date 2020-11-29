@@ -17,10 +17,12 @@ namespace RemTool.Controllers
     public class ToolTypeController : ControllerBase
     {
         private readonly IToolTypeService _db;
+        private readonly IToolTypeSearchService _dbs;
 
-        public ToolTypeController(IToolTypeService context)
+        public ToolTypeController(IToolTypeService context, IToolTypeSearchService contextS)
         {
             _db = context;
+            _dbs = contextS;
         }
 
 
@@ -105,7 +107,11 @@ namespace RemTool.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.CreateToolType(toolType);
+                // добавил инструмент
+                _db.CreateToolTypeAsync(toolType);
+
+                // добавил инфу для поиска
+                _dbs.CreateToolTypeSearchAsync(toolType);
                 return Ok(toolType);
             }
             return BadRequest(ModelState);
@@ -117,11 +123,20 @@ namespace RemTool.Controllers
         {
             if (ModelState.IsValid)
             {
+                // удалили инфу для поиска
+                _dbs.DeleteToolTypeSearch(toolType.Name);
+                
+                // обновили инструмент
                 _db.UpdateToolType(toolType);
+
+                // добавили инфу для поиска
+                _dbs.CreateToolTypeSearch(toolType);
+
                 return Ok(toolType);
             }
             return BadRequest(ModelState);
         }
+
 
         [HttpDelete("{id}")]
         [Authorize]
@@ -130,16 +145,20 @@ namespace RemTool.Controllers
             ToolType toolType = _db.ReadToolType(id);
             if (toolType != null)
             {
+                _dbs.DeleteToolTypeSearch(toolType.Name);
                 _db.DeleteToolType(id);
             }
             return Ok(toolType);
         }
 
+
         [HttpDelete("DeleteAllToolTypes")]
         [Authorize]
         public IActionResult DeleteAll()
         {
+            // удалили все инструменты и всю инфу для поиска
             _db.DeleteAllToolTypes();
+            _dbs.DeleteAllToolTypeSearch();
             return Ok();
         }
 

@@ -32,6 +32,8 @@ namespace RemTool.Infrastructure.Interfaces.Services
 
         public Task DeleteToolTypeSearchAsync(string name);
 
+        public void DeleteAllToolTypeSearch();
+
 
 
         public string Search(string userInput);
