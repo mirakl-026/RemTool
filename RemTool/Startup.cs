@@ -55,6 +55,7 @@ namespace RemTool
             services.AddSingleton<IClickCounterService, ClickCounterService>();
             services.AddSingleton<IRtRequestService, RtRequestService>();
             services.AddSingleton<IBackUpService, BackUpService>();
+            services.AddSingleton<IToolTypeSearchService, ToolTypeSearchService>();
 
 
             services.AddControllers();

@@ -84,12 +84,6 @@ namespace RemTool.Controllers
             return await _db.GetPriceListOfToolTypeByNameAsync(name);
         }
 
-        [HttpGet("GetPriceListByFilter")]
-        public async Task<string> GetPriceListByFilter(string filter)
-        {
-            return await _db.GetPriceListOfToolTypeByFilterAsync(filter);
-        }
-
         //[Authorize]
         [HttpGet]
         public async Task<IEnumerable<ToolType>> Get()
@@ -148,6 +142,8 @@ namespace RemTool.Controllers
             _db.DeleteAllToolTypes();
             return Ok();
         }
+
+
 
     }
 }

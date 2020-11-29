@@ -17,7 +17,7 @@ using System.Text.Unicode;
 
 
 
-namespace RemTool.Services
+namespace RemTool.Services.MongoDB
 {
     public class ToolTypeSearchService : IToolTypeSearchService
     {
