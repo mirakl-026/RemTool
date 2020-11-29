@@ -26,6 +26,7 @@ namespace RemTool.Services.FileSystem
         private IMongoCollection<RtRequest> _rtRequests;
         private IMongoCollection<SparePart> _spareParts;
         private IMongoCollection<ToolType> _toolTypes;
+        private IMongoCollection<ToolTypeSearch> _toolTypesSearch;
 
         private string PathToImages;
         private string PathToBackUpTemp;
@@ -51,6 +52,7 @@ namespace RemTool.Services.FileSystem
             _rtRequests = database.GetCollection<RtRequest>("RtRequests");
             _spareParts = database.GetCollection<SparePart>("SpareParts");
             _toolTypes = database.GetCollection<ToolType>("ToolTypes");
+            _toolTypesSearch = database.GetCollection<ToolTypeSearch>("ToolTypesSearch");
         }
 
         public async Task SaveServerToZip()
@@ -89,6 +91,10 @@ namespace RemTool.Services.FileSystem
             using (FileStream fs = new FileStream(PathToBackUpTemp + "/json/" + "toolTypes.json", FileMode.OpenOrCreate))
             {
                 await JsonSerializer.SerializeAsync(fs, GetAllToolTypes());
+            }
+            using (FileStream fs = new FileStream(PathToBackUpTemp + "/json/" + "toolTypesSearch.json", FileMode.OpenOrCreate))
+            {
+                await JsonSerializer.SerializeAsync(fs, GetAllToolTypeSearches());
             }
 
             // пакуем в архив
@@ -205,6 +211,23 @@ namespace RemTool.Services.FileSystem
                 }
             }
 
+            string jsonToolTypesSearch = PathToBackUpTemp + "/json/" + "toolTypesSearch.json";
+            FileInfo fiTts = new FileInfo(jsonToolTypesSearch);
+            if (fiTts.Exists)
+            {
+                using (FileStream fs = new FileStream(jsonSpareParts, FileMode.OpenOrCreate))
+                {
+                    ToolTypeSearch[] ttss = await JsonSerializer.DeserializeAsync<ToolTypeSearch[]>(fs);
+                    if (ttss != null)
+                    {
+                        foreach (var tts in ttss)
+                        {
+                            await _toolTypesSearch.InsertOneAsync(tts);
+                        }
+                    }
+                }
+            }
+
             // чистим папку temp
             ClearTemp();
         }
@@ -298,6 +321,11 @@ namespace RemTool.Services.FileSystem
         public IEnumerable<SparePart> GetAllSpareParts()
         {
             return _spareParts.Find(new BsonDocument()).ToList();
+        }
+
+        public IEnumerable<ToolTypeSearch> GetAllToolTypeSearches()
+        {
+            return _toolTypesSearch.Find(new BsonDocument()).ToList();
         }
     }
 }
