@@ -44,7 +44,7 @@ namespace RemTool.Infrastructure.Interfaces.Services
 
         public string GetPriceListOfToolTypeByName(string Name);
 
-        public string GetPriceListOfToolTypeByFilter(string filter);
+        //public string GetPriceListOfToolTypeByFilter(string filter);
         #endregion
 
 
@@ -99,7 +99,7 @@ namespace RemTool.Infrastructure.Interfaces.Services
 
         public Task<string> GetPriceListOfToolTypeByNameAsync(string Name);
 
-        public Task<string> GetPriceListOfToolTypeByFilterAsync(string filter);
+        //public Task<string> GetPriceListOfToolTypeByFilterAsync(string filter);
         #endregion
 
         #region CRUD_Async

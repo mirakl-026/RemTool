@@ -154,10 +154,10 @@ namespace RemTool.Services.MongoDB
             return JsonSerializer.Serialize(toolTypePriceList, options);
         }
 
-        public string GetPriceListOfToolTypeByFilter(string filter)
-        {
-            throw new NotImplementedException();
-        }
+        // public string GetPriceListOfToolTypeByFilter(string filter)
+        // {
+        //     throw new NotImplementedException();
+        // }
 
 
 
@@ -286,38 +286,38 @@ namespace RemTool.Services.MongoDB
             return JsonSerializer.Serialize(toolTypePriceList, options);
         }
 
-        public async Task<string> GetPriceListOfToolTypeByFilterAsync(string filter)
-        {
-            var fb = Builders<ToolType>.Filter;
+    //     public async Task<string> GetPriceListOfToolTypeByFilterAsync(string filter)
+    //     {
+    //         var fb = Builders<ToolType>.Filter;
 
 
 
-            FilterDefinition<ToolType> f =
-                fb.Eq("Name", filter) |
-                //fb.Eq("MainType", filter) |
-                fb.All("Brands", new List<string>() { filter }) |
-                fb.All("Serves", new List<string>() { filter }) |
-                fb.Where( e => e.Info.Contains(filter));
+    //         FilterDefinition<ToolType> f =
+    //             fb.Eq("Name", filter) |
+    //             //fb.Eq("MainType", filter) |
+    //             fb.All("Brands", new List<string>() { filter }) |
+    //             fb.All("Serves", new List<string>() { filter }) |
+    //             fb.Where( e => e.Info.Contains(filter));
 
-            var tt = await _toolTypes.Find(f).ToListAsync();
+    //         var tt = await _toolTypes.Find(f).ToListAsync();
 
-            List<string> FindedToolTypes = new List<string>();
-            foreach (var t in tt)
-            {
-                FindedToolTypes.Add(t.Name);
-            }
+    //         List<string> FindedToolTypes = new List<string>();
+    //         foreach (var t in tt)
+    //         {
+    //             FindedToolTypes.Add(t.Name);
+    //         }
 
-            var options = new JsonSerializerOptions()
-            {
-                AllowTrailingCommas = true,
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All), //поможет с кодировкой
-                WriteIndented = true
-            };
+    //         var options = new JsonSerializerOptions()
+    //         {
+    //             AllowTrailingCommas = true,
+    //             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+    //             Encoder = JavaScriptEncoder.Create(UnicodeRanges.All), //поможет с кодировкой
+    //             WriteIndented = true
+    //         };
 
-            return JsonSerializer.Serialize(FindedToolTypes, options);
-        }
-    }
+    //         return JsonSerializer.Serialize(FindedToolTypes, options);
+    //     }
+}
 
 
 
