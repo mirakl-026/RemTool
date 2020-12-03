@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using RemTool.Infrastructure.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RemTool.Controllers
 {
@@ -22,6 +23,7 @@ namespace RemTool.Controllers
 
 
         [HttpGet("PackToZip")]
+        [Authorize]
         public async Task<IActionResult> PackToZip()
         {
             await _context.SaveServerToZip();
@@ -29,6 +31,7 @@ namespace RemTool.Controllers
         }
 
         [HttpGet("UnpackFromZip")]
+        [Authorize]
         public async Task<IActionResult> UnpackFromZip()
         {
             await _context.UnZipToServer();
