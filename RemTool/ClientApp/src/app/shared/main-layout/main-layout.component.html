@@ -1,130 +1,135 @@
 <header class="header">
     <div class="header__topper">
-        <span>График работы: пн-пт 10:00-20:00</span>
-        <a href="https://yandex.ru/maps/-/CCQSEMaDOB">Наш адрес: МКАД, 32-й километр, вл 15</a>
+        <span class="header__hours">График работы: пн-пт 10:00-20:00</span>
+        <a class="header__adress" href="https://yandex.ru/maps/-/CCUEb2QElD">Наш адрес: г.Москва, МГСА 256</a>
+        <a class="header__mob-phone" href="tel: +7 (495) 123-45-67">
+            <!-- <img src="../../../assets/img/phone-icon_light.svg" alt=""> -->
+            +7 (495) 123-45-67
+        </a>
+
         <button class="button_light" onclick="this.blur()">
             Оставить заявку
         </button>
     </div>
     <nav class="header__nav nav">
+        <!-- <div class="header__logo" routerLinkActive='active'> -->
+            <a class="header__logo" [routerLink]="['/']" routerLinkActive='active'>
+                <img src="assets/img/header__logo.svg" alt="logo">
+            </a>
+        <!-- </div> -->
         <ul>
-            <li class="header__logo" routerLinkActive='active'>
-                <a [routerLink]="['/']">
-                    <img src="assets/img/header__logo.svg" alt="logo">
-                </a>
-            </li>
-            <li class="nav__item" routerLinkActive='active'>
+            <li [ngClass]="{'nav__item': true, 'nav__item_hover': dropMenuFlag}" routerLinkActive='active' (mouseenter)="arrowDown('h')" (mouseleave)="dropMenuFlag = false">
                 <!-- <a class="nav__link drop" [routerLink]="['tools']"> -->
-                <a class="nav__link drop" [routerLink]="['tools']">
+                <a class="nav__link drop" [routerLink]="['tools']" (click)="dropMenuHide()">
                     Инструменты
                 </a>
-                <div class="arrow-down">
+                <div class="arrow-down" (click)="arrowDown('t')">
                     <svg width="13" height="9" viewBox="0 0 13 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M11.5 2L6.5 7L1.5 2" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </div>
-                <div class="drop-menu">
+                <div class="drop-menu" *ngIf="(dropMenuFlag)">
                     <div>
-                        <div class="drop-menu__item">
-                            <a class="drop-menu__link" [routerLink]="['tools', 'electro']">
+                        <div  [ngClass]="{'drop-menu__item': true, 'drop-menu__item_hover': sideElectro}" (mouseenter)="arrowRight('electrom')" (mouseleave)="sideElectro = false" (click)="arrowRight('electro')">
+                            <a class="drop-menu__link" [routerLink]="['tools', 'electro']" (click)="dropMenuHide()">
                                 Электроинструмент
                             </a>
                             <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
-                            <div class="side-drop-menu">
-                                <a *ngFor="let tool of this.tools.electro.includedTypes; index as i" [routerLink]="['tools', 'electro', this.tools.electro.includedIds[i]]">
+                            <div class="side-drop-menu" *ngIf="sideElectro">
+                                <a *ngFor="let tool of this.tools.electro.includedTypes; index as i" [routerLink]="['tools', 'electro', this.tools.electro.includedIds[i]]" (click)="dropMenuHide()">
                                     {{tool}}
                                 </a>
                             </div>
                         </div>
-                        <div class="drop-menu__item">
-                            <a class="drop-menu__link" [routerLink]="['tools', 'benzo']">
+                        <div [ngClass]="{'drop-menu__item': true, 'drop-menu__item_hover': sideFuel}" (mouseenter)="arrowRight('benzom')" (mouseleave)="sideFuel = false" (click)="arrowRight('benzo')">
+                            <a class="drop-menu__link" [routerLink]="['tools', 'benzo']" (click)="dropMenuHide()">
                                 Бензоинструмент
                             </a>
                             <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
-                            <div class="side-drop-menu">
-                                <a *ngFor="let tool of this.tools.benzo.includedTypes; index as i" [routerLink]="['tools', 'benzo', this.tools.benzo.includedIds[i]]">
+                            <div class="side-drop-menu" *ngIf="sideFuel">
+                                <a *ngFor="let tool of this.tools.benzo.includedTypes; index as i" [routerLink]="['tools', 'benzo', this.tools.benzo.includedIds[i]]" (click)="dropMenuHide()">
                                     {{tool}}
                                 </a>
                             </div>
                         </div>
-                        <div class="drop-menu__item">
-                            <a class="drop-menu__link" [routerLink]="['tools', 'garden']">
+                        <div [ngClass]="{'drop-menu__item': true, 'drop-menu__item_hover': sideGarden}" (mouseenter)="arrowRight('gardenm')" (mouseleave)="sideGarden = false" (click)="arrowRight('garden')">
+                            <a class="drop-menu__link" [routerLink]="['tools', 'garden']" (click)="dropMenuHide()">
                                 Садовая техника
                             </a>
                             <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
-                            <div class="side-drop-menu">
-                                <a *ngFor="let tool of this.tools.garden.includedTypes; index as i" [routerLink]="['tools', 'garden', this.tools.garden.includedIds[i]]">
+                            <div class="side-drop-menu" *ngIf="sideGarden">
+                                <a *ngFor="let tool of this.tools.garden.includedTypes; index as i" [routerLink]="['tools', 'garden', this.tools.garden.includedIds[i]]" (click)="dropMenuHide()">
                                     {{tool}}
                                 </a>
                             </div>
                         </div>
-                        <div class="drop-menu__item">
-                            <a class="drop-menu__link" [routerLink]="['tools', 'compressor']">
+                        <div [ngClass]="{'drop-menu__item': true, 'drop-menu__item_hover': sideCompressors}" (mouseenter)="arrowRight('compressorm')" (mouseleave)="sideCompressors = false" (click)="arrowRight('compressor')">
+                            <a class="drop-menu__link" [routerLink]="['tools', 'compressor']" (click)="dropMenuHide()">
                                 Компрессоры
                             </a>
                             <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
-                            <div class="side-drop-menu">
-                                <a *ngFor="let tool of this.tools.compressors.includedTypes; index as i" [routerLink]="['tools', 'compressors', this.tools.compressors.includedIds[i]]">
+                            <div class="side-drop-menu" *ngIf="sideCompressors">
+                                <a *ngFor="let tool of this.tools.compressors.includedTypes; index as i" [routerLink]="['tools', 'compressors', this.tools.compressors.includedIds[i]]" (click)="dropMenuHide()">
                                     {{tool}}
                                 </a>
                             </div>
                         </div>
-                        <div class="drop-menu__item">
-                            <a class="drop-menu__link" [routerLink]="['tools', 'generator']">
+                        <div [ngClass]="{'drop-menu__item': true, 'drop-menu__item_hover': sideGenerators}" (mouseenter)="arrowRight('generatorm')" (mouseleave)="sideGenerators = false" (click)="arrowRight('generator')">
+                            <a class="drop-menu__link" [routerLink]="['tools', 'generator']" (click)="dropMenuHide()">
                                 Генераторы
                             </a>
                             <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
-                            <div class="side-drop-menu">
-                                <a *ngFor="let tool of this.tools.generators.includedTypes; index as i" [routerLink]="['tools', 'generators', this.tools.generators.includedIds[i]]">
+                            <div class="side-drop-menu" *ngIf="sideGenerators">
+                                <a *ngFor="let tool of this.tools.generators.includedTypes; index as i" [routerLink]="['tools', 'generators', this.tools.generators.includedIds[i]]" (click)="dropMenuHide()">
                                     {{tool}}
                                 </a>
                             </div>
                         </div>
-                        <div class="drop-menu__item">
-                            <a class="drop-menu__link" [routerLink]="['tools', 'welding']">
+                        <div [ngClass]="{'drop-menu__item': true, 'drop-menu__item_hover': sideWelding}" (mouseenter)="arrowRight('weldingm')" (mouseleave)="sideWelding = false" (click)="arrowRight('welding')">
+                            <a class="drop-menu__link" [routerLink]="['tools', 'welding']" (click)="dropMenuHide()">
                                 Сварочная техника
                             </a>
                             <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
-                            <div class="side-drop-menu">
-                                <a *ngFor="let tool of this.tools.welding.includedTypes; index as i" [routerLink]="['tools', 'welding', this.tools.welding.includedIds[i]]">
+                            <div class="side-drop-menu" *ngIf="sideWelding">
+                                <a *ngFor="let tool of this.tools.welding.includedTypes; index as i" [routerLink]="['tools', 'welding', this.tools.welding.includedIds[i]]" (click)="dropMenuHide()">
                                     {{tool}}
                                 </a>
                             </div>
                         </div>
-                        <div class="drop-menu__item">
-                            <a class="drop-menu__link" [routerLink]="['tools', 'heatgun']">
+                        <div [ngClass]="{'drop-menu__item': true, 'drop-menu__item_hover': sideHeatguns}" (mouseenter)="arrowRight('heatgunm')" (mouseleave)="sideHeatguns = false" (click)="arrowRight('heatgun')">
+                            <a class="drop-menu__link" [routerLink]="['tools', 'heatgun']" (click)="dropMenuHide()">
                                 Тепловые пушки
                             </a>
                             <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
-                            <div class="side-drop-menu">
-                                <a *ngFor="let tool of this.tools.heatguns.includedTypes; index as i" [routerLink]="['tools', 'heatguns', this.tools.heatguns.includedIds[i]]">
+                            <div class="side-drop-menu" *ngIf="sideHeatguns">
+                                <a *ngFor="let tool of this.tools.heatguns.includedTypes; index as i" [routerLink]="['tools', 'heatguns', this.tools.heatguns.includedIds[i]]" (click)="dropMenuHide()">
                                     {{tool}}
                                 </a>
                             </div>
                         </div>
-                        <div class="drop-menu__item">
-                            <a class="drop-menu__link" [routerLink]="['tools', 'rest']">
+                        <div [ngClass]="{'drop-menu__item': true, 'drop-menu__item_hover': sideRest}" (mouseenter)="arrowRight('restm')" (mouseleave)="sideRest = false" (click)="arrowRight('rest')">
+                            <a class="drop-menu__link" [routerLink]="['tools', 'rest']" (click)="dropMenuHide()">
                                 Техника для отдыха
                             </a>
                             <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
-                            <div class="side-drop-menu">
-                                <a *ngFor="let tool of this.tools.rest.includedTypes; index as i" [routerLink]="['tools', 'rest', this.tools.rest.includedIds[i]]">
+                            <div class="side-drop-menu" *ngIf="sideRest">
+                                <a *ngFor="let tool of this.tools.rest.includedTypes; index as i" [routerLink]="['tools', 'rest', this.tools.rest.includedIds[i]]" (click)="dropMenuHide()">
                                     {{tool}}
                                 </a>
                             </div>
@@ -138,17 +143,16 @@
             <li class="nav__item" routerLinkActive='active'>
                 <a class="nav__link" [routerLink]="['contacts']">Контакты</a>
             </li>
-            <li class="header__search">
+            <li class="header__search" *ngIf="!searchMobile">
                 <form action="">
                     <input type="search" placeholder="Найти инструмент или бренд">
                     <button type="submit" onclick="this.blur()">
-                        <!-- <img src="assets/img/search-icon.svg" alt=""> -->
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M19.9399 18.5624L13.4474 12.0699C14.4549 10.7675 14.9999 9.17496 14.9999 7.49997C14.9999 5.49498 14.2174 3.61498 12.8024 2.19749C11.3874 0.779996 9.50246 0 7.49997 0C5.49748 0 3.61248 0.782496 2.19749 2.19749C0.779996 3.61248 0 5.49498 0 7.49997C0 9.50246 0.782496 11.3874 2.19749 12.8024C3.61248 14.2199 5.49498 14.9999 7.49997 14.9999C9.17496 14.9999 10.765 14.4549 12.0674 13.4499L18.5599 19.9399C18.579 19.959 18.6016 19.9741 18.6264 19.9844C18.6513 19.9947 18.678 20 18.7049 20C18.7318 20 18.7585 19.9947 18.7834 19.9844C18.8083 19.9741 18.8309 19.959 18.8499 19.9399L19.9399 18.8524C19.959 18.8334 19.9741 18.8108 19.9844 18.7859C19.9947 18.761 20 18.7343 20 18.7074C20 18.6805 19.9947 18.6538 19.9844 18.6289C19.9741 18.6041 19.959 18.5815 19.9399 18.5624ZM11.46 11.46C10.4 12.5174 8.99496 13.0999 7.49997 13.0999C6.00497 13.0999 4.59998 12.5174 3.53998 11.46C2.48249 10.4 1.89999 8.99496 1.89999 7.49997C1.89999 6.00497 2.48249 4.59748 3.53998 3.53998C4.59998 2.48249 6.00497 1.89999 7.49997 1.89999C8.99496 1.89999 10.4025 2.47999 11.46 3.53998C12.5174 4.59998 13.0999 6.00497 13.0999 7.49997C13.0999 8.99496 12.5174 10.4025 11.46 11.46Z" fill="#131522"/>
                         </svg>
                     </button>
                 </form>
-            </li>
+            </li>    
             <li class="header__phone">
                 <a href="tel: +7 (495) 123-45-67">
                     <img src="assets/img/phone-icon.svg" alt="">
@@ -156,19 +160,50 @@
                 </a>
             </li>
         </ul>
+        <div class="header__search" *ngIf="searchMobile">
+            <form action="">
+                <input type="search" placeholder="Найти инструмент или бренд">
+                <button type="submit" onclick="this.blur()">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19.9399 18.5624L13.4474 12.0699C14.4549 10.7675 14.9999 9.17496 14.9999 7.49997C14.9999 5.49498 14.2174 3.61498 12.8024 2.19749C11.3874 0.779996 9.50246 0 7.49997 0C5.49748 0 3.61248 0.782496 2.19749 2.19749C0.779996 3.61248 0 5.49498 0 7.49997C0 9.50246 0.782496 11.3874 2.19749 12.8024C3.61248 14.2199 5.49498 14.9999 7.49997 14.9999C9.17496 14.9999 10.765 14.4549 12.0674 13.4499L18.5599 19.9399C18.579 19.959 18.6016 19.9741 18.6264 19.9844C18.6513 19.9947 18.678 20 18.7049 20C18.7318 20 18.7585 19.9947 18.7834 19.9844C18.8083 19.9741 18.8309 19.959 18.8499 19.9399L19.9399 18.8524C19.959 18.8334 19.9741 18.8108 19.9844 18.7859C19.9947 18.761 20 18.7343 20 18.7074C20 18.6805 19.9947 18.6538 19.9844 18.6289C19.9741 18.6041 19.959 18.5815 19.9399 18.5624ZM11.46 11.46C10.4 12.5174 8.99496 13.0999 7.49997 13.0999C6.00497 13.0999 4.59998 12.5174 3.53998 11.46C2.48249 10.4 1.89999 8.99496 1.89999 7.49997C1.89999 6.00497 2.48249 4.59748 3.53998 3.53998C4.59998 2.48249 6.00497 1.89999 7.49997 1.89999C8.99496 1.89999 10.4025 2.47999 11.46 3.53998C12.5174 4.59998 13.0999 6.00497 13.0999 7.49997C13.0999 8.99496 12.5174 10.4025 11.46 11.46Z" fill="#131522"/>
+                    </svg>
+                </button>
+            </form>
+        </div>
+        <input id="burger" type="checkbox" [(ngModel)]="burger" *ngIf="searchMobile">
+        <label for="burger" class="header__nav_mobile" *ngIf="searchMobile">
+            <div></div>
+            <div></div>
+            <div></div>
+        </label>
     </nav>
-    <!-- <nav class="header__drop">
-
-    </nav> -->
+    <!-- <app-mobile-nav class="mob-nav" [ngClass]="{'mob-nav_visible': burger}" *ngIf="searchMobile"></app-mobile-nav> -->
+    <nav class="mobile__nav" [ngClass]="{'mobile__nav_visible': burger}" *ngIf="searchMobile">
+        <a [routerLink]="['tools', 'electro']" (click)="burger = false">Электроинструмент</a>
+        <a [routerLink]="['tools', 'benzo']" (click)="burger = false">Бензоинструмент</a>
+        <a [routerLink]="['tools', 'welding']" (click)="burger = false">Сварочные аппараты</a>
+        <a [routerLink]="['tools', 'generator']" (click)="burger = false">Генераторы</a>
+        <a [routerLink]="['tools', 'compressor']" (click)="burger = false">Компрессоры</a>
+        <a [routerLink]="['tools', 'rest']" (click)="burger = false">Техника для отдыха</a>
+        <a [routerLink]="['tools', 'garden']" (click)="burger = false">Садовая техника</a>
+        <a [routerLink]="['tools', 'heatgun']" (click)="burger = false">Тепловые пушки</a>
+        <a [routerLink]="['delivery']" (click)="burger = false">Доставка и оплата</a>
+        <a [routerLink]="['contacts']" (click)="burger = false">Контакты</a>
+    </nav>
 </header>
-
 <router-outlet></router-outlet>
 
 <footer class="footer">
     <img src="../../../assets/img/remtool-footer.svg" alt="">
     <div class="footer__content">
         <div class="footer__map">
-            <div style="position:relative;overflow:hidden;"><a href="https://yandex.ru/maps/213/moscow/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Москва</a><a href="https://yandex.ru/maps/213/moscow/house/mkad_32_y_kilometr_vl15/Z04Ycw5oS0wCQFtvfXl2dHxgZg==/?ll=37.598295%2C55.575032&utm_medium=mapframe&utm_source=maps&z=17.09" style="color:#eee;font-size:12px;position:absolute;top:14px;">МКАД, 32-й километр, вл15 — Яндекс.Карты</a><iframe src="https://yandex.ru/map-widget/v1/-/CCQ~NCAzsD" width="490" height="280" frameborder="1" allowfullscreen="true" style="position:relative;"></iframe></div>
+            <div style="position:relative;overflow:hidden;">
+                <a href="https://yandex.ru/maps/org/remont_elektro_benzo_tekhniki/103410214575/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Ремонт электро-бензо техники</a>
+                <a href="https://yandex.ru/maps/213/moscow/category/electrical_equipment_repairs/184107046/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:14px;">Ремонт электрооборудования в Москве</a>
+                <a href="https://yandex.ru/maps/213/moscow/category/engine_repairs/184106616/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:28px;">Ремонт двигателей в Москве</a>
+                <iframe src="https://yandex.ru/map-widget/v1/-/CCUEb2Qz0C" width="600" height="280" frameborder="1" allowfullscreen="true" style="position:relative;">
+                </iframe>
+            </div>
         </div>
         <div class="footer__nav">
             <a [routerLink]="['tools', 'electro']">Электроинструмент</a>

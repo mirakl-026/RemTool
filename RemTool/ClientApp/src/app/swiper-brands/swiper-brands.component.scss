@@ -6,3 +6,17 @@
     text-align: center;
 }
 
+.swiper-slide {
+    & img {
+        // width: 100%;
+    }
+}
+
+@media (max-width: 424.98px) {
+    .swiper-slide {
+        & img {
+
+            width: 80px;
+        }
+    }
+}

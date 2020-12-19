@@ -37,3 +37,31 @@
     color: var(--light-color);
     background-image: url('../../assets/img//diagnostic.jpg');
 }
+
+@media (max-width: 767.98px) {
+    .swiper-slide {
+        & h2 {
+            // font-size: 24px;
+        }
+        & p {
+            // font-size: 14px;
+
+        }
+    }
+}
+
+@media (max-width: 683.98px) {
+
+}
+
+@media (max-width: 575.98px) {
+    .swiper-slide {
+        & h2 {
+            font-size: 30px;
+        }
+        & p {
+            font-size: 16px;
+            line-height: 20px;
+        }
+    }
+}

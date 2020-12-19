@@ -1,34 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
-  styleUrls: ['./main-page.component.scss']
-
-  
+  styleUrls: ['./main-page.component.scss'] 
 })
 export class MainPageComponent implements OnInit {
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router
-  ) { }
-  fragment;
+  constructor( ) { }
   ngOnInit(): void {
-    // this.route.fragment.subscribe(fragment => {
-    //   this.fragment = fragment;
-    //   console.log(this.fragment);
-    // });
-  }
-
-  ngAfterViewChecked(): void {
-    try {
-        if(this.fragment) {
-          console.log(this.fragment);
-          document.querySelector('#' + this.fragment).scrollIntoView();
-        }
-    } catch (e) { }
+    let heroHeader = document.querySelector('.hero__header');
+    // console.log(heroHeader)
+    heroHeaderResize();
+    window.addEventListener('resize', () => {
+      heroHeaderResize();
+    });
+    function heroHeaderResize () {
+      // console.log('resize');
+      let heroHeaderWidth = heroHeader.getBoundingClientRect().width;
+      if (window.innerWidth > 991.98){
+        heroHeader.setAttribute("style",
+        `font-size: ${Math.round(heroHeaderWidth * 0.116)}px;
+        line-height: ${Math.round(heroHeaderWidth * 0.16)}px;`)
+      } else {
+        heroHeader.removeAttribute("style");
+        // heroHeader.setAttribute("style",
+        // `font-size: ${Math.round(heroHeaderWidth * 0.06)}px;
+        // line-height: ${Math.round(heroHeaderWidth * 0.08)}px;`)
+      }
+    }
   }
 }

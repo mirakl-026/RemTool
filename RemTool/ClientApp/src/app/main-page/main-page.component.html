@@ -8,12 +8,9 @@
 </section>
 <section id="categories" class="we-repair" fragment="categories">
     <h2 class="main-h2">Мы ремонтируем</h2>
-    <div class="we-repair__row row-2-col">
-        <a class="we-repair__electric" [routerLink]="['tools', 'electro']">Электроинструмент</a>
+    <div class="we-repair__wrapper">
+        <a class="we-repair__electro" [routerLink]="['tools', 'electro']">Электроинструмент</a>
         <a class="we-repair__benzo" [routerLink]="['tools', 'benzo']">Бензоинструмент</a>
-        
-    </div>
-    <div class="we-repair__row row-3-col">
         <a class="we-repair__welding" [routerLink]="['tools', 'welding']">Сварочные аппараты</a>
         <a class="we-repair__generators" [routerLink]="['tools', 'generator']">Генераторы</a>
         <a class="we-repair__compressor" [routerLink]="['tools', 'compressor']">Компрессоры</a>
@@ -21,7 +18,6 @@
         <a class="we-repair__garden" [routerLink]="['tools', 'garden']">Садовая техника</a>
         <a class="we-repair__heater" [routerLink]="['tools', 'heatgun']">Тепловые пушки</a>
     </div>
-    
 </section>
 
 <section class="advantage">
@@ -29,19 +25,20 @@
     <div class="advantage__wrapper">
         <div class="advantage__item">
             <img src="../../assets/img/diagnostic.svg" alt="">
-            Качественная диагностика
+            Качественная<br>
+            диагностика
         </div>
         <div class="advantage__item">
             <img src="../../assets/img/guarantee.svg" alt="">
-            Гарантия на ремонт
+            Гарантия<br>на&nbsp;ремонт
         </div>
         <div class="advantage__item">
             <img src="../../assets/img/delivery.svg" alt="">
-            Выездной ремонт
+            Выездной<br>ремонт
         </div>
         <div class="advantage__item">
             <img src="../../assets/img/experience.svg" alt="">
-            Многолетний опыт
+            Многолетний<br>опыт
         </div>
     </div>
 </section>
@@ -53,7 +50,7 @@
 
 <section class="popular">
     <h2 class="main-h2">Популярные услуги</h2>
-    <div class="popular__row row-4-col">
+    <div class="popular__wrapper">
         <a href="">Замена ствола перфоратора</a>
         <a href="">Замена щеток в шуруповерте</a>
         <a href="">Замена подшипника редуктора УШМ</a>
