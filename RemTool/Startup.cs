@@ -61,13 +61,6 @@ namespace RemTool
 
             services.AddControllers();
 
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/dist";
-            });
-
-
-
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(
@@ -75,6 +68,11 @@ namespace RemTool
                     {
                         builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
                     });
+            });
+
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/dist";
             });
 
             services.AddAuthentication(opt =>
@@ -108,15 +106,8 @@ namespace RemTool
 
             InitMainFolders(env.WebRootPath, env.ContentRootPath);
 
-            app.UseStaticFiles(
-                //new StaticFileOptions
-                //{
-                //    FileProvider = new PhysicalFileProvider(
-                //    Path.Combine(Directory.GetCurrentDirectory(), "ClientApp", "dist")),
-                //    RequestPath = ""
-                //}
-                );
-            if (env.IsDevelopment())
+            app.UseStaticFiles();
+            if (!env.IsDevelopment())
             {
                 app.UseSpaStaticFiles();
             }
