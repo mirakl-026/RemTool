@@ -36,7 +36,7 @@ namespace RemTool.Controllers
             if (request == null)
                 return BadRequest("Invalid user request");
 
-            if (request.Email == "admin@gmail.com" && request.Password == "iddqdidkfa")
+            if (request.Email == "admin@gmail.com" && request.Password == "iddqd1idkfa2")
             {
                 var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("whoWillSaveYouNow?123456789+-"));
                 var credentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
