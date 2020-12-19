@@ -108,12 +108,14 @@ namespace RemTool
 
             InitMainFolders(env.WebRootPath, env.ContentRootPath);
 
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(
-                Path.Combine(Directory.GetCurrentDirectory(), "ClientApp", "dist")),
-                RequestPath = ""
-            });
+            app.UseStaticFiles(
+                //new StaticFileOptions
+                //{
+                //    FileProvider = new PhysicalFileProvider(
+                //    Path.Combine(Directory.GetCurrentDirectory(), "ClientApp", "dist")),
+                //    RequestPath = ""
+                //}
+                );
             if (env.IsDevelopment())
             {
                 app.UseSpaStaticFiles();
