@@ -20,6 +20,7 @@ using RemTool.Infrastructure.Interfaces.Services;
 using RemTool.Infrastructure.Additional;
 using RemTool.Services.MongoDB;
 using RemTool.Services.FileSystem;
+using Microsoft.Extensions.FileProviders;
 
 
 namespace RemTool
@@ -107,7 +108,12 @@ namespace RemTool
 
             InitMainFolders(env.WebRootPath, env.ContentRootPath);
 
-            app.UseStaticFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                Path.Combine(Directory.GetCurrentDirectory(), "ClientApp", "dist")),
+                RequestPath = ""
+            });
             if (env.IsDevelopment())
             {
                 app.UseSpaStaticFiles();
