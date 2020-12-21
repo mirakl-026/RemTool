@@ -6,20 +6,7 @@
     </div>
     <app-swiper class="hero__slider"></app-swiper>
 </section>
-<section id="categories" class="we-repair" fragment="categories">
-    <h2 class="main-h2">Мы ремонтируем</h2>
-    <div class="we-repair__wrapper">
-        <a class="we-repair__electro" [routerLink]="['tools', 'electro']">Электроинструмент</a>
-        <a class="we-repair__benzo" [routerLink]="['tools', 'benzo']">Бензоинструмент</a>
-        <a class="we-repair__welding" [routerLink]="['tools', 'welding']">Сварочные аппараты</a>
-        <a class="we-repair__generators" [routerLink]="['tools', 'generator']">Генераторы</a>
-        <a class="we-repair__compressor" [routerLink]="['tools', 'compressor']">Компрессоры</a>
-        <a class="we-repair__rest" [routerLink]="['tools', 'rest']">Техника для отдыха</a>
-        <a class="we-repair__garden" [routerLink]="['tools', 'garden']">Садовая техника</a>
-        <a class="we-repair__heater" [routerLink]="['tools', 'heatgun']">Тепловые пушки</a>
-    </div>
-</section>
-
+<app-we-repair-block></app-we-repair-block>
 <section class="advantage">
     <h2 class="main-h2">Почему мы</h2>
     <div class="advantage__wrapper">

@@ -17,21 +17,11 @@ export class ToolPageComponent implements OnInit {
 
   id: string;
   res$;
+  pricelist;
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {
-      // console.log(data["tool"]);
       this.res$ = data["res"];
     });
-    // this.route.queryParams.subscribe(params => {
-    //   this.id = String(params.id);
-    //   this.dataService.getToolType(this.id).subscribe(data => {
-    //     console.log(data);
-    //     this.res$ = data;
-    //   });
-      // container.innerHTML = String(params.type);
-    // });
-
   }
-
 }

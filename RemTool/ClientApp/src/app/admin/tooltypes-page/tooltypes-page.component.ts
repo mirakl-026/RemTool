@@ -157,7 +157,6 @@ export class ToolTypePageComponent implements OnInit {
 
   // Добавиить картинку к инструменту
   addImage(e, img) {
-    console.log(String(e.target.currentSrc));
     this.toolType.imgRefenrence = String(img);
     this.chooseImg(false);
   }

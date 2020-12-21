@@ -1,5 +1,3 @@
-// @import 'swiper/swiper-bundle.css';
-
 .swiper-container {
     border-radius: 6px;
 }
@@ -36,18 +34,6 @@
     text-shadow: 0 2px 8px rgba(0,0,0,1);
     color: var(--light-color);
     background-image: url('../../assets/img//diagnostic.jpg');
-}
-
-@media (max-width: 767.98px) {
-    .swiper-slide {
-        & h2 {
-            // font-size: 24px;
-        }
-        & p {
-            // font-size: 14px;
-
-        }
-    }
 }
 
 @media (max-width: 683.98px) {

@@ -23,9 +23,7 @@ export class ResolverService implements Resolve<ToolType> {
     resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Promise<any> | Observable<any> | any | Observable<ToolType> | Promise<ToolType> | ToolType | Observable<MainTools> | MainTools | Promise<MainTools> | Observable<object> | ToolType[]{
-    (console.log(route));
     this.type = String(route.params["type"]);
-    // console.log(this.type);
     if (route.routeConfig["path"] == "tools/:type") {
       if (this.type == "electro") {
         this.res = this.dataService.getElectroTools();
@@ -73,7 +71,6 @@ export class ResolverService implements Resolve<ToolType> {
         this.tools.rest = data;
       });
       this.res = this.dataService.getElectroTools();
-      console.log('MAIN')
       return this.tools;
     }
     return this.res;

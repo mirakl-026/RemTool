@@ -54,18 +54,9 @@ export class AuthService {
   }
   isAuth(): number {
     let status: number;
-    // console.log("isAuth");
     this.dataService.checkAuth().subscribe(data => {
-      // console.log(data["status"]);
       status = data["status"];
     })
     return status;
   }
 }
-
-//export class User {
-//  constructor(
-//    public email?: string,
-//    public password?: string
-//  ) { }
-//}

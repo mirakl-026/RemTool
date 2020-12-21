@@ -10,13 +10,11 @@ export class MainPageComponent implements OnInit {
   constructor( ) { }
   ngOnInit(): void {
     let heroHeader = document.querySelector('.hero__header');
-    // console.log(heroHeader)
     heroHeaderResize();
     window.addEventListener('resize', () => {
       heroHeaderResize();
     });
     function heroHeaderResize () {
-      // console.log('resize');
       let heroHeaderWidth = heroHeader.getBoundingClientRect().width;
       if (window.innerWidth > 991.98){
         heroHeader.setAttribute("style",

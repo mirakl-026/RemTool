@@ -29,7 +29,6 @@ export class ToolsPageComponent implements OnInit {
       behavior: "smooth"
     });
       this.route.data.subscribe(data => {
-      console.log(data["res"]);
       this.res$ = data["res"];
       this.toolNames$ = this.res$["includedTypes"];
       this.toolIds$ = this.res$["includedIds"];

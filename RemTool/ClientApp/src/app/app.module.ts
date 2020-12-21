@@ -18,6 +18,7 @@ import { ToolPageComponent } from './tool-page/tool-page.component';
 import { PreloaderComponent } from './preloader/preloader.component';
 import { DataService } from './DataService/data.service';
 import { AllToolsPageComponent } from './all-tools-page/all-tools-page.component';
+import { WeRepairBlockComponent } from './shared/we-repair-block/we-repair-block.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { AllToolsPageComponent } from './all-tools-page/all-tools-page.component
     ToolPageComponent,
     PreloaderComponent,
     AllToolsPageComponent,
+    WeRepairBlockComponent,
   ],
   imports: [
     BrowserModule,
