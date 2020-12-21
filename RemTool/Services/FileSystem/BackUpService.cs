@@ -154,7 +154,8 @@ namespace RemTool.Services.FileSystem
                     {
                         foreach (var tt in toolTypes)
                         {
-                            await _toolTypes.InsertOneAsync(tt);
+                            if ( _toolTypes.Find(tool => tool.Id == tt.Id).FirstOrDefault() == null)
+                                await _toolTypes.InsertOneAsync(tt);
                         }
                     }
                 }
@@ -171,7 +172,8 @@ namespace RemTool.Services.FileSystem
                     {
                         foreach (var ct in counters)
                         {
-                            await _counters.InsertOneAsync(ct);
+                            if (_counters.Find(cnt => cnt.Id == ct.Id).FirstOrDefault() == null)
+                                await _counters.InsertOneAsync(ct);
                         }
                     }
                 }
@@ -188,7 +190,8 @@ namespace RemTool.Services.FileSystem
                     {
                         foreach (var rt in requests)
                         {
-                            await _rtRequests.InsertOneAsync(rt);
+                            if (_rtRequests.Find(rtReq => rtReq.Id == rt.Id).FirstOrDefault() == null)
+                                await _rtRequests.InsertOneAsync(rt);
                         }
                     }
                 }
@@ -205,7 +208,8 @@ namespace RemTool.Services.FileSystem
                     {
                         foreach (var sp in spareParts)
                         {
-                            await _spareParts.InsertOneAsync(sp);
+                            if (_toolTypes.Find(spp => spp.Id == sp.Id).FirstOrDefault() == null)
+                                await _spareParts.InsertOneAsync(sp);
                         }
                     }
                 }
@@ -222,7 +226,8 @@ namespace RemTool.Services.FileSystem
                     {
                         foreach (var tts in ttss)
                         {
-                            await _toolTypesSearch.InsertOneAsync(tts);
+                            if (_toolTypesSearch.Find(tttss => tttss.Id == tts.Id).FirstOrDefault() == null)
+                                await _toolTypesSearch.InsertOneAsync(tts);
                         }
                     }
                 }
