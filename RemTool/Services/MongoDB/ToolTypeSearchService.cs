@@ -286,14 +286,18 @@ namespace RemTool.Services.MongoDB
         {
             var ttss = ReadAllToolTypeSearch();
 
-            List<string> findedToolTypes = new List<string>();
+            SearchResults searchResults = new SearchResults();
 
             foreach(var tts in ttss)
             {
                 // если пользовательский ввод - часть названия - уже добавить
                 if(tts.Name.IndexOf(userInput) > 0 || tts.Name.Equals(userInput))
                 {
-                    findedToolTypes.Add(tts.Name);
+                    if (!searchResults.IncludedTypes.Contains(tts.Name))
+                    {
+                        searchResults.IncludedTypes.Add(tts.Name);
+                        searchResults.IncludedIds.Add(tts.RefId);
+                    }
                 }
                 else
                 {
@@ -301,7 +305,11 @@ namespace RemTool.Services.MongoDB
                     {
                         if (word.IndexOf(userInput) > 0 || word.Equals(userInput))
                         {
-                            findedToolTypes.Add(tts.Name);
+                            if (!searchResults.IncludedTypes.Contains(tts.Name))
+                            {
+                                searchResults.IncludedTypes.Add(tts.Name);
+                                searchResults.IncludedIds.Add(tts.RefId);
+                            }
                         }
                     }
                 }
@@ -315,22 +323,25 @@ namespace RemTool.Services.MongoDB
                 WriteIndented = true
             };
 
-            return JsonSerializer.Serialize(findedToolTypes, options);
+            return JsonSerializer.Serialize(searchResults, options);
         }
 
         public async Task<string> SearchAsync(string userInput)
         {
             var ttss = await ReadAllToolTypeSearchAsync();
 
-            List<string> findedToolTypes = new List<string>();
+            SearchResults searchResults = new SearchResults();
 
             foreach(var tts in ttss)
             {
                 // если пользовательский ввод - часть названия - уже добавить
                 if(tts.Name.IndexOf(userInput) >= 0 || tts.Name.Equals(userInput))
                 {
-                    if (!findedToolTypes.Contains(tts.Name))
-                        findedToolTypes.Add(tts.Name);
+                    if (!searchResults.IncludedTypes.Contains(tts.Name))
+                    {
+                        searchResults.IncludedTypes.Add(tts.Name);
+                        searchResults.IncludedIds.Add(tts.RefId);
+                    }                       
                 }
                 else
                 {
@@ -338,8 +349,11 @@ namespace RemTool.Services.MongoDB
                     {
                         if (word.IndexOf(userInput) >= 0 || word.Equals(userInput))
                         {
-                            if (!findedToolTypes.Contains(tts.Name))
-                                findedToolTypes.Add(tts.Name);
+                            if (!searchResults.IncludedTypes.Contains(tts.Name))
+                            {
+                                searchResults.IncludedTypes.Add(tts.Name);
+                                searchResults.IncludedIds.Add(tts.RefId);
+                            }
                         }
                     }
                 }
@@ -353,7 +367,7 @@ namespace RemTool.Services.MongoDB
                 WriteIndented = true
             };
 
-            return JsonSerializer.Serialize(findedToolTypes, options);
+            return JsonSerializer.Serialize(searchResults, options);
         }
 
         public void DeleteAllToolTypeSearch()
