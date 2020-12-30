@@ -11,6 +11,8 @@ namespace RemTool.Models
 
         public string Name {get; set;}
 
+        public string RefId { get; set; }
+
         // массив ключевых слов для поиска
         public string[] KeyWords{ get; set; } 
     }  

@@ -47,7 +47,8 @@ namespace RemTool.Services.MongoDB
         {
             var tts = new ToolTypeSearch
             {
-                Name = toolType.Name    
+                Name = toolType.Name,
+                RefId = toolType.Id                
             };
 
             string[] mainTypes = new string[]
@@ -94,7 +95,8 @@ namespace RemTool.Services.MongoDB
         {
             var tts = new ToolTypeSearch
             {
-                Name = toolType.Name    
+                Name = toolType.Name,
+                RefId = toolType.Id
             };
 
             string[] mainTypes = new string[]
@@ -143,7 +145,8 @@ namespace RemTool.Services.MongoDB
 
             var tts = new ToolTypeSearch
             {
-                Name = tt.Name    
+                Name = tt.Name,
+                RefId = tt.Id
             };
 
             string[] mainTypes = new string[]
@@ -192,7 +195,8 @@ namespace RemTool.Services.MongoDB
 
             var tts = new ToolTypeSearch
             {
-                Name = tt.Name    
+                Name = tt.Name,
+                RefId = tt.Id
             };
 
             string[] mainTypes = new string[]
@@ -356,5 +360,16 @@ namespace RemTool.Services.MongoDB
         {
             _toolTypesSearch.DeleteMany(new BsonDocument());
         }
+    }
+
+    public class SearchResults
+    {
+        public SearchResults()
+        {
+            IncludedTypes = new List<string>();
+            IncludedIds = new List<string>();
+        }
+        public List<string> IncludedTypes { get; set; }
+        public List<string> IncludedIds { get; set; }
     }
 }
