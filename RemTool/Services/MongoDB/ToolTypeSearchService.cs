@@ -48,7 +48,8 @@ namespace RemTool.Services.MongoDB
             var tts = new ToolTypeSearch
             {
                 Name = toolType.Name,
-                RefId = toolType.Id                
+                RefId = toolType.Id,
+                MainType = toolType.MainType
             };
 
             string[] mainTypes = new string[]
@@ -96,7 +97,8 @@ namespace RemTool.Services.MongoDB
             var tts = new ToolTypeSearch
             {
                 Name = toolType.Name,
-                RefId = toolType.Id
+                RefId = toolType.Id,
+                MainType = toolType.MainType
             };
 
             string[] mainTypes = new string[]
@@ -146,7 +148,8 @@ namespace RemTool.Services.MongoDB
             var tts = new ToolTypeSearch
             {
                 Name = tt.Name,
-                RefId = tt.Id
+                RefId = tt.Id,
+                MainType = tt.MainType
             };
 
             string[] mainTypes = new string[]
@@ -196,7 +199,8 @@ namespace RemTool.Services.MongoDB
             var tts = new ToolTypeSearch
             {
                 Name = tt.Name,
-                RefId = tt.Id
+                RefId = tt.Id,
+                MainType = tt.MainType
             };
 
             string[] mainTypes = new string[]
@@ -297,6 +301,7 @@ namespace RemTool.Services.MongoDB
                     {
                         searchResults.IncludedTypes.Add(tts.Name);
                         searchResults.IncludedIds.Add(tts.RefId);
+                        searchResults.IncludedSubtypes.Add(tts.MainType);
                     }
                 }
                 else
@@ -309,6 +314,7 @@ namespace RemTool.Services.MongoDB
                             {
                                 searchResults.IncludedTypes.Add(tts.Name);
                                 searchResults.IncludedIds.Add(tts.RefId);
+                                searchResults.IncludedSubtypes.Add(tts.MainType);
                             }
                         }
                     }
@@ -341,6 +347,7 @@ namespace RemTool.Services.MongoDB
                     {
                         searchResults.IncludedTypes.Add(tts.Name);
                         searchResults.IncludedIds.Add(tts.RefId);
+                        searchResults.IncludedSubtypes.Add(tts.MainType);
                     }                       
                 }
                 else
@@ -353,6 +360,7 @@ namespace RemTool.Services.MongoDB
                             {
                                 searchResults.IncludedTypes.Add(tts.Name);
                                 searchResults.IncludedIds.Add(tts.RefId);
+                                searchResults.IncludedSubtypes.Add(tts.MainType);
                             }
                         }
                     }
@@ -382,8 +390,10 @@ namespace RemTool.Services.MongoDB
         {
             IncludedTypes = new List<string>();
             IncludedIds = new List<string>();
+            IncludedSubtypes = new List<bool[]>();
         }
         public List<string> IncludedTypes { get; set; }
         public List<string> IncludedIds { get; set; }
+        public List<bool[]> IncludedSubtypes { get; set; }
     }
 }
