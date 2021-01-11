@@ -33,12 +33,12 @@ const routes: Routes = [
       {
         path: 'tools/:type',
         component: ToolsPageComponent,
-        resolve: {res: ResolverService}
+        // resolve: {res: ResolverService}
       },
       {
         path: 'tools/:type/:id',
         component: ToolPageComponent,
-        resolve: { res: ResolverService }
+        // resolve: { res: ResolverService }
       },
       {path: 'delivery', component: DeliveryPageComponent},
       {path: 'contacts', component: ContactsPageComponent},

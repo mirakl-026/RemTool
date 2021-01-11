@@ -292,8 +292,7 @@ input[type=search] {
     align-content: start;
     flex-direction: row;
     flex-wrap: wrap;
-    backdrop-filter: blur(16px);
-    background-color: rgba(white, 0.5);
+    background: var(--grey-grad);
     & a {
         text-decoration: none;
         font-size: 14px;
@@ -341,6 +340,9 @@ input[type=search] {
 }
 
 .footer {
+    // position: absolute;
+    // left: 0;
+    // bottom: 0;
     & > img {
         display: block;
         margin: 0 auto;

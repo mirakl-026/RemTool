@@ -1,6 +1,8 @@
-<div *ngIf="!res$">
+<!-- <div *ngIf="!res$">
     <app-preloader></app-preloader>
-</div>
+</div> -->
+<app-preloader *ngIf="this.preloader"></app-preloader>
+
 <section class="tools-container">
     <a class="tool" *ngFor="let tool of numOfTools; index as i" [routerLink]="[toolIds$[i]]">
         <h4 class="tool__title">{{toolNames$[i]}}</h4>

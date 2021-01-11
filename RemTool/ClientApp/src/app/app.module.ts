@@ -21,6 +21,7 @@ import { AllToolsPageComponent } from './all-tools-page/all-tools-page.component
 import { WeRepairBlockComponent } from './shared/we-repair-block/we-repair-block.component';
 import { TopPreloaderComponent } from './top-preloader/top-preloader.component';
 import { PreloaderService } from './shared/preloader.service';
+import { SendRequestComponent } from './send-request/send-request.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { PreloaderService } from './shared/preloader.service';
     AllToolsPageComponent,
     WeRepairBlockComponent,
     TopPreloaderComponent,
+    SendRequestComponent,
   ],
   imports: [
     BrowserModule,

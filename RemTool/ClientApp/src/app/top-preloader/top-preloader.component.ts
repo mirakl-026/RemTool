@@ -8,21 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopPreloaderComponent implements OnInit {
 
-  constructor(
-    // private preloaderService: PreloaderService
-  ) { }
+  constructor() { }
 
-  preloader: boolean = false;
 
   ngOnInit(): void {
-    // this.preloader = true;
   }
-
-  showPreloader(){
-    this.preloader = true;
-  }
-  hidePreloader(){
-    this.preloader = false;
-  }
-
 }

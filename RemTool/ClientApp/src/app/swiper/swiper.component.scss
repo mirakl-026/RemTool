@@ -51,3 +51,15 @@
         }
     }
 }
+
+@media (max-width: 359.98px) {
+    .swiper-slide {
+        padding: 30px 30px;
+    }
+    .swiper-button-prev {
+        display: none;
+    }
+    .swiper-button-next {
+        display: none;
+    }
+}

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router'
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { DataService } from '../DataService/data.service';
 
 @Component({
@@ -10,38 +12,85 @@ import { DataService } from '../DataService/data.service';
 })
 
 export class ToolsPageComponent implements OnInit {
-
+  private destroy$ = new Subject<undefined>();
   constructor(
-  private route: ActivatedRoute,
-  private dataService: DataService
-  ) { }
+    private route: ActivatedRoute,
+    private dataService: DataService
+  ) {
+  }
 
+  preloader: boolean = false;
 
-  type: string;
+  type;
   res$;
-  toolNames$;
+  toolNames$: string[];
   toolIds$;
   toolImages$;
-  numOfTools;
+  numOfTools: number[];
   ngOnInit(): void {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-      this.route.data.subscribe(data => {
-      this.res$ = data["res"];
-      this.toolNames$ = this.res$["includedTypes"];
-      this.toolIds$ = this.res$["includedIds"];
-      this.toolImages$ = this.res$["includedImages"];
-      this.numOfTools = new Array(this.toolNames$.length)
-    })
-
+    // this.type = this.route.snapshot.params.type;
+    this.route.params.pipe(
+      takeUntil(this.destroy$))
+      .subscribe(params => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });    
+        this.type = params.type;
+        console.log(this.type);
+        this.preloader = true;
+        this.getTools();
+      });
   }
-  ngDoCheck() {
-    // let dropMenu = document.querySelector('.drop-menu');
-    // dropMenu.setAttribute('style', 'visibility: hidden');
-    // dropMenu.removeAttribute('style');
 
+  getTools() {
+    if (this.type == 'electro') {
+      this.dataService.getElectroTools().subscribe(data => {
+        this.getRes(data)
+      });
+    } else if (this.type == 'benzo') {
+      this.dataService.getFuelTools().subscribe(data => {
+        this.getRes(data)
+      });
+    } else if (this.type == "garden") {
+      this.dataService.getGardenTools().subscribe(data => {
+        this.getRes(data)
+      });
+    } else if (this.type == "compressor") {
+      this.dataService.getCompressors().subscribe(data => {
+        this.getRes(data)
+      });
+    } else if (this.type == "generator") {
+      this.dataService.getGenerators().subscribe(data => {
+        this.getRes(data)
+      });
+    } else if (this.type == "welding") {
+      this.dataService.getWeldingTools().subscribe(data => {
+        this.getRes(data)
+      });
+    } else if (this.type == "heatgun") {
+      this.dataService.getHeatGuns().subscribe(data => {
+        this.getRes(data)
+      });
+    } else if (this.type == "rest") {
+      this.dataService.getRestTools().subscribe(data => {
+        this.getRes(data)
+      });
+    }
+  }
+
+  getRes(data) {
+    this.res$ = data;
+    this.toolNames$ = this.res$["includedTypes"];
+    this.toolIds$ = this.res$["includedIds"];
+    this.toolImages$ = this.res$["includedImages"];
+    this.numOfTools = new Array(this.toolNames$.length);
+    this.preloader = false;
+  }
+
+
+  ngDoCheck(): void {
+    // alert('doCheck');
   }
 
 }

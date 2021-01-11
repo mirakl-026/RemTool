@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { DataService } from '../DataService/data.service';
 
 @Component({
@@ -9,25 +11,40 @@ import { DataService } from '../DataService/data.service';
   providers: [DataService]
 })
 export class ToolPageComponent implements OnInit {
+  private destroy$ = new Subject<undefined>();
 
   constructor(
     private route: ActivatedRoute,
     private dataService: DataService
   ) { }
 
+  preloader: boolean = false;
   id: string;
   res$;
   pricelist$: string[] = [];
 
   ngOnInit(): void {
-    this.route.data.subscribe(data => {
-      this.res$ = data["res"];
-      console.log(this.res$)
-      for (let i = 0; i < data["res"].serves.length; i++) {
-        this.pricelist$.push(data["res"].serves[i]);
-        this.pricelist$.push(data["res"].costs[i]);
+    this.route.params.pipe(
+      takeUntil(this.destroy$))
+      .subscribe(params => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        }); 
+        this.id = params.id;
+        console.log(this.id);
+        this.preloader = true;
+        this.getTool(this.id);
+      });
+  }
+
+  getTool(id) {
+    this.dataService.getToolType(id).subscribe(data => {
+      this.res$ = data;
+      for (let i = 0; i < this.res$.serves.length; i++) {
+        this.pricelist$.push(this.res$.serves[i]);
+        this.pricelist$.push(this.res$.costs[i]);
       }
-      console.log(this.pricelist$);
     });
   }
 }
