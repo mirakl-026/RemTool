@@ -10,7 +10,7 @@ import { ContactsPageComponent } from './contacts-page/contacts-page.component';
 import { SwiperComponent } from './swiper/swiper.component';
 import { SwiperBrandsComponent } from './swiper-brands/swiper-brands.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PopupComponent } from './popup/popup.component';
 import { QuillModule } from 'ngx-quill';
 import { AuthInterceptor } from './shared/auth.interceptor';
@@ -19,6 +19,8 @@ import { PreloaderComponent } from './preloader/preloader.component';
 import { DataService } from './DataService/data.service';
 import { AllToolsPageComponent } from './all-tools-page/all-tools-page.component';
 import { WeRepairBlockComponent } from './shared/we-repair-block/we-repair-block.component';
+import { TopPreloaderComponent } from './top-preloader/top-preloader.component';
+import { PreloaderService } from './shared/preloader.service';
 
 @NgModule({
   declarations: [
@@ -34,12 +36,14 @@ import { WeRepairBlockComponent } from './shared/we-repair-block/we-repair-block
     PreloaderComponent,
     AllToolsPageComponent,
     WeRepairBlockComponent,
+    TopPreloaderComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     QuillModule.forRoot()
   ],
   providers: [
@@ -48,7 +52,9 @@ import { WeRepairBlockComponent } from './shared/we-repair-block/we-repair-block
       multi: true,
       useClass: AuthInterceptor
     },
-    DataService
+    DataService,
+    PreloaderService,
+    TopPreloaderComponent
   ],
   bootstrap: [AppComponent]
 })

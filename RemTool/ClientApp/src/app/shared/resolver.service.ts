@@ -4,25 +4,32 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DataService } from '../DataService/data.service';
 import { ToolType } from '../DataService/toolType';
+import { TopPreloaderComponent } from '../top-preloader/top-preloader.component';
+import { PreloaderService } from './preloader.service';
 
 @Injectable({
   providedIn: 'root',
-  // providers: [DataService]
+  // providers: [preloader]
 })
 
 
 
 export class ResolverService implements Resolve<ToolType> {
   constructor(
+    private preloaderService: PreloaderService,
+    private preloader: TopPreloaderComponent,
     private dataService: DataService
-    ) {  }
-    
-    res;
-    type;
-    tools: MainTools = new MainTools();
-    resolve(
+  ) {
+
+  }
+
+  res;
+  type;
+  tools: MainTools = new MainTools();
+  resolve(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Promise<any> | Observable<any> | any | Observable<ToolType> | Promise<ToolType> | ToolType | Observable<MainTools> | MainTools | Promise<MainTools> | Observable<object> | ToolType[]{
+    state: RouterStateSnapshot): Promise<any> | Observable<any> | any | Observable<ToolType> | Promise<ToolType> | ToolType | Observable<MainTools> | MainTools | Promise<MainTools> | Observable<object> | ToolType[] {
+    this.preloaderService.showLoader();
     this.type = String(route.params["type"]);
     if (route.routeConfig["path"] == "tools/:type") {
       if (this.type == "electro") {
@@ -78,7 +85,7 @@ export class ResolverService implements Resolve<ToolType> {
 }
 
 export class MainTools {
-  constructor (
+  constructor(
     public electro?: any,
     public benzo?: any,
     public garden?: any,
@@ -87,7 +94,7 @@ export class MainTools {
     public welding?: any,
     public heatguns?: any,
     public rest?: any
-  ){
+  ) {
     this.electro = {};
     this.benzo = {};
     this.garden = {};

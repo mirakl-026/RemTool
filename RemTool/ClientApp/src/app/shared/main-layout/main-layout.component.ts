@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MainTools } from '../resolver.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { utf8Encode } from '@angular/compiler/src/util';
+import { url } from 'inspector';
+import { ToolType } from 'src/app/DataService/toolType';
+// import { PreloaderService } from '../preloader.service';
+
 
 @Component({
   selector: 'app-main-layout',
@@ -8,11 +15,14 @@ import { MainTools } from '../resolver.service';
   styleUrls: ['./main-layout.component.scss']
 })
 export class MainLayoutComponent implements OnInit {
-
+  
   constructor(
-    private route: ActivatedRoute
-  ) { }
-
+    private http: HttpClient,
+    private route: ActivatedRoute,
+    // private preloaderService: PreloaderService
+    ) { }
+    
+  searchForm: FormGroup;
   dropMenuFlag: boolean = false;
 
   sideElectro: boolean = false;
@@ -29,23 +39,38 @@ export class MainLayoutComponent implements OnInit {
   tools: MainTools = new MainTools();
 
   burger: boolean = false;
+  searchPlaceholder: string;
   ngOnInit(): void {
+    this.searchForm = new FormGroup({
+      data: new FormControl(null, [Validators.minLength(2), Validators.maxLength(20)])
+    });
+
     this.route.data.subscribe(data => {
       this.tools = data["res"];
     });
 
-    window.onresize = () => {
+    window.addEventListener('resize', () => {
       if (window.matchMedia("(max-width: 683.98px)").matches) {
         this.searchMobile = true;
       } else {
         this.searchMobile = false;
       }
-    }
-
+      if (window.matchMedia("(max-width: 449.98px)").matches) {
+        this.searchPlaceholder = 'Найти инструмент';
+      } else {
+        this.searchPlaceholder = 'Найти инструмент или бренд';
+      }
+    });
     if (window.matchMedia("(max-width: 683.98px)").matches) {
       this.searchMobile = true;
     } else {
       this.searchMobile = false;
+    }
+
+    if (window.matchMedia("(max-width: 449.98px)").matches) {
+      this.searchPlaceholder = 'Найти инструмент';
+    } else {
+      this.searchPlaceholder = 'Найти инструмент или бренд';
     }
   }
 
@@ -109,13 +134,41 @@ export class MainLayoutComponent implements OnInit {
       }
     }
   }
+  searchFocuse: boolean;
+  mainTypes: string[] = ['electro', 'benzo', 'garden', 'compressor', 'generator', 'welding', 'heatgun', 'rest'];
+  searchMainTypes$: any[] = [];
+  searchTypes$: string[] = [];
+  searchIds$: string[] = [];
 
-  // clickBurger() {
-  //   if (!this.burger) {
-  //     // document.getElementsByTagName('body')[0].classList.add('locked');
-  //     document.body.classList.add('locked');
-  //   } else {
-  //     document.body.classList.remove('locked');
-  //   }
+  // preloader: boolean = this.preloaderService.isLoading();
+
+  searchTool(data){
+    // console.log(this.searchForm.value.data);
+    if (!!this.searchForm.value.data) {
+      this.http.get("api/search/find?userInput=" + encodeURI(this.searchForm.value.data)).subscribe(res => {
+        // console.log(res);
+        this.searchMainTypes$ = [];
+        this.searchTypes$ = res["includedTypes"];
+        this.searchIds$ = res["includedIds"];
+        let mains = res["includedSubtypes"];
+        for (let main of mains) {
+          for (let i = 0; i < main.length; i++) {
+            if (main[i]) {
+              this.searchMainTypes$.push(this.mainTypes[i]);
+              break;
+            }
+          }
+        }
+        // console.log(this.searchMainTypes$);
+      })
+    }
+  }
+
+  // showPreloader() {
+  //   this.preloader = true;
+  // }
+
+  // hidePreloader() {
+  //   this.preloader = false;
   // }
 }

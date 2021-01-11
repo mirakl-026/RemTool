@@ -1,0 +1,18 @@
+.top-preloader {
+    position: fixed;
+    height: 4px;
+    background-color: var(--orange-color);
+    top: 0;
+    animation: preloader 2s infinite ease-in-out;
+}
+
+@keyframes preloader {
+    from {
+        left: 0;
+        width: 0;
+    }
+    to {
+        left: 100vw;
+        width: 100vw;
+    }
+}

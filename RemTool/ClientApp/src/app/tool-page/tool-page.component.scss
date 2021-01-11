@@ -13,20 +13,39 @@
         text-align: center;
     }
     &__pricelist {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: 10px;
+        // display: grid;
+        // grid-template-columns: repeat(2, auto);
+        // grid-row-gap: 10px;
+        margin-bottom: 30px;
         width: 100%;
         max-width: 800px;
         background-color: var(--grey-color);
-        padding: 10px;
+        padding: 10px 0;
         border-radius: 6px;
         box-sizing: border-box;
         // max-width: 100%;
         & div {
+            // padding: 0 10px;
             line-height: 1.5rem;
+            // &:not(:nth-last-of-type(1)) {
+                //     border-bottom: 1px solid var(--light-color);
+                // }
+            }
         }
     }
+    
+    .pricelist {
+        &__row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 10px;
+            &:not(:nth-last-of-type(1)) {
+                border-bottom: 1px solid var(--light-color);
+            }
+            &:hover {
+                background-color: var(--dark-grey-color);
+            }
+        }
 }
 
 .pricelist-column {

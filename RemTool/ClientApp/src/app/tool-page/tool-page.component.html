@@ -9,12 +9,10 @@
     <div class="tool-page__pricelist">
         <!-- <div class="pricelist-column">
             <p>Услуга</p> -->
-        <div class="pricelist-wrapper" *ngFor="let serve of res$.serves, index as i">
-            <div>
-                {{res$.serves[i]}}
-            </div>
-            <div>
-                {{res$.costs[i]}}
+        <div class="pricelist-wrapper">
+            <div class="pricelist__row" *ngFor="let serve of res$.serves; index as i">
+                <div>{{serve}}</div>
+                <div>{{res$.costs[i]}}</div>
             </div>
         </div>
         <!-- <p *ngFor="let cost of res$.costs"></p> -->

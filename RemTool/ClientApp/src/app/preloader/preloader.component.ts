@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PreloaderService } from '../shared/preloader.service';
 
 @Component({
   selector: 'app-preloader',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PreloaderComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(
+    private preloaderService: PreloaderService
+  ) { }
+  preloader: boolean;
   ngOnInit(): void {
+    this.preloader = false;
   }
 
 }

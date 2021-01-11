@@ -1,9 +1,9 @@
 <header class="header">
+    <app-top-preloader></app-top-preloader>
     <div class="header__topper">
         <span class="header__hours">График работы: пн-пт 10:00-20:00</span>
         <a class="header__adress" href="https://yandex.ru/maps/-/CCUEb2QElD">Наш адрес: г.Москва, МГСА 256</a>
         <a class="header__mob-phone" href="tel: +7 (495) 123-45-67">
-            <!-- <img src="../../../assets/img/phone-icon_light.svg" alt=""> -->
             +7 (495) 123-45-67
         </a>
 
@@ -12,124 +12,171 @@
         </button>
     </div>
     <nav class="header__nav nav">
-        <!-- <div class="header__logo" routerLinkActive='active'> -->
-            <a class="header__logo" [routerLink]="['/']" routerLinkActive='active'>
-                <img src="assets/img/header__logo.svg" alt="logo">
-            </a>
-        <!-- </div> -->
+        <a class="header__logo" [routerLink]="['/']" routerLinkActive='active'>
+            <img src="assets/img/header__logo.svg" alt="logo">
+        </a>
         <ul>
-            <li [ngClass]="{'nav__item': true, 'nav__item_hover': dropMenuFlag}" routerLinkActive='active' (mouseenter)="arrowDown('h')" (mouseleave)="dropMenuFlag = false">
-                <!-- <a class="nav__link drop" [routerLink]="['tools']"> -->
+            <li [ngClass]="{'nav__item': true, 'nav__item_hover': dropMenuFlag}" routerLinkActive='active'
+                (mouseenter)="arrowDown('h')" (mouseleave)="dropMenuFlag = false">
                 <a class="nav__link drop" [routerLink]="['tools']" (click)="dropMenuHide()">
                     Инструменты
                 </a>
                 <div class="arrow-down" (click)="arrowDown('t')">
                     <svg width="13" height="9" viewBox="0 0 13 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M11.5 2L6.5 7L1.5 2" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M11.5 2L6.5 7L1.5 2" stroke="black" stroke-width="3" stroke-linecap="round"
+                            stroke-linejoin="round" />
                     </svg>
                 </div>
                 <div class="drop-menu" *ngIf="(dropMenuFlag)">
                     <div>
-                        <div  [ngClass]="{'drop-menu__item': true, 'drop-menu__item_hover': sideElectro}" (mouseenter)="arrowRight('electrom')" (mouseleave)="sideElectro = false" (click)="arrowRight('electro')">
+                        <div [ngClass]="{'drop-menu__item': true, 'drop-menu__item_hover': sideElectro}"
+                            (mouseenter)="arrowRight('electrom')" (mouseleave)="sideElectro = false"
+                            (click)="arrowRight('electro')">
                             <a class="drop-menu__link" [routerLink]="['tools', 'electro']" (click)="dropMenuHide()">
                                 Электроинструмент
                             </a>
-                            <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round"
+                                    stroke-linejoin="round" />
                             </svg>
                             <div class="side-drop-menu" *ngIf="sideElectro">
-                                <a *ngFor="let tool of this.tools.electro.includedTypes; index as i" [routerLink]="['tools', 'electro', this.tools.electro.includedIds[i]]" (click)="dropMenuHide()">
+                                <a *ngFor="let tool of this.tools.electro.includedTypes; index as i"
+                                    [routerLink]="['tools', 'electro', this.tools.electro.includedIds[i]]"
+                                    (click)="dropMenuHide()">
                                     {{tool}}
                                 </a>
                             </div>
                         </div>
-                        <div [ngClass]="{'drop-menu__item': true, 'drop-menu__item_hover': sideFuel}" (mouseenter)="arrowRight('benzom')" (mouseleave)="sideFuel = false" (click)="arrowRight('benzo')">
+                        <div [ngClass]="{'drop-menu__item': true, 'drop-menu__item_hover': sideFuel}"
+                            (mouseenter)="arrowRight('benzom')" (mouseleave)="sideFuel = false"
+                            (click)="arrowRight('benzo')">
                             <a class="drop-menu__link" [routerLink]="['tools', 'benzo']" (click)="dropMenuHide()">
                                 Бензоинструмент
                             </a>
-                            <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round"
+                                    stroke-linejoin="round" />
                             </svg>
                             <div class="side-drop-menu" *ngIf="sideFuel">
-                                <a *ngFor="let tool of this.tools.benzo.includedTypes; index as i" [routerLink]="['tools', 'benzo', this.tools.benzo.includedIds[i]]" (click)="dropMenuHide()">
+                                <a *ngFor="let tool of this.tools.benzo.includedTypes; index as i"
+                                    [routerLink]="['tools', 'benzo', this.tools.benzo.includedIds[i]]"
+                                    (click)="dropMenuHide()">
                                     {{tool}}
                                 </a>
                             </div>
                         </div>
-                        <div [ngClass]="{'drop-menu__item': true, 'drop-menu__item_hover': sideGarden}" (mouseenter)="arrowRight('gardenm')" (mouseleave)="sideGarden = false" (click)="arrowRight('garden')">
+                        <div [ngClass]="{'drop-menu__item': true, 'drop-menu__item_hover': sideGarden}"
+                            (mouseenter)="arrowRight('gardenm')" (mouseleave)="sideGarden = false"
+                            (click)="arrowRight('garden')">
                             <a class="drop-menu__link" [routerLink]="['tools', 'garden']" (click)="dropMenuHide()">
                                 Садовая техника
                             </a>
-                            <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round"
+                                    stroke-linejoin="round" />
                             </svg>
                             <div class="side-drop-menu" *ngIf="sideGarden">
-                                <a *ngFor="let tool of this.tools.garden.includedTypes; index as i" [routerLink]="['tools', 'garden', this.tools.garden.includedIds[i]]" (click)="dropMenuHide()">
+                                <a *ngFor="let tool of this.tools.garden.includedTypes; index as i"
+                                    [routerLink]="['tools', 'garden', this.tools.garden.includedIds[i]]"
+                                    (click)="dropMenuHide()">
                                     {{tool}}
                                 </a>
                             </div>
                         </div>
-                        <div [ngClass]="{'drop-menu__item': true, 'drop-menu__item_hover': sideCompressors}" (mouseenter)="arrowRight('compressorm')" (mouseleave)="sideCompressors = false" (click)="arrowRight('compressor')">
+                        <div [ngClass]="{'drop-menu__item': true, 'drop-menu__item_hover': sideCompressors}"
+                            (mouseenter)="arrowRight('compressorm')" (mouseleave)="sideCompressors = false"
+                            (click)="arrowRight('compressor')">
                             <a class="drop-menu__link" [routerLink]="['tools', 'compressor']" (click)="dropMenuHide()">
                                 Компрессоры
                             </a>
-                            <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round"
+                                    stroke-linejoin="round" />
                             </svg>
                             <div class="side-drop-menu" *ngIf="sideCompressors">
-                                <a *ngFor="let tool of this.tools.compressors.includedTypes; index as i" [routerLink]="['tools', 'compressors', this.tools.compressors.includedIds[i]]" (click)="dropMenuHide()">
+                                <a *ngFor="let tool of this.tools.compressors.includedTypes; index as i"
+                                    [routerLink]="['tools', 'compressors', this.tools.compressors.includedIds[i]]"
+                                    (click)="dropMenuHide()">
                                     {{tool}}
                                 </a>
                             </div>
                         </div>
-                        <div [ngClass]="{'drop-menu__item': true, 'drop-menu__item_hover': sideGenerators}" (mouseenter)="arrowRight('generatorm')" (mouseleave)="sideGenerators = false" (click)="arrowRight('generator')">
+                        <div [ngClass]="{'drop-menu__item': true, 'drop-menu__item_hover': sideGenerators}"
+                            (mouseenter)="arrowRight('generatorm')" (mouseleave)="sideGenerators = false"
+                            (click)="arrowRight('generator')">
                             <a class="drop-menu__link" [routerLink]="['tools', 'generator']" (click)="dropMenuHide()">
                                 Генераторы
                             </a>
-                            <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round"
+                                    stroke-linejoin="round" />
                             </svg>
                             <div class="side-drop-menu" *ngIf="sideGenerators">
-                                <a *ngFor="let tool of this.tools.generators.includedTypes; index as i" [routerLink]="['tools', 'generators', this.tools.generators.includedIds[i]]" (click)="dropMenuHide()">
+                                <a *ngFor="let tool of this.tools.generators.includedTypes; index as i"
+                                    [routerLink]="['tools', 'generators', this.tools.generators.includedIds[i]]"
+                                    (click)="dropMenuHide()">
                                     {{tool}}
                                 </a>
                             </div>
                         </div>
-                        <div [ngClass]="{'drop-menu__item': true, 'drop-menu__item_hover': sideWelding}" (mouseenter)="arrowRight('weldingm')" (mouseleave)="sideWelding = false" (click)="arrowRight('welding')">
+                        <div [ngClass]="{'drop-menu__item': true, 'drop-menu__item_hover': sideWelding}"
+                            (mouseenter)="arrowRight('weldingm')" (mouseleave)="sideWelding = false"
+                            (click)="arrowRight('welding')">
                             <a class="drop-menu__link" [routerLink]="['tools', 'welding']" (click)="dropMenuHide()">
                                 Сварочная техника
                             </a>
-                            <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round"
+                                    stroke-linejoin="round" />
                             </svg>
                             <div class="side-drop-menu" *ngIf="sideWelding">
-                                <a *ngFor="let tool of this.tools.welding.includedTypes; index as i" [routerLink]="['tools', 'welding', this.tools.welding.includedIds[i]]" (click)="dropMenuHide()">
+                                <a *ngFor="let tool of this.tools.welding.includedTypes; index as i"
+                                    [routerLink]="['tools', 'welding', this.tools.welding.includedIds[i]]"
+                                    (click)="dropMenuHide()">
                                     {{tool}}
                                 </a>
                             </div>
                         </div>
-                        <div [ngClass]="{'drop-menu__item': true, 'drop-menu__item_hover': sideHeatguns}" (mouseenter)="arrowRight('heatgunm')" (mouseleave)="sideHeatguns = false" (click)="arrowRight('heatgun')">
+                        <div [ngClass]="{'drop-menu__item': true, 'drop-menu__item_hover': sideHeatguns}"
+                            (mouseenter)="arrowRight('heatgunm')" (mouseleave)="sideHeatguns = false"
+                            (click)="arrowRight('heatgun')">
                             <a class="drop-menu__link" [routerLink]="['tools', 'heatgun']" (click)="dropMenuHide()">
                                 Тепловые пушки
                             </a>
-                            <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round"
+                                    stroke-linejoin="round" />
                             </svg>
                             <div class="side-drop-menu" *ngIf="sideHeatguns">
-                                <a *ngFor="let tool of this.tools.heatguns.includedTypes; index as i" [routerLink]="['tools', 'heatguns', this.tools.heatguns.includedIds[i]]" (click)="dropMenuHide()">
+                                <a *ngFor="let tool of this.tools.heatguns.includedTypes; index as i"
+                                    [routerLink]="['tools', 'heatguns', this.tools.heatguns.includedIds[i]]"
+                                    (click)="dropMenuHide()">
                                     {{tool}}
                                 </a>
                             </div>
                         </div>
-                        <div [ngClass]="{'drop-menu__item': true, 'drop-menu__item_hover': sideRest}" (mouseenter)="arrowRight('restm')" (mouseleave)="sideRest = false" (click)="arrowRight('rest')">
+                        <div [ngClass]="{'drop-menu__item': true, 'drop-menu__item_hover': sideRest}"
+                            (mouseenter)="arrowRight('restm')" (mouseleave)="sideRest = false"
+                            (click)="arrowRight('rest')">
                             <a class="drop-menu__link" [routerLink]="['tools', 'rest']" (click)="dropMenuHide()">
                                 Техника для отдыха
                             </a>
-                            <svg width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2 2L7 7L2 12" stroke="black" stroke-width="3" stroke-linecap="round"
+                                    stroke-linejoin="round" />
                             </svg>
                             <div class="side-drop-menu" *ngIf="sideRest">
-                                <a *ngFor="let tool of this.tools.rest.includedTypes; index as i" [routerLink]="['tools', 'rest', this.tools.rest.includedIds[i]]" (click)="dropMenuHide()">
+                                <a *ngFor="let tool of this.tools.rest.includedTypes; index as i"
+                                    [routerLink]="['tools', 'rest', this.tools.rest.includedIds[i]]"
+                                    (click)="dropMenuHide()">
                                     {{tool}}
                                 </a>
                             </div>
@@ -144,15 +191,22 @@
                 <a class="nav__link" [routerLink]="['contacts']">Контакты</a>
             </li>
             <li class="header__search" *ngIf="!searchMobile">
-                <form action="">
-                    <input type="search" placeholder="Найти инструмент или бренд">
-                    <button type="submit" onclick="this.blur()">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M19.9399 18.5624L13.4474 12.0699C14.4549 10.7675 14.9999 9.17496 14.9999 7.49997C14.9999 5.49498 14.2174 3.61498 12.8024 2.19749C11.3874 0.779996 9.50246 0 7.49997 0C5.49748 0 3.61248 0.782496 2.19749 2.19749C0.779996 3.61248 0 5.49498 0 7.49997C0 9.50246 0.782496 11.3874 2.19749 12.8024C3.61248 14.2199 5.49498 14.9999 7.49997 14.9999C9.17496 14.9999 10.765 14.4549 12.0674 13.4499L18.5599 19.9399C18.579 19.959 18.6016 19.9741 18.6264 19.9844C18.6513 19.9947 18.678 20 18.7049 20C18.7318 20 18.7585 19.9947 18.7834 19.9844C18.8083 19.9741 18.8309 19.959 18.8499 19.9399L19.9399 18.8524C19.959 18.8334 19.9741 18.8108 19.9844 18.7859C19.9947 18.761 20 18.7343 20 18.7074C20 18.6805 19.9947 18.6538 19.9844 18.6289C19.9741 18.6041 19.959 18.5815 19.9399 18.5624ZM11.46 11.46C10.4 12.5174 8.99496 13.0999 7.49997 13.0999C6.00497 13.0999 4.59998 12.5174 3.53998 11.46C2.48249 10.4 1.89999 8.99496 1.89999 7.49997C1.89999 6.00497 2.48249 4.59748 3.53998 3.53998C4.59998 2.48249 6.00497 1.89999 7.49997 1.89999C8.99496 1.89999 10.4025 2.47999 11.46 3.53998C12.5174 4.59998 13.0999 6.00497 13.0999 7.49997C13.0999 8.99496 12.5174 10.4025 11.46 11.46Z" fill="#131522"/>
-                        </svg>
-                    </button>
+                <form [formGroup]="searchForm" (input)="searchTool()">
+                    <input formControlName="data" id="search" type="search" placeholder={{searchPlaceholder}} (focus)="searchFocuse = true" (blur)="searchFocuse = false">
                 </form>
-            </li>    
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M19.9399 18.5624L13.4474 12.0699C14.4549 10.7675 14.9999 9.17496 14.9999 7.49997C14.9999 5.49498 14.2174 3.61498 12.8024 2.19749C11.3874 0.779996 9.50246 0 7.49997 0C5.49748 0 3.61248 0.782496 2.19749 2.19749C0.779996 3.61248 0 5.49498 0 7.49997C0 9.50246 0.782496 11.3874 2.19749 12.8024C3.61248 14.2199 5.49498 14.9999 7.49997 14.9999C9.17496 14.9999 10.765 14.4549 12.0674 13.4499L18.5599 19.9399C18.579 19.959 18.6016 19.9741 18.6264 19.9844C18.6513 19.9947 18.678 20 18.7049 20C18.7318 20 18.7585 19.9947 18.7834 19.9844C18.8083 19.9741 18.8309 19.959 18.8499 19.9399L19.9399 18.8524C19.959 18.8334 19.9741 18.8108 19.9844 18.7859C19.9947 18.761 20 18.7343 20 18.7074C20 18.6805 19.9947 18.6538 19.9844 18.6289C19.9741 18.6041 19.959 18.5815 19.9399 18.5624ZM11.46 11.46C10.4 12.5174 8.99496 13.0999 7.49997 13.0999C6.00497 13.0999 4.59998 12.5174 3.53998 11.46C2.48249 10.4 1.89999 8.99496 1.89999 7.49997C1.89999 6.00497 2.48249 4.59748 3.53998 3.53998C4.59998 2.48249 6.00497 1.89999 7.49997 1.89999C8.99496 1.89999 10.4025 2.47999 11.46 3.53998C12.5174 4.59998 13.0999 6.00497 13.0999 7.49997C13.0999 8.99496 12.5174 10.4025 11.46 11.46Z"
+                        fill="#131522" />
+                </svg>
+                <div class="search-result" *ngIf="!!searchForm.value.data">
+                    <div *ngFor="let type of searchTypes$; index as i">
+                        <a [routerLink]="['tools', searchMainTypes$[i], searchIds$[i]]">
+                            {{ type }}
+                        </a>
+                    </div>
+                </div>
+            </li>
             <li class="header__phone">
                 <a href="tel: +7 (495) 123-45-67">
                     <img src="assets/img/phone-icon.svg" alt="">
@@ -161,14 +215,19 @@
             </li>
         </ul>
         <div class="header__search" *ngIf="searchMobile">
-            <form action="">
-                <input type="search" placeholder="Найти инструмент или бренд">
-                <button type="submit" onclick="this.blur()">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M19.9399 18.5624L13.4474 12.0699C14.4549 10.7675 14.9999 9.17496 14.9999 7.49997C14.9999 5.49498 14.2174 3.61498 12.8024 2.19749C11.3874 0.779996 9.50246 0 7.49997 0C5.49748 0 3.61248 0.782496 2.19749 2.19749C0.779996 3.61248 0 5.49498 0 7.49997C0 9.50246 0.782496 11.3874 2.19749 12.8024C3.61248 14.2199 5.49498 14.9999 7.49997 14.9999C9.17496 14.9999 10.765 14.4549 12.0674 13.4499L18.5599 19.9399C18.579 19.959 18.6016 19.9741 18.6264 19.9844C18.6513 19.9947 18.678 20 18.7049 20C18.7318 20 18.7585 19.9947 18.7834 19.9844C18.8083 19.9741 18.8309 19.959 18.8499 19.9399L19.9399 18.8524C19.959 18.8334 19.9741 18.8108 19.9844 18.7859C19.9947 18.761 20 18.7343 20 18.7074C20 18.6805 19.9947 18.6538 19.9844 18.6289C19.9741 18.6041 19.959 18.5815 19.9399 18.5624ZM11.46 11.46C10.4 12.5174 8.99496 13.0999 7.49997 13.0999C6.00497 13.0999 4.59998 12.5174 3.53998 11.46C2.48249 10.4 1.89999 8.99496 1.89999 7.49997C1.89999 6.00497 2.48249 4.59748 3.53998 3.53998C4.59998 2.48249 6.00497 1.89999 7.49997 1.89999C8.99496 1.89999 10.4025 2.47999 11.46 3.53998C12.5174 4.59998 13.0999 6.00497 13.0999 7.49997C13.0999 8.99496 12.5174 10.4025 11.46 11.46Z" fill="#131522"/>
-                    </svg>
-                </button>
+            <form [formGroup]="searchForm" (input)="searchTool()">
+                <input formControlName="data" id="search" type="search" placeholder={{searchPlaceholder}}>
             </form>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M19.9399 18.5624L13.4474 12.0699C14.4549 10.7675 14.9999 9.17496 14.9999 7.49997C14.9999 5.49498 14.2174 3.61498 12.8024 2.19749C11.3874 0.779996 9.50246 0 7.49997 0C5.49748 0 3.61248 0.782496 2.19749 2.19749C0.779996 3.61248 0 5.49498 0 7.49997C0 9.50246 0.782496 11.3874 2.19749 12.8024C3.61248 14.2199 5.49498 14.9999 7.49997 14.9999C9.17496 14.9999 10.765 14.4549 12.0674 13.4499L18.5599 19.9399C18.579 19.959 18.6016 19.9741 18.6264 19.9844C18.6513 19.9947 18.678 20 18.7049 20C18.7318 20 18.7585 19.9947 18.7834 19.9844C18.8083 19.9741 18.8309 19.959 18.8499 19.9399L19.9399 18.8524C19.959 18.8334 19.9741 18.8108 19.9844 18.7859C19.9947 18.761 20 18.7343 20 18.7074C20 18.6805 19.9947 18.6538 19.9844 18.6289C19.9741 18.6041 19.959 18.5815 19.9399 18.5624ZM11.46 11.46C10.4 12.5174 8.99496 13.0999 7.49997 13.0999C6.00497 13.0999 4.59998 12.5174 3.53998 11.46C2.48249 10.4 1.89999 8.99496 1.89999 7.49997C1.89999 6.00497 2.48249 4.59748 3.53998 3.53998C4.59998 2.48249 6.00497 1.89999 7.49997 1.89999C8.99496 1.89999 10.4025 2.47999 11.46 3.53998C12.5174 4.59998 13.0999 6.00497 13.0999 7.49997C13.0999 8.99496 12.5174 10.4025 11.46 11.46Z"
+                    fill="#131522" />
+            </svg>
+        </div>
+        <div class="search-result" *ngIf="searchMobile && (!!searchForm.value.data)">
+            <div *ngFor="let type of searchTypes$">
+                {{ type }}
+            </div>
         </div>
         <input id="burger" type="checkbox" [(ngModel)]="burger" *ngIf="searchMobile">
         <label for="burger" class="header__nav_mobile" *ngIf="searchMobile">
@@ -177,7 +236,6 @@
             <div></div>
         </label>
     </nav>
-    <!-- <app-mobile-nav class="mob-nav" [ngClass]="{'mob-nav_visible': burger}" *ngIf="searchMobile"></app-mobile-nav> -->
     <nav class="mobile__nav" [ngClass]="{'mobile__nav_visible': burger}" *ngIf="searchMobile">
         <a [routerLink]="['tools', 'electro']" (click)="burger = false">Электроинструмент</a>
         <a [routerLink]="['tools', 'benzo']" (click)="burger = false">Бензоинструмент</a>
@@ -190,6 +248,7 @@
         <a [routerLink]="['delivery']" (click)="burger = false">Доставка и оплата</a>
         <a [routerLink]="['contacts']" (click)="burger = false">Контакты</a>
     </nav>
+
 </header>
 <router-outlet></router-outlet>
 
@@ -198,10 +257,15 @@
     <div class="footer__content">
         <div class="footer__map">
             <div style="position:relative;overflow:hidden;">
-                <a href="https://yandex.ru/maps/org/remont_elektro_benzo_tekhniki/103410214575/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Ремонт электро-бензо техники</a>
-                <a href="https://yandex.ru/maps/213/moscow/category/electrical_equipment_repairs/184107046/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:14px;">Ремонт электрооборудования в Москве</a>
-                <a href="https://yandex.ru/maps/213/moscow/category/engine_repairs/184106616/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:28px;">Ремонт двигателей в Москве</a>
-                <iframe src="https://yandex.ru/map-widget/v1/-/CCUEb2Qz0C" width="600" height="280" frameborder="1" allowfullscreen="true" style="position:relative;">
+                <a href="https://yandex.ru/maps/org/remont_elektro_benzo_tekhniki/103410214575/?utm_medium=mapframe&utm_source=maps"
+                    style="color:#eee;font-size:12px;position:absolute;top:0px;">Ремонт электро-бензо техники</a>
+                <a href="https://yandex.ru/maps/213/moscow/category/electrical_equipment_repairs/184107046/?utm_medium=mapframe&utm_source=maps"
+                    style="color:#eee;font-size:12px;position:absolute;top:14px;">Ремонт электрооборудования в
+                    Москве</a>
+                <a href="https://yandex.ru/maps/213/moscow/category/engine_repairs/184106616/?utm_medium=mapframe&utm_source=maps"
+                    style="color:#eee;font-size:12px;position:absolute;top:28px;">Ремонт двигателей в Москве</a>
+                <iframe src="https://yandex.ru/map-widget/v1/-/CCUEb2Qz0C" width="600" height="280" frameborder="1"
+                    allowfullscreen="true" style="position:relative;">
                 </iframe>
             </div>
         </div>
@@ -218,21 +282,43 @@
         <div class="footer__contacts">
             <a href="tel: +7 (495) 123-45-67">+7 (495) 123-45-67</a>
             <a href="mailto:remtool@mail.ru">remtool@mail.ru</a>
-            <a href="https://yandex.ru/maps/-/CCQSEMaDOB">МКАД, 32-й километр, вл 15</a>
+            <a href="https://yandex.ru/maps/-/CCUEb2QElD">Наш адрес: г.Москва, МГСА 256</a>
             <span>пн-пт 10:00-20:00</span>
             <div class="footer__messengers">
                 <a href="">
-                    <svg height="50px" viewBox="0 -39 512.00011 512" width="50px" xmlns="http://www.w3.org/2000/svg"><path d="m504.09375 11.859375c-6.253906-7.648437-15.621094-11.859375-26.378906-11.859375-5.847656 0-12.042969 1.230469-18.410156 3.664062l-433.398438 165.441407c-23 8.777343-26.097656 21.949219-25.8984375 29.019531s4.0390625 20.046875 27.4999995 27.511719c.140626.042969.28125.085937.421876.125l89.898437 25.726562 48.617187 139.023438c6.628907 18.953125 21.507813 30.726562 38.835938 30.726562 10.925781 0 21.671875-4.578125 31.078125-13.234375l55.605469-51.199218 80.652344 64.941406c.007812.007812.019531.011718.027343.019531l.765625.617187c.070313.054688.144532.113282.214844.167969 8.964844 6.953125 18.75 10.625 28.308594 10.628907h.003906c18.675781 0 33.546875-13.824219 37.878906-35.214844l71.011719-350.640625c2.851563-14.074219.460937-26.667969-6.734375-35.464844zm-356.191406 234.742187 173.441406-88.605468-107.996094 114.753906c-1.769531 1.878906-3.023437 4.179688-3.640625 6.683594l-20.824219 84.351562zm68.132812 139.332032c-.71875.660156-1.441406 1.25-2.164062 1.792968l19.320312-78.25 35.144532 28.300782zm265.390625-344.566406-71.011719 350.644531c-.683593 3.355469-2.867187 11.164062-8.480468 11.164062-2.773438 0-6.257813-1.511719-9.824219-4.257812l-91.390625-73.585938c-.011719-.011719-.027344-.023437-.042969-.03125l-54.378906-43.789062 156.175781-165.949219c5-5.3125 5.453125-13.449219 1.074219-19.285156-4.382813-5.835938-12.324219-7.671875-18.820313-4.351563l-256.867187 131.226563-91.121094-26.070313 433.265625-165.390625c3.660156-1.398437 6.214844-1.691406 7.710938-1.691406.917968 0 2.550781.109375 3.15625.855469.796875.972656 1.8125 4.289062.554687 10.511719zm0 0"  fill="white"/></svg>
+                    <svg height="50px" viewBox="0 -39 512.00011 512" width="50px" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="m504.09375 11.859375c-6.253906-7.648437-15.621094-11.859375-26.378906-11.859375-5.847656 0-12.042969 1.230469-18.410156 3.664062l-433.398438 165.441407c-23 8.777343-26.097656 21.949219-25.8984375 29.019531s4.0390625 20.046875 27.4999995 27.511719c.140626.042969.28125.085937.421876.125l89.898437 25.726562 48.617187 139.023438c6.628907 18.953125 21.507813 30.726562 38.835938 30.726562 10.925781 0 21.671875-4.578125 31.078125-13.234375l55.605469-51.199218 80.652344 64.941406c.007812.007812.019531.011718.027343.019531l.765625.617187c.070313.054688.144532.113282.214844.167969 8.964844 6.953125 18.75 10.625 28.308594 10.628907h.003906c18.675781 0 33.546875-13.824219 37.878906-35.214844l71.011719-350.640625c2.851563-14.074219.460937-26.667969-6.734375-35.464844zm-356.191406 234.742187 173.441406-88.605468-107.996094 114.753906c-1.769531 1.878906-3.023437 4.179688-3.640625 6.683594l-20.824219 84.351562zm68.132812 139.332032c-.71875.660156-1.441406 1.25-2.164062 1.792968l19.320312-78.25 35.144532 28.300782zm265.390625-344.566406-71.011719 350.644531c-.683593 3.355469-2.867187 11.164062-8.480468 11.164062-2.773438 0-6.257813-1.511719-9.824219-4.257812l-91.390625-73.585938c-.011719-.011719-.027344-.023437-.042969-.03125l-54.378906-43.789062 156.175781-165.949219c5-5.3125 5.453125-13.449219 1.074219-19.285156-4.382813-5.835938-12.324219-7.671875-18.820313-4.351563l-256.867187 131.226563-91.121094-26.070313 433.265625-165.390625c3.660156-1.398437 6.214844-1.691406 7.710938-1.691406.917968 0 2.550781.109375 3.15625.855469.796875.972656 1.8125 4.289062.554687 10.511719zm0 0"
+                            fill="white" />
+                    </svg>
                 </a>
                 <a href="">
-                    <svg height="50px" viewBox="-23 -21 682 682.66669" width="50px" xmlns="http://www.w3.org/2000/svg"><path d="m544.386719 93.007812c-59.875-59.945312-139.503907-92.9726558-224.335938-93.007812-174.804687 0-317.070312 142.261719-317.140625 317.113281-.023437 55.894531 14.578125 110.457031 42.332032 158.550781l-44.992188 164.335938 168.121094-44.101562c46.324218 25.269531 98.476562 38.585937 151.550781 38.601562h.132813c174.785156 0 317.066406-142.273438 317.132812-317.132812.035156-84.742188-32.921875-164.417969-92.800781-224.359376zm-224.335938 487.933594h-.109375c-47.296875-.019531-93.683594-12.730468-134.160156-36.742187l-9.621094-5.714844-99.765625 26.171875 26.628907-97.269531-6.269532-9.972657c-26.386718-41.96875-40.320312-90.476562-40.296875-140.28125.054688-145.332031 118.304688-263.570312 263.699219-263.570312 70.40625.023438 136.589844 27.476562 186.355469 77.300781s77.15625 116.050781 77.132812 186.484375c-.0625 145.34375-118.304687 263.59375-263.59375 263.59375zm144.585938-197.417968c-7.921875-3.96875-46.882813-23.132813-54.148438-25.78125-7.257812-2.644532-12.546875-3.960938-17.824219 3.96875-5.285156 7.929687-20.46875 25.78125-25.09375 31.066406-4.625 5.289062-9.242187 5.953125-17.167968 1.984375-7.925782-3.964844-33.457032-12.335938-63.726563-39.332031-23.554687-21.011719-39.457031-46.960938-44.082031-54.890626-4.617188-7.9375-.039062-11.8125 3.476562-16.171874 8.578126-10.652344 17.167969-21.820313 19.808594-27.105469 2.644532-5.289063 1.320313-9.917969-.664062-13.882813-1.976563-3.964844-17.824219-42.96875-24.425782-58.839844-6.4375-15.445312-12.964843-13.359374-17.832031-13.601562-4.617187-.230469-9.902343-.277344-15.1875-.277344-5.28125 0-13.867187 1.980469-21.132812 9.917969-7.261719 7.933594-27.730469 27.101563-27.730469 66.105469s28.394531 76.683594 32.355469 81.972656c3.960937 5.289062 55.878906 85.328125 135.367187 119.648438 18.90625 8.171874 33.664063 13.042968 45.175782 16.695312 18.984374 6.03125 36.253906 5.179688 49.910156 3.140625 15.226562-2.277344 46.878906-19.171875 53.488281-37.679687 6.601563-18.511719 6.601563-34.375 4.617187-37.683594-1.976562-3.304688-7.261718-5.285156-15.183593-9.253906zm0 0" fill-rule="evenodd" fill="white"/></svg>
+                    <svg height="50px" viewBox="-23 -21 682 682.66669" width="50px" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="m544.386719 93.007812c-59.875-59.945312-139.503907-92.9726558-224.335938-93.007812-174.804687 0-317.070312 142.261719-317.140625 317.113281-.023437 55.894531 14.578125 110.457031 42.332032 158.550781l-44.992188 164.335938 168.121094-44.101562c46.324218 25.269531 98.476562 38.585937 151.550781 38.601562h.132813c174.785156 0 317.066406-142.273438 317.132812-317.132812.035156-84.742188-32.921875-164.417969-92.800781-224.359376zm-224.335938 487.933594h-.109375c-47.296875-.019531-93.683594-12.730468-134.160156-36.742187l-9.621094-5.714844-99.765625 26.171875 26.628907-97.269531-6.269532-9.972657c-26.386718-41.96875-40.320312-90.476562-40.296875-140.28125.054688-145.332031 118.304688-263.570312 263.699219-263.570312 70.40625.023438 136.589844 27.476562 186.355469 77.300781s77.15625 116.050781 77.132812 186.484375c-.0625 145.34375-118.304687 263.59375-263.59375 263.59375zm144.585938-197.417968c-7.921875-3.96875-46.882813-23.132813-54.148438-25.78125-7.257812-2.644532-12.546875-3.960938-17.824219 3.96875-5.285156 7.929687-20.46875 25.78125-25.09375 31.066406-4.625 5.289062-9.242187 5.953125-17.167968 1.984375-7.925782-3.964844-33.457032-12.335938-63.726563-39.332031-23.554687-21.011719-39.457031-46.960938-44.082031-54.890626-4.617188-7.9375-.039062-11.8125 3.476562-16.171874 8.578126-10.652344 17.167969-21.820313 19.808594-27.105469 2.644532-5.289063 1.320313-9.917969-.664062-13.882813-1.976563-3.964844-17.824219-42.96875-24.425782-58.839844-6.4375-15.445312-12.964843-13.359374-17.832031-13.601562-4.617187-.230469-9.902343-.277344-15.1875-.277344-5.28125 0-13.867187 1.980469-21.132812 9.917969-7.261719 7.933594-27.730469 27.101563-27.730469 66.105469s28.394531 76.683594 32.355469 81.972656c3.960937 5.289062 55.878906 85.328125 135.367187 119.648438 18.90625 8.171874 33.664063 13.042968 45.175782 16.695312 18.984374 6.03125 36.253906 5.179688 49.910156 3.140625 15.226562-2.277344 46.878906-19.171875 53.488281-37.679687 6.601563-18.511719 6.601563-34.375 4.617187-37.683594-1.976562-3.304688-7.261718-5.285156-15.183593-9.253906zm0 0"
+                            fill-rule="evenodd" fill="white" />
+                    </svg>
                 </a>
                 <a href="">
-                    <svg id="Bold" enable-background="new 0 0 24 24" height="50px" viewBox="0 0 24 24" width="50px" xmlns="http://www.w3.org/2000/svg"><path d="m23.155 13.893c.716-6.027-.344-9.832-2.256-11.553l.001-.001c-3.086-2.939-13.508-3.374-17.2.132-1.658 1.715-2.242 4.232-2.306 7.348-.064 3.117-.14 8.956 5.301 10.54h.005l-.005 2.419s-.037.98.589 1.177c.716.232 1.04-.223 3.267-2.883 3.724.323 6.584-.417 6.909-.525.752-.252 5.007-.815 5.695-6.654zm-12.237 5.477s-2.357 2.939-3.09 3.702c-.24.248-.503.225-.499-.267 0-.323.018-4.016.018-4.016-4.613-1.322-4.341-6.294-4.291-8.895.05-2.602.526-4.733 1.93-6.168 3.239-3.037 12.376-2.358 14.704-.17 2.846 2.523 1.833 9.651 1.839 9.894-.585 4.874-4.033 5.183-4.667 5.394-.271.09-2.786.737-5.944.526z"/><path d="m12.222 4.297c-.385 0-.385.6 0 .605 2.987.023 5.447 2.105 5.474 5.924 0 .403.59.398.585-.005h-.001c-.032-4.115-2.718-6.501-6.058-6.524z"/><path d="m16.151 10.193c-.009.398.58.417.585.014.049-2.269-1.35-4.138-3.979-4.335-.385-.028-.425.577-.041.605 2.28.173 3.481 1.729 3.435 3.716z"/><path d="m15.521 12.774c-.494-.286-.997-.108-1.205.173l-.435.563c-.221.286-.634.248-.634.248-3.014-.797-3.82-3.951-3.82-3.951s-.037-.427.239-.656l.544-.45c.272-.216.444-.736.167-1.247-.74-1.337-1.237-1.798-1.49-2.152-.266-.333-.666-.408-1.082-.183h-.009c-.865.506-1.812 1.453-1.509 2.428.517 1.028 1.467 4.305 4.495 6.781 1.423 1.171 3.675 2.371 4.631 2.648l.009.014c.942.314 1.858-.67 2.347-1.561v-.007c.217-.431.145-.839-.172-1.106-.562-.548-1.41-1.153-2.076-1.542z"/><path d="m13.169 8.104c.961.056 1.427.558 1.477 1.589.018.403.603.375.585-.028-.064-1.346-.766-2.096-2.03-2.166-.385-.023-.421.582-.032.605z"/></svg>
+                    <svg id="Bold" enable-background="new 0 0 24 24" height="50px" viewBox="0 0 24 24" width="50px"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="m23.155 13.893c.716-6.027-.344-9.832-2.256-11.553l.001-.001c-3.086-2.939-13.508-3.374-17.2.132-1.658 1.715-2.242 4.232-2.306 7.348-.064 3.117-.14 8.956 5.301 10.54h.005l-.005 2.419s-.037.98.589 1.177c.716.232 1.04-.223 3.267-2.883 3.724.323 6.584-.417 6.909-.525.752-.252 5.007-.815 5.695-6.654zm-12.237 5.477s-2.357 2.939-3.09 3.702c-.24.248-.503.225-.499-.267 0-.323.018-4.016.018-4.016-4.613-1.322-4.341-6.294-4.291-8.895.05-2.602.526-4.733 1.93-6.168 3.239-3.037 12.376-2.358 14.704-.17 2.846 2.523 1.833 9.651 1.839 9.894-.585 4.874-4.033 5.183-4.667 5.394-.271.09-2.786.737-5.944.526z" />
+                        <path
+                            d="m12.222 4.297c-.385 0-.385.6 0 .605 2.987.023 5.447 2.105 5.474 5.924 0 .403.59.398.585-.005h-.001c-.032-4.115-2.718-6.501-6.058-6.524z" />
+                        <path
+                            d="m16.151 10.193c-.009.398.58.417.585.014.049-2.269-1.35-4.138-3.979-4.335-.385-.028-.425.577-.041.605 2.28.173 3.481 1.729 3.435 3.716z" />
+                        <path
+                            d="m15.521 12.774c-.494-.286-.997-.108-1.205.173l-.435.563c-.221.286-.634.248-.634.248-3.014-.797-3.82-3.951-3.82-3.951s-.037-.427.239-.656l.544-.45c.272-.216.444-.736.167-1.247-.74-1.337-1.237-1.798-1.49-2.152-.266-.333-.666-.408-1.082-.183h-.009c-.865.506-1.812 1.453-1.509 2.428.517 1.028 1.467 4.305 4.495 6.781 1.423 1.171 3.675 2.371 4.631 2.648l.009.014c.942.314 1.858-.67 2.347-1.561v-.007c.217-.431.145-.839-.172-1.106-.562-.548-1.41-1.153-2.076-1.542z" />
+                        <path
+                            d="m13.169 8.104c.961.056 1.427.558 1.477 1.589.018.403.603.375.585-.028-.064-1.346-.766-2.096-2.03-2.166-.385-.023-.421.582-.032.605z" />
+                    </svg>
                 </a>
             </div>
         </div>
     </div>
-    <p>Данный интернет-сайт носит информационный характер и ни при каких условиях не является публичной офертой, которая определяется положениями Статьи 437 (2) Гражданского кодекса РФ. Для получения подробной информации о наличии и стоимости указанных товаров и (или) услуг, пожалуйста, обращайтесь к нашим менеджерам по email или по телефону.
+    <p>Данный интернет-сайт носит информационный характер и ни при каких условиях не является публичной офертой, которая
+        определяется положениями Статьи 437 (2) Гражданского кодекса РФ. Для получения подробной информации о наличии и
+        стоимости указанных товаров и (или) услуг, пожалуйста, обращайтесь к нашим менеджерам по email или по телефону.
         РемТул © 2020</p>
 </footer>

@@ -17,11 +17,17 @@ export class ToolPageComponent implements OnInit {
 
   id: string;
   res$;
-  pricelist;
+  pricelist$: string[] = [];
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {
       this.res$ = data["res"];
+      console.log(this.res$)
+      for (let i = 0; i < data["res"].serves.length; i++) {
+        this.pricelist$.push(data["res"].serves[i]);
+        this.pricelist$.push(data["res"].costs[i]);
+      }
+      console.log(this.pricelist$);
     });
   }
 }
