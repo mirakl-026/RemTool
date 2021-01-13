@@ -52,30 +52,30 @@ namespace RemTool.Services.MongoDB
                 MainType = toolType.MainType
             };
 
-            string[] mainTypes = new string[]
-            {
-                "Электроинструмент",
-                "Бензоинструмент",
-                "Садовая техника",
-                "Компрессоры",
-                "Генераторы",
-                "Сварочная техника",
-                "Тепловые пушки",
-                "Техника для отдыха"
-            };
+            //string[] mainTypes = new string[]
+            //{
+            //    "Электроинструмент",
+            //    "Бензоинструмент",
+            //    "Садовая техника",
+            //    "Компрессоры",
+            //    "Генераторы",
+            //    "Сварочная техника",
+            //    "Тепловые пушки",
+            //    "Техника для отдыха"
+            //};
 
             List<string> ttsKeyWords = new List<string>();   
 
             // Add All Key Words
             ttsKeyWords.Add(toolType.Name.ToUpper()); // ToolType.Name
 
-            for (int i = 0; i < mainTypes.Length; i++)
-            {
-                if (toolType.MainType[i] == true)
-                {
-                    ttsKeyWords.Add(mainTypes[i].ToUpper() + " ");  // ToolType.MainType
-                }
-            }
+            //for (int i = 0; i < mainTypes.Length; i++)
+            //{
+            //    if (toolType.MainType[i] == true)
+            //    {
+            //        ttsKeyWords.Add(mainTypes[i].ToUpper() + " ");  // ToolType.MainType
+            //    }
+            //}
 
             foreach(var brand in toolType.Brands)
             {
@@ -101,30 +101,30 @@ namespace RemTool.Services.MongoDB
                 MainType = toolType.MainType
             };
 
-            string[] mainTypes = new string[]
-            {
-                "Электроинструмент",
-                "Бензоинструмент",
-                "Садовая техника",
-                "Компрессоры",
-                "Генераторы",
-                "Сварочная техника",
-                "Тепловые пушки",
-                "Техника для отдыха"
-            };
+            //string[] mainTypes = new string[]
+            //{
+            //    "Электроинструмент",
+            //    "Бензоинструмент",
+            //    "Садовая техника",
+            //    "Компрессоры",
+            //    "Генераторы",
+            //    "Сварочная техника",
+            //    "Тепловые пушки",
+            //    "Техника для отдыха"
+            //};
 
             List<string> ttsKeyWords = new List<string>();   
 
             // Add All Key Words
             ttsKeyWords.Add(toolType.Name.ToUpper()); // ToolType.Name
 
-            for (int i = 0; i < mainTypes.Length; i++)
-            {
-                if (toolType.MainType[i] == true)
-                {
-                    ttsKeyWords.Add(mainTypes[i].ToUpper() + " ");  // ToolType.MainType
-                }
-            }
+            //for (int i = 0; i < mainTypes.Length; i++)
+            //{
+            //    if (toolType.MainType[i] == true)
+            //    {
+            //        ttsKeyWords.Add(mainTypes[i].ToUpper() + " ");  // ToolType.MainType
+            //    }
+            //}
 
             foreach(var brand in toolType.Brands)
             {
@@ -152,30 +152,30 @@ namespace RemTool.Services.MongoDB
                 MainType = tt.MainType
             };
 
-            string[] mainTypes = new string[]
-            {
-                "Электроинструмент",
-                "Бензоинструмент",
-                "Садовая техника",
-                "Компрессоры",
-                "Генераторы",
-                "Сварочная техника",
-                "Тепловые пушки",
-                "Техника для отдыха"
-            };
+            //string[] mainTypes = new string[]
+            //{
+            //    "Электроинструмент",
+            //    "Бензоинструмент",
+            //    "Садовая техника",
+            //    "Компрессоры",
+            //    "Генераторы",
+            //    "Сварочная техника",
+            //    "Тепловые пушки",
+            //    "Техника для отдыха"
+            //};
 
             List<string> ttsKeyWords = new List<string>();   
 
             // Add All Key Words
             ttsKeyWords.Add(tt.Name.ToUpper()); // ToolType.Name
 
-            for (int i = 0; i < mainTypes.Length; i++)
-            {
-                if (tt.MainType[i] == true)
-                {
-                    ttsKeyWords.Add(mainTypes[i].ToUpper() + " ");  // ToolType.MainType
-                }
-            }
+            //for (int i = 0; i < mainTypes.Length; i++)
+            //{
+            //    if (tt.MainType[i] == true)
+            //    {
+            //        ttsKeyWords.Add(mainTypes[i].ToUpper() + " ");  // ToolType.MainType
+            //    }
+            //}
 
             foreach(var brand in tt.Brands)
             {
@@ -203,30 +203,30 @@ namespace RemTool.Services.MongoDB
                 MainType = tt.MainType
             };
 
-            string[] mainTypes = new string[]
-            {
-                "Электроинструмент",
-                "Бензоинструмент",
-                "Садовая техника",
-                "Компрессоры",
-                "Генераторы",
-                "Сварочная техника",
-                "Тепловые пушки",
-                "Техника для отдыха"
-            };
+            //string[] mainTypes = new string[]
+            //{
+            //    "Электроинструмент",
+            //    "Бензоинструмент",
+            //    "Садовая техника",
+            //    "Компрессоры",
+            //    "Генераторы",
+            //    "Сварочная техника",
+            //    "Тепловые пушки",
+            //    "Техника для отдыха"
+            //};
 
             List<string> ttsKeyWords = new List<string>();   
 
             // Add All Key Words
             ttsKeyWords.Add(tt.Name.ToUpper()); // ToolType.Name
 
-            for (int i = 0; i < mainTypes.Length; i++)
-            {
-                if (tt.MainType[i] == true)
-                {
-                    ttsKeyWords.Add(mainTypes[i].ToUpper() + " ");  // ToolType.MainType
-                }
-            }
+            //for (int i = 0; i < mainTypes.Length; i++)
+            //{
+            //    if (tt.MainType[i] == true)
+            //    {
+            //        ttsKeyWords.Add(mainTypes[i].ToUpper() + " ");  // ToolType.MainType
+            //    }
+            //}
 
             foreach(var brand in tt.Brands)
             {
