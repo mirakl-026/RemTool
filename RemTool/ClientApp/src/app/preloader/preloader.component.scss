@@ -1,6 +1,6 @@
 .preloader {
   z-index: 999;
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translateX(-50%);
@@ -8,7 +8,7 @@
 }
 
 #cube-loader {
-  position: fixed;
+  position: absolute;
   left: 50%;
   transform: translateX(-50%);
   align-items: center;

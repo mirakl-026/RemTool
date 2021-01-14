@@ -135,18 +135,30 @@ export class MainLayoutComponent implements OnInit {
     }
   }
   searchFocuse: boolean;
+  resultHover: boolean;
+  searchPreloader: boolean;
   mainTypes: string[] = ['electro', 'benzo', 'garden', 'compressor', 'generator', 'welding', 'heatgun', 'rest'];
   searchMainTypes$: any[] = [];
   searchTypes$: string[] = [];
   searchIds$: string[] = [];
+
+  searchFocuseSet(e){
+    if(this.resultHover) {
+      if(e == 'focus'){
+
+      }
+    }
+  }
 
   // preloader: boolean = this.preloaderService.isLoading();
 
   searchTool(data){
     // console.log(this.searchForm.value.data);
     if (!!this.searchForm.value.data) {
+      this.searchPreloader = true;
+      console.log(this.searchForm.value.data);
       this.http.get("api/search/find?userInput=" + encodeURI(this.searchForm.value.data)).subscribe(res => {
-        // console.log(res);
+        console.log(res);
         this.searchMainTypes$ = [];
         this.searchTypes$ = res["includedTypes"];
         this.searchIds$ = res["includedIds"];
@@ -159,9 +171,16 @@ export class MainLayoutComponent implements OnInit {
             }
           }
         }
+        this.searchPreloader = false;
         // console.log(this.searchMainTypes$);
       })
     }
+  }
+
+  resetSearch(){
+    this.searchForm.value.data = '';
+    document.getElementById('search').focus();
+    // document.querySelector('#search').focus();
   }
 
   // showPreloader() {

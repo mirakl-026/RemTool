@@ -32,10 +32,10 @@ export class ToolsPageComponent implements OnInit {
     this.route.params.pipe(
       takeUntil(this.destroy$))
       .subscribe(params => {
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth"
-        });    
+        // window.scrollTo({
+        //   top: 0,
+        //   behavior: "smooth"
+        // });    
         this.type = params.type;
         console.log(this.type);
         this.preloader = true;

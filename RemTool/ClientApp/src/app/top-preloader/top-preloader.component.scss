@@ -1,7 +1,7 @@
 .top-preloader {
     z-index: 999;
-    position: fixed;
-    height: 4px;
+    position: absolute;
+    height: 2px;
     background-color: var(--orange-color);
     top: 0;
     animation: preloader 2s infinite ease-in-out;
@@ -12,8 +12,11 @@
         left: 0;
         width: 0;
     }
+    50% {
+        width: 50%;
+    }
     to {
-        left: 100vw;
-        width: 100vw;
+        left: 100%;
+        width: 0;
     }
 }

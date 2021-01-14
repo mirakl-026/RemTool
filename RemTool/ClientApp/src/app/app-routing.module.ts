@@ -8,6 +8,7 @@ import { MainLayoutComponent } from './shared/main-layout/main-layout.component'
 import { ToolPageComponent } from './tool-page/tool-page.component';
 import { ToolsPageComponent } from './tools-page/tools-page.component';
 import { AllToolsPageComponent } from './all-tools-page/all-tools-page.component';
+import { FormControlDirective } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -51,8 +52,12 @@ const routes: Routes = [
   }
 ];
 
+
+
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    scrollPositionRestoration: 'enabled'
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

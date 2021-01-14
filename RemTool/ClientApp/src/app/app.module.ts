@@ -22,9 +22,12 @@ import { WeRepairBlockComponent } from './shared/we-repair-block/we-repair-block
 import { TopPreloaderComponent } from './top-preloader/top-preloader.component';
 import { PreloaderService } from './shared/preloader.service';
 import { SendRequestComponent } from './send-request/send-request.component';
+import { filter } from 'rxjs/operators';
+import { Scroll } from '@angular/router';
 
 @NgModule({
   declarations: [
+    
     AppComponent,
     MainLayoutComponent,
     MainPageComponent,

@@ -12,4 +12,7 @@ export class SendRequestComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  sendRequest(){
+    
+  }
 }
