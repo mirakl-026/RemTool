@@ -10,7 +10,7 @@
     &__image {
         width: 100%;
         max-width: 200px;
-        margin: 0 auto;
+        margin: 10px auto;
         text-align: center;
     }
     &__pricelist {
@@ -21,7 +21,7 @@
         width: 100%;
         max-width: 800px;
         background-color: var(--grey-color);
-        padding: 10px 0;
+        // padding: 10px 0;
         border-radius: 6px;
         box-sizing: border-box;
         // max-width: 100%;
@@ -40,11 +40,20 @@
             display: flex;
             justify-content: space-between;
             padding: 6px 10px;
+            & div:nth-of-type(1) {
+                margin-right: 10px;
+            }
             &:not(:nth-last-of-type(1)) {
                 border-bottom: 1px solid var(--light-color);
             }
+            &:nth-of-type(1) {
+                padding-top: 16px;
+            }
+            &:nth-last-of-type(1) {
+                padding-bottom: 16px;
+            }
             &:hover {
-                background-color: var(--dark-grey-color);
+                background-color: #e3e6f5;
             }
         }
 }
