@@ -41,9 +41,15 @@ namespace RemTool.Controllers
         [HttpPut]
         public IActionResult UpdateRtMailSettings(RtMailSettings mailSettings)
         {
-            _db.UpdateRtMailSettings(mailSettings);
-            return Ok();
-
+            if (mailSettings != null)
+            {
+                _db.UpdateRtMailSettings(mailSettings);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         //[HttpDelete]
@@ -59,57 +65,113 @@ namespace RemTool.Controllers
         [HttpPut("ChangeHQeMail")]
         public IActionResult ChangeHQeMail(string eMail)
         {
-            _db.ChangeHQeMail(eMail);
-            return Ok();
+            if (eMail != null)
+            {
+                _db.ChangeHQeMail(eMail);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         [HttpPut("ChangeFlag_notificationToHQ")]
-        public IActionResult ChangeFlag_notificationToHQ(bool value)
+        public IActionResult ChangeFlag_notificationToHQ(bool? value)
         {
-            _db.ChangeFlag_notificationToHQ(value);
-            return Ok();
+            if (value.HasValue)
+            {
+                _db.ChangeFlag_notificationToHQ(value.Value);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         [HttpPut("ChangeFlag_notificationToClient")]
-        public IActionResult ChangeFlag_notificationToClient(bool value)
+        public IActionResult ChangeFlag_notificationToClient(bool? value)
         {
-            _db.ChangeFlag_notificationToClient(value);
-            return Ok();
+            if (value.HasValue)
+            {
+                _db.ChangeFlag_notificationToClient(value.Value);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         [HttpPut("ChangeDefaultMessageToClient")]
         public IActionResult ChangeDefaultMessageToClient(string message)
         {
-            _db.ChangeDefaultMessageToClient(message);
-            return Ok();
+            if (message != null)
+            {
+                _db.ChangeDefaultMessageToClient(message);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         [HttpPut("ChangeCredentials_Name")]
         public IActionResult ChangeCredentials_Name(string credentialsName)
         {
-            _db.ChangeCredentials_Name(credentialsName);
-            return Ok();
+            if (credentialsName != null)
+            {
+                _db.ChangeCredentials_Name(credentialsName);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         [HttpPut("ChangeCredentials_Pass")]
         public IActionResult ChangeCredentials_Pass(string credentialsPass)
         {
-            _db.ChangeCredentials_Pass(credentialsPass);
-            return Ok();
+            if (credentialsPass != null)
+            {
+                _db.ChangeCredentials_Pass(credentialsPass);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         [HttpPut("ChangeSmtpServer_Host")]
         public IActionResult ChangeSmtpServer_Host(string smtp_host)
         {
-            _db.ChangeSmtpServer_Host(smtp_host);
-            return Ok();
+            if (smtp_host != null)
+            {
+                _db.ChangeSmtpServer_Host(smtp_host);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         [HttpPut("ChangeSmtpServer_Port")]
         public IActionResult ChangeSmtpServer_Port(string smtp_port)
         {
-            _db.ChangeSmtpServer_Port(smtp_port);
-            return Ok();
+            if (smtp_port != null)
+            {
+                _db.ChangeSmtpServer_Port(smtp_port);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
     }
 }
