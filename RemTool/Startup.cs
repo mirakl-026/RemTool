@@ -20,6 +20,7 @@ using RemTool.Infrastructure.Interfaces.Services;
 using RemTool.Infrastructure.Additional;
 using RemTool.Services.MongoDB;
 using RemTool.Services.FileSystem;
+using RemTool.Services.Additional;
 using Microsoft.Extensions.FileProviders;
 
 
@@ -51,6 +52,7 @@ namespace RemTool
 
 
             services.AddSingleton<IRtMailSettingsService, RtMailSettingsService>();
+            services.AddSingleton<RtMailMessageService>();
             services.AddTransient<IFileImageService, FileImageService>();
             services.AddSingleton<ISparePartService, SparePartService>();
             services.AddSingleton<IToolTypeService, ToolTypeService>();
@@ -106,7 +108,7 @@ namespace RemTool
             }
 
             InitMainFolders(env.WebRootPath, env.ContentRootPath);
-            InitMailSettings();
+            InitRtMailSettings();
 
             app.UseStaticFiles();
             if (!env.IsDevelopment())
@@ -181,9 +183,9 @@ namespace RemTool
             }
         }
 
-        public void InitMailSettings()
+        public void InitRtMailSettings()
         {
-            var currentMailSettings = 
+            
         }
     }
 }
