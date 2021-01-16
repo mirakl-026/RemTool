@@ -15,21 +15,21 @@ namespace RemTool.Models
         public string Id { get; set; }
 
         // флаг об отправке оповещений на почту админа
-        public bool SendMailToHQ { get; set; }
+        public bool SendNotificationToHQ { get; set; }
 
         // почта админа для оповещений
-        public string HQ_mail { get; set; }
+        public string HQeMail { get; set; }
 
-        // флаг об отправке на почту запросящего
-        public bool SendMailToRequester { get; set; }
+        // флаг об отправке на почту клиенту
+        public bool SendNotificationToClient { get; set; }
 
         // сообщение по умолчанию в письме запросящему
-        public string DefaultMessageToRequester { get; set; }
+        public string DefaultMessageToClient { get; set; }
 
 
         // почта за счёт которой идёт отправка
-        public string senderMail { get; set; }
+        public string sender_eMail { get; set; }
 
-        public string senderPass { get; set; }
+        public string sender_Pass { get; set; }
     }
 }
