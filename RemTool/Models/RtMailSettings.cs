@@ -8,7 +8,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace RemTool.Models
 {
-    public class MailSettings
+    public class RtMailSettings
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]

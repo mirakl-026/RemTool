@@ -7,20 +7,20 @@ using RemTool.Models;
 
 namespace RemTool.Infrastructure.Interfaces.Services
 {
-    public interface IMailSettingsService
+    public interface IRtMailSettingsService
     {
         // настройки mail существуют в единственном экземпляре, поэтому не нужно беспокоится об id
         #region CRUD_sync
 
-        public void CreateMailSettings(MailSettings mailSettings);
+        public void CreateRtMailSettings(RtMailSettings mailSettings);
 
-        public MailSettings ReadMailSettings();
+        public RtMailSettings ReadRtMailSettings();
 
-        public void UpdateMailSettings(MailSettings newMailSettings);
+        public void UpdateRtMailSettings(RtMailSettings newMailSettings);
 
-        public void UpdateMailSettingsFromCurrent(MailSettings refreshedMailSettings);
+        public void UpdateRtMailSettingsFromCurrent(RtMailSettings refreshedMailSettings);
 
-        public void DeleteMailSettings();
+        public void DeleteRtMailSettings();
 
         #endregion
 

@@ -50,7 +50,7 @@ namespace RemTool
                 sp.GetRequiredService<IOptions<MailSendSettings>>().Value);
 
 
-            services.AddSingleton<IMailSettingsService, MailSettingsService>();
+            services.AddSingleton<IRtMailSettingsService, RtMailSettingsService>();
             services.AddTransient<IFileImageService, FileImageService>();
             services.AddSingleton<ISparePartService, SparePartService>();
             services.AddSingleton<IToolTypeService, ToolTypeService>();
