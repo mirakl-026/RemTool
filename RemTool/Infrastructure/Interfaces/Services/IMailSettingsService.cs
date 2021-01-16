@@ -18,6 +18,8 @@ namespace RemTool.Infrastructure.Interfaces.Services
 
         public void UpdateMailSettings(MailSettings newMailSettings);
 
+        public void UpdateMailSettingsFromCurrent(MailSettings refreshedMailSettings);
+
         public void DeleteMailSettings();
 
         #endregion
