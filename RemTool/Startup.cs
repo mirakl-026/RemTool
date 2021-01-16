@@ -50,6 +50,7 @@ namespace RemTool
                 sp.GetRequiredService<IOptions<MailSendSettings>>().Value);
 
 
+            services.AddSingleton<IMailSettingsService, MailSettingsService>();
             services.AddTransient<IFileImageService, FileImageService>();
             services.AddSingleton<ISparePartService, SparePartService>();
             services.AddSingleton<IToolTypeService, ToolTypeService>();
@@ -105,6 +106,7 @@ namespace RemTool
             }
 
             InitMainFolders(env.WebRootPath, env.ContentRootPath);
+            InitMailSettings();
 
             app.UseStaticFiles();
             if (!env.IsDevelopment())
@@ -177,6 +179,11 @@ namespace RemTool
             {
                 di_backUpArch.Create();
             }
+        }
+
+        public void InitMailSettings()
+        {
+            var currentMailSettings = 
         }
     }
 }
