@@ -42,15 +42,8 @@ namespace RemTool
             services.Configure<RemToolMongoDBsettings>(
                 Configuration.GetSection(nameof(RemToolMongoDBsettings)));
 
-            services.Configure<MailSendSettings>(
-                Configuration.GetSection(nameof(MailSendSettings)));
-
-
             services.AddSingleton<IRemToolMongoDBsettings>(sp =>
                 sp.GetRequiredService<IOptions<RemToolMongoDBsettings>>().Value);
-
-            services.AddSingleton<IMailSendSettings>(sp =>
-                sp.GetRequiredService<IOptions<MailSendSettings>>().Value);
 
 
             services.AddSingleton<IRtMailSettingsService, RtMailSettingsService>();

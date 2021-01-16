@@ -16,81 +16,87 @@ namespace RemTool.Services.Additional
     {
         public void SendEMailMessageToHQ(string HQeMail, RtRequest request, string credentialsName, string credentialsPass, string smtpHost, string smtpPort)
         {
-            try
+            if (!HQeMail.Equals("") && !credentialsName.Equals("") && !credentialsPass.Equals(""))
             {
-                // отправитель - устанавливаем адрес и отображаемое в письме имя
-                MailAddress from = new MailAddress(credentialsName, "RemTool");
-
-                // кому отправляем
-                MailAddress to = new MailAddress(HQeMail);
-
-                // адрес smtp-сервера и порт, с которого будем отправлять письмо
-                SmtpClient smtp = new SmtpClient(smtpHost, int.Parse(smtpPort));
-
-                // создаем объект сообщения
-                using (MailMessage m = new MailMessage(from, to))
+                try
                 {
-                    // тема письма
-                    m.Subject = "Запрос";
+                    // отправитель - устанавливаем адрес и отображаемое в письме имя
+                    MailAddress from = new MailAddress(credentialsName, "RemTool");
 
-                    // текст письма
-                    m.Body = $"<h3>RemTool, запрос от {request.Name}, тел:{request.Phone}: </h3><p>{request.ReqInfo}</p><p>Email:{request.Email}, {request.SendedTime}</p>";
+                    // кому отправляем
+                    MailAddress to = new MailAddress(HQeMail);
 
-                    // письмо представляет код html
-                    m.IsBodyHtml = true;
+                    // адрес smtp-сервера и порт, с которого будем отправлять письмо
+                    SmtpClient smtp = new SmtpClient(smtpHost, int.Parse(smtpPort));
 
-                    // логин и пароль
-                    smtp.Credentials = new NetworkCredential(credentialsPass, credentialsPass);
+                    // создаем объект сообщения
+                    using (MailMessage m = new MailMessage(from, to))
+                    {
+                        // тема письма
+                        m.Subject = "Запрос";
 
-                    smtp.EnableSsl = true;
-                    //smtp.EnableSsl = false;
+                        // текст письма
+                        m.Body = $"<h3>RemTool, запрос от {request.Name}, тел:{request.Phone}: </h3><p>{request.ReqInfo}</p><p>Email:{request.Email}, {request.SendedTime}</p>";
 
-                    smtp.Send(m);
+                        // письмо представляет код html
+                        m.IsBodyHtml = true;
+
+                        // логин и пароль
+                        smtp.Credentials = new NetworkCredential(credentialsPass, credentialsPass);
+
+                        smtp.EnableSsl = true;
+                        //smtp.EnableSsl = false;
+
+                        smtp.Send(m);
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error send mail:" + ex);
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error send mail:" + ex);
+                }
             }
         }
     
         public void SendEMailMessageToClient(string ClientMail, string messageText, string credentialsName, string credentialsPass, string smtpHost, string smtpPort)
         {
-            try
+            if (!ClientMail.Equals("") && !credentialsName.Equals("") && !credentialsPass.Equals(""))
             {
-                // отправитель - устанавливаем адрес и отображаемое в письме имя
-                MailAddress from = new MailAddress(credentialsName, "RemTool");
-
-                // кому отправляем
-                MailAddress to = new MailAddress(ClientMail);
-
-                // адрес smtp-сервера и порт, с которого будем отправлять письмо
-                SmtpClient smtp = new SmtpClient(smtpHost, int.Parse(smtpPort));
-
-                // создаем объект сообщения
-                using (MailMessage m = new MailMessage(from, to))
+                try
                 {
-                    // тема письма
-                    m.Subject = "Запрос";
+                    // отправитель - устанавливаем адрес и отображаемое в письме имя
+                    MailAddress from = new MailAddress(credentialsName, "RemTool");
 
-                    // текст письма
-                    m.Body = $"<h3>{messageText}</h3>";
+                    // кому отправляем
+                    MailAddress to = new MailAddress(ClientMail);
 
-                    // письмо представляет код html
-                    m.IsBodyHtml = true;
+                    // адрес smtp-сервера и порт, с которого будем отправлять письмо
+                    SmtpClient smtp = new SmtpClient(smtpHost, int.Parse(smtpPort));
 
-                    // логин и пароль
-                    smtp.Credentials = new NetworkCredential(credentialsName, credentialsPass);
+                    // создаем объект сообщения
+                    using (MailMessage m = new MailMessage(from, to))
+                    {
+                        // тема письма
+                        m.Subject = "Запрос";
 
-                    smtp.EnableSsl = true;
-                    //smtp.EnableSsl = false;
+                        // текст письма
+                        m.Body = $"<h3>{messageText}</h3>";
 
-                    smtp.Send(m);
+                        // письмо представляет код html
+                        m.IsBodyHtml = true;
+
+                        // логин и пароль
+                        smtp.Credentials = new NetworkCredential(credentialsName, credentialsPass);
+
+                        smtp.EnableSsl = true;
+                        //smtp.EnableSsl = false;
+
+                        smtp.Send(m);
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error send mail:" + ex);
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error send mail:" + ex);
+                }
             }
         }
     }
