@@ -32,8 +32,12 @@ namespace RemTool.Infrastructure.Interfaces.Services
 
         public void ChangeDefaultMessageToClient(string message);
 
-        public void ChangeSender_eMail(string eMail);
+        public void ChangeCredentials_Name(string credentialsName);
 
-        public void ChangeSender_pS(string pS);
+        public void ChangeCredentials_Pass(string credentialsPass);
+
+        public void ChangeSmtpServer_Host(string smtp_host);
+
+        public void ChangeSmtpServer_Port(string smtp_port);
     }
 }

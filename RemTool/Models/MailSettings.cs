@@ -28,8 +28,13 @@ namespace RemTool.Models
 
 
         // почта за счёт которой идёт отправка
-        public string sender_eMail { get; set; }
+        public string Credentials_Name { get; set; }
 
-        public string sender_Pass { get; set; }
+        public string Credentials_Pass { get; set; }
+
+        // SMTP сервер предоставляющий услуги отправки почты
+        public string SmtpServer_Host { get; set; }
+
+        public string SmtpServer_Port { get; set; }
     }
 }
