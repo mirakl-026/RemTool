@@ -32,9 +32,9 @@ namespace RemTool.Services.MongoDB
 
 
         #region CRUD_sync
-        public void CreateRtMailSettings(RtMailSettings mailSettings)
+        public void CreateRtMailSettings(RtMailSettings rtMailSettings)
         {
-            _rtMailSettingsCol.InsertOne(mailSettings);
+            _rtMailSettingsCol.InsertOne(rtMailSettings);
         }
 
         public RtMailSettings ReadRtMailSettings()

@@ -12,13 +12,13 @@ namespace RemTool.Infrastructure.Interfaces.Services
         // настройки mail существуют в единственном экземпляре, поэтому не нужно беспокоится об id
         #region CRUD_sync
 
-        public void CreateRtMailSettings(RtMailSettings mailSettings);
+        public void CreateRtMailSettings(RtMailSettings rtMailSettings);
 
         public RtMailSettings ReadRtMailSettings();
 
-        public void UpdateRtMailSettings(RtMailSettings newMailSettings);
+        public void UpdateRtMailSettings(RtMailSettings newRtMailSettings);
 
-        public void UpdateRtMailSettingsFromCurrent(RtMailSettings refreshedMailSettings);
+        public void UpdateRtMailSettingsFromCurrent(RtMailSettings refreshedRtMailSettings);
 
         public void DeleteRtMailSettings();
 
