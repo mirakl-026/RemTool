@@ -13,9 +13,11 @@ namespace RemTool.Models
 
         public string RefId { get; set; }
 
-        public bool[] MainType { get; set; }
+        public bool[] Categories { get; set; }
 
         // массив ключевых слов для поиска
         public string[] KeyWords{ get; set; } 
+
+        public string[] Services { get; set; }
     }  
 }

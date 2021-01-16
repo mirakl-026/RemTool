@@ -49,45 +49,23 @@ namespace RemTool.Services.MongoDB
             {
                 Name = toolType.Name,
                 RefId = toolType.Id,
-                MainType = toolType.MainType
+                Categories = toolType.MainType,
+                Services = toolType.Serves
             };
 
-            //string[] mainTypes = new string[]
-            //{
-            //    "Электроинструмент",
-            //    "Бензоинструмент",
-            //    "Садовая техника",
-            //    "Компрессоры",
-            //    "Генераторы",
-            //    "Сварочная техника",
-            //    "Тепловые пушки",
-            //    "Техника для отдыха"
-            //};
-
-            List<string> ttsKeyWords = new List<string>();   
+            List<string> keyWords = new List<string>();   
 
             // Add All Key Words
-            ttsKeyWords.Add(toolType.Name.ToUpper()); // ToolType.Name
+            // add name
+            //keyWords.Add(toolType.Name.ToUpper()); // ToolType.Name
 
-            //for (int i = 0; i < mainTypes.Length; i++)
-            //{
-            //    if (toolType.MainType[i] == true)
-            //    {
-            //        ttsKeyWords.Add(mainTypes[i].ToUpper() + " ");  // ToolType.MainType
-            //    }
-            //}
-
-            foreach(var brand in toolType.Brands)
-            {
-                ttsKeyWords.Add(brand.ToUpper() + " ");   // ToolType.Brands
-            }
-
+            // add serves
             foreach(var serve in toolType.Serves)
             {
-                ttsKeyWords.Add(serve.ToUpper() + " ");   // ToolTypes.Serves
+                keyWords.Add(serve.ToUpper() + " ");   // ToolTypes.Serves
             }
 
-            tts.KeyWords = ttsKeyWords.ToArray();
+            tts.KeyWords = keyWords.ToArray();
 
             _toolTypesSearch.InsertOne(tts);           
         }
@@ -98,147 +76,82 @@ namespace RemTool.Services.MongoDB
             {
                 Name = toolType.Name,
                 RefId = toolType.Id,
-                MainType = toolType.MainType
+                Categories = toolType.MainType,
+                Services = toolType.Serves                
             };
 
-            //string[] mainTypes = new string[]
-            //{
-            //    "Электроинструмент",
-            //    "Бензоинструмент",
-            //    "Садовая техника",
-            //    "Компрессоры",
-            //    "Генераторы",
-            //    "Сварочная техника",
-            //    "Тепловые пушки",
-            //    "Техника для отдыха"
-            //};
 
-            List<string> ttsKeyWords = new List<string>();   
+            List<string> keyWords = new List<string>();
 
             // Add All Key Words
-            ttsKeyWords.Add(toolType.Name.ToUpper()); // ToolType.Name
+            // add name
+            //keyWords.Add(toolType.Name.ToUpper()); // ToolType.Name
 
-            //for (int i = 0; i < mainTypes.Length; i++)
-            //{
-            //    if (toolType.MainType[i] == true)
-            //    {
-            //        ttsKeyWords.Add(mainTypes[i].ToUpper() + " ");  // ToolType.MainType
-            //    }
-            //}
-
-            foreach(var brand in toolType.Brands)
-            {
-                ttsKeyWords.Add(brand.ToUpper() + " ");   // ToolType.Brands
-            }
-
+            // add serves
             foreach(var serve in toolType.Serves)
             {
-                ttsKeyWords.Add(serve.ToUpper() + " ");   // ToolTypes.Serves
+                keyWords.Add(serve.ToUpper() + " ");   // ToolTypes.Serves
             }
 
-            tts.KeyWords = ttsKeyWords.ToArray();
+            tts.KeyWords = keyWords.ToArray();
 
             await _toolTypesSearch.InsertOneAsync(tts);   
         }
 
         public void CreateToolTypeSearch(string toolTypeName)
         {
-            ToolType tt = _toolTypes.Find(toolType => toolType.Name.Equals(toolTypeName)).FirstOrDefault();
+            ToolType toolType = _toolTypes.Find(toolType => toolType.Name.Equals(toolTypeName)).FirstOrDefault();
 
             var tts = new ToolTypeSearch
             {
-                Name = tt.Name,
-                RefId = tt.Id,
-                MainType = tt.MainType
+                Name = toolType.Name,
+                RefId = toolType.Id,
+                Categories = toolType.MainType,
+                Services = toolType.Serves
             };
 
-            //string[] mainTypes = new string[]
-            //{
-            //    "Электроинструмент",
-            //    "Бензоинструмент",
-            //    "Садовая техника",
-            //    "Компрессоры",
-            //    "Генераторы",
-            //    "Сварочная техника",
-            //    "Тепловые пушки",
-            //    "Техника для отдыха"
-            //};
-
-            List<string> ttsKeyWords = new List<string>();   
+            List<string> keyWords = new List<string>();
 
             // Add All Key Words
-            ttsKeyWords.Add(tt.Name.ToUpper()); // ToolType.Name
+            // add name
+            //keyWords.Add(toolType.Name.ToUpper()); // ToolType.Name
 
-            //for (int i = 0; i < mainTypes.Length; i++)
-            //{
-            //    if (tt.MainType[i] == true)
-            //    {
-            //        ttsKeyWords.Add(mainTypes[i].ToUpper() + " ");  // ToolType.MainType
-            //    }
-            //}
-
-            foreach(var brand in tt.Brands)
+            // add serves
+            foreach(var serve in toolType.Serves)
             {
-                ttsKeyWords.Add(brand.ToUpper() + " ");   // ToolType.Brands
+                keyWords.Add(serve.ToUpper());   // ToolTypes.Serves
             }
 
-            foreach(var serve in tt.Serves)
-            {
-                ttsKeyWords.Add(serve.ToUpper() + " ");   // ToolTypes.Serves
-            }
-
-            tts.KeyWords = ttsKeyWords.ToArray();
+            tts.KeyWords = keyWords.ToArray();
 
             _toolTypesSearch.InsertOne(tts);     
         }
 
         public async Task CreateToolTypeSearchAsync(string toolTypeName)
         {
-            ToolType tt = await _toolTypes.Find(toolType => toolType.Name.Equals(toolTypeName)).FirstOrDefaultAsync();
+            ToolType toolType = await _toolTypes.Find(toolType => toolType.Name.Equals(toolTypeName)).FirstOrDefaultAsync();
 
             var tts = new ToolTypeSearch
             {
-                Name = tt.Name,
-                RefId = tt.Id,
-                MainType = tt.MainType
+                Name = toolType.Name,
+                RefId = toolType.Id,
+                Categories = toolType.MainType,
+                Services = toolType.Serves
             };
 
-            //string[] mainTypes = new string[]
-            //{
-            //    "Электроинструмент",
-            //    "Бензоинструмент",
-            //    "Садовая техника",
-            //    "Компрессоры",
-            //    "Генераторы",
-            //    "Сварочная техника",
-            //    "Тепловые пушки",
-            //    "Техника для отдыха"
-            //};
-
-            List<string> ttsKeyWords = new List<string>();   
+            List<string> keyWords = new List<string>();   
 
             // Add All Key Words
-            ttsKeyWords.Add(tt.Name.ToUpper()); // ToolType.Name
+            // add name
+            //keyWords.Add(toolType.Name.ToUpper()); // ToolType.Name
 
-            //for (int i = 0; i < mainTypes.Length; i++)
-            //{
-            //    if (tt.MainType[i] == true)
-            //    {
-            //        ttsKeyWords.Add(mainTypes[i].ToUpper() + " ");  // ToolType.MainType
-            //    }
-            //}
-
-            foreach(var brand in tt.Brands)
+            // add serves
+            foreach(var serve in toolType.Serves)
             {
-                ttsKeyWords.Add(brand.ToUpper() + " ");   // ToolType.Brands
+                keyWords.Add(serve.ToUpper());   // ToolTypes.Serves
             }
 
-            foreach(var serve in tt.Serves)
-            {
-                ttsKeyWords.Add(serve.ToUpper() + " ");   // ToolTypes.Serves
-            }
-
-            tts.KeyWords = ttsKeyWords.ToArray();
+            tts.KeyWords = keyWords.ToArray();
 
             await _toolTypesSearch.InsertOneAsync(tts);   
         }
@@ -289,21 +202,45 @@ namespace RemTool.Services.MongoDB
         public string Search(string userInput)
         {
             var upperUserInput = userInput.ToUpper();
-            var ttss = ReadAllToolTypeSearch();
+            var allToolTypesSearch = ReadAllToolTypeSearch();
 
             SearchResults searchResults = new SearchResults();
 
-            foreach(var tts in ttss)
+            foreach(var oneToolTypeSearch in allToolTypesSearch)
             {
-                foreach(var word in tts.KeyWords)
+                // Если пользовательский ввод совпадает с именем типа инструмента
+                if (oneToolTypeSearch.Name.IndexOf(upperUserInput) >= 0 || oneToolTypeSearch.Name.Equals(upperUserInput))
                 {
-                    if (word.IndexOf(upperUserInput) > 0 || word.Equals(upperUserInput))
+                    if (!searchResults.IncludedTypes.Contains(oneToolTypeSearch.Name))
                     {
-                        if (!searchResults.IncludedTypes.Contains(tts.Name))
+                        searchResults.IncludedTypes.Add(oneToolTypeSearch.Name);
+                        searchResults.IncludedIds.Add(oneToolTypeSearch.RefId);
+                        searchResults.IncludedCategories.Add(oneToolTypeSearch.Categories);
+                        searchResults.IncludedServices.Add("_");
+                    }
+                }
+                // если пользовательский ввод совпадает со услугой вутри инструмента
+                else
+                {
+                    foreach (var service in oneToolTypeSearch.Services)
+                    {
+                        var serviceUpper = service.ToUpper();
+                        if (serviceUpper.IndexOf(upperUserInput) >= 0 || serviceUpper.Equals(upperUserInput))
                         {
-                            searchResults.IncludedTypes.Add(tts.Name);
-                            searchResults.IncludedIds.Add(tts.RefId);
-                            searchResults.IncludedSubtypes.Add(tts.MainType);
+                            if (!searchResults.IncludedTypes.Contains(oneToolTypeSearch.Name))
+                            {
+                                searchResults.IncludedTypes.Add(oneToolTypeSearch.Name);
+                                searchResults.IncludedIds.Add(oneToolTypeSearch.RefId);
+                                searchResults.IncludedCategories.Add(oneToolTypeSearch.Categories);
+                                searchResults.IncludedServices.Add(service);
+                            }
+                            else
+                            {
+                                var last = searchResults.IncludedServices.Last();
+                                var added = last + "," + service;
+                                searchResults.IncludedServices.Remove(last);
+                                searchResults.IncludedServices.Add(added);
+                            }
                         }
                     }
                 }
@@ -323,21 +260,45 @@ namespace RemTool.Services.MongoDB
         public async Task<string> SearchAsync(string userInput)
         {
             var upperUserInput = userInput.ToUpper();
-            var ttss = await ReadAllToolTypeSearchAsync();
+            var allToolTypesSearch = await ReadAllToolTypeSearchAsync();
 
             SearchResults searchResults = new SearchResults();
 
-            foreach(var tts in ttss)
+            foreach(var oneToolTypeSearch in allToolTypesSearch)
             {
-                foreach(var word in tts.KeyWords)
+                // Если пользовательский ввод совпадает с именем типа инструмента
+                if (oneToolTypeSearch.Name.IndexOf(upperUserInput) >= 0 || oneToolTypeSearch.Name.Equals(upperUserInput))
                 {
-                    if (word.IndexOf(upperUserInput) >= 0 || word.Equals(upperUserInput))
+                    if (!searchResults.IncludedTypes.Contains(oneToolTypeSearch.Name))
                     {
-                        if (!searchResults.IncludedTypes.Contains(tts.Name))
+                        searchResults.IncludedTypes.Add(oneToolTypeSearch.Name);
+                        searchResults.IncludedIds.Add(oneToolTypeSearch.RefId);
+                        searchResults.IncludedCategories.Add(oneToolTypeSearch.Categories);
+                        searchResults.IncludedServices.Add("_");
+                    }
+                }
+                // если пользовательский ввод совпадает со услугой вутри инструмента
+                else
+                {
+                    foreach (var service in oneToolTypeSearch.Services)
+                    {
+                        var serviceUpper = service.ToUpper();
+                        if (serviceUpper.IndexOf(upperUserInput) >= 0 || serviceUpper.Equals(upperUserInput))
                         {
-                            searchResults.IncludedTypes.Add(tts.Name);
-                            searchResults.IncludedIds.Add(tts.RefId);
-                            searchResults.IncludedSubtypes.Add(tts.MainType);
+                            if (!searchResults.IncludedTypes.Contains(oneToolTypeSearch.Name))
+                            {
+                                searchResults.IncludedTypes.Add(oneToolTypeSearch.Name);
+                                searchResults.IncludedIds.Add(oneToolTypeSearch.RefId);
+                                searchResults.IncludedCategories.Add(oneToolTypeSearch.Categories);
+                                searchResults.IncludedServices.Add(service);
+                            }
+                            else
+                            {
+                                var last = searchResults.IncludedServices.Last();
+                                var added = last + "," + service;
+                                searchResults.IncludedServices.Remove(last);
+                                searchResults.IncludedServices.Add(added);
+                            }
                         }
                     }
                 }
@@ -366,10 +327,13 @@ namespace RemTool.Services.MongoDB
         {
             IncludedTypes = new List<string>();
             IncludedIds = new List<string>();
-            IncludedSubtypes = new List<bool[]>();
+            IncludedCategories = new List<bool[]>();
+            IncludedServices = new List<string>();
         }
         public List<string> IncludedTypes { get; set; }
         public List<string> IncludedIds { get; set; }
-        public List<bool[]> IncludedSubtypes { get; set; }
+        public List<bool[]> IncludedCategories { get; set; }
+        public List<string> IncludedServices { get; set; }
+        
     }
 }
