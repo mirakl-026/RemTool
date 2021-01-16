@@ -22,7 +22,9 @@ using RemTool.Services.MongoDB;
 using RemTool.Services.FileSystem;
 using RemTool.Services.Additional;
 using Microsoft.Extensions.FileProviders;
-
+using MongoDB.Driver;
+using RemTool.Models;
+using MongoDB.Bson;
 
 namespace RemTool
 {
@@ -47,7 +49,7 @@ namespace RemTool
             services.AddSingleton<IRemToolMongoDBsettings>(sp =>
                 sp.GetRequiredService<IOptions<RemToolMongoDBsettings>>().Value);
 
-            services.AddSingleton<IMailSendSettings>(sp => 
+            services.AddSingleton<IMailSendSettings>(sp =>
                 sp.GetRequiredService<IOptions<MailSendSettings>>().Value);
 
 
@@ -185,7 +187,44 @@ namespace RemTool
 
         public void InitRtMailSettings()
         {
-            
+            // первоначальна€ инициализаци€ настроек Mail
+            var client = new MongoClient("mongodb://localhost:27017");
+            var database = client.GetDatabase("RemTool");
+
+            var _rtMailSettingsCol = database.GetCollection<RtMailSettings>("RtMailSettings");
+
+            // проверка существовани€ объекта
+            if (_rtMailSettingsCol.Find(new BsonDocument()).FirstOrDefault() == null)
+            {
+                // если объекта нет - то создать по умолчанию
+                RtMailSettings rtms = new RtMailSettings()
+                {
+                    // флаг об отправке оповещений на почту админа
+                    SendNotificationToHQ = false,
+
+                    // почта админа дл€ оповещений
+                    HQeMail = "",
+
+                    // флаг об отправке на почту клиенту
+                    SendNotificationToClient = false,
+
+                    // сообщение по умолчанию в письме запрос€щему
+                    DefaultMessageToClient = "< h3 > ¬аш запрос передан, с ¬ами св€жутс€...</ h3 >",
+
+                    // почта за счЄт которой идЄт отправка
+                    Credentials_Name = "",
+
+                    Credentials_Pass = "",
+
+                    // SMTP сервер предоставл€ющий услуги отправки почты
+                    SmtpServer_Host = "smtp.mail.ru",
+
+                    SmtpServer_Port = "25"  //465
+                };
+
+                _rtMailSettingsCol.InsertOne(rtms);
+
+            }
         }
     }
 }
