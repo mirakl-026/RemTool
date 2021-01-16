@@ -14,7 +14,7 @@ namespace RemTool.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class RtMailSettingsController : ControllerBase
     {
         private readonly IRtMailSettingsService _db;
