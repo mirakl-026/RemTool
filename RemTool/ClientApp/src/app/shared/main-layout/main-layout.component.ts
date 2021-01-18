@@ -40,6 +40,9 @@ export class MainLayoutComponent implements OnInit {
 
   burger: boolean = false;
   searchPlaceholder: string;
+
+  map: boolean = false;
+
   ngOnInit(): void {
     this.searchForm = new FormGroup({
       data: new FormControl(null, [Validators.minLength(2), Validators.maxLength(20)])
@@ -48,6 +51,13 @@ export class MainLayoutComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.tools = data["res"];
     });
+
+    window.onclick = (e) => {
+      // console.log(e.path)
+      // this.burger = false;
+      // if ((e.target != document.querySelector('.mobile__nav')) &&  (e.path[1] != document.querySelector('#burger'))) {
+      // }
+    }
 
     window.addEventListener('resize', () => {
       if (window.matchMedia("(max-width: 683.98px)").matches) {
@@ -61,6 +71,7 @@ export class MainLayoutComponent implements OnInit {
         this.searchPlaceholder = 'Найти инструмент или бренд';
       }
     });
+    
     if (window.matchMedia("(max-width: 683.98px)").matches) {
       this.searchMobile = true;
     } else {
@@ -181,6 +192,10 @@ export class MainLayoutComponent implements OnInit {
     this.searchForm.value.data = '';
     document.getElementById('search').focus();
     // document.querySelector('#search').focus();
+  }
+
+  ngAfterViewInit(){
+    this.map = true;
   }
 
   // showPreloader() {

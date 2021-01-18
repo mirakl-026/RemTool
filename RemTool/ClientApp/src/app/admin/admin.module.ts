@@ -8,6 +8,8 @@ import { AuthGuard } from '../shared/auth.guard';
 import { ToolTypePageComponent } from '../admin/tooltypes-page/tooltypes-page.component';
 import { SparePartsPageComponent } from '../admin/spareparts-page/spareparts-page.component';
 import { QuillModule } from 'ngx-quill';
+import { SettingsPageComponent } from './settings-page/settings-page.component';
+import { RequestsPageComponent } from './requests-page/requests-page.component';
 
 @NgModule({
     declarations: [
@@ -15,6 +17,8 @@ import { QuillModule } from 'ngx-quill';
         LoginPageComponent,
         ToolTypePageComponent,
         SparePartsPageComponent,
+        SettingsPageComponent,
+        RequestsPageComponent,
         
     ],
     imports: [
@@ -29,8 +33,10 @@ import { QuillModule } from 'ngx-quill';
                     {path: 'login', component: LoginPageComponent},
                     // { path: 'spareparts', component: SparePartsPageComponent },
                     // { path: 'tooltypes', component: ToolTypePageComponent },
-                    { path: 'spareparts', component: SparePartsPageComponent, canActivate: [AuthGuard] },
+                    // { path: 'spareparts', component: SparePartsPageComponent, canActivate: [AuthGuard] },
                     { path: 'tooltypes', component: ToolTypePageComponent, canActivate: [AuthGuard] },
+                    { path: 'settings', component: SettingsPageComponent, canActivate: [AuthGuard] },
+                    { path: 'requests', component: RequestsPageComponent, canActivate: [AuthGuard] },
                 ]
             }
         ])

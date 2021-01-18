@@ -1,0 +1,121 @@
+
+.request-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba($color: #000000, $alpha: 0.6);
+    z-index: 999;
+}
+
+.request-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    // height: 200px;
+    background-color: var(--grey-color);
+    padding: 16px;
+    box-sizing: border-box;
+    border-radius: 6px;
+    &__close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 0;
+        vertical-align: middle;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        outline: none;
+        background: none;
+        border: none;
+        box-sizing: border-box;
+        &::before, &::after {
+            content: '';
+            position: absolute;
+            top: calc(50% - 1px);
+            left: -3px;
+            width: 26px;
+            height: 2px;
+            background-color: var(--dark-color);
+        }
+        &::before {
+            transform: rotate(45deg);
+        }
+        &::after {
+            transform: rotate(-45deg);
+        }
+        &:active {
+            transform: scale(0.9);
+        }
+    }
+    & div {
+        position: relative;
+    }
+    & input, & textarea, &label {
+        width: 100%;
+        padding: 0 16px;
+        height: 40px;
+        border-radius: 6px;
+        font-weight: 600;
+        color: var(--dark-color);
+        box-sizing: border-box;
+        border: 2px solid rgba(0, 0, 0, 0);
+        margin-bottom: 30px;
+        &::-webkit-search-decoration {
+            appearance: none;
+        }
+        &::-moz-focus-inner {
+            border: 0;
+            padding: 0;
+        }
+        &::placeholder {
+            font-family: "Montserrat", sans-serif;
+        }
+        &:focus {
+            outline: none;
+            border: 2px solid var(--orange-color);
+        }
+
+    }
+    
+    & input + span, textarea + span {
+        position: absolute;
+        left: 16px;
+        top: 14px;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 600;
+        transition: font-size 200ms ease, top 200ms ease;
+        color: var(--dark-grey-color);
+    }
+    & input:focus + span, & textarea:focus + span {
+        top: -16px;
+        font-size: 12px;
+    }
+    & input:not(:placeholder-shown) + span,
+    & textarea:not(:placeholder-shown) + span {
+        top: -16px;
+        font-size: 12px;
+    }
+    & textarea {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 600;
+        padding: 10px 16px;
+        height: 150px;
+    }
+}
+
+.request-form__contacts{
+    margin-top: 20px;
+}
+
+@media (hover: hover) {
+    .request-form {
+        top: 50%;
+    }
+}

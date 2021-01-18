@@ -2,9 +2,9 @@
     <!-- <app-top-preloader></app-top-preloader> -->
     <div class="header__topper">
         <span class="header__hours">График работы: пн-пт 10:00-20:00</span>
-        <a class="header__adress" href="https://yandex.ru/maps/-/CCUEb2QElD">Наш адрес: г.Москва, МГСА 256</a>
-        <a class="header__mob-phone" href="tel: +7 (495) 123-45-67">
-            +7 (495) 123-45-67
+        <a class="header__adress" target="_blank" href="https://yandex.ru/maps/-/CCUEb2QElD">Наш адрес: г.Москва, МГСА №256</a>
+        <a class="header__mob-phone" href="tel: +7 (926) 247 86 03">
+            +7(926)247-86-03
         </a>
         <app-send-request></app-send-request>
     </div>
@@ -222,9 +222,9 @@
                 </div>
             </li>
             <li class="header__phone">
-                <a href="tel: +7 (495) 123-45-67">
+                <a href="tel: +7 (926) 247 86 03">
                     <img src="assets/img/phone-icon.svg" alt="">
-                    +7 (495) 123-45-67
+                    +7(926)247-86-03
                 </a>
             </li>
         </ul>
@@ -283,6 +283,7 @@
     </nav>
 
 </header>
+
 <router-outlet></router-outlet>
 
 <footer class="footer">
@@ -290,14 +291,14 @@
     <div class="footer__content">
         <div class="footer__map">
             <div style="position:relative;overflow:hidden;">
-                <a href="https://yandex.ru/maps/org/remont_elektro_benzo_tekhniki/103410214575/?utm_medium=mapframe&utm_source=maps"
+                <!-- <a href="https://yandex.ru/maps/org/remont_elektro_benzo_tekhniki/103410214575/?utm_medium=mapframe&utm_source=maps"
                     style="color:#eee;font-size:12px;position:absolute;top:0px;">Ремонт электро-бензо техники</a>
                 <a href="https://yandex.ru/maps/213/moscow/category/electrical_equipment_repairs/184107046/?utm_medium=mapframe&utm_source=maps"
                     style="color:#eee;font-size:12px;position:absolute;top:14px;">Ремонт электрооборудования в
-                    Москве</a>
-                <a href="https://yandex.ru/maps/213/moscow/category/engine_repairs/184106616/?utm_medium=mapframe&utm_source=maps"
-                    style="color:#eee;font-size:12px;position:absolute;top:28px;">Ремонт двигателей в Москве</a>
-                <iframe src="https://yandex.ru/map-widget/v1/-/CCUEb2Qz0C" width="600" height="280" frameborder="1"
+                    Москве</a> -->
+                <!-- <a href="https://yandex.ru/maps/213/moscow/category/engine_repairs/184106616/?utm_medium=mapframe&utm_source=maps"
+                    style="color:#eee;font-size:12px;position:absolute;top:28px;">Ремонт двигателей в Москве</a> -->
+                <iframe *ngIf="map" src="https://yandex.ru/map-widget/v1/-/CCUEb2Qz0C" width="600" height="280" frameborder="1"
                     allowfullscreen="true" style="position:relative;">
                 </iframe>
             </div>
@@ -313,9 +314,9 @@
             <a [routerLink]="['tools', 'heatgun']">Тепловые пушки</a>
         </div>
         <div class="footer__contacts">
-            <a href="tel: +7 (495) 123-45-67">+7 (495) 123-45-67</a>
+            <a href="tel: +7 (926) 247 86 03">+7(926)247-86-03</a>
             <a href="mailto:remtool@mail.ru">remtool@mail.ru</a>
-            <a href="https://yandex.ru/maps/-/CCUEb2QElD">Наш адрес: г.Москва, МГСА 256</a>
+            <a target="_blank" href="https://yandex.ru/maps/-/CCUEb2QElD">Наш адрес: г.Москва, МГСА №256</a>
             <span>пн-пт 10:00-20:00</span>
             <div class="footer__messengers">
                 <a href="">

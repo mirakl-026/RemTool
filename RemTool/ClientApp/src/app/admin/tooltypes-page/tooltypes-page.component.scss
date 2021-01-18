@@ -1,5 +1,8 @@
 ﻿// @import '~quill/dist/quill.snow.css';
 // @import url('~quill/dist/quill.snow.css');
+@import '../../tools-page/tools-page.component.scss';
+@import '../../shared/main-layout/main-layout.component.scss';
+
 
 h1 {
     margin: 30px 0;
@@ -176,26 +179,27 @@ h1 {
 }
 
 .saved-tool {
-    border-radius: 6px;
-    padding: 10px;
-    position: relative;
-    width: 282px;
-    height: 200px;
-    background-color: var(--grey-color);
-    overflow: hidden;
-    align-content: center;
-    text-align: center;
-    box-sizing: border-box;
-    &__img {
-        // width: 80%;
-        height: 80%;
-    }
-    &__name {
-        margin-top: 10px;
-        // position: absolute;
-        // bottom: 20px;
-    }
+    // border-radius: 6px;
+    // padding: 10px;
+    // position: relative;
+    // width: 282px;
+    // height: 200px;
+    // background-color: var(--grey-color);
+    // overflow: hidden;
+    // align-content: center;
+    // text-align: center;
+    // box-sizing: border-box;
+    // &__img {
+    //     // width: 80%;
+    //     height: 80%;
+    // }
+    // &__name {
+    //     margin-top: 10px;
+    //     // position: absolute;
+    //     // bottom: 20px;
+    // }
     &__btns {
+        opacity: 0.8;
         position: absolute;
         top: 10px;
         right: 10px;

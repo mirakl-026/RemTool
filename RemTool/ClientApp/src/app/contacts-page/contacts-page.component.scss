@@ -1,0 +1,47 @@
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.contacts-wrapper {
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    & a {
+        text-decoration: none;
+        color: var(--dark-color);
+        
+    }
+}
+
+.contacts {
+    &__item:not(:nth-last-of-type(2)) {
+        margin-right: 20px;
+    }
+    &__title {
+        margin-bottom: 12px;
+    }
+    &__text{
+        margin-bottom: 40px;
+    }
+}
+
+.contacts-image {
+    margin: 0 auto;
+    max-width: 70%;
+    text-align: center;
+    & img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.contacts__hours {
+    & tr:not(:last-of-type) {
+        margin-bottom: 6px;
+    }
+    & td {
+        margin-right: 6px;
+    }
+}

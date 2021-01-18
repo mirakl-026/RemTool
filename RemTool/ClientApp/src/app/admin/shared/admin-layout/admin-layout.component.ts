@@ -18,19 +18,33 @@ export class AdminLayoutComponent implements OnInit {
     private http: HttpClient
   ) { }
 
-  ngOnInit(): void {
-  }
-  createBackup() {
-    this.http.get("api/Backup/PackToZip").subscribe();
+  navMobile;
+  burger;
 
-  }
-  restoreSite(){
-    this.http.get("api/Backup/UnpackFromZip").subscribe();
+  ngOnInit(): void {
+    window.addEventListener('resize', () => {
+      if (window.matchMedia("(max-width: 683.98px)").matches) {
+        this.navMobile = true;
+        this.burger = false;
+      } else {
+        this.navMobile = false;
+        this.burger = true;
+      }
+    });
+    
+    if (window.matchMedia("(max-width: 683.98px)").matches) {
+      this.navMobile = true;
+      this.burger = false;
+    } else {
+      this.navMobile = false;
+      this.burger = true;
+    }
   }
   logout($event) {
     event.preventDefault();
     this.auth.logout();
     this.router.navigate(['/admin', 'login']);
+    this.burger = false;
   }
 
 }

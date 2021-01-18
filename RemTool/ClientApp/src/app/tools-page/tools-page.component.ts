@@ -21,6 +21,7 @@ export class ToolsPageComponent implements OnInit {
 
   preloader: boolean = false;
 
+  category: string;
   type;
   res$;
   toolNames$: string[];
@@ -46,35 +47,43 @@ export class ToolsPageComponent implements OnInit {
   getTools() {
     if (this.type == 'electro') {
       this.dataService.getElectroTools().subscribe(data => {
-        this.getRes(data)
+        this.getRes(data);
+        this.category = "Электроинструмент";
       });
     } else if (this.type == 'benzo') {
       this.dataService.getFuelTools().subscribe(data => {
         this.getRes(data)
+        this.category = "Бензоинструмент";
       });
     } else if (this.type == "garden") {
       this.dataService.getGardenTools().subscribe(data => {
         this.getRes(data)
+        this.category = "Садовая техника";
       });
     } else if (this.type == "compressor") {
       this.dataService.getCompressors().subscribe(data => {
         this.getRes(data)
+        this.category = "Компрессоры";
       });
     } else if (this.type == "generator") {
       this.dataService.getGenerators().subscribe(data => {
         this.getRes(data)
+        this.category = "Генераторы";
       });
     } else if (this.type == "welding") {
       this.dataService.getWeldingTools().subscribe(data => {
         this.getRes(data)
+        this.category = "Сварочные аппараты";
       });
     } else if (this.type == "heatgun") {
       this.dataService.getHeatGuns().subscribe(data => {
         this.getRes(data)
+        this.category = "Тепловые пушки";
       });
     } else if (this.type == "rest") {
       this.dataService.getRestTools().subscribe(data => {
         this.getRes(data)
+        this.category = "Техника для отдыха";
       });
     }
   }

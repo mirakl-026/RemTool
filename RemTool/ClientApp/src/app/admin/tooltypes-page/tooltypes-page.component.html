@@ -1,11 +1,11 @@
 <h1>Список инструментов</h1>
 <!-- Список сохраненных инструментов -->
-<div class="saved-tools">
-  <div class="saved-tool" *ngFor="let tt of toolTypes">
-    <img class="saved-tool__img" *ngIf="!!tt.imgRefenrence" src={{tt.imgRefenrence}} alt="">
-    <p class="saved-tool__name">
+<div class="tools-container">
+  <div class="tool" *ngFor="let tt of toolTypes">
+    <h4 class="tool__title">
       {{tt.name}}
-    </p>
+    </h4>
+    <img class="tool__image" *ngIf="!!tt.imgRefenrence" src={{tt.imgRefenrence}} alt="">
     <div class="saved-tool__btns">
       <!-- Кнопка редактирования инструмента -->
       <button class="saved-tools__edit" (click)="editToolType(tt)">
@@ -128,7 +128,7 @@
     <hr>
 
     <!-- Добавление инфо об инструменте -->
-    <quill-editor [(ngModel)]="this.toolType.info"></quill-editor>
+    <!-- <quill-editor [(ngModel)]="this.toolType.info"></quill-editor> -->
 
     <div>
       <button (click)="saveToolType()" class="btn btn-success">

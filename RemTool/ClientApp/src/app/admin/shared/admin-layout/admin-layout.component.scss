@@ -1,5 +1,74 @@
-.navbar {
-    & button {
-        margin-right: 26px;
+.active {
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background-color: var(--orange-color);
     }
+    & a {
+        color: var(--orange-color);
+    }
+}
+
+.nav {
+    &::before {
+        top: 0;
+    }
+    &__item:hover .nav__link {
+        color: var(--orange-color);
+    }
+}
+
+#burger {
+    display: none;
+    &:checked ~ .header__nav_mobile > div:nth-of-type(1) {
+        transform: translateY(15px) rotate(45deg);
+    }
+    &:checked ~ .header__nav_mobile > div:nth-of-type(2) {
+        transform: rotate(45deg);
+    }
+    &:checked ~ .header__nav_mobile > div:nth-of-type(3) {
+        transform: translateY(-15px) rotate(-45deg);
+    }
+}
+
+.header__nav_mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 36px;
+    min-width: 40px;
+    & > div {
+        height: 6px;
+        width: 100%;
+        border-radius: 3px;
+        background-color: var(--dark-color);
+        transition: transform 200ms ease;
+    }
+}
+
+
+@media (max-width: 683.98px) {
+    .nav ul {
+        flex-direction: column;
+        z-index: 5;
+        background: var(--grey-grad);
+        position: absolute;
+        width: auto;
+        height: auto;
+        top: 60px;
+        right: 0;
+        align-items: flex-start;
+    }
+
+    .active {
+        &::after {
+            width: 4px;
+            height: 100%;
+        }
+    }
+    
 }
