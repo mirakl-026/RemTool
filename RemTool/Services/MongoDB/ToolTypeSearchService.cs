@@ -209,7 +209,8 @@ namespace RemTool.Services.MongoDB
             foreach(var oneToolTypeSearch in allToolTypesSearch)
             {
                 // Если пользовательский ввод совпадает с именем типа инструмента
-                if (oneToolTypeSearch.Name.IndexOf(upperUserInput) >= 0 || oneToolTypeSearch.Name.Equals(upperUserInput))
+                var upperName = oneToolTypeSearch.Name.ToUpper();
+                if (upperName.IndexOf(upperUserInput) >= 0 || upperName.Equals(upperUserInput))
                 {
                     if (!searchResults.IncludedTypes.Contains(oneToolTypeSearch.Name))
                     {
@@ -267,7 +268,8 @@ namespace RemTool.Services.MongoDB
             foreach(var oneToolTypeSearch in allToolTypesSearch)
             {
                 // Если пользовательский ввод совпадает с именем типа инструмента
-                if (oneToolTypeSearch.Name.IndexOf(upperUserInput) >= 0 || oneToolTypeSearch.Name.Equals(upperUserInput))
+                var upperName = oneToolTypeSearch.Name.ToUpper();
+                if (upperName.IndexOf(upperUserInput) >= 0 || upperName.Equals(upperUserInput))
                 {
                     if (!searchResults.IncludedTypes.Contains(oneToolTypeSearch.Name))
                     {
