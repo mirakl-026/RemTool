@@ -33,6 +33,7 @@ h2 {
     padding: 10px;
     text-decoration: none;
     color: var(--dark-color);
+    transition: box-shadow 200ms ease;;
     &__title {
         font-size: 18px;
         text-align: center;
@@ -44,6 +45,9 @@ h2 {
         max-height: 80%;
         // width: 100%;
         // size: 100%;
+    }
+    &:hover {
+        box-shadow: var(--shadow);
     }
     // display: block;
 }

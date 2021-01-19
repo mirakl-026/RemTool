@@ -43,7 +43,7 @@ export class AdminLayoutComponent implements OnInit {
   logout($event) {
     event.preventDefault();
     this.auth.logout();
-    this.router.navigate(['/admin', 'login']);
+    this.router.navigate(['/admin', 'login'])
     this.burger = false;
   }
 

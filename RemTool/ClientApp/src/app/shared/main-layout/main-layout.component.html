@@ -211,15 +211,24 @@
                     <p *ngIf="searchTypes$.length < 1">
                         Ничего не найдено
                     </p>
-                    <div *ngFor="let type of searchTypes$; index as i">
-                        <a [routerLink]="['tools', searchMainTypes$[i], searchIds$[i]]"
+                    <h4 *ngIf="types.type.length > 0">Инструменты</h4>
+                    <div *ngFor="let type of types.type; index as i">
+                        <a [routerLink]="['tools', types.category[i], types.id[i]]"
                             (click)="resultHover = false"
                             (mouseover)="resultHover = true"
                             (mouseout)="resultHover = false">
                             {{ type }}
                         </a>
                     </div>
-                </div>
+                    <h4 *ngIf="services.type.length > 0">Услуги</h4>
+                    <div *ngFor="let service of services.type; index as i">
+                        <a [routerLink]="['tools', services.category[i], services.id[i]]"
+                            (click)="resultHover = false"
+                            (mouseover)="resultHover = true"
+                            (mouseout)="resultHover = false">
+                            {{ service }}
+                        </a>
+                    </div>                </div>
             </li>
             <li class="header__phone">
                 <a href="tel: +7 (926) 247 86 03">
@@ -253,12 +262,22 @@
         <p *ngIf="searchTypes$.length < 1">
             Ничего не найдено
         </p>
-        <div *ngFor="let type of searchTypes$; index as i">
-            <a [routerLink]="['tools', searchMainTypes$[i], searchIds$[i]]"
+        <h4 *ngIf="types.type.length > 0">Инструменты</h4>
+        <div *ngFor="let type of types.type; index as i">
+            <a [routerLink]="['tools', types.category[i], types.id[i]]"
                 (click)="resultHover = false"
                 (mouseover)="resultHover = true"
                 (mouseout)="resultHover = false">
                 {{ type }}
+            </a>
+        </div>
+        <h4 *ngIf="services.type.length > 0">Услуги</h4>
+        <div *ngFor="let service of services.type; index as i">
+            <a [routerLink]="['tools', services.category[i], services.id[i]]"
+                (click)="resultHover = false"
+                (mouseover)="resultHover = true"
+                (mouseout)="resultHover = false">
+                {{ service }}
             </a>
         </div>
     </div>

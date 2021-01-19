@@ -3,6 +3,9 @@
 @import '../../tools-page/tools-page.component.scss';
 @import '../../shared/main-layout/main-layout.component.scss';
 
+input {
+    appearance: auto;
+}
 
 h1 {
     margin: 30px 0;

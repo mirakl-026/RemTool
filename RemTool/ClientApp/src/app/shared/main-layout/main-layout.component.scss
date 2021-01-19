@@ -302,12 +302,19 @@ input[type=search] {
 
 .search-result {
     min-height: auto;
+    max-height: auto;
     z-index: 5;
     margin: 0;
     top: 60px;
     border-radius: 6px;
     box-shadow: var(--shadow);
     overflow: hidden;
+    & h4 {
+        display: block;
+        flex-wrap: nowrap;
+        width: 100%;
+        margin-bottom: 10px;
+    }
 }
 
 .search-reset {

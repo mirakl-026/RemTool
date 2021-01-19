@@ -68,7 +68,7 @@ export class MainLayoutComponent implements OnInit {
       if (window.matchMedia("(max-width: 449.98px)").matches) {
         this.searchPlaceholder = 'Найти инструмент';
       } else {
-        this.searchPlaceholder = 'Найти инструмент или бренд';
+        this.searchPlaceholder = 'Найти инструмент или услугу';
       }
     });
     
@@ -81,7 +81,7 @@ export class MainLayoutComponent implements OnInit {
     if (window.matchMedia("(max-width: 449.98px)").matches) {
       this.searchPlaceholder = 'Найти инструмент';
     } else {
-      this.searchPlaceholder = 'Найти инструмент или бренд';
+      this.searchPlaceholder = 'Найти инструмент или услугу';
     }
   }
 
@@ -151,6 +151,17 @@ export class MainLayoutComponent implements OnInit {
   mainTypes: string[] = ['electro', 'benzo', 'garden', 'compressor', 'generator', 'welding', 'heatgun', 'rest'];
   searchMainTypes$: any[] = [];
   searchTypes$: string[] = [];
+  types = {
+    'type': [],
+    'category': [],
+    'id': []
+  }
+  searchServices$: string[] = [];
+  services = {
+    'type': [],
+    'category': [],
+    'id': []
+  }
   searchIds$: string[] = [];
 
   searchFocuseSet(e){
@@ -160,6 +171,7 @@ export class MainLayoutComponent implements OnInit {
       }
     }
   }
+  mains: string[] = [];
 
   // preloader: boolean = this.preloaderService.isLoading();
 
@@ -169,19 +181,39 @@ export class MainLayoutComponent implements OnInit {
       this.searchPreloader = true;
       console.log(this.searchForm.value.data);
       this.http.get("api/search/find?userInput=" + encodeURI(this.searchForm.value.data)).subscribe(res => {
-        console.log(res);
+        // console.log(res);
         this.searchMainTypes$ = [];
+        this.types.type = [];
+        this.types.category = [];
+        this.types.id = [];
+        this.services.type = [];
+        this.services.category = [];
+        this.services.id = [];
         this.searchTypes$ = res["includedTypes"];
+        this.searchServices$ = res["includedServices"];
         this.searchIds$ = res["includedIds"];
-        let mains = res["includedSubtypes"];
-        for (let main of mains) {
-          for (let i = 0; i < main.length; i++) {
-            if (main[i]) {
-              this.searchMainTypes$.push(this.mainTypes[i]);
+        this.searchMainTypes$ = res["includedCategories"];
+        for (let i = 0; i < this.searchMainTypes$.length; i++) {
+          console.log(this.searchMainTypes$.length);
+          for (let j = 0; j < this.searchMainTypes$[i].length; j++) {
+            console.log(this.searchMainTypes$[i].length);
+            if (this.searchMainTypes$[i][j]) {
+              this.mains.push(this.mainTypes[j]);
               break;
             }
           }
+          if (this.searchServices$[i] == '_') {
+            this.types.type.push(this.searchTypes$[i]);
+            this.types.category.push(this.mains[i]);
+            this.types.id.push(this.searchIds$[i]);
+          } else {
+            this.services.type.push(this.searchTypes$[i]);
+            this.services.category.push(this.mains[i]);
+            this.services.id.push(this.searchIds$[i]);
+          }
         }
+        // console.log(this.types)
+        // console.log(this.services)
         this.searchPreloader = false;
         // console.log(this.searchMainTypes$);
       })
