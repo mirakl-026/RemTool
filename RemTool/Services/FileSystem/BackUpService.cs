@@ -12,6 +12,7 @@ using RemTool.Models;
 using RemTool.Infrastructure.Interfaces.Services;
 using RemTool.Infrastructure.Additional;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 
 namespace RemTool.Services.FileSystem
 {
@@ -331,6 +332,21 @@ namespace RemTool.Services.FileSystem
         public IEnumerable<ToolTypeSearch> GetAllToolTypeSearches()
         {
             return _toolTypesSearch.Find(new BsonDocument()).ToList();
+        }
+
+        public async Task ReplaceBackupToNew(IFormFile newBackup)
+        {
+            FileInfo fiCurrentBackup = new FileInfo(PathToBackUpZip + "backup.zip");
+            if (fiCurrentBackup.Exists)
+            {
+                fiCurrentBackup.Delete();
+            }
+
+            // Сохранение файла на сервере
+            using (var fileStream = new FileStream(PathToBackUpZip + "backup.zip", FileMode.Create))
+            {
+                await newBackup.CopyToAsync(fileStream);
+            }
         }
     }
 }

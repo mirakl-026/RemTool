@@ -37,5 +37,19 @@ namespace RemTool.Controllers
             await _context.UnZipToServer();
             return Ok();
         }
+
+        // загрузить картинку
+        [HttpPost("LoadBackup")]
+        [RequestSizeLimit(100428800)]
+        [Authorize]
+        public async Task<IActionResult> LoadBackup(IFormFile backup)
+        {
+            if (backup != null)
+            {
+                await _context.ReplaceBackupToNew(backup);
+                return Ok();
+            }
+            return NoContent();
+        }
     }
 }
