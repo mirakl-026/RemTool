@@ -42,11 +42,11 @@ namespace RemTool.Controllers
         [HttpPost("LoadBackup")]
         [RequestSizeLimit(100428800)]
         [Authorize]
-        public async Task<IActionResult> LoadBackup(IFormFile backup)
+        public async Task<IActionResult> LoadBackup(IFormFile newBackup)
         {
-            if (backup != null)
+            if (newBackup != null)
             {
-                await _context.ReplaceBackupToNew(backup);
+                await _context.ReplaceBackupToNew(newBackup);
                 return Ok();
             }
             return NoContent();

@@ -1,2 +1,7 @@
 <button class="button_light" (click)="createBackup()">Создать бекап</button>
 <button class="button_light" (click)="restoreSite()">Восстановить сайт</button>
+<!-- Загрузка картинки на сервер -->
+<form [formGroup]="newBackupForm" (change)="loadBackup(newBackupForm.value)">
+  <label class="popup__upload" for="newBackup">Загрузить бэкап</label>
+  <input type="file" id="newBackup" formControlName="newBackup" (change)="onSelectFile($event)" style="display: none;">
+</form>
