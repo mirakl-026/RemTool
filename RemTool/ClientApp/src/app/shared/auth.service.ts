@@ -29,7 +29,7 @@ export class AuthService {
 
   private setToken(response) {
     if (response) {
-      const expDate = new Date( new Date().getTime() + + response.expiresIn * 1000);
+      const expDate = new Date( new Date().getTime() + + response.expiresIn * 10000);
       localStorage.setItem('token-exp', expDate.toString())
       localStorage.setItem('token', response.idToken)
     } else {

@@ -3,6 +3,21 @@
 @import '../../tools-page/tools-page.component.scss';
 @import '../../shared/main-layout/main-layout.component.scss';
 
+.invisible {
+    // position: absolute;
+    visibility: hidden;
+    height: 0;
+    // width: 0;
+    margin: 0;
+    padding: 0;
+    // top: 0;
+    overflow: hidden;
+}
+
+.display-none {
+    display: none;
+}
+
 input {
     appearance: auto;
 }
@@ -15,8 +30,9 @@ h1 {
 }
 
 .create-tool {
+    padding-top: 30px;
     max-width: 700px;
-    margin: 30px auto;
+    margin: 30px auto 60px auto;
     &__item {
         width: 100%;
         margin: 20px 0;
@@ -24,6 +40,9 @@ h1 {
 
         width: 100%;
         justify-content: space-between;
+    }
+    &__btn {
+        margin: 10px 0;
     }
 }
 
@@ -57,8 +76,6 @@ h1 {
 }
 
 .price {
-    & label {
-    }
     &__container {
         margin-top: 10px;
     }
@@ -66,20 +83,25 @@ h1 {
         display: flex;
         // justify-content: space-between;
         margin-bottom: 10px;
-        & span, & input {
-            width: 40%;
+        & span:nth-of-type(1), & input:nth-of-type(1) {
+            width: 60%;
+        }
+        & span:nth-of-type(2), & input:nth-of-type(2) {
+            width: 20%;
+        }
+        & input:nth-of-type(1) {
             border: 1px solid var(--dark-color);
         }
         & button {
-            width: 4%;
+            width: 36px;
         }
     }
 }
 
 .old-row {
-    color: var(--grey-color);
     & input {
         border: 1px solid var(--green-color);
+        // color: var(--grey-color);
     }
     & button {
         display: flex;
@@ -90,7 +112,7 @@ h1 {
 
 .new-row {
     & button {
-        width: 15%;
+        width: 36px;
     }
 }
 
@@ -98,7 +120,6 @@ h1 {
 .popup {
     z-index: 999;
     position: fixed;
-    // position: absolute;
     width: 100%;
     height: 100%;
     background-color: rgba($color: #000000, $alpha: 0.5);
@@ -155,11 +176,7 @@ h1 {
         & img {
             border: 2px solid var(--dark-color);
             width: 100%;
-            // height: 100px;
             cursor: pointer;
-        }
-        & a {
-            // box-sizing: border-box;
         }
     }
 }

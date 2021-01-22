@@ -41,9 +41,14 @@ export class ToolPageComponent implements OnInit {
   getTool(id) {
     this.dataService.getToolType(id).subscribe(data => {
       this.res$ = data;
+      this.res$.serves.unshift('Вид работ');
+      this.res$.costs.unshift('Стоимость, руб');
+      this.pricelist$ = [];
+      this.pricelist$.push('Вид работ');
+      this.pricelist$.push('Стоимость, руб');
       for (let i = 0; i < this.res$.serves.length; i++) {
-        this.pricelist$.push(this.res$.serves[i]);
-        this.pricelist$.push(this.res$.costs[i]);
+        // this.pricelist$.push(this.res$.serves[i]);
+        // this.pricelist$.push(this.res$.costs[i]);
       }
     });
   }

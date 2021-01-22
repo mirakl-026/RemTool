@@ -24,6 +24,7 @@
         // padding: 10px 0;
         border-radius: 6px;
         box-sizing: border-box;
+        overflow: hidden;
         // max-width: 100%;
         & div {
             // padding: 0 10px;
@@ -55,5 +56,9 @@
             &:hover {
                 background-color: #e3e6f5;
             }
+        }
+        &__row:first-of-type {
+            background-color: var(--orange-color);
+            font-weight: 600;
         }
 }

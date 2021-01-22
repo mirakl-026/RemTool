@@ -1,7 +1,7 @@
 <nav class="admin-nav nav">
-    <h1 class="nav__item">
+    <h2 class="nav__item">
         <a routerLink="/">На сайт</a>
-    </h1>
+    </h2>
 
     <ul *ngIf="(navMobile && auth.isToken() && burger) || (!navMobile && auth.isToken())">
       <li class="nav__item" routerLinkActive="active">

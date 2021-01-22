@@ -42,6 +42,8 @@ export class ToolTypePageComponent implements OnInit {
   newValue: string = "";
   serveCostLength: number[] = [];
 
+  deletePopupFlag: boolean = false;
+
   ngOnInit(): void {
     this.loadToolTypes();
     this.newImageForm = new FormGroup({
@@ -72,11 +74,16 @@ export class ToolTypePageComponent implements OnInit {
   editToolType(tt: ToolType) {
     this.addToolType();
     this.dataService.getToolType(tt.id).subscribe(data => this.toolType = data);
-    // let currectTt = tt;
-    // this.toolType = currectTt;
     for (let i of tt.serves) {
       this.serveCostLength.push(0);
     }
+
+    // console.log(document.querySelector('.create').getClientRects);
+    // window.scrollTo({
+    //   top: document.querySelector('.create').getBoundingClientRect().top,
+    //   behavior: "smooth"
+    // });
+
   }
 
   // сброс картинки
@@ -99,12 +106,22 @@ export class ToolTypePageComponent implements OnInit {
       .subscribe(data => this.loadToolTypes());
   }
 
+  deletePopup(node){
+    console.log(node)
+    console.log(this.toolTypes)
+    // e.target.parentNode.querySelector('.delete-popup').classList.remove('display-none');
+  }
+
   // добавление инструмента
   addToolType() {
     this.resetToolType();
     this.addToolFlag = true;
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
   }
-
+    
   // добавление бренда
   currentBrand: string = "";
   addBrandToToolType() {
