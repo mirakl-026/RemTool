@@ -10,7 +10,6 @@ import { SparePartsPageComponent } from '../admin/spareparts-page/spareparts-pag
 import { QuillModule } from 'ngx-quill';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { RequestsPageComponent } from './requests-page/requests-page.component';
-import { TooltypeComponent } from './tooltypes-page/tooltype/tooltype.component';
 
 @NgModule({
     declarations: [
@@ -20,7 +19,6 @@ import { TooltypeComponent } from './tooltypes-page/tooltype/tooltype.component'
         SparePartsPageComponent,
         SettingsPageComponent,
         RequestsPageComponent,
-        TooltypeComponent,
         
     ],
     imports: [

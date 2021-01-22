@@ -42,7 +42,7 @@ export class ToolTypePageComponent implements OnInit {
   newValue: string = "";
   serveCostLength: number[] = [];
 
-  deletePopupFlag: boolean = false;
+  deletePopupFlags: boolean[] = [];
 
   ngOnInit(): void {
     this.loadToolTypes();
@@ -54,8 +54,14 @@ export class ToolTypePageComponent implements OnInit {
   // ToolTypes
   // получаем данные через сервис
   loadToolTypes() {
+    this.deletePopupFlags = [];
     this.dataService.getToolTypes()
-      .subscribe((data: ToolType[]) => this.toolTypes = data);
+      .subscribe((data: ToolType[]) => {
+        this.toolTypes = data;
+        for (let i of this.toolTypes) {
+          this.deletePopupFlags.push(false);
+        }
+      });
   }
 
   // сохранение инструмента
@@ -98,6 +104,7 @@ export class ToolTypePageComponent implements OnInit {
     this.toolType = new ToolType();
     this.addToolFlag = false;
     this.serveCostLength = [];
+    this.deletePopupFlags = [];
   }
 
   // удаление инструмента 
@@ -106,10 +113,8 @@ export class ToolTypePageComponent implements OnInit {
       .subscribe(data => this.loadToolTypes());
   }
 
-  deletePopup(node){
-    console.log(node)
-    console.log(this.toolTypes)
-    // e.target.parentNode.querySelector('.delete-popup').classList.remove('display-none');
+  deletePopup(i){
+    this.deletePopupFlags[i] = true;
   }
 
   // добавление инструмента
