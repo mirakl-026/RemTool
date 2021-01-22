@@ -9,6 +9,7 @@ export class MainPageComponent implements OnInit {
 
   constructor( ) { }
   ngOnInit(): void {
+    document.title = 'Ремонт строительного инструмента';
     let heroHeader = document.querySelector('.hero__header');
     heroHeaderResize();
     window.addEventListener('resize', () => {

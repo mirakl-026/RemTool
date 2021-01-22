@@ -10,6 +10,7 @@ export class ContactsPageComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    document.title = 'Ремонт строительного инструмента';
   }
 
 }

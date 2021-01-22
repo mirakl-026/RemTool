@@ -1,19 +1,21 @@
 
 .request-container {
-    position: fixed;
+    position: absolute;
+    // bottom: 0;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba($color: #000000, $alpha: 0.6);
+    // background-color: rgba($color: #000000, $alpha: 0.6);
     z-index: 999;
 }
 
 .request-form {
+    box-shadow: var(--shadow);
     position: absolute;
-    top: 50%;
+    top: 50px;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     display: flex;
     flex-direction: column;
     width: 300px;
@@ -117,5 +119,7 @@
 @media (hover: hover) {
     .request-form {
         top: 50%;
+        transform: translate(-50%, -50%);
+
     }
 }

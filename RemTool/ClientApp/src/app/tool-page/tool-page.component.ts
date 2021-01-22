@@ -1,3 +1,5 @@
+import { JsonPipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -15,22 +17,20 @@ export class ToolPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private dataService: DataService
+    private dataService: DataService,
+    private http: HttpClient
   ) { }
 
   preloader: boolean = false;
   id: string;
   res$;
   pricelist$: string[] = [];
+  titleName$;
 
   ngOnInit(): void {
     this.route.params.pipe(
       takeUntil(this.destroy$))
       .subscribe(params => {
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth"
-        }); 
         this.id = params.id;
         console.log(this.id);
         this.preloader = true;
@@ -41,6 +41,11 @@ export class ToolPageComponent implements OnInit {
   getTool(id) {
     this.dataService.getToolType(id).subscribe(data => {
       this.res$ = data;
+      this.http.get(`http://ws3.morpher.ru/russian/declension?s=${this.res$.name}&format=json`).subscribe(res => {
+        this.titleName$ = res;
+        console.log(this.titleName$['Р']);
+        document.title = `Ремонт ${this.titleName$['Р'].toLowerCase()}`;
+      });
       this.res$.serves.unshift('Вид работ');
       this.res$.costs.unshift('Стоимость, руб');
       this.pricelist$ = [];

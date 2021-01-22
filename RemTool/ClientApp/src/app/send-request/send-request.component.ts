@@ -18,17 +18,22 @@ export class SendRequestComponent implements OnInit {
       text: new FormControl(null, [Validators.required]),
     })
   }
-
+  
   formPopupClose(e){
     console.log(e.path[0]);
     if ((e.path[0] == document.querySelector('.request-container')) || (e.path[0] == document.querySelector('.request-form__close'))) {
       this.formPopup = false;
+      // window.onscroll = function () { };
     }
   }
-
+  
   sendRequestPopup(e){
     e.target.blur();
     this.formPopup = true;
+    // document.querySelector('.request-container').setAttribute('style', `height: ${document.body.clientHeight}px`);
+  //   let scrollX = window.scrollX
+	// let scrollY = window.scrollY;
+  //  window.onscroll = function () { window.scrollTo(scrollX, scrollY); };
   }
   sendRequest(e){
     e.target.blur();

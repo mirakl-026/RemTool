@@ -10,6 +10,7 @@ export class AllToolsPageComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    document.title = 'Ремонт строительного инструмента';
   }
 
 }
