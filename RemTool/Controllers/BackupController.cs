@@ -56,6 +56,7 @@ namespace RemTool.Controllers
 
         [HttpGet("DownloadBackup")]
         [Route("Stream")]
+        [Authorize]
         public IActionResult DownloadBackup()
         {
             string mimeType = "application/zip";

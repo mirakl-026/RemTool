@@ -5,7 +5,7 @@ import { DataService } from '../../DataService/data.service';
 import { ToolType } from '../../DataService/toolType';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/shared/auth.service';
-
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-settings-page',
@@ -45,7 +45,7 @@ export class SettingsPageComponent implements OnInit {
   }
 
   // Отправка бэкапа на сервер
-  loadBackup(data) {
+  uploadBackup(data) {
     const formData = new FormData();
     formData.append('newBackup', this.selectedFile);
     this.http.post('api/backup/loadbackup', formData)
@@ -54,5 +54,14 @@ export class SettingsPageComponent implements OnInit {
         //this.http.get("api/images/getimages").subscribe((data: string) => this.images = data);
       });
     this.newBackupForm.reset();
+  }
+
+  // загрузка бэкапа с сервера на клиент
+  public downloadBackup() {
+    this.http.get('api/backup/downloadBackup', { responseType: 'blob' }).subscribe(blob => {
+      saveAs(blob, 'backup.zip', {
+        type: 'application/zip' // --> or whatever you need here
+      });
+    });
   }
 }
