@@ -13,5 +13,7 @@ namespace RemTool.Infrastructure.Interfaces.Services
         public Task UnZipToServer();
 
         public Task ReplaceBackupToNew(IFormFile newBackup);
+
+        public byte[] ReadBackupFromSystem();
     }
 }

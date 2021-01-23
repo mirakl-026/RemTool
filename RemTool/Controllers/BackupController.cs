@@ -4,9 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Net.Mime;
 
 using RemTool.Infrastructure.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
+using System.IO;
 
 namespace RemTool.Controllers
 {
@@ -50,6 +52,17 @@ namespace RemTool.Controllers
                 return Ok();
             }
             return NoContent();
+        }
+
+        [HttpGet("DownloadBackup")]
+        [Route("Stream")]
+        public IActionResult DownloadBackup()
+        {
+            string mimeType = "application/zip";
+            return new FileContentResult(_context.ReadBackupFromSystem(), mimeType)
+            {
+                FileDownloadName = "backup.zip"
+            };
         }
     }
 }

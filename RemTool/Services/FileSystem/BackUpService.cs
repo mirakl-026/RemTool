@@ -348,5 +348,20 @@ namespace RemTool.Services.FileSystem
                 await newBackup.CopyToAsync(fileStream);
             }
         }
+
+        public byte[] ReadBackupFromSystem()
+        {
+            byte[] backupFile;
+            // чтение из файла
+            using (FileStream fstream = File.OpenRead(PathToBackUpZip + "backup.zip"))
+            {
+                // преобразуем строку в байты
+                backupFile = new byte[fstream.Length];
+                // считываем данные
+                fstream.Read(backupFile, 0, backupFile.Length);
+            }
+
+            return backupFile;
+        }
     }
 }
