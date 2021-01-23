@@ -2,7 +2,74 @@
 <button class="button_light" (click)="restoreSite()">Восстановить сайт</button>
 <!-- Загрузка картинки на сервер -->
 <form [formGroup]="newBackupForm" (change)="uploadBackup(newBackupForm.value)">
-  <label class="popup__upload" for="newBackup">Загрузить бэкап на сервер</label>
+  <label class="button_light" for="newBackup">Загрузить бэкап на сервер</label>
   <input type="file" id="newBackup" formControlName="newBackup" (change)="onSelectFile($event)" style="display: none;">
 </form>
 <button class="button_light" (click)="downloadBackup()">Скачать бэкап</button>
+
+<h4>Настройки почты</h4>
+<table>
+  <tr>
+    <td>Название</td>
+    <td>Значение</td>
+  </tr>
+  <tr>
+    <td>Флаг отправки уведомлений админу</td>
+    <td><input type="checkbox" [(ngModel)]="mailSettings.sendNotificationToHQ" /></td>
+  </tr>
+  <tr>
+    <td>Адрес админа</td>
+    <td><input type="text" size="40" [(ngModel)]="mailSettings.hQeMail"></td>
+  </tr>
+  <tr>
+    <td>Флаг отправки уведомлений клиенту</td>
+    <td><input type="checkbox" [(ngModel)]="mailSettings.sendNotificationToClient" /></td>
+  </tr>
+  <tr>
+    <td>Сообщение для клиента</td>
+    <td><input type="text" size="40" [(ngModel)]="mailSettings.defaultMessageToClient"></td>
+  </tr>
+  <tr>
+    <td>Адрес хоста-отправителя</td>
+    <td><input type="text" size="40" [(ngModel)]="mailSettings.credentials_Name"></td>
+  </tr>
+  <tr>
+    <td>Пасс хоста-отправителя</td>
+    <td><input type="text" size="40" [(ngModel)]="mailSettings.credentials_Pass"></td>
+  </tr>
+  <tr>
+    <td>SMTP хост</td>
+    <td><input type="text" size="40" [(ngModel)]="mailSettings.smtpServer_Host"></td>
+  </tr>
+  <tr>
+    <td>SMTP порт</td>
+    <td><input type="text" size="40" [(ngModel)]="mailSettings.smtpServer_Port"></td>
+  </tr>
+</table>
+<button class="button_light" (click)="saveMailSettings()">Сохранить вообще всё</button>
+<button class="button_light" (click)="resetMailSettings()">Сбросить настройки</button>
+
+<!--
+
+        // флаг об отправке оповещений на почту админа
+        public sendNotificationToHQ?: boolean,
+
+        // почта админа для оповещений
+        public hQeMail?: string,
+
+        // флаг об отправке на почту клиенту
+        public sendNotificationToClient?: boolean,
+
+        // сообщение по умолчанию в письме запросящему
+        public defaultMessageToClient?: boolean,
+
+        // почта за счёт которой идёт отправка
+        public credentials_Name?: string,
+
+        public credentials_Pass?: string,
+
+        // SMTP сервер предоставляющий услуги отправки почты
+        public smtpServer_Host?: string,
+
+        public smtpServer_Port?: string
+-->

@@ -21,8 +21,10 @@ export class SettingsPageComponent implements OnInit {
   ) { }
 
   newBackupForm: FormGroup;
+  mailSettings: MailSettings;
 
   ngOnInit(): void {
+    this.getMailSettings();
     this.newBackupForm = new FormGroup({
       newBackup: new FormControl(null)
     });
@@ -64,4 +66,107 @@ export class SettingsPageComponent implements OnInit {
       });
     });
   }
+
+  // загрузка настроек почты
+  getMailSettings() {
+    //this.mailSettings = new MailSettings();
+    this.http.get("api/RtMailSettings")
+      .subscribe((data: MailSettings) => {
+        this.mailSettings = data;
+      });
+  }
+
+
+  // методы измения настроек почты
+  /*
+  changeNotificationToHQ() {
+    if (this.mailSettings.sendNotificationToHQ == false) {
+      this.http.put("api/RtMailSettings/ChangeFlag_notificationToHQ?value=true", {}).subscribe();
+      this.getMailSettings();
+    }
+    else {
+      this.http.put("api/RtMailSettings/ChangeFlag_notificationToHQ?value=false", {}).subscribe();
+      this.getMailSettings();
+    }
+  }
+
+  saveHQeMail() {
+    this.http.put("api/RtMailSettings/ChangeHQeMail?eMail=" + this.mailSettings.hQeMail, {}).subscribe();
+  }
+
+  changeNotificationToClient() {
+    if (this.mailSettings.sendNotificationToClient == false) {
+      this.http.put("api/RtMailSettings/ChangeFlag_notificationToClient?value=true", {}).subscribe();
+      this.getMailSettings();
+    }
+    else {
+      this.http.put("api/RtMailSettings/ChangeFlag_notificationToClient?value=false", {}).subscribe();
+      this.getMailSettings();
+    }
+  }
+
+  saveDefaultMessage() {
+    this.http.put("api/RtMailSettings/ChangeDefaultMessageToClient?message=" + this.mailSettings.defaultMessageToClient, {}).subscribe();
+  }
+
+  saveCredentialsName() {
+    this.http.put("api/RtMailSettings/ChangeCredentials_Name?credentialsName=" + this.mailSettings.credentials_Name, {}).subscribe();
+  }
+
+  saveCredentialsPass() {
+    this.http.put("api/RtMailSettings/ChangeCredentials_Pass?credentialsPass=" + this.mailSettings.credentials_Pass, {}).subscribe();
+  }
+
+  saveSMTP_Host() {
+    this.http.put("api/RtMailSettings/ChangeSmtpServer_Host?smtp_host=" + this.mailSettings.smtpServer_Host, {}).subscribe();
+  }
+
+  saveSMTP_Pass() {
+    this.http.put("api/RtMailSettings/ChangeSmtpServer_Port?smtp_port=" + this.mailSettings.smtpServer_Port, {}).subscribe();
+  }
+  */
+
+  saveMailSettings() {
+    this.http.put("api/RtMailSettings", this.mailSettings).subscribe();
+  }
+
+  resetMailSettings() {
+    this.mailSettings.sendNotificationToHQ = false;
+    this.mailSettings.hQeMail = "";
+    this.mailSettings.sendNotificationToClient = false;
+    this.mailSettings.defaultMessageToClient = "< h3 > Ваш запрос передан, с Вами свяжутся ...</ h3 >";
+    this.mailSettings.credentials_Name = "";
+    this.mailSettings.credentials_Pass = "";
+    this.mailSettings.smtpServer_Host = "smtp.mail.ru";
+    this.mailSettings.smtpServer_Port = "25";
+
+    this.http.put("api/RtMailSettings", this.mailSettings).subscribe();
+  }
+}
+
+export class MailSettings {
+
+  constructor(
+        // флаг об отправке оповещений на почту админа
+        public sendNotificationToHQ?: boolean,
+
+        // почта админа для оповещений
+        public hQeMail?: string,
+
+        // флаг об отправке на почту клиенту
+        public sendNotificationToClient?: boolean, 
+
+        // сообщение по умолчанию в письме запросящему
+        public defaultMessageToClient?: string,
+
+        // почта за счёт которой идёт отправка
+        public credentials_Name?: string,
+
+        public credentials_Pass?: string, 
+
+        // SMTP сервер предоставляющий услуги отправки почты
+        public smtpServer_Host?: string,
+
+        public smtpServer_Port?: string,
+  ){ }
 }
