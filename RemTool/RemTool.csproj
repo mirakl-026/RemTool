@@ -8,8 +8,16 @@
 
   <ItemGroup>
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="ClientApp\node_modules\**" />
     <None Remove="$(SpaRoot)**" />
+    <None Remove="ClientApp\node_modules\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="ClientApp\node_modules\**" />
+    <EmbeddedResource Remove="ClientApp\node_modules\**" />
+    <TypeScriptCompile Remove="ClientApp\node_modules\**" />
   </ItemGroup>
 
   <ItemGroup>
