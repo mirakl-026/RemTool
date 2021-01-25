@@ -149,5 +149,10 @@ namespace RemTool.Services.MongoDB
                 UpdateRtMailSettingsFromCurrent(currentRtMailSettings);
             }
         }
+
+        public async Task<RtMailSettings> ReadRtMailSettingsAsync()
+        {
+            return await _rtMailSettingsCol.Find(new BsonDocument()).FirstOrDefaultAsync();
+        }
     }
 }

@@ -24,6 +24,8 @@ namespace RemTool.Infrastructure.Interfaces.Services
 
         #endregion
 
+        public Task<RtMailSettings> ReadRtMailSettingsAsync();
+
         public void ChangeHQeMail(string eMail);
 
         public void ChangeFlag_notificationToHQ(bool value);
