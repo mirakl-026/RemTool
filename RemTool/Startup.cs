@@ -212,7 +212,7 @@ namespace RemTool
                     // SMTP сервер предоставл€ющий услуги отправки почты
                     SmtpServer_Host = "smtp.mail.ru",
 
-                    SmtpServer_Port = "25"  //465
+                    SmtpServer_Port = "587"  //465 // 587
                 };
 
                 _rtMailSettingsCol.InsertOne(rtms);

@@ -42,10 +42,12 @@ namespace RemTool.Services.Additional
                         m.IsBodyHtml = true;
 
                         // логин и пароль
-                        smtp.Credentials = new NetworkCredential(credentialsPass, credentialsPass);
+                        smtp.Credentials = new NetworkCredential(credentialsName, credentialsPass);
 
                         smtp.EnableSsl = true;
                         //smtp.EnableSsl = false;
+
+                        //smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
 
                         smtp.Send(m);
                     }
@@ -86,6 +88,8 @@ namespace RemTool.Services.Additional
 
                         // логин и пароль
                         smtp.Credentials = new NetworkCredential(credentialsName, credentialsPass);
+
+                        //smtp.DeliveryMethod = SmtpDeliveryMethod.Network; 
 
                         smtp.EnableSsl = true;
                         //smtp.EnableSsl = false;
