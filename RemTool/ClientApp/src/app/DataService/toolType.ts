@@ -9,7 +9,8 @@ export class ToolType {
     public serves?: string[],
     public costs?: string[],
     public imgRefenrence?: string,
-    public info?: string
+    public info?: string,
+    public nameSeo?: string
   )
   {
     // this.id = "";
@@ -21,6 +22,7 @@ export class ToolType {
     this.costs = [];
     this.imgRefenrence = "";
     this.info = "";
+    this.nameSeo = "";
   }
 }
 

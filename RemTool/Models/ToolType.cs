@@ -42,5 +42,8 @@ namespace RemTool.Models
 
         // описание инструмента
         public string Info { get; set; }
+
+        // SEO оптимизация
+        public string NameSeo { get; set; }
     }
 }
