@@ -41,11 +41,17 @@ export class ToolPageComponent implements OnInit {
   getTool(id) {
     this.dataService.getToolType(id).subscribe(data => {
       this.res$ = data;
-      this.http.get(`http://ws3.morpher.ru/russian/declension?s=${this.res$.name}&format=json`).subscribe(res => {
-        this.titleName$ = res;
-        console.log(this.titleName$['Р']);
-        document.title = `Ремонт ${this.titleName$['Р'].toLowerCase()}`;
-      });
+      console.log(this.res$);
+      if (!this.res$.nameSeo) {
+        document.title = `Ремонт | ${this.res$.name.toLowerCase()}`;
+      } else {
+        document.title = `Ремонт ${this.res$.nameSeo}`;
+      }
+      // this.http.get(`http://ws3.morpher.ru/russian/declension?s=${this.res$.name}&format=json`).subscribe(res => {
+      //   this.titleName$ = res;
+      //   console.log(this.titleName$['Р']);
+      //   document.title = `Ремонт ${this.titleName$['Р'].toLowerCase()}`;
+      // });
       this.res$.serves.unshift('Вид работ');
       this.res$.costs.unshift('Стоимость, руб');
       this.pricelist$ = [];
