@@ -45,7 +45,7 @@ export class ToolPageComponent implements OnInit {
       if (!this.res$.nameSeo) {
         document.title = `Ремонт | ${this.res$.name.toLowerCase()}`;
       } else {
-        document.title = `Ремонт ${this.res$.nameSeo}`;
+        document.title = `Ремонт ${this.res$.nameSeo.toLowerCase()}`;
       }
       // this.http.get(`http://ws3.morpher.ru/russian/declension?s=${this.res$.name}&format=json`).subscribe(res => {
       //   this.titleName$ = res;
