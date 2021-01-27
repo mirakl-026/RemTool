@@ -124,7 +124,8 @@ namespace RemTool.Controllers
             if (ModelState.IsValid)
             {
                 // удалили инфу для поиска
-                _dbs.DeleteToolTypeSearch(toolType.Name);
+                //_dbs.DeleteToolTypeSearch(toolType.Name);
+                _dbs.DeleteToolTypeSearchByRefId(toolType.Id);
                 
                 // обновили инструмент
                 _db.UpdateToolType(toolType);
@@ -145,7 +146,8 @@ namespace RemTool.Controllers
             ToolType toolType = _db.ReadToolType(id);
             if (toolType != null)
             {
-                _dbs.DeleteToolTypeSearch(toolType.Name);
+                //_dbs.DeleteToolTypeSearch(toolType.Name);
+                _dbs.DeleteToolTypeSearchByRefId(toolType.Id);
                 _db.DeleteToolType(id);
             }
             return Ok(toolType);

@@ -197,6 +197,16 @@ namespace RemTool.Services.MongoDB
             await _toolTypesSearch.DeleteOneAsync(tts => tts.Name.Equals(name));
         }
 
+        public void DeleteToolTypeSearchByRefId(string refId)
+        {
+            _toolTypesSearch.DeleteOne(tts => tts.RefId.Equals(refId));
+        }
+
+        public async Task DeleteToolTypeSearchByRefIdAsync(string refId)
+        {
+            await _toolTypesSearch.DeleteOneAsync(tts => tts.RefId.Equals(refId));
+        }
+
 
 
         public string Search(string userInput)
