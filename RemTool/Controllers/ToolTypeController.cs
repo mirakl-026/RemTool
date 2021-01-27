@@ -164,7 +164,18 @@ namespace RemTool.Controllers
             return Ok();
         }
 
+        [HttpPatch("RefreshAllToolTypesSearch")]
+        [Authorize]
+        public IActionResult RefreshAllToolTypesSearch()
+        {
+            _dbs.DeleteAllToolTypeSearch();
 
-
+            IEnumerable<ToolType> allToolTypes = _db.GetAllToolTypes();
+            foreach(var toolType in allToolTypes)
+            {
+                _dbs.CreateToolTypeSearch(toolType);
+            }
+            return Ok();
+        }
     }
 }
