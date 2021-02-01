@@ -210,7 +210,7 @@ namespace RemTool
                     Credentials_Pass = "",
 
                     // SMTP сервер предоставл€ющий услуги отправки почты
-                    SmtpServer_Host = "smtp.mail.ru",
+                    SmtpServer_Host = "smtp.yandex.ru",
 
                     SmtpServer_Port = "587"  //465 // 587
                 };
