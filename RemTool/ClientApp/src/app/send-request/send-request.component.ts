@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -9,7 +10,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class SendRequestComponent implements OnInit {
   requestForm: FormGroup;
   formPopup: boolean;
-  constructor( ) { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
   ngOnInit(): void {
     this.requestForm = new FormGroup({
@@ -38,12 +41,25 @@ export class SendRequestComponent implements OnInit {
   //  window.onscroll = function () { window.scrollTo(scrollX, scrollY); };
   }
   sendRequest(e){
+    var nowDate = new Date();
+    var day = nowDate.getDate();
+    var mounth = nowDate.getMonth();
+    var year = nowDate.getFullYear();
+    var hours = nowDate.getHours();
+    var minutes = nowDate.getMinutes();
+    var time = day + " " + mounth + " " + year + " " + hours + " " + minutes;
+    // document.write(time);
     e.target.blur();
-    const reqForm = {
-      "Email": this.requestForm.value.email,
+    var req = {
       "Name": this.requestForm.value.name,
+      "Phone": '',
+      "Email": this.requestForm.value.email,
+      "ReqInfo": this.requestForm.value.text,
+      "SendedTime": time
     }
-    
+    this.http.post("/api/rtrequest", req).subscribe(res => {
+      console.log(res);
+    })
   }
 
   inputFocus(e){
