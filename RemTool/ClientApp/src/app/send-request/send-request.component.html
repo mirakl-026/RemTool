@@ -2,7 +2,7 @@
     Оставить заявку
 </button>
 <div class="request-container" *ngIf="formPopup" (click)="formPopupClose($event)">
-    <div style="position: relative;">
+
 
         <app-top-preloader></app-top-preloader>
         <form class="request-form" [formGroup]="requestForm">
@@ -29,5 +29,5 @@
             <button class="button_light" [disabled]="requestForm.invalid"
                 (click)="sendRequest($event)">Отправить</button>
         </form>
-    </div>
+
 </div>

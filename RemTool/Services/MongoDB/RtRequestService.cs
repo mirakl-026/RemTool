@@ -101,7 +101,11 @@ namespace RemTool.Services.MongoDB
         public async Task<RtRequest> ReadRtRequestByEMailAsync(string eMail)
         {
             var rtReqsByEmail = await _rtRequests.Find(rtReq => rtReq.Email == eMail).ToListAsync();
-            return rtReqsByEmail.Last();
+            if (rtReqsByEmail.Count > 0)
+            {
+                return rtReqsByEmail.Last();
+            }
+            return null;            
         }
     }
 }

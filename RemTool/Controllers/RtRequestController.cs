@@ -73,55 +73,48 @@ namespace RemTool.Controllers
 
                     if (newRtreq.SendedTime != null && rtReq.SendedTime != null)
                     {
-                        var newTimeValues = newRtreq.SendedTime.Split(' ');
-                        var oldTimeValues = rtReq.SendedTime.Split(' ');
+                        var newTime = long.Parse(newRtreq.SendedTime);
+                        var oldTime = long.Parse(rtReq.SendedTime);
 
-
-                        if (newTimeValues.Length == 5 && oldTimeValues.Length == 5)
+                        if (newTime > oldTime + 180)
                         {
-                            var newTime = 24 * int.Parse(newTimeValues[3]) + 60 * int.Parse(newTimeValues[4]);
-                            var oldTime = 24 * int.Parse(oldTimeValues[3]) + 60 * int.Parse(oldTimeValues[4]);
+                            //await db.UpdateRtRequestAsync(new RtRequest
+                            //{
+                            //    Id = rtReq.Id,
+                            //    Name = newRtreq.Name,
+                            //    Email = newRtreq.Email,
+                            //    Phone = newRtreq.Phone,
+                            //    ReqInfo = newRtreq.ReqInfo,
+                            //    SendedTime = newRtreq.SendedTime
+                            //});
+                            db.CreateRtRequest(newRtreq);
 
-                            if (newTime > oldTime + 3)
+                            if (mSettings.SendNotificationToClient == true)
                             {
-                                //await db.UpdateRtRequestAsync(new RtRequest
-                                //{
-                                //    Id = rtReq.Id,
-                                //    Name = newRtreq.Name,
-                                //    Email = newRtreq.Email,
-                                //    Phone = newRtreq.Phone,
-                                //    ReqInfo = newRtreq.ReqInfo,
-                                //    SendedTime = newRtreq.SendedTime
-                                //});
-                                db.CreateRtRequest(newRtreq);
-
-                                if (mSettings.SendNotificationToClient == true)
-                                {
-                                    mailSender.SendEMailMessageToClient(
-                                        newRtreq.Email,
-                                        mSettings.DefaultMessageToClient,
-                                        mSettings.Credentials_Name,
-                                        mSettings.Credentials_Pass,
-                                        mSettings.SmtpServer_Host,
-                                        mSettings.SmtpServer_Port);
-                                }
-                                if (mSettings.SendNotificationToHQ == true)
-                                {
-                                    mailSender.SendEMailMessageToHQ(
-                                        mSettings.HQeMail,
-                                        newRtreq,
-                                        mSettings.Credentials_Name,
-                                        mSettings.Credentials_Pass,
-                                        mSettings.SmtpServer_Host,
-                                        mSettings.SmtpServer_Port);
-                                }
-                                return Ok();
+                                mailSender.SendEMailMessageToClient(
+                                    newRtreq.Email,
+                                    mSettings.DefaultMessageToClient,
+                                    mSettings.Credentials_Name,
+                                    mSettings.Credentials_Pass,
+                                    mSettings.SmtpServer_Host,
+                                    mSettings.SmtpServer_Port);
                             }
-                            else
+                            if (mSettings.SendNotificationToHQ == true)
                             {
-                                return BadRequest("wait");
+                                mailSender.SendEMailMessageToHQ(
+                                    mSettings.HQeMail,
+                                    newRtreq,
+                                    mSettings.Credentials_Name,
+                                    mSettings.Credentials_Pass,
+                                    mSettings.SmtpServer_Host,
+                                    mSettings.SmtpServer_Port);
+                            }
+                            return Ok();
+                        }
+                        else
+                        {
+                            return BadRequest("wait");
                                 
-                            }
                         }
                     }
                     else

@@ -50,7 +50,7 @@ export class SendRequestComponent implements OnInit {
     // var time = day + " " + mounth + " " + year + " " + hours + " " + minutes;
     // document.write(time);
     e.target.blur();
-    let time = Math.trunc(new Date().getTime()/1000);
+    let time = String(Math.trunc(new Date().getTime() / 1000));
     console.log(time);
     var req = {
       "Name": this.requestForm.value.name,
