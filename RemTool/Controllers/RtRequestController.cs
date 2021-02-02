@@ -82,17 +82,18 @@ namespace RemTool.Controllers
                             var newTime = 24 * int.Parse(newTimeValues[3]) + 60 * int.Parse(newTimeValues[4]);
                             var oldTime = 24 * int.Parse(oldTimeValues[3]) + 60 * int.Parse(oldTimeValues[4]);
 
-                            if (newTime > oldTime + 60)
+                            if (newTime > oldTime + 3)
                             {
-                                await db.UpdateRtRequestAsync(new RtRequest
-                                {
-                                    Id = rtReq.Id,
-                                    Name = newRtreq.Name,
-                                    Email = newRtreq.Email,
-                                    Phone = newRtreq.Phone,
-                                    ReqInfo = newRtreq.ReqInfo,
-                                    SendedTime = newRtreq.SendedTime
-                                });
+                                //await db.UpdateRtRequestAsync(new RtRequest
+                                //{
+                                //    Id = rtReq.Id,
+                                //    Name = newRtreq.Name,
+                                //    Email = newRtreq.Email,
+                                //    Phone = newRtreq.Phone,
+                                //    ReqInfo = newRtreq.ReqInfo,
+                                //    SendedTime = newRtreq.SendedTime
+                                //});
+                                db.CreateRtRequest(newRtreq);
 
                                 if (mSettings.SendNotificationToClient == true)
                                 {
