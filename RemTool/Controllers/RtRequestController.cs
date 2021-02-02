@@ -55,7 +55,7 @@ namespace RemTool.Controllers
 
             if (ModelState.IsValid)
             {
-                var rtReq = await db.ReadRtRequestByPhoneAsync(newRtreq.Phone);
+                var rtReq = await db.ReadRtRequestByEMailAsync(newRtreq.Email);
 
                 if(rtReq != null)
                 {
@@ -114,6 +114,7 @@ namespace RemTool.Controllers
                                         mSettings.SmtpServer_Host,
                                         mSettings.SmtpServer_Port);
                                 }
+                                return Ok();
                             }
                             else
                             {

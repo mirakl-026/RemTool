@@ -97,5 +97,11 @@ namespace RemTool.Services.MongoDB
         {
             return await _rtRequests.Find(rtReq => rtReq.Phone == phone).FirstOrDefaultAsync();
         }
+
+        public async Task<RtRequest> ReadRtRequestByEMailAsync(string eMail)
+        {
+            var rtReqsByEmail = await _rtRequests.Find(rtReq => rtReq.Email == eMail).ToListAsync();
+            return rtReqsByEmail.Last();
+        }
     }
 }

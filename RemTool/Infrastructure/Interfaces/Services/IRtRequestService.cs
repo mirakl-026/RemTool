@@ -44,5 +44,7 @@ namespace RemTool.Infrastructure.Interfaces.Services
         public Task DeleteAllRtRequestsAsync();
 
         public Task<RtRequest> ReadRtRequestByPhoneAsync(string phone);
+
+        public Task<RtRequest> ReadRtRequestByEMailAsync(string eMail);
     }
 }
