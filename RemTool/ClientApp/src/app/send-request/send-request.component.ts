@@ -41,15 +41,17 @@ export class SendRequestComponent implements OnInit {
   //  window.onscroll = function () { window.scrollTo(scrollX, scrollY); };
   }
   sendRequest(e){
-    var nowDate = new Date();
-    var day = nowDate.getDate();
-    var mounth = nowDate.getMonth();
-    var year = nowDate.getFullYear();
-    var hours = nowDate.getHours();
-    var minutes = nowDate.getMinutes();
-    var time = day + " " + mounth + " " + year + " " + hours + " " + minutes;
+    // var nowDate = new Date();
+    // var day = nowDate.getDate();
+    // var mounth = nowDate.getMonth();
+    // var year = nowDate.getFullYear();
+    // var hours = nowDate.getHours();
+    // var minutes = nowDate.getMinutes();
+    // var time = day + " " + mounth + " " + year + " " + hours + " " + minutes;
     // document.write(time);
     e.target.blur();
+    let time = Math.trunc(new Date().getTime()/1000);
+    console.log(time);
     var req = {
       "Name": this.requestForm.value.name,
       "Phone": '',

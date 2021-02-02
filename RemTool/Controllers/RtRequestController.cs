@@ -119,13 +119,14 @@ namespace RemTool.Controllers
                             }
                             else
                             {
-                                BadRequest("wait");
+                                return BadRequest("wait");
+                                
                             }
                         }
                     }
                     else
                     {
-                        BadRequest("bad time");
+                       return BadRequest("bad time");
                     }
                 }
                 else
