@@ -148,6 +148,12 @@ export class ToolTypePageComponent implements OnInit {
       this.newKey = "";
       this.newValue = "";
       this.serveCostLength.push(0);
+    } else if ((this.newKey != "") && (this.newValue == "")) {
+      this.toolType.serves.push(this.newKey);
+      this.toolType.costs.push("<h4>");
+      this.newKey = "";
+      this.newValue = "";
+      this.serveCostLength.push(0);
     }
   }
   removeBrand(i) {

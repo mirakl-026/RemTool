@@ -114,8 +114,12 @@
     }
 }
 
-.request-form__contacts{
+.request-form__email{
     margin-top: 20px;
+}
+
+.warning {
+    color: red !important;
 }
 
 @media (hover: hover) {

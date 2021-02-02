@@ -29,7 +29,7 @@ import { RequestsPageComponent } from './requests-page/requests-page.component';
         RouterModule.forChild([
             {
                 path: '', component: AdminLayoutComponent, children: [
-                    {path: '', redirectTo: '/admin/login', pathMatch: 'full'},
+                    {path: '', redirectTo: '/admin/tooltypes', pathMatch: 'full'},
                     {path: 'login', component: LoginPageComponent},
                     // { path: 'spareparts', component: SparePartsPageComponent },
                     // { path: 'tooltypes', component: ToolTypePageComponent },

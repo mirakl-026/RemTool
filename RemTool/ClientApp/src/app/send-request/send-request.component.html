@@ -5,16 +5,21 @@
     <form class="request-form"
     [formGroup]="requestForm">
     <button class="request-form__close" (click)="formPopupClose($event)"></button>
-        <div class="request-form__contacts">
+        <div class="request-form__email">
             <input
             type="email"
-                maxlength="20"
-                formControlName="contacts"
-                placeholder=" ">
-                <!-- <small *ngIf="requestForm.get('phone').errors.pattern">неверный формат</small> -->
-                <span (click)="inputFocus($event)">Ваш телефон или email*</span>
+            maxlength="20"
+            formControlName="email"
+            placeholder=" ">
+            <!-- <small *ngIf="requestForm.get('phone').errors.pattern">неверный формат</small> -->
+            <span
+            [ngClass]="{
+                'warning': !!requestForm.get('email').errors && requestForm.get('email').touched
+            }"
+            (click)="inputFocus($event)">Ваш email*</span>
+            <!-- <span  (click)="inputFocus($event)">{{!!requestForm.get('email').errors}}</span> -->
         </div>
-        <div>
+            <div>
             <input class="request-form__name"
                 type="text"
                 maxlength="40"
@@ -28,9 +33,14 @@
                 formControlName="text"
                 placeholder=" "
                 maxlength="150"></textarea>
-                <span (click)="inputFocus($event)">Заявка*</span>
+                <span
+                [ngClass]="{
+                    'warning': !!requestForm.get('text').errors && requestForm.get('text').touched
+                }"
+                (click)="inputFocus($event)">Заявка*</span>
         </div>
         <button class="button_light"
+            [disabled]="requestForm.invalid"
             (click)="sendRequest($event)">Отправить</button>
     </form>
 </div>

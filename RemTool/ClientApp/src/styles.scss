@@ -76,6 +76,9 @@ body {
         border: 2px solid var(--orange-color);
         padding: 0 14px;
     }
+    &:disabled {
+        color: var(--grey-color);
+    }
 }
 
 .nav {

@@ -203,6 +203,7 @@ input[type=search] {
 
 
 .drop-menu {
+    box-shadow: var(--shadow);
     z-index: 999;
     position: absolute;
     display: flex;
@@ -266,6 +267,7 @@ input[type=search] {
 }
 
 .side-drop-menu {
+    box-shadow: var(--shadow);
     position: absolute;
     overflow-y: auto;
     top: 0;

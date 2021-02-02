@@ -13,7 +13,7 @@ export class SendRequestComponent implements OnInit {
 
   ngOnInit(): void {
     this.requestForm = new FormGroup({
-      contacts: new FormControl(null, [Validators.required]),
+      email: new FormControl(null, [Validators.required, Validators.email]),
       name: new FormControl(null, []),
       text: new FormControl(null, [Validators.required]),
     })
@@ -21,9 +21,11 @@ export class SendRequestComponent implements OnInit {
   
   formPopupClose(e){
     console.log(e.path[0]);
-    if ((e.path[0] == document.querySelector('.request-container')) || (e.path[0] == document.querySelector('.request-form__close'))) {
+    if (e.path[0] == document.querySelector('.request-container')) {
       this.formPopup = false;
       // window.onscroll = function () { };
+    } else if (e.target == document.querySelector('.request-form__close')) {
+      this.formPopup = false;
     }
   }
   
@@ -37,6 +39,10 @@ export class SendRequestComponent implements OnInit {
   }
   sendRequest(e){
     e.target.blur();
+    const reqForm = {
+      "Email": this.requestForm.value.email,
+      "Name": this.requestForm.value.name,
+    }
     
   }
 

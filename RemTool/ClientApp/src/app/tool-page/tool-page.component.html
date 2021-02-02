@@ -7,8 +7,9 @@
     <div *ngIf="!!res$" class="tool-page__pricelist">
         <div class="pricelist-wrapper">
             <div class="pricelist__row" *ngFor="let serve of res$.serves; index as i">
-                <div>{{serve}}</div>
-                <div>{{res$.costs[i]}}</div>
+                <h4  *ngIf="res$.costs[i] == '<h4>'" class="pricelist__title">{{serve}}</h4>
+                <div *ngIf="res$.costs[i] != '<h4>'" class="pricelist__serve">{{serve}}</div>
+                <div *ngIf="res$.costs[i] != '<h4>'" class="pricelist__cost">{{res$.costs[i]}}</div>
             </div>
         </div>
     </div>
