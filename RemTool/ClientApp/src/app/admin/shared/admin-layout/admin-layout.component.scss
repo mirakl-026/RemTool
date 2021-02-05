@@ -17,7 +17,7 @@
     &::before {
         top: 0;
     }
-    &__item:hover .nav__link {
+    &__link:hover {
         color: var(--orange-color);
     }
 }

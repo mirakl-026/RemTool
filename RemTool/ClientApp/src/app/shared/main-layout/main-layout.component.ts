@@ -180,6 +180,7 @@ export class MainLayoutComponent implements OnInit {
       if (this.searchForm.value.data.length > 1) {
         this.searchPreloader = true;
         this.http.get("api/search/find?userInput=" + encodeURI(this.searchForm.value.data)).subscribe(res => {
+          console.log(res);
           this.searchMainTypes$ = [];
           this.types.type = [];
           this.types.category = [];
@@ -192,9 +193,9 @@ export class MainLayoutComponent implements OnInit {
           this.searchIds$ = res["includedIds"];
           this.searchMainTypes$ = res["includedCategories"];
           for (let i = 0; i < this.searchMainTypes$.length; i++) {
-            console.log(this.searchMainTypes$.length);
+            // console.log(this.searchMainTypes$.length);
             for (let j = 0; j < this.searchMainTypes$[i].length; j++) {
-              console.log(this.searchMainTypes$[i].length);
+              // console.log(this.searchMainTypes$[i].length);
               if (this.searchMainTypes$[i][j]) {
                 this.mains.push(this.mainTypes[j]);
                 break;

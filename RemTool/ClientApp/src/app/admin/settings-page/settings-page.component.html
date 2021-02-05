@@ -1,53 +1,55 @@
-<button class="button_light" (click)="createBackup()">Создать бекап</button>
-<button class="button_light" (click)="restoreSite()">Восстановить сайт</button>
-<!-- Загрузка картинки на сервер -->
-<form [formGroup]="newBackupForm" (change)="uploadBackup(newBackupForm.value)">
+<section class="backup">
+  <!-- <button class="button_light" (click)="createBackup()">Создать бекап</button> -->
+  <!-- <button class="button_light" (click)="restoreSite()">Восстановить сайт</button> -->
+  <!-- Загрузка картинки на сервер -->
+<form class="upload-btn" [formGroup]="newBackupForm" (change)="uploadBackup(newBackupForm.value)">
   <label class="button_light" for="newBackup">Загрузить бэкап на сервер</label>
   <input type="file" id="newBackup" formControlName="newBackup" (change)="onSelectFile($event)" style="display: none;">
 </form>
-<button class="button_light" (click)="downloadBackup()">Скачать бэкап</button>
+  <button class="button_light download-btn" (click)="downloadBackup($event)">Скачать бэкап</button>
+</section>
 
-<h4>Настройки почты</h4>
-<table>
-  <tr>
-    <td>Название</td>
-    <td>Значение</td>
-  </tr>
-  <tr>
-    <td>Флаг отправки уведомлений админу</td>
-    <td><input type="checkbox" [(ngModel)]="mailSettings.sendNotificationToHQ" /></td>
-  </tr>
-  <tr>
-    <td>Адрес админа</td>
-    <td><input type="text" size="40" [(ngModel)]="mailSettings.hQeMail"></td>
-  </tr>
-  <tr>
-    <td>Флаг отправки уведомлений клиенту</td>
-    <td><input type="checkbox" [(ngModel)]="mailSettings.sendNotificationToClient" /></td>
-  </tr>
-  <tr>
-    <td>Сообщение для клиента</td>
-    <td><input type="text" size="40" [(ngModel)]="mailSettings.defaultMessageToClient"></td>
-  </tr>
-  <tr>
-    <td>Адрес хоста-отправителя</td>
-    <td><input type="text" size="40" [(ngModel)]="mailSettings.credentials_Name"></td>
-  </tr>
-  <tr>
-    <td>Пасс хоста-отправителя</td>
-    <td><input type="password" size="40" [(ngModel)]="mailSettings.credentials_Pass"></td>
-  </tr>
-  <tr>
-    <td>SMTP хост</td>
-    <td><input type="text" size="40" [(ngModel)]="mailSettings.smtpServer_Host"></td>
-  </tr>
-  <tr>
-    <td>SMTP порт</td>
-    <td><input type="text" size="40" [(ngModel)]="mailSettings.smtpServer_Port"></td>
-  </tr>
-</table>
-<button class="button_light" (click)="saveMailSettings()">Сохранить вообще всё</button>
-<button class="button_light" (click)="resetMailSettings()">Сбросить настройки</button>
+<section class="mail-settings">
+  <h4>Настройки почты</h4>
+  <div class="mail-settings__item">
+    <label for="mail-to-admin">
+      <input id="mail-to-admin" type="checkbox" [(ngModel)]="mailSettings$.sendNotificationToHQ" />
+      Отправлять заявки администратору</label>
+  </div>
+  <div class="mail-settings__item">
+    <label for="admin-email">Адрес администратора</label>
+    <input id="admin-email" type="text" size="40" [(ngModel)]="mailSettings$.hQeMail">
+  </div>
+  <div class="mail-settings__item">
+    <label for="mail-to-client">
+      <input id="mail-to-client" type="checkbox" [(ngModel)]="mailSettings$.sendNotificationToClient" />
+      Отправлять уведомление клиенту</label>
+  </div>
+  <div class="mail-settings__item">
+    <label>Сообщение клиенту</label>
+    <textarea type="text" [(ngModel)]="mailSettings$.defaultMessageToClient"></textarea>
+  </div>
+  <div class="mail-settings__item">
+    <label for="host-email">Адрес почты сайта</label>
+    <input id="host-email" type="text" size="40" [(ngModel)]="mailSettings$.credentials_Name">
+  </div>
+  <div class="mail-settings__item">
+    <label for="host-password">Пароль почты сайта</label>
+    <input id="host-password" type="password" size="40" [(ngModel)]="mailSettings$.credentials_Pass">
+  </div>
+  <div class="mail-settings__item">
+    <label for="smtp-adress">SMTP адрес</label>
+    <input id="smtp-adress" type="text" size="40" [(ngModel)]="mailSettings$.smtpServer_Host">
+  </div>
+  <div class="mail-settings__item">
+    <label for="smtp-port">SMTP порт</label>
+    <input id="smtp-port" type="text" size="40" [(ngModel)]="mailSettings$.smtpServer_Port">
+  </div>
+  
+  <button class="button_ok" (click)="saveMailSettings($event)">Сохранить настройки</button>
+  <button class="button_light" (click)="resetMailSettings($event)">Сбросить настройки</button>
+</section>
+
 
 <!--
 

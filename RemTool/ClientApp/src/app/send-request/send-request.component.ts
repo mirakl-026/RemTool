@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-send-request',
@@ -10,6 +12,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class SendRequestComponent implements OnInit {
   requestForm: FormGroup;
   formPopup: boolean;
+  preloader: boolean = false;
+  sendButtonDisabled: boolean = false;
+  thankYouFlag: boolean = false;
+  thankYouMessage: string = '';
+  response$: any;
   constructor(
     private http: HttpClient
   ) { }
@@ -21,37 +28,30 @@ export class SendRequestComponent implements OnInit {
       text: new FormControl(null, [Validators.required]),
     })
   }
-  
-  formPopupClose(e){
-    console.log(e.path[0]);
-    if (e.path[0] == document.querySelector('.request-container')) {
+
+  formPopupClose(e) {
+    console.log(e.target);
+    if (e.target == document.querySelector('.request-container')) {
+      this.thankYouFlag = false;
       this.formPopup = false;
       // window.onscroll = function () { };
     } else if (e.target == document.querySelector('.request-form__close')) {
+      this.thankYouFlag = false;
       this.formPopup = false;
     }
   }
-  
-  sendRequestPopup(e){
+
+  sendRequestPopup(e) {
     e.target.blur();
     this.formPopup = true;
-    // document.querySelector('.request-container').setAttribute('style', `height: ${document.body.clientHeight}px`);
-  //   let scrollX = window.scrollX
-	// let scrollY = window.scrollY;
-  //  window.onscroll = function () { window.scrollTo(scrollX, scrollY); };
   }
-  sendRequest(e){
-    // var nowDate = new Date();
-    // var day = nowDate.getDate();
-    // var mounth = nowDate.getMonth();
-    // var year = nowDate.getFullYear();
-    // var hours = nowDate.getHours();
-    // var minutes = nowDate.getMinutes();
-    // var time = day + " " + mounth + " " + year + " " + hours + " " + minutes;
-    // document.write(time);
+  sendRequest(e) {
+    this.preloader = true;
+    this.sendButtonDisabled = true;
+    e.target.disabled;
     e.target.blur();
     let time = String(Math.trunc(new Date().getTime() / 1000));
-    console.log(time);
+    // console.log(time);
     var req = {
       "Name": this.requestForm.value.name,
       "Phone": '',
@@ -59,12 +59,63 @@ export class SendRequestComponent implements OnInit {
       "ReqInfo": this.requestForm.value.text,
       "SendedTime": time
     }
-    this.http.post("/api/rtrequest", req).subscribe(res => {
-      console.log(res);
-    })
+    this.response$ =  this.http.post("/api/rtrequest", req, {observe: 'response'});
+    this.response$
+    .pipe(
+      catchError(err => {
+        if (err.error == 'wait') {
+          this.thankYouMessage = "Заявки можно отправлять 1 раз в 3 минуты. Попробуйте позже."
+        } else {
+          this.thankYouMessage = "Что-то пошло не так, попробуйсте еще раз."
+        }
+        this.thankYouFlag = true;
+        this.preloader = false;
+        this.sendButtonDisabled = false;
+
+        // console.log(err.error);
+        return throwError(err);
+      })
+      )
+    .subscribe(res => {
+      console.log(res.status);
+      if (res.status == 200) {
+        this.thankYouMessage = "Ваша заявка отправлена и будет обработана в ближайшее время";
+        this.requestForm.reset();
+      } else if ((res.status == 400) && (res["error"] == "wait")) {
+        this.thankYouMessage = "Заявки можно отправлять 1 раз в 3 минуты. Попробуйте позже."
+      } else {
+        this.thankYouMessage = "Что-то пошло не так, попробуйсте еще раз."
+      }
+      this.preloader = false;
+      this.sendButtonDisabled = false;
+      this.thankYouFlag = true;
+      // console.log(res);
+    });
   }
 
-  inputFocus(e){
+  requestResult(req){
+    
+  }
+
+
+  // getUsers(): Observable<User[]> {
+  //   return this.http.get('usersP.json').pipe(
+  //     map((data) => {
+  //       let usersList = data['usersList']
+  //       return usersList.map(function (user: any) {
+  //         return { name: user.userName, age: user.userAge }
+  //       })
+  //     }),
+  //     catchError((err) => {
+  //       console.log(err)
+  //       return throwError(err)
+  //     })
+  //   )
+  // }
+
+
+
+  inputFocus(e) {
     e.target.previousElementSibling.focus();
   }
 }

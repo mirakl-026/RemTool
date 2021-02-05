@@ -215,4 +215,8 @@ export class ToolTypePageComponent implements OnInit {
     let fileName: string = imgSrc.slice(fileNameIndex);
     this.http.delete("api/images/DeleteImage/" + fileName).subscribe(data => this.chooseImg(true));
   }
+
+  refreshSearch() {
+    this.http.patch("/api/tooltype/RefreshAllToolTypesSearch", null).subscribe();
+  }
 }

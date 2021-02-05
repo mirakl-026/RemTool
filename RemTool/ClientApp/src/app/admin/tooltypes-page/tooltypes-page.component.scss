@@ -29,6 +29,15 @@ h1 {
     text-align: center;
 }
 
+.tool-btns {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    & button {
+        margin-bottom: 20px;
+    }
+}
+
 .create-tool {
     padding-top: 30px;
     max-width: 700px;
@@ -42,7 +51,7 @@ h1 {
         justify-content: space-between;
     }
     &__btn {
-        margin: 10px 0;
+        margin-right: 20px;
     }
 }
 

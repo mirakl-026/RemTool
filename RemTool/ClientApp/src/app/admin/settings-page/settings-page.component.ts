@@ -21,9 +21,18 @@ export class SettingsPageComponent implements OnInit {
   ) { }
 
   newBackupForm: FormGroup;
-  mailSettings: MailSettings;
+  mailSettings$: MailSettings;
 
   ngOnInit(): void {
+    this.mailSettings$ = new MailSettings;
+    this.mailSettings$.sendNotificationToHQ = false;
+    this.mailSettings$.hQeMail = "";
+    this.mailSettings$.sendNotificationToClient = false;
+    this.mailSettings$.defaultMessageToClient = "";
+    this.mailSettings$.credentials_Name = "";
+    this.mailSettings$.credentials_Pass = "";
+    this.mailSettings$.smtpServer_Host = "";
+    this.mailSettings$.smtpServer_Port = "";
     this.getMailSettings();
     this.newBackupForm = new FormGroup({
       newBackup: new FormControl(null)
@@ -52,17 +61,22 @@ export class SettingsPageComponent implements OnInit {
     formData.append('newBackup', this.selectedFile);
     this.http.post('api/backup/loadbackup', formData)
       .subscribe(res => {
-        alert('Uploaded!!');
+        this.restoreSite();
+        alert('База данных восстановлена');
         //this.http.get("api/images/getimages").subscribe((data: string) => this.images = data);
       });
     this.newBackupForm.reset();
   }
 
   // загрузка бэкапа с сервера на клиент
-  public downloadBackup() {
-    this.http.get('api/backup/downloadBackup', { responseType: 'blob' }).subscribe(blob => {
-      saveAs(blob, 'backup.zip', {
-        type: 'application/zip' // --> or whatever you need here
+  public downloadBackup(e) {
+    e.target.blur();
+    // this.createBackup();
+    this.http.get("api/Backup/PackToZip").subscribe(() => {
+      this.http.get('api/backup/downloadBackup', { responseType: 'blob' }).subscribe(blob => {
+        saveAs(blob, 'backup.zip', {
+          type: 'application/zip' // --> or whatever you need here
+        });
       });
     });
   }
@@ -72,7 +86,7 @@ export class SettingsPageComponent implements OnInit {
     //this.mailSettings = new MailSettings();
     this.http.get("api/RtMailSettings")
       .subscribe((data: MailSettings) => {
-        this.mailSettings = data;
+        this.mailSettings$ = data;
       });
   }
 
@@ -126,21 +140,23 @@ export class SettingsPageComponent implements OnInit {
   }
   */
 
-  saveMailSettings() {
-    this.http.put("api/RtMailSettings", this.mailSettings).subscribe();
+  saveMailSettings(e) {
+    e.target.blur();
+    this.http.put("api/RtMailSettings", this.mailSettings$).subscribe();
   }
 
-  resetMailSettings() {
-    this.mailSettings.sendNotificationToHQ = false;
-    this.mailSettings.hQeMail = "";
-    this.mailSettings.sendNotificationToClient = false;
-    this.mailSettings.defaultMessageToClient = "< h3 > Ваш запрос передан, с Вами свяжутся ...</ h3 >";
-    this.mailSettings.credentials_Name = "";
-    this.mailSettings.credentials_Pass = "";
-    this.mailSettings.smtpServer_Host = "smtp.mail.ru";
-    this.mailSettings.smtpServer_Port = "25";
+  resetMailSettings(e) {
+    e.target.blur();
+    this.mailSettings$.sendNotificationToHQ = false;
+    this.mailSettings$.hQeMail = "";
+    this.mailSettings$.sendNotificationToClient = false;
+    this.mailSettings$.defaultMessageToClient = "";
+    this.mailSettings$.credentials_Name = "";
+    this.mailSettings$.credentials_Pass = "";
+    this.mailSettings$.smtpServer_Host = "";
+    this.mailSettings$.smtpServer_Port = "";
 
-    this.http.put("api/RtMailSettings", this.mailSettings).subscribe();
+    this.http.put("api/RtMailSettings", this.mailSettings$).subscribe();
   }
 }
 

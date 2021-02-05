@@ -4,30 +4,49 @@
 <div class="request-container" *ngIf="formPopup" (click)="formPopupClose($event)">
 
 
-        <app-top-preloader></app-top-preloader>
-        <form class="request-form" [formGroup]="requestForm">
+    <form class="request-form" [formGroup]="requestForm">
+        <div *ngIf="thankYouFlag" class="thank-you">
+            <span>
+                {{thankYouMessage}}
+            </span>
+        </div>
+            <!-- <app-top-preloader *ngIf="preloader"></app-top-preloader> -->
             <button class="request-form__close" (click)="formPopupClose($event)"></button>
-            <div class="request-form__email">
+            <div
+                [ngClass]="{
+                    'visibility-hidden': thankYouMessage
+                }"
+                class="request-form__email">
                 <input type="email" maxlength="40" formControlName="email" placeholder=" ">
                 <!-- <small *ngIf="requestForm.get('phone').errors.pattern">неверный формат</small> -->
-                <span [ngClass]="{
-                'warning': !!requestForm.get('email').errors && requestForm.get('email').touched
-            }" (click)="inputFocus($event)">Ваш email*</span>
+                <span
+                    [ngClass]="{
+                        'warning': !!requestForm.get('email').errors && requestForm.get('email').touched
+                    }"
+                    (click)="inputFocus($event)">Ваш email*
+                </span>
                 <!-- <span  (click)="inputFocus($event)">{{!!requestForm.get('email').errors}}</span> -->
             </div>
-            <div>
+            <div [ngClass]="{'visibility-hidden': thankYouMessage}">
                 <input class="request-form__name" type="text" maxlength="40" formControlName="name" placeholder=" ">
                 <span (click)="inputFocus($event)">Ваше имя</span>
             </div>
-            <div>
+            <div [ngClass]="{'visibility-hidden': thankYouMessage}">
                 <textarea class="request-form__req" name="" id="" cols="" rows="" formControlName="text" placeholder=" "
                     maxlength="150"></textarea>
                 <span [ngClass]="{
                 'warning': !!requestForm.get('text').errors && requestForm.get('text').touched
             }" (click)="inputFocus($event)">Заявка*</span>
             </div>
-            <button class="button_light" [disabled]="requestForm.invalid"
-                (click)="sendRequest($event)">Отправить</button>
+            <button
+                [ngClass]="{'visibility-hidden': thankYouMessage}"
+                class="button_light"
+                style="position: relative;"
+                [disabled]="requestForm.invalid || sendButtonDisabled"
+                (click)="sendRequest($event)">
+                <app-top-preloader *ngIf="preloader"></app-top-preloader>
+                Отправить
+            </button>
         </form>
 
 </div>

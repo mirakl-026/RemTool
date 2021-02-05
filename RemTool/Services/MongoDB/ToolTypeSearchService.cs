@@ -292,24 +292,43 @@ namespace RemTool.Services.MongoDB
                 // если пользовательский ввод совпадает со услугой вутри инструмента
                 else
                 {
+                    // foreach (var service in oneToolTypeSearch.Services)
+                    // {
+                    //     var serviceUpper = service.ToUpper();
+                    //     if (serviceUpper.IndexOf(upperUserInput) >= 0 || serviceUpper.Equals(upperUserInput))
+                    //     {
+                    //         if (!searchResults.IncludedTypes.Contains(oneToolTypeSearch.Name))
+                    //         {
+                    //             searchResults.IncludedTypes.Add(oneToolTypeSearch.Name);
+                    //             searchResults.IncludedIds.Add(oneToolTypeSearch.RefId);
+                    //             searchResults.IncludedCategories.Add(oneToolTypeSearch.Categories);
+                    //             searchResults.IncludedServices.Add(service);
+                    //         }
+                    //         else
+                    //         {
+                    //             var last = searchResults.IncludedServices.Last();
+                    //             var added = last + "," + service;
+                    //             searchResults.IncludedServices.Remove(last);
+                    //             searchResults.IncludedServices.Add(added);
+                    //         }
+                    //     }
+                    // }
                     foreach (var service in oneToolTypeSearch.Services)
                     {
                         var serviceUpper = service.ToUpper();
                         if (serviceUpper.IndexOf(upperUserInput) >= 0 || serviceUpper.Equals(upperUserInput))
                         {
-                            if (!searchResults.IncludedTypes.Contains(oneToolTypeSearch.Name))
+                            if (searchResults.IncludedTypes.Contains(oneToolTypeSearch.Name))
+                            {
+                                break;
+                            }
+                            else
                             {
                                 searchResults.IncludedTypes.Add(oneToolTypeSearch.Name);
                                 searchResults.IncludedIds.Add(oneToolTypeSearch.RefId);
                                 searchResults.IncludedCategories.Add(oneToolTypeSearch.Categories);
                                 searchResults.IncludedServices.Add(service);
-                            }
-                            else
-                            {
-                                var last = searchResults.IncludedServices.Last();
-                                var added = last + "," + service;
-                                searchResults.IncludedServices.Remove(last);
-                                searchResults.IncludedServices.Add(added);
+                                break;
                             }
                         }
                     }

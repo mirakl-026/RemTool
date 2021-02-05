@@ -11,7 +11,7 @@ h2 {
     // margin-top: 60px;
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(130px, 1fr));
     grid-gap: 30px;
     // grid-auto-rows: auto;
     // grid-auto-columns: auto;
@@ -54,7 +54,7 @@ h2 {
 
 @media (max-width: 767.98px) {
     .tools-container {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, minmax(130px, 1fr));
         grid-gap: 16px;
     }
     .tool {
@@ -73,7 +73,7 @@ h2 {
 
 @media (max-width: 463.98px) {
     .tools-container {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(130px, 1fr));
     }
 
 }

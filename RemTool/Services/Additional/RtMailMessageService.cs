@@ -36,7 +36,7 @@ namespace RemTool.Services.Additional
                         m.Subject = "Запрос";
 
                         // текст письма
-                        m.Body = $"<h3>RemTool, запрос от {request.Name}, тел:{request.Phone}: </h3><p>{request.ReqInfo}</p><p>Email:{request.Email}, {request.SendedTime}</p>";
+                        m.Body = $"<h3>RemTool, запрос от {request.Name}</h3><p>{request.ReqInfo}</p><p>Email:{request.Email}</p>";
 
                         // письмо представляет код html
                         m.IsBodyHtml = true;
