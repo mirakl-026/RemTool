@@ -41,6 +41,7 @@
         background: none;
         border: none;
         box-sizing: border-box;
+        transition: transform 150ms ease;
         &::before, &::after {
             content: '';
             position: absolute;
@@ -129,7 +130,7 @@
     left: 0;
     position: absolute !important;
     z-index: 8;
-    height: 100%;
+    height: calc(100% - 34px);
     width: 100%;
 }
 
