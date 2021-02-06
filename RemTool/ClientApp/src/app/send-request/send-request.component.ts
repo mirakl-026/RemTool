@@ -45,6 +45,7 @@ export class SendRequestComponent implements OnInit {
     e.target.blur();
     this.formPopup = true;
   }
+
   sendRequest(e) {
     this.preloader = true;
     this.sendButtonDisabled = true;
@@ -83,8 +84,10 @@ export class SendRequestComponent implements OnInit {
         this.requestForm.reset();
       } else if ((res.status == 400) && (res["error"] == "wait")) {
         this.thankYouMessage = "Заявки можно отправлять 1 раз в 3 минуты. Попробуйте позже."
+      } else if ((res.status == 400) && (res["error"] == "error")){
+        this.thankYouMessage = "Что-то пошло не так, попробуйсте позже."
       } else {
-        this.thankYouMessage = "Что-то пошло не так, попробуйсте еще раз."
+        this.thankYouMessage = "Что-то пошло не так, попробуйсте позже."
       }
       this.preloader = false;
       this.sendButtonDisabled = false;
