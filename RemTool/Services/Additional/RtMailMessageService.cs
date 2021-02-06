@@ -14,7 +14,7 @@ namespace RemTool.Services.Additional
 {
     public class RtMailMessageService
     {
-        public int SendEMailMessageToHQ(string HQeMail, RtRequest request, string credentialsName, string credentialsPass, string smtpHost, string smtpPort)
+        public int SendEMailMessageToHQ(string HQeMail, RtRequest request, string credentialsName, string credentialsPass, string smtpHost, string smtpPort, out string resultMessage)
         {
             if (!HQeMail.Equals("") && !credentialsName.Equals("") && !credentialsPass.Equals(""))
             {
@@ -50,24 +50,26 @@ namespace RemTool.Services.Additional
                         //smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
 
                         smtp.Send(m);
+                        resultMessage = "1 message to HQ sended";
                         return 1;       // всё хорошо
                     }
                 }
                 catch (SmtpException smtp_ex)
                 {
-                    Console.WriteLine("Error send mail:" + smtp_ex);
+                    resultMessage = "Error: 2 smtp_ex: " + smtp_ex.Message;
                     return 2;   // ошибка в smtp (в отправке почты)
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error:" + ex);
+                    resultMessage = "Error: 3 allRound_ex: " + ex.Message;
                     return 3;   // ошибка в чом то ещё - мб формы незаполнены 
                 }
             }
+            resultMessage = "Error: 4 - wrong settings";
             return 4;   // отправки не было, т.к. основные поля отправки невалидны
         }
     
-        public int SendEMailMessageToClient(string ClientMail, string messageText, string credentialsName, string credentialsPass, string smtpHost, string smtpPort)
+        public int SendEMailMessageToClient(string ClientMail, string messageText, string credentialsName, string credentialsPass, string smtpHost, string smtpPort, out string resultMessage)
         {
             if (!ClientMail.Equals("") && !credentialsName.Equals("") && !credentialsPass.Equals(""))
             {
@@ -103,20 +105,22 @@ namespace RemTool.Services.Additional
                         //smtp.EnableSsl = false;
 
                         smtp.Send(m);
+                        resultMessage = "1 message to client sended";
                         return 1;       // всё хорошо
                     }
                 }
                 catch (SmtpException smtp_ex)
                 {
-                    Console.WriteLine("Error send mail:" + smtp_ex);
+                    resultMessage = "Error: 2 smtp_ex: " + smtp_ex.Message;
                     return 2;   // ошибка в smtp (в отправке почты)
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error:" + ex);
+                    resultMessage = "Error: 3 allRound_ex: " + ex.Message;
                     return 3;   // ошибка в чом то ещё - мб формы незаполнены 
                 }
             }
+            resultMessage = "Error: 4 - wrong settings";
             return 4;
         }
     }

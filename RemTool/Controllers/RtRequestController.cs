@@ -91,30 +91,34 @@ namespace RemTool.Controllers
 
                             if (mSettings.SendNotificationToClient == true)
                             {
+                                string sendResultMessage;
                                 var sendResult = mailSender.SendEMailMessageToClient(
                                     newRtreq.Email,
                                     mSettings.DefaultMessageToClient,
                                     mSettings.Credentials_Name,
                                     mSettings.Credentials_Pass,
                                     mSettings.SmtpServer_Host,
-                                    mSettings.SmtpServer_Port);
+                                    mSettings.SmtpServer_Port,
+                                    out sendResultMessage);
                                 if (sendResult != 1)
                                 {
-                                    return BadRequest("Error");
+                                    return BadRequest(sendResultMessage);
                                 }
                             }
                             if (mSettings.SendNotificationToHQ == true)
                             {
+                                string sendResultMessage;
                                 var sendResult = mailSender.SendEMailMessageToHQ(
                                     mSettings.HQeMail,
                                     newRtreq,
                                     mSettings.Credentials_Name,
                                     mSettings.Credentials_Pass,
                                     mSettings.SmtpServer_Host,
-                                    mSettings.SmtpServer_Port);
+                                    mSettings.SmtpServer_Port,
+                                    out sendResultMessage);
                                 if (sendResult != 1)
                                 {
-                                    return BadRequest("Error");
+                                    return BadRequest(sendResultMessage);
                                 }
                             }
                             return Ok();
@@ -136,30 +140,34 @@ namespace RemTool.Controllers
 
                     if (mSettings.SendNotificationToClient == true)
                     {
+                        string sendResultMessage;
                         var sendResult = mailSender.SendEMailMessageToClient(
                             newRtreq.Email,
                             mSettings.DefaultMessageToClient,
                             mSettings.Credentials_Name,
                             mSettings.Credentials_Pass,
                             mSettings.SmtpServer_Host,
-                            mSettings.SmtpServer_Port);
+                            mSettings.SmtpServer_Port,
+                            out sendResultMessage);
                         if (sendResult != 1)
                         {
-                            return BadRequest("Error");
+                            return BadRequest(sendResultMessage);
                         }
                     }
                     if (mSettings.SendNotificationToHQ == true)
                     {
+                        string sendResultMessage;
                         var sendResult = mailSender.SendEMailMessageToHQ(
                             mSettings.HQeMail,
                             newRtreq,
                             mSettings.Credentials_Name,
                             mSettings.Credentials_Pass,
                             mSettings.SmtpServer_Host,
-                            mSettings.SmtpServer_Port);
+                            mSettings.SmtpServer_Port,
+                            out sendResultMessage);
                         if (sendResult != 1)
                         {
-                            return BadRequest("Error");
+                            return BadRequest(sendResultMessage);
                         }
                     }
 
