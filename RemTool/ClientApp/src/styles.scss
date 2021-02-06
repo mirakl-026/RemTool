@@ -91,6 +91,9 @@ body {
     }
     &:disabled {
         color: var(--grey-color);
+        &:hover {
+            color: var(--grey-color);
+        }
     }
 }
 

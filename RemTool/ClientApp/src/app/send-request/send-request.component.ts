@@ -30,7 +30,7 @@ export class SendRequestComponent implements OnInit {
   }
 
   formPopupClose(e) {
-    console.log(e.target);
+    // console.log(e.target);
     if (e.target == document.querySelector('.request-container')) {
       this.thankYouFlag = false;
       this.formPopup = false;
