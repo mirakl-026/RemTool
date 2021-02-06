@@ -91,23 +91,31 @@ namespace RemTool.Controllers
 
                             if (mSettings.SendNotificationToClient == true)
                             {
-                                mailSender.SendEMailMessageToClient(
+                                var sendResult = mailSender.SendEMailMessageToClient(
                                     newRtreq.Email,
                                     mSettings.DefaultMessageToClient,
                                     mSettings.Credentials_Name,
                                     mSettings.Credentials_Pass,
                                     mSettings.SmtpServer_Host,
                                     mSettings.SmtpServer_Port);
+                                if (sendResult != 1)
+                                {
+                                    return BadRequest("Error");
+                                }
                             }
                             if (mSettings.SendNotificationToHQ == true)
                             {
-                                mailSender.SendEMailMessageToHQ(
+                                var sendResult = mailSender.SendEMailMessageToHQ(
                                     mSettings.HQeMail,
                                     newRtreq,
                                     mSettings.Credentials_Name,
                                     mSettings.Credentials_Pass,
                                     mSettings.SmtpServer_Host,
                                     mSettings.SmtpServer_Port);
+                                if (sendResult != 1)
+                                {
+                                    return BadRequest("Error");
+                                }
                             }
                             return Ok();
                         }
@@ -128,23 +136,31 @@ namespace RemTool.Controllers
 
                     if (mSettings.SendNotificationToClient == true)
                     {
-                        mailSender.SendEMailMessageToClient(
+                        var sendResult = mailSender.SendEMailMessageToClient(
                             newRtreq.Email,
                             mSettings.DefaultMessageToClient,
                             mSettings.Credentials_Name,
                             mSettings.Credentials_Pass,
                             mSettings.SmtpServer_Host,
                             mSettings.SmtpServer_Port);
+                        if (sendResult != 1)
+                        {
+                            return BadRequest("Error");
+                        }
                     }
                     if (mSettings.SendNotificationToHQ == true)
                     {
-                        mailSender.SendEMailMessageToHQ(
+                        var sendResult = mailSender.SendEMailMessageToHQ(
                             mSettings.HQeMail,
                             newRtreq,
                             mSettings.Credentials_Name,
                             mSettings.Credentials_Pass,
                             mSettings.SmtpServer_Host,
                             mSettings.SmtpServer_Port);
+                        if (sendResult != 1)
+                        {
+                            return BadRequest("Error");
+                        }
                     }
 
                     return Ok(newRtreq);

@@ -14,7 +14,7 @@ namespace RemTool.Services.Additional
 {
     public class RtMailMessageService
     {
-        public void SendEMailMessageToHQ(string HQeMail, RtRequest request, string credentialsName, string credentialsPass, string smtpHost, string smtpPort)
+        public int SendEMailMessageToHQ(string HQeMail, RtRequest request, string credentialsName, string credentialsPass, string smtpHost, string smtpPort)
         {
             if (!HQeMail.Equals("") && !credentialsName.Equals("") && !credentialsPass.Equals(""))
             {
@@ -50,16 +50,24 @@ namespace RemTool.Services.Additional
                         //smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
 
                         smtp.Send(m);
+                        return 1;       // всё хорошо
                     }
+                }
+                catch (SmtpException smtp_ex)
+                {
+                    Console.WriteLine("Error send mail:" + smtp_ex);
+                    return 2;   // ошибка в smtp (в отправке почты)
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error send mail:" + ex);
+                    Console.WriteLine("Error:" + ex);
+                    return 3;   // ошибка в чом то ещё - мб формы незаполнены 
                 }
             }
+            return 4;   // отправки не было, т.к. основные поля отправки невалидны
         }
     
-        public void SendEMailMessageToClient(string ClientMail, string messageText, string credentialsName, string credentialsPass, string smtpHost, string smtpPort)
+        public int SendEMailMessageToClient(string ClientMail, string messageText, string credentialsName, string credentialsPass, string smtpHost, string smtpPort)
         {
             if (!ClientMail.Equals("") && !credentialsName.Equals("") && !credentialsPass.Equals(""))
             {
@@ -95,13 +103,21 @@ namespace RemTool.Services.Additional
                         //smtp.EnableSsl = false;
 
                         smtp.Send(m);
+                        return 1;       // всё хорошо
                     }
+                }
+                catch (SmtpException smtp_ex)
+                {
+                    Console.WriteLine("Error send mail:" + smtp_ex);
+                    return 2;   // ошибка в smtp (в отправке почты)
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error send mail:" + ex);
+                    Console.WriteLine("Error:" + ex);
+                    return 3;   // ошибка в чом то ещё - мб формы незаполнены 
                 }
             }
+            return 4;
         }
     }
 }
