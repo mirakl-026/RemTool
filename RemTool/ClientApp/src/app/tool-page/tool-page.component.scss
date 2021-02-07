@@ -69,12 +69,13 @@
         }
         &__serve {
             width: 100%;
-            padding-right: 6px;
-            border-right: 1px solid var(--light-color);
         }
         &__cost {
-            min-width: 56px;
+            padding-left: 6px;
+
+            min-width: 70px;
             text-align: right;
+            border-left: 1px solid var(--light-color);
             // white-space: nowrap;
         }
         &__title {

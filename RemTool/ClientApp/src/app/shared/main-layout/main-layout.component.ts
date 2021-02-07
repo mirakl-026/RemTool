@@ -52,13 +52,6 @@ export class MainLayoutComponent implements OnInit {
       this.tools = data["res"];
     });
 
-    window.onclick = (e) => {
-      // console.log(e.path)
-      // this.burger = false;
-      // if ((e.target != document.querySelector('.mobile__nav')) &&  (e.path[1] != document.querySelector('#burger'))) {
-      // }
-    }
-
     window.addEventListener('resize', () => {
       if (window.matchMedia("(max-width: 683.98px)").matches) {
         this.searchMobile = true;
@@ -180,7 +173,6 @@ export class MainLayoutComponent implements OnInit {
       if (this.searchForm.value.data.length > 1) {
         this.searchPreloader = true;
         this.http.get("api/search/find?userInput=" + encodeURI(this.searchForm.value.data)).subscribe(res => {
-          console.log(res);
           this.searchMainTypes$ = [];
           this.types.type = [];
           this.types.category = [];
@@ -193,9 +185,7 @@ export class MainLayoutComponent implements OnInit {
           this.searchIds$ = res["includedIds"];
           this.searchMainTypes$ = res["includedCategories"];
           for (let i = 0; i < this.searchMainTypes$.length; i++) {
-            // console.log(this.searchMainTypes$.length);
             for (let j = 0; j < this.searchMainTypes$[i].length; j++) {
-              // console.log(this.searchMainTypes$[i].length);
               if (this.searchMainTypes$[i][j]) {
                 this.mains.push(this.mainTypes[j]);
                 break;
@@ -211,10 +201,7 @@ export class MainLayoutComponent implements OnInit {
               this.services.id.push(this.searchIds$[i]);
             }
           }
-          // console.log(this.types)
-          // console.log(this.services)
           this.searchPreloader = false;
-          // console.log(this.searchMainTypes$);
         })
       } else {
         this.searchMainTypes$ = [];

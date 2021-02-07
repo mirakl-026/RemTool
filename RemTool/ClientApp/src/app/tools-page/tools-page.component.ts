@@ -34,7 +34,6 @@ export class ToolsPageComponent implements OnInit {
       takeUntil(this.destroy$))
       .subscribe(params => {
         this.type = params.type;
-        // console.log(this.type);
         this.preloader = true;
         this.getTools();
       });

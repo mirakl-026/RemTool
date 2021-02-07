@@ -9,7 +9,7 @@
             <div class="pricelist__row" *ngFor="let serve of res$.serves; index as i">
                 <h4  *ngIf="res$.costs[i] == '<h4>'" class="pricelist__title">{{serve}}</h4>
                 <div *ngIf="res$.costs[i] != '<h4>'" class="pricelist__serve">{{serve}}</div>
-                <div *ngIf="res$.costs[i] != '<h4>'" class="pricelist__cost">{{res$.costs[i]}}</div>
+                <div *ngIf="(res$.costs[i] != '<h4>') && (res$.costs[i] != '<none>')" class="pricelist__cost">{{res$.costs[i]}}</div>
             </div>
         </div>
     </div>

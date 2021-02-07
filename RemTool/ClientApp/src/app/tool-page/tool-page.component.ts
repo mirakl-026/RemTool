@@ -32,7 +32,6 @@ export class ToolPageComponent implements OnInit {
       takeUntil(this.destroy$))
       .subscribe(params => {
         this.id = params.id;
-        console.log(this.id);
         this.preloader = true;
         this.getTool(this.id);
       });
@@ -41,7 +40,6 @@ export class ToolPageComponent implements OnInit {
   getTool(id) {
     this.dataService.getToolType(id).subscribe(data => {
       this.res$ = data;
-      console.log(this.res$);
       if (!this.res$.nameSeo) {
         document.title = `Ремонт | ${this.res$.name.toLowerCase()}`;
       } else {
@@ -49,7 +47,6 @@ export class ToolPageComponent implements OnInit {
       }
       // this.http.get(`http://ws3.morpher.ru/russian/declension?s=${this.res$.name}&format=json`).subscribe(res => {
       //   this.titleName$ = res;
-      //   console.log(this.titleName$['Р']);
       //   document.title = `Ремонт ${this.titleName$['Р'].toLowerCase()}`;
       // });
       this.res$.serves.unshift('Вид работ');

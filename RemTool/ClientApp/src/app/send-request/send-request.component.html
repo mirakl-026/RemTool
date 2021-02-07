@@ -1,7 +1,7 @@
 <button class="button_light" (click)="sendRequestPopup($event)">
     Оставить заявку
 </button>
-<div class="request-container" *ngIf="formPopup" (click)="formPopupClose($event)">
+<div class="request-container" *ngIf="formPopup" (mousedown)="formPopupClose($event)">
 
 
     <form class="request-form" [formGroup]="requestForm">

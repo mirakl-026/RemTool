@@ -14,9 +14,6 @@ export class PreloaderService {
 
   loader:ILoader={isLoading:false}; 
   showLoader(){
-    console.log('showloader started');
-    // this.loader.isLoading=true;
-    // this.preloader.showPreloader();
   }
 
   hideLoader(){

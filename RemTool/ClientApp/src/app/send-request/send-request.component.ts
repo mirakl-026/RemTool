@@ -30,7 +30,6 @@ export class SendRequestComponent implements OnInit {
   }
 
   formPopupClose(e) {
-    // console.log(e.target);
     if (e.target == document.querySelector('.request-container')) {
       this.thankYouFlag = false;
       this.formPopup = false;
@@ -52,7 +51,6 @@ export class SendRequestComponent implements OnInit {
     e.target.disabled;
     e.target.blur();
     let time = String(Math.trunc(new Date().getTime() / 1000));
-    // console.log(time);
     var req = {
       "Name": this.requestForm.value.name,
       "Phone": '',
@@ -73,12 +71,10 @@ export class SendRequestComponent implements OnInit {
         this.preloader = false;
         this.sendButtonDisabled = false;
 
-        // console.log(err.error);
         return throwError(err);
       })
       )
     .subscribe(res => {
-      console.log(res.status);
       if (res.status == 200) {
         this.thankYouMessage = "Ваша заявка отправлена и будет обработана в ближайшее время";
         this.requestForm.reset();
@@ -92,7 +88,6 @@ export class SendRequestComponent implements OnInit {
       this.preloader = false;
       this.sendButtonDisabled = false;
       this.thankYouFlag = true;
-      // console.log(res);
     });
   }
 
@@ -110,7 +105,6 @@ export class SendRequestComponent implements OnInit {
   //       })
   //     }),
   //     catchError((err) => {
-  //       console.log(err)
   //       return throwError(err)
   //     })
   //   )

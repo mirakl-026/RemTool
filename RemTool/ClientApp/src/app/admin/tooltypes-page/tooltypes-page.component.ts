@@ -84,7 +84,6 @@ export class ToolTypePageComponent implements OnInit {
       this.serveCostLength.push(0);
     }
 
-    // console.log(document.querySelector('.create').getClientRects);
     // window.scrollTo({
     //   top: document.querySelector('.create').getBoundingClientRect().top,
     //   behavior: "smooth"

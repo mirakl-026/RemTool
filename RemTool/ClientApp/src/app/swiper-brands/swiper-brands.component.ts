@@ -14,8 +14,6 @@ export class SwiperBrandsComponent implements OnInit {
 
   ngOnInit(): void {
     window.addEventListener('resize', () => {
-      // alert('swiper');
-      // console.log('SWIPER');
       if (window.matchMedia("(max-width: 730.98px)").matches) {
         this.slidesPerView = 3;
         /* the viewport is at least 400 pixels wide */
@@ -27,17 +25,6 @@ export class SwiperBrandsComponent implements OnInit {
         /* the viewport is less than 400 pixels wide */
       }
       brandsSwiper.params.slidesPerView = this.slidesPerView;
-      // var brandsSwiper = new Swiper ('.brands-swiper', {
-      //   direction: 'horizontal',
-      //   slidesPerView: this.slidesPerView,
-      //   centeredSlides: true,
-      //   loop: true,
-      //   autoplay: {
-      //     disableOnInteraction: false,
-      //     delay: 3000,
-      //   }
-      // })
-  
     });
     if (window.matchMedia("(max-width: 730.98px)").matches) {
       this.slidesPerView = 3;
@@ -60,7 +47,6 @@ export class SwiperBrandsComponent implements OnInit {
         delay: 3000,
       }
     })
-    // console.log(brandsSwiper);
 
   }
 }
