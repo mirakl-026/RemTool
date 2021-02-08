@@ -34,7 +34,7 @@ const routes: Routes = [
       {
         path: 'tools/:type',
         component: ToolsPageComponent,
-        // resolve: {res: ResolverService}
+        resolve: {res: ResolverService}
       },
       {
         path: 'tools/:type/:id',
@@ -43,11 +43,9 @@ const routes: Routes = [
       },
       {path: 'delivery', component: DeliveryPageComponent},
       {path: 'contacts', component: ContactsPageComponent},
-      // {path: 'images', children: [{path: 'drill.png'}],  canActivate: [AuthGuard]}
     ]
   },
   {
-    // path: 'admin', loadChildren: './admin/admin.module#AdminModule'
     path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
   }
 ];
@@ -56,7 +54,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-    scrollPositionRestoration: 'enabled'
+    // scrollPositionRestoration: 'enabled'
   })],
   exports: [RouterModule]
 })
