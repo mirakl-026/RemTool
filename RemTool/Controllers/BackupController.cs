@@ -40,7 +40,25 @@ namespace RemTool.Controllers
             return Ok();
         }
 
-        // загрузить картинку
+        [HttpGet("UnpackFromZipHard")]
+        [Authorize]
+        public async Task<IActionResult> UnpackFromZipHard()
+        {
+            await _context.UnZipToServerWithHardReload();
+            return Ok();
+        }
+
+        [HttpGet("UnpackFromZipSoft")]
+        [Authorize]
+        public async Task<IActionResult> UnpackFromZipSoft()
+        {
+            await _context.UnZipToServerWithSoftReload();
+            return Ok();
+        }
+
+
+
+        // загрузить бэкап
         [HttpPost("LoadBackup")]
         [RequestSizeLimit(100428800)]
         [Authorize]

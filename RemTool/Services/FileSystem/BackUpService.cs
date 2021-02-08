@@ -244,7 +244,6 @@ namespace RemTool.Services.FileSystem
             ClearTemp();
         }
 
-
         public async Task UnZipToServerWithHardReload()
         {
             //
@@ -529,15 +528,6 @@ namespace RemTool.Services.FileSystem
             // чистим папку temp
             ClearTemp();
         }
-
-
-
-
-
-
-
-
-
 
 
 
