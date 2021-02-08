@@ -129,6 +129,12 @@ namespace RemTool.Services.FileSystem
 
             // распаковываем из архива
             string zipFile = PathToBackUpZip + "backup.zip";
+            FileInfo fiZip = new FileInfo(zipFile);
+            if (!fiZip.Exists)
+            {
+                // если архива нет - стоп
+                return;
+            }
             ZipFile.ExtractToDirectory(zipFile, PathToBackUpTemp);
 
             // получаем картинки и .json файлы 
@@ -237,6 +243,304 @@ namespace RemTool.Services.FileSystem
             // чистим папку temp
             ClearTemp();
         }
+
+
+        public async Task UnZipToServerWithHardReload()
+        {
+            //
+            int checkResult = CheckNCreateMainFolders();
+            if (checkResult == -1)
+            {
+                // папки с архивом не было, значит распаковывать нечего
+                return;
+            }
+
+            // чистка папки temp
+            ClearTemp();
+
+            // распаковываем из архива
+            string zipFile = PathToBackUpZip + "backup.zip";
+            FileInfo fiZip = new FileInfo(zipFile);
+            if (!fiZip.Exists)
+            {
+                // если архива почему-то нет - стоп
+                return;
+            }
+            ZipFile.ExtractToDirectory(zipFile, PathToBackUpTemp);
+
+            // получаем картинки и .json файлы 
+            // перемещаем картинки из temp в wwwroot/images
+            foreach (var imgFile in Directory.GetFiles(PathToBackUpTemp + "/images/"))
+            {
+                // копирование файла картинки в папку BackUp сервера
+                FileInfo fi = new FileInfo(imgFile);
+                if (fi.Exists)
+                {
+                    fi.CopyTo(_appEnvironment.WebRootPath + ImagesPath + fi.Name, true);
+                }
+            }
+
+            // по json записываем данные в коллекции (предварительно стирая)
+            // стереть всю коллекцию
+            _toolTypes.DeleteMany(new BsonDocument());
+            string jsonToolType = PathToBackUpTemp + "/json/" + "toolTypes.json";
+            FileInfo fiTt = new FileInfo(jsonToolType);
+            if (fiTt.Exists)
+            {
+                using (FileStream fs = new FileStream(jsonToolType, FileMode.OpenOrCreate))
+                {
+                    ToolType[] toolTypes = await JsonSerializer.DeserializeAsync<ToolType[]>(fs);
+                    if (toolTypes != null)
+                    {
+                        // поочерёдно заполнить коллекцию
+                        foreach (var tt in toolTypes)
+                        {
+                            await _toolTypes.InsertOneAsync(tt);
+                        }
+                    }
+                }
+            }
+
+            // Counters
+            // стереть всю коллекцию
+            _counters.DeleteMany(new BsonDocument());
+            string jsonCounter = PathToBackUpTemp + "/json/" + "counters.json";
+            FileInfo fiCt = new FileInfo(jsonCounter);
+            if (fiCt.Exists)
+            {
+                using (FileStream fs = new FileStream(jsonCounter, FileMode.OpenOrCreate))
+                {
+                    ClickCounter[] counters = await JsonSerializer.DeserializeAsync<ClickCounter[]>(fs);
+                    if (counters != null)
+                    {
+                        foreach (var ct in counters)
+                        {
+                            await _counters.InsertOneAsync(ct);
+                        }
+                    }
+                }
+            }
+
+            // rtRequest
+            // стереть всю коллекцию
+            _rtRequests.DeleteMany(new BsonDocument());
+            string jsonRtReq = PathToBackUpTemp + "/json/" + "rtrequests.json";
+            FileInfo fiRt = new FileInfo(jsonRtReq);
+            if (fiRt.Exists)
+            {
+                using (FileStream fs = new FileStream(jsonRtReq, FileMode.OpenOrCreate))
+                {
+                    RtRequest[] requests = await JsonSerializer.DeserializeAsync<RtRequest[]>(fs);
+                    if (requests != null)
+                    {
+                        foreach (var rt in requests)
+                        {
+                            await _rtRequests.InsertOneAsync(rt);
+                        }
+                    }
+                }
+            }
+
+            // spareParts
+            _spareParts.DeleteMany(new BsonDocument());
+            string jsonSpareParts = PathToBackUpTemp + "/json/" + "spareparts.json";
+            FileInfo fiSp = new FileInfo(jsonSpareParts);
+            if (fiSp.Exists)
+            {
+                using (FileStream fs = new FileStream(jsonSpareParts, FileMode.OpenOrCreate))
+                {
+                    SparePart[] spareParts = await JsonSerializer.DeserializeAsync<SparePart[]>(fs);
+                    if (spareParts != null)
+                    {
+                        foreach (var sp in spareParts)
+                        {
+                            await _spareParts.InsertOneAsync(sp);
+                        }
+                    }
+                }
+            }
+
+            // toolTypesSearch
+            _toolTypesSearch.DeleteMany(new BsonDocument());
+            string jsonToolTypesSearch = PathToBackUpTemp + "/json/" + "toolTypesSearch.json";
+            FileInfo fiTts = new FileInfo(jsonToolTypesSearch);
+            if (fiTts.Exists)
+            {
+                using (FileStream fs = new FileStream(jsonToolTypesSearch, FileMode.OpenOrCreate))
+                {
+                    ToolTypeSearch[] ttss = await JsonSerializer.DeserializeAsync<ToolTypeSearch[]>(fs);
+                    if (ttss != null)
+                    {
+                        foreach (var tts in ttss)
+                        {
+                            await _toolTypesSearch.InsertOneAsync(tts);
+                        }
+                    }
+                }
+            }
+
+            // чистим папку temp
+            ClearTemp();
+        }
+
+        public async Task UnZipToServerWithSoftReload()
+        {
+            //
+            int checkResult = CheckNCreateMainFolders();
+            if (checkResult == -1)
+            {
+                // папки с архивом не было, значит распаковывать нечего
+                return;
+            }
+
+            // чистка папки temp
+            ClearTemp();
+
+            // распаковываем из архива
+            string zipFile = PathToBackUpZip + "backup.zip";
+            FileInfo fiZip = new FileInfo(zipFile);
+            if (!fiZip.Exists)
+            {
+                // если архива почему-то нет - стоп
+                return;
+            }
+            ZipFile.ExtractToDirectory(zipFile, PathToBackUpTemp);
+
+            // получаем картинки и .json файлы 
+            // перемещаем картинки из temp в wwwroot/images
+            foreach (var imgFile in Directory.GetFiles(PathToBackUpTemp + "/images/"))
+            {
+                // копирование файла картинки в папку BackUp сервера
+                FileInfo fi = new FileInfo(imgFile);
+                if (fi.Exists)
+                {
+                    fi.CopyTo(_appEnvironment.WebRootPath + ImagesPath + fi.Name, true);
+                }
+            }
+
+            // по json записываем данные в коллекции (предварительно стирая)
+            string jsonToolType = PathToBackUpTemp + "/json/" + "toolTypes.json";
+            FileInfo fiTt = new FileInfo(jsonToolType);
+            if (fiTt.Exists)
+            {
+                using (FileStream fs = new FileStream(jsonToolType, FileMode.OpenOrCreate))
+                {
+                    ToolType[] toolTypes = await JsonSerializer.DeserializeAsync<ToolType[]>(fs);
+                    if (toolTypes != null)
+                    {
+                        // стереть всю коллекцию (стирает только если, из бэкапа есть замена)
+                        _toolTypes.DeleteMany(new BsonDocument());
+
+                        // поочерёдно заполнить коллекцию
+                        foreach (var tt in toolTypes)
+                        {
+                            await _toolTypes.InsertOneAsync(tt);
+                        }
+                    }
+                }
+            }
+
+            // Counters
+            // стереть всю коллекцию
+            string jsonCounter = PathToBackUpTemp + "/json/" + "counters.json";
+            FileInfo fiCt = new FileInfo(jsonCounter);
+            if (fiCt.Exists)
+            {
+                using (FileStream fs = new FileStream(jsonCounter, FileMode.OpenOrCreate))
+                {
+                    ClickCounter[] counters = await JsonSerializer.DeserializeAsync<ClickCounter[]>(fs);
+                    if (counters != null)
+                    {
+                        // стереть всю коллекцию (стирает только если, из бэкапа есть замена)
+                        _counters.DeleteMany(new BsonDocument());
+
+                        foreach (var ct in counters)
+                        {
+                            await _counters.InsertOneAsync(ct);
+                        }
+                    }
+                }
+            }
+
+            // rtRequest
+            // стереть всю коллекцию
+            string jsonRtReq = PathToBackUpTemp + "/json/" + "rtrequests.json";
+            FileInfo fiRt = new FileInfo(jsonRtReq);
+            if (fiRt.Exists)
+            {
+                using (FileStream fs = new FileStream(jsonRtReq, FileMode.OpenOrCreate))
+                {
+                    RtRequest[] requests = await JsonSerializer.DeserializeAsync<RtRequest[]>(fs);
+                    if (requests != null)
+                    {
+                        // стереть всю коллекцию (стирает только если, из бэкапа есть замена)
+                        _rtRequests.DeleteMany(new BsonDocument());
+
+                        foreach (var rt in requests)
+                        {
+                            await _rtRequests.InsertOneAsync(rt);
+                        }
+                    }
+                }
+            }
+
+            // spareParts
+            string jsonSpareParts = PathToBackUpTemp + "/json/" + "spareparts.json";
+            FileInfo fiSp = new FileInfo(jsonSpareParts);
+            if (fiSp.Exists)
+            {
+                using (FileStream fs = new FileStream(jsonSpareParts, FileMode.OpenOrCreate))
+                {
+                    SparePart[] spareParts = await JsonSerializer.DeserializeAsync<SparePart[]>(fs);
+                    if (spareParts != null)
+                    {
+                        // стереть всю коллекцию (стирает только если, из бэкапа есть замена)
+                        _spareParts.DeleteMany(new BsonDocument());
+
+                        foreach (var sp in spareParts)
+                        {
+                            await _spareParts.InsertOneAsync(sp);
+                        }
+                    }
+                }
+            }
+
+            // toolTypesSearch
+            string jsonToolTypesSearch = PathToBackUpTemp + "/json/" + "toolTypesSearch.json";
+            FileInfo fiTts = new FileInfo(jsonToolTypesSearch);
+            if (fiTts.Exists)
+            {
+                using (FileStream fs = new FileStream(jsonToolTypesSearch, FileMode.OpenOrCreate))
+                {
+                    ToolTypeSearch[] ttss = await JsonSerializer.DeserializeAsync<ToolTypeSearch[]>(fs);
+                    if (ttss != null)
+                    {
+                        // стереть всю коллекцию (стирает только если, из бэкапа есть замена)
+                        _toolTypesSearch.DeleteMany(new BsonDocument());
+
+                        foreach (var tts in ttss)
+                        {
+                            await _toolTypesSearch.InsertOneAsync(tts);
+                        }
+                    }
+                }
+            }
+
+            // чистим папку temp
+            ClearTemp();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
