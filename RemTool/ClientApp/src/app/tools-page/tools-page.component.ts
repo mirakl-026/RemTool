@@ -29,70 +29,70 @@ export class ToolsPageComponent implements OnInit {
   toolImages$;
   numOfTools: number[];
   ngOnInit(): void {
-    // this.type = this.route.snapshot.params.type;
-    // this.route.params.pipe(
-    //   takeUntil(this.destroy$))
-    //   .subscribe(params => {
-    //     this.type = params.type;
-    //     this.preloader = true;
-    //     this.getTools();
-    //   });
-    this.route.data.subscribe(data => {
-      this.getRes( data["res"]);
-    });
+    this.type = this.route.snapshot.params.type;
+    this.route.params.pipe(
+      takeUntil(this.destroy$))
+      .subscribe(params => {
+        this.type = params.type;
+        this.preloader = true;
+        this.getTools();
+      });
+    // this.route.data.subscribe(data => {
+    //   this.getRes( data["res"]);
+    // });
   }
 
-  // getTools() {
-  //   if (this.type == 'electro') {
-  //     this.dataService.getElectroTools().subscribe(data => {
-  //       this.getRes(data);
-  //       this.category = "Электроинструмент";
-  //       document.title = 'Ремонт электроинструмента';
-  //     });
-  //   } else if (this.type == 'benzo') {
-  //     this.dataService.getFuelTools().subscribe(data => {
-  //       this.getRes(data)
-  //       this.category = "Бензоинструмент";
-  //       document.title = 'Ремонт бензоинструмента';
-  //     });
-  //   } else if (this.type == "garden") {
-  //     this.dataService.getGardenTools().subscribe(data => {
-  //       this.getRes(data)
-  //       this.category = "Садовая техника";
-  //       document.title = 'Ремонт садовой техники';
-  //     });
-  //   } else if (this.type == "compressor") {
-  //     this.dataService.getCompressors().subscribe(data => {
-  //       this.getRes(data)
-  //       this.category = "Компрессоры";
-  //       document.title = 'Ремонт компрессоров';
-  //     });
-  //   } else if (this.type == "generator") {
-  //     this.dataService.getGenerators().subscribe(data => {
-  //       this.getRes(data)
-  //       this.category = "Генераторы";
-  //       document.title = 'Ремонт генераторов';
-  //     });
-  //   } else if (this.type == "welding") {
-  //     this.dataService.getWeldingTools().subscribe(data => {
-  //       this.getRes(data)
-  //       this.category = "Сварочные аппараты";
-  //       document.title = 'Ремонт сварочных аппаратов';
-  //     });
-  //   } else if (this.type == "heatgun") {
-  //     this.dataService.getHeatGuns().subscribe(data => {
-  //       this.getRes(data)
-  //       this.category = "Тепловые пушки";
-  //       document.title = 'Ремонт тепловых пушек';
-  //     });
-  //   } else if (this.type == "rest") {
-  //     this.dataService.getRestTools().subscribe(data => {
-  //       this.getRes(data)
-  //       this.category = "Техника для отдыха";
-  //       document.title = 'Ремонт техники для отдыха';
-  //     });
-  //   }
-  // }
+  getTools() {
+    if (this.type == 'electro') {
+      this.dataService.getElectroTools().subscribe(data => {
+        this.getRes(data);
+        this.category = "Электроинструмент";
+        document.title = 'Ремонт электроинструмента';
+      });
+    } else if (this.type == 'benzo') {
+      this.dataService.getFuelTools().subscribe(data => {
+        this.getRes(data)
+        this.category = "Бензоинструмент";
+        document.title = 'Ремонт бензоинструмента';
+      });
+    } else if (this.type == "garden") {
+      this.dataService.getGardenTools().subscribe(data => {
+        this.getRes(data)
+        this.category = "Садовая техника";
+        document.title = 'Ремонт садовой техники';
+      });
+    } else if (this.type == "compressor") {
+      this.dataService.getCompressors().subscribe(data => {
+        this.getRes(data)
+        this.category = "Компрессоры";
+        document.title = 'Ремонт компрессоров';
+      });
+    } else if (this.type == "generator") {
+      this.dataService.getGenerators().subscribe(data => {
+        this.getRes(data)
+        this.category = "Генераторы";
+        document.title = 'Ремонт генераторов';
+      });
+    } else if (this.type == "welding") {
+      this.dataService.getWeldingTools().subscribe(data => {
+        this.getRes(data)
+        this.category = "Сварочные аппараты";
+        document.title = 'Ремонт сварочных аппаратов';
+      });
+    } else if (this.type == "heatgun") {
+      this.dataService.getHeatGuns().subscribe(data => {
+        this.getRes(data)
+        this.category = "Тепловые пушки";
+        document.title = 'Ремонт тепловых пушек';
+      });
+    } else if (this.type == "rest") {
+      this.dataService.getRestTools().subscribe(data => {
+        this.getRes(data)
+        this.category = "Техника для отдыха";
+        document.title = 'Ремонт техники для отдыха';
+      });
+    }
+  }
 
   getRes(data) {
     this.res$ = data;
