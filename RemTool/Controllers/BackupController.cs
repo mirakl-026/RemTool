@@ -9,6 +9,7 @@ using System.Net.Mime;
 using RemTool.Infrastructure.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using System.IO;
+using RemTool.Models;
 
 namespace RemTool.Controllers
 {
@@ -17,10 +18,14 @@ namespace RemTool.Controllers
     public class BackupController : ControllerBase
     {
         private readonly IBackUpService _context;
+        private readonly IToolTypeService _contextToolTypes;
+        private readonly IToolTypeSearchService _contextToolTypesSearch;
 
-        public BackupController(IBackUpService context)
+        public BackupController(IBackUpService context, IToolTypeService contextToolTypes, IToolTypeSearchService contextToolTypesSearch)
         {
             _context = context;
+            _contextToolTypes = contextToolTypes;
+            _contextToolTypesSearch = contextToolTypesSearch;
         }
 
 
@@ -53,6 +58,40 @@ namespace RemTool.Controllers
         public async Task<IActionResult> UnpackFromZipSoft()
         {
             await _context.UnZipToServerWithSoftReload();
+            return Ok();
+        }
+
+        [HttpGet("UnpackFromZipHardWR")]
+        [Authorize]
+        public async Task<IActionResult> UnpackFromZipHardWR()
+        {
+            await _context.UnZipToServerWithHardReload();
+
+            // перезагрузка ToolTypesSearch
+            _contextToolTypesSearch.DeleteAllToolTypeSearch();
+            IEnumerable<ToolType> allToolTypes = _contextToolTypes.GetAllToolTypes();
+            foreach (var toolType in allToolTypes)
+            {
+                _contextToolTypesSearch.CreateToolTypeSearch(toolType);
+            }
+
+            return Ok();
+        }
+
+        [HttpGet("UnpackFromZipSoftWR")]
+        [Authorize]
+        public async Task<IActionResult> UnpackFromZipSoftWR()
+        {
+            await _context.UnZipToServerWithSoftReload();
+
+            // перезагрузка ToolTypesSearch
+            _contextToolTypesSearch.DeleteAllToolTypeSearch();
+            IEnumerable<ToolType> allToolTypes = _contextToolTypes.GetAllToolTypes();
+            foreach (var toolType in allToolTypes)
+            {
+                _contextToolTypesSearch.CreateToolTypeSearch(toolType);
+            }
+
             return Ok();
         }
 
