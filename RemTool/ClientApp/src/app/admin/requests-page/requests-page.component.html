@@ -23,10 +23,10 @@
 
   <tr *ngFor="let req of requests; index as i">
     <td *ngFor="let column of headers">
-      <div *ngIf="edit == false">
+      <div *ngIf="(edit == false) || !(editIndex == i)">
         {{req[column]}}
       </div>
-      <textarea *ngIf="edit == true">
+      <textarea *ngIf="(edit == true) && (editIndex == i)">
         {{req[column]}}
       </textarea>
     </td>
