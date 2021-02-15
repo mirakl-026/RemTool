@@ -76,7 +76,8 @@ namespace RemTool.Controllers
                         var newTime = long.Parse(newRtreq.SendedTime);
                         var oldTime = long.Parse(rtReq.SendedTime);
 
-                        if (newTime > oldTime + 180)
+                        //if (newTime > oldTime + 180)
+                        if (newTime > oldTime + 10)
                         {
                             //await db.UpdateRtRequestAsync(new RtRequest
                             //{

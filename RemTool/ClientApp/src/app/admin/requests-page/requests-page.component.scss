@@ -1,0 +1,31 @@
+h1 {
+  text-align: center;
+  color: orange;
+}
+
+#rtRequests {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#rtRequests td, #rtRequests th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#rtRequests tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#rtRequests tr:hover {
+  background-color: #ddd
+}
+
+#rtRequests th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: orange;
+  color: white;
+}

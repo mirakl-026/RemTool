@@ -1,1 +1,68 @@
 <p>requests-page works!</p>
+
+<!--<div *ngFor="let req of requests; index as i">
+    <div>{{req.id}}</div>
+    <div>{{req.name}}</div>
+    <div>{{req.phone}}</div>
+    <div>{{req.email}}</div>
+    <div>{{req.reqInfo}}</div>
+    <div>{{req.sendedTime}}</div>
+    <div>Обновить</div>
+    <div>Удалить</div>
+    <div>________</div>
+</div>-->
+
+<table id="rtRequests" cellspacing="5" cellpadding="10" border="1" width="100%">
+  <tr>
+    <th *ngFor="let column of headers">
+      {{column}}
+    </th>
+    <th> ___ </th>
+    <th> ___ </th>
+  </tr>
+
+  <tr *ngFor="let req of requests; index as i">
+    <td *ngFor="let column of headers">
+      <div *ngIf="edit == false">
+        {{req[column]}}
+      </div>
+      <textarea *ngIf="edit == true">
+        {{req[column]}}
+      </textarea>
+    </td>
+    <td> <button (click)="editModeForReq(i)"> O </button> </td>
+    <td> <button (click)="deleteRtRequest(i)"> X </button> </td>
+  </tr>
+</table>
+
+
+
+<!--
+    string Id
+
+    string Name
+
+    string Phone
+
+    string Email
+
+    string ReqInfo
+
+    string SendedTime
+-->
+<!--
+    /api/rtrequest
+
+    [HttpGet],[Authorize]
+    public async Task<IEnumerable<RtRequest>> Get()
+
+    [HttpGet("{id}")],[Authorize]
+    public async Task<RtRequest> Get(string id)
+
+    [HttpPut],[Authorize]
+    public IActionResult Put(RtRequest updatedRtreq)
+
+    [HttpDelete("{id}")],[Authorize]
+    public IActionResult Delete(string id)
+
+-->
