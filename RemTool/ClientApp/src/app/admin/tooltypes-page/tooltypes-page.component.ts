@@ -155,6 +155,29 @@ export class ToolTypePageComponent implements OnInit {
       this.serveCostLength.push(0);
     }
   }
+
+  rowUp(i) {
+    if (i > 0) {
+      let upperServe = this.toolType.serves[i - 1];
+      let upperCost = this.toolType.costs[i - 1];
+      this.toolType.serves[i - 1] = this.toolType.serves[i];
+      this.toolType.costs[i - 1] = this.toolType.costs[i];
+      this.toolType.serves[i] = upperServe;
+      this.toolType.costs[i] = upperCost;
+    } else return;
+  }
+
+  rowDown(i) {
+    if (i < this.toolType.serves.length - 1) {
+      let bottomServe = this.toolType.serves[i + 1];
+      let bottomCost = this.toolType.costs[i + 1];
+      this.toolType.serves[i + 1] = this.toolType.serves[i];
+      this.toolType.costs[i + 1] = this.toolType.costs[i];
+      this.toolType.serves[i] = bottomServe;
+      this.toolType.costs[i] = bottomCost;
+    } else return;
+  }
+
   removeBrand(i) {
     this.toolType.brands.splice(i, 1);
   }

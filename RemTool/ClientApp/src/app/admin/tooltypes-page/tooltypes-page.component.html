@@ -77,6 +77,16 @@
     </div>
     <!-- <div class="price__row old-row">Стоимость, руб</div> -->
     <div *ngFor="let key of serveCostLength; index as i" class="price__row old-row">
+      <button class="row-up" (click)="rowUp(i)">
+        <svg width="24" height="20" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 18L12 3L22 18" stroke="black" stroke-width="3" stroke-linecap="round"/>
+        </svg>          
+      </button>
+      <button class="row-down" (click)="rowDown(i)">
+        <svg width="24" height="20" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22 2L12 17L2 2" stroke="black" stroke-width="3" stroke-linecap="round"/>
+        </svg>        
+      </button>
       <input type="text" [(ngModel)]="toolType.serves[i]">
       <input type="text" [(ngModel)]="toolType.costs[i]">
       <button class="remove-btn" (click)="removeRow(i)">
