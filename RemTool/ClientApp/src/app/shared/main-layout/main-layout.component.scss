@@ -212,7 +212,7 @@ input[type=search] {
     background-color: var(--grey-color);
     background: var(--grey-grad);
     &__item {
-        width: 230px;
+        width: 200px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -273,8 +273,8 @@ input[type=search] {
     top: 0;
     margin-left: 100%;
     padding: 16px;
-    width: 60vw;
-    max-width: 300px;
+    // width: 60vw;
+    width: 400px;
     min-height: 320px;
     max-height: 500px;
     box-sizing: border-box;
