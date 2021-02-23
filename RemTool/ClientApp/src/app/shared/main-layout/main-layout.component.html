@@ -25,6 +25,7 @@
                     </svg>
                 </div>
                 <div class="drop-menu" *ngIf="(dropMenuFlag)">
+                <!-- <div class="drop-menu"> -->
                     <div>
                         <div [ngClass]="{'drop-menu__item': true, 'drop-menu__item_hover': sideElectro}"
                             (mouseenter)="arrowRight('electrom')" (mouseleave)="sideElectro = false"
@@ -152,6 +153,7 @@
                                     stroke-linejoin="round" />
                             </svg>
                             <div class="side-drop-menu" *ngIf="sideHeatguns">
+                            <!-- <div class="side-drop-menu"> -->
                                 <a *ngFor="let tool of this.tools.heatguns.includedTypes; index as i"
                                     [routerLink]="['tools', 'heatguns', this.tools.heatguns.includedIds[i]]"
                                     (click)="dropMenuHide()">
