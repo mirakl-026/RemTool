@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DataService } from '../DataService/data.service';
+import { RequestServiceService } from '../request-service.service';
 
 @Component({
   selector: 'app-tool-page',
@@ -18,7 +19,8 @@ export class ToolPageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private dataService: DataService,
-    private http: HttpClient
+    private http: HttpClient,
+    private reqService: RequestServiceService
   ) { }
 
   preloader: boolean = false;
@@ -35,6 +37,10 @@ export class ToolPageComponent implements OnInit {
         this.preloader = true;
         this.getTool(this.id);
       });
+  }
+
+  sendRequest(e) {
+    this.reqService.callMethodOfSecondComponent(e);
   }
 
   getTool(id) {

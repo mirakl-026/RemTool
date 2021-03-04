@@ -24,10 +24,10 @@ import { PreloaderService } from './shared/preloader.service';
 import { SendRequestComponent } from './send-request/send-request.component';
 import { filter } from 'rxjs/operators';
 import { Scroll } from '@angular/router';
+import { RequestServiceService } from './request-service.service';
 
 @NgModule({
   declarations: [
-    
     AppComponent,
     MainLayoutComponent,
     MainPageComponent,
@@ -59,7 +59,8 @@ import { Scroll } from '@angular/router';
     },
     DataService,
     PreloaderService,
-    TopPreloaderComponent
+    TopPreloaderComponent,
+    RequestServiceService
   ],
   bootstrap: [AppComponent]
 })

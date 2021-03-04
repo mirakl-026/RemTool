@@ -29,3 +29,36 @@ h1 {
   background-color: orange;
   color: white;
 }
+
+.request-wrapper {
+  position: relative;
+  background-color: var(--grey-color);
+  border-radius: 6px;
+  margin: 20px 0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.request-delete {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 46px;
+}
+
+#request-done {
+  display: none;
+}
+
+.request-done {
+  position: absolute;
+  top: 54px;
+  right: 10px;
+  width: 46px;
+}
+
+#request-done:checked + .request-done {
+  background-color: var(--green-color);
+  color: var(--light-color);
+  border-color: var(--green-color);
+}

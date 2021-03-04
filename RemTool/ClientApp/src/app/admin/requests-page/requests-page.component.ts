@@ -25,6 +25,7 @@ export class RequestsPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllRtRequests();
+    
   }
 
 
@@ -45,6 +46,23 @@ export class RequestsPageComponent implements OnInit {
     this.http.get(this.urlRtRequests)
       .subscribe((data: RtRequest[]) => {
         this.requests = data;
+        for (let req of this.requests) {
+          let date = new Date(parseInt(req.sendedTime) * 1000);
+          req.sendedDate = String(date.getDate()) + "." + String(date.getMonth() + 1) + "." + String(date.getFullYear() + "г");
+          let hours: string = "";
+          let minutes: string = "";
+          if (String(date.getHours()).length < 2) {
+            hours = "0" + String(date.getHours());
+          } else {
+            hours = String(date.getHours());
+          }
+          if (String(date.getMinutes()).length < 2) {
+            minutes = "0" + String(date.getMinutes());
+          } else {
+            minutes = String(date.getMinutes());
+          }
+          req.sendedTime = hours + ":" + minutes;
+        }
       });
   }
 
@@ -81,6 +99,8 @@ export class RtRequest {
 
     public reqInfo? : string,
 
-    public sendedTime? : string
+    public sendedTime? : string,
+
+    public sendedDate? : string,
   ) { }
 }

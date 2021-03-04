@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import Swiper, { Navigation, Pagination, Autoplay } from 'swiper';
 import 'swiper/swiper-bundle.css';
+import { RequestServiceService } from '../request-service.service';
+import { SendRequestComponent } from '../send-request/send-request.component';
 
 @Component({
   selector: 'app-swiper',
@@ -10,7 +12,9 @@ import 'swiper/swiper-bundle.css';
 })
 export class SwiperComponent implements OnInit {
   
-  constructor() { }
+  constructor(
+    public reqService: RequestServiceService
+  ) { }
   
   ngOnInit(): void {
     Swiper.use([Navigation, Pagination, Autoplay]);
@@ -35,8 +39,11 @@ export class SwiperComponent implements OnInit {
         disableOnInteraction: false
       },
     })
-    
-    
+  }
+
+  sendRequest(e) {
+    console.log('swiper send req');
+    this.reqService.callMethodOfSecondComponent(e);
   }
 
 }

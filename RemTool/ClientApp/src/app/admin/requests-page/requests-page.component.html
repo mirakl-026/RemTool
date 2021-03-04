@@ -1,5 +1,3 @@
-<p>requests-page works!</p>
-
 <!--<div *ngFor="let req of requests; index as i">
     <div>{{req.id}}</div>
     <div>{{req.name}}</div>
@@ -12,7 +10,24 @@
     <div>________</div>
 </div>-->
 
-<table id="rtRequests" cellspacing="5" cellpadding="10" border="1" width="100%">
+<div class="requests-table">
+  <div class="request-wrapper" *ngFor="let req of requests; index as i">
+    <div class="request-header">
+      <!-- <div class="request-header__id">ID: {{req.id}}</div> -->
+      <div class="request-header__name">От кого: {{req.name}}</div>
+      <div class="request-header__date">Дата: {{req.sendedDate}}</div>
+      <div class="request-header__time">Время: {{req.sendedTime}}</div>
+      <a href="mailto:{{req.email}}">{{req.email}}</a>
+      <button class="request-delete button_light" (click)="deleteRtRequest(i)" ondblclick="return">X</button>
+      <input id="request-done" type="checkbox">
+      <label class="request-done button_light" for="request-done" ondblclick="return">✔</label>
+    </div>
+    <hr>
+    <p>{{req.reqInfo}}</p>
+  </div>
+</div>
+
+<!-- <table id="rtRequests" cellspacing="5" cellpadding="10" border="1" width="100%">
   <tr>
     <th *ngFor="let column of headers">
       {{column}}
@@ -33,7 +48,7 @@
     <td> <button (click)="editModeForReq(i)"> O </button> </td>
     <td> <button (click)="deleteRtRequest(i)"> X </button> </td>
   </tr>
-</table>
+</table> -->
 
 
 

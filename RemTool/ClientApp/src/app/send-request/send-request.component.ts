@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { RequestServiceService } from '../request-service.service';
 
 @Component({
   selector: 'app-send-request',
@@ -18,8 +19,14 @@ export class SendRequestComponent implements OnInit {
   thankYouMessage: string = '';
   response$: any;
   constructor(
-    private http: HttpClient
-  ) { }
+    private http: HttpClient,
+    private reqService: RequestServiceService
+  ) {
+    this.reqService.invokeEvent.subscribe(res => {
+      console.log('send req component');
+      this.sendRequestPopup(res);
+    })
+  }
 
   ngOnInit(): void {
     this.requestForm = new FormGroup({
@@ -42,6 +49,10 @@ export class SendRequestComponent implements OnInit {
 
   sendRequestPopup(e) {
     e.target.blur();
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
     this.formPopup = true;
   }
 
