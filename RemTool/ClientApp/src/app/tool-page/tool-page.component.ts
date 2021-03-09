@@ -40,7 +40,7 @@ export class ToolPageComponent implements OnInit {
   }
 
   sendRequest(e) {
-    this.reqService.callMethodOfSecondComponent(e);
+    this.reqService.callMethodOfSecondComponent();
   }
 
   getTool(id) {

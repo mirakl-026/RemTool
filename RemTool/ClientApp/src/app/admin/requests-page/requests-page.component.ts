@@ -18,6 +18,8 @@ export class RequestsPageComponent implements OnInit {
   headers = ["id", "name", "phone", "email", "reqInfo", "sendedTime"];
   edit = false;
   editIndex = 0;
+  doneArr: boolean[] = [];
+  reqText: string[] = [];
 
   constructor(
     private http: HttpClient
@@ -26,6 +28,15 @@ export class RequestsPageComponent implements OnInit {
   ngOnInit(): void {
     this.getAllRtRequests();
     
+  }
+
+  requestDone(id, i, e) {
+    if (e.target.checked) {
+      this.requests[i].reqInfo += "<done>";
+    } else {
+      this.requests[i].reqInfo = this.requests[i].reqInfo.substr(0, this.requests[i].reqInfo.length - 6);
+    }
+    this.updateRtRequest(i);
   }
 
 
@@ -46,9 +57,11 @@ export class RequestsPageComponent implements OnInit {
     this.http.get(this.urlRtRequests)
       .subscribe((data: RtRequest[]) => {
         this.requests = data;
-        for (let req of this.requests) {
-          let date = new Date(parseInt(req.sendedTime) * 1000);
-          req.sendedDate = String(date.getDate()) + "." + String(date.getMonth() + 1) + "." + String(date.getFullYear() + "г");
+        this.doneArr = [];
+        this.reqText = [];
+        for (let i = 0; i < this.requests.length; i++) {          
+          let date = new Date(parseInt(this.requests[i].sendedTime) * 1000);
+          this.requests[i].sendedDate = String(date.getDate()) + "." + String(date.getMonth() + 1) + "." + String(date.getFullYear() + "г");
           let hours: string = "";
           let minutes: string = "";
           if (String(date.getHours()).length < 2) {
@@ -61,21 +74,29 @@ export class RequestsPageComponent implements OnInit {
           } else {
             minutes = String(date.getMinutes());
           }
-          req.sendedTime = hours + ":" + minutes;
+          this.requests[i].sendedTime = hours + ":" + minutes;
+          if (this.requests[i].reqInfo.substr(this.requests[i].reqInfo.length - 6, this.requests[i].reqInfo.length - 1) == '<done>') {
+            this.reqText.push(this.requests[i].reqInfo.substr(0, this.requests[i].reqInfo.length - 6));
+            this.doneArr.push(true);
+          } else {
+            this.reqText.push(this.requests[i].reqInfo);
+            this.doneArr.push(false);
+          }
         }
+        // console.log(this.doneArr);
       });
   }
 
   // обновить информацю заявки
   updateRtRequest(i: number) {
-    if (this.editIndex == i && this.edit == true) {
+    // if (this.editIndex == i && this.edit == true) {
       return this.http.put(this.urlRtRequests, this.requests[i]).subscribe((data) => {
         this.getAllRtRequests();
 
         this.edit = false;
         this.editIndex = 0;
       });
-    }
+    // }
   }
 
   // удалить заявку

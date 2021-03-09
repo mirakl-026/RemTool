@@ -1,4 +1,4 @@
-<button class="button_light" (click)="sendRequestPopup($event)">
+<button class="button_light" onclick="this.blur()" (click)="sendRequestPopup()">
     Оставить заявку
 </button>
 <div class="request-container" *ngIf="formPopup" (mousedown)="formPopupClose($event)">

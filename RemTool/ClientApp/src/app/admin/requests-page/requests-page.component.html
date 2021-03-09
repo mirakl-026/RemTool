@@ -19,11 +19,11 @@
       <div class="request-header__time">Время: {{req.sendedTime}}</div>
       <a href="mailto:{{req.email}}">{{req.email}}</a>
       <button class="request-delete button_light" (click)="deleteRtRequest(i)" ondblclick="return">X</button>
-      <input id="request-done" type="checkbox">
-      <label class="request-done button_light" for="request-done" ondblclick="return">✔</label>
+      <input style="display: none;" [ngModel]="doneArr[i]" class="request-done-input" id="request-done{{i}}" name="request-done" type="checkbox" (click)="requestDone(req.id, i, $event)">
+      <label class="request-done button_light" for="request-done{{i}}" ondblclick="return false">✔</label>
     </div>
     <hr>
-    <p>{{req.reqInfo}}</p>
+    <p>{{reqText[i]}}</p>
   </div>
 </div>
 

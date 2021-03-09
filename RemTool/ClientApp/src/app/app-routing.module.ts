@@ -9,8 +9,12 @@ import { ToolPageComponent } from './tool-page/tool-page.component';
 import { ToolsPageComponent } from './tools-page/tools-page.component';
 import { AllToolsPageComponent } from './all-tools-page/all-tools-page.component';
 import { FormControlDirective } from '@angular/forms';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
+  {
+    path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+  },
   {
     path: '',
     component: MainLayoutComponent,
@@ -41,13 +45,25 @@ const routes: Routes = [
         component: ToolPageComponent,
         // resolve: { res: ResolverService }
       },
-      {path: 'delivery', component: DeliveryPageComponent},
-      {path: 'contacts', component: ContactsPageComponent},
+      {
+        path: 'delivery',
+        component: DeliveryPageComponent
+      },
+      {
+        path: 'contacts',
+        component: ContactsPageComponent
+      },
+      {path: '404', component: NotFoundComponent},
+      {path: '**', redirectTo: '/404'}
     ]
   },
-  {
-    path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
-  }
+  // {
+  //   path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+  // },
+  // {
+  //   path: '**',
+  //   component: NotFoundComponent
+  // }
 ];
 
 

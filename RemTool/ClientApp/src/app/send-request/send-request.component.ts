@@ -23,8 +23,8 @@ export class SendRequestComponent implements OnInit {
     private reqService: RequestServiceService
   ) {
     this.reqService.invokeEvent.subscribe(res => {
-      console.log('send req component');
-      this.sendRequestPopup(res);
+      // console.log('send req component');
+      this.sendRequestPopup();
     })
   }
 
@@ -47,8 +47,8 @@ export class SendRequestComponent implements OnInit {
     }
   }
 
-  sendRequestPopup(e) {
-    e.target.blur();
+  sendRequestPopup() {
+    // e.target.blur();
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
@@ -69,41 +69,41 @@ export class SendRequestComponent implements OnInit {
       "ReqInfo": this.requestForm.value.text,
       "SendedTime": time
     }
-    this.response$ =  this.http.post("/api/rtrequest", req, {observe: 'response'});
+    this.response$ = this.http.post("/api/rtrequest", req, { observe: 'response' });
     this.response$
-    .pipe(
-      catchError(err => {
-        if (err.error == 'wait') {
+      .pipe(
+        catchError(err => {
+          if (err.error == 'wait') {
+            this.thankYouMessage = "Заявки можно отправлять 1 раз в 3 минуты. Попробуйте позже."
+          } else {
+            this.thankYouMessage = "Что-то пошло не так, попробуйсте еще раз."
+          }
+          this.thankYouFlag = true;
+          this.preloader = false;
+          this.sendButtonDisabled = false;
+
+          return throwError(err);
+        })
+      )
+      .subscribe(res => {
+        if (res.status == 200) {
+          this.thankYouMessage = "Ваша заявка отправлена и будет обработана в ближайшее время";
+          this.requestForm.reset();
+        } else if ((res.status == 400) && (res["error"] == "wait")) {
           this.thankYouMessage = "Заявки можно отправлять 1 раз в 3 минуты. Попробуйте позже."
+        } else if ((res.status == 400) && (res["error"] == "error")) {
+          this.thankYouMessage = "Что-то пошло не так, попробуйсте позже."
         } else {
-          this.thankYouMessage = "Что-то пошло не так, попробуйсте еще раз."
+          this.thankYouMessage = "Что-то пошло не так, попробуйсте позже."
         }
-        this.thankYouFlag = true;
         this.preloader = false;
         this.sendButtonDisabled = false;
-
-        return throwError(err);
-      })
-      )
-    .subscribe(res => {
-      if (res.status == 200) {
-        this.thankYouMessage = "Ваша заявка отправлена и будет обработана в ближайшее время";
-        this.requestForm.reset();
-      } else if ((res.status == 400) && (res["error"] == "wait")) {
-        this.thankYouMessage = "Заявки можно отправлять 1 раз в 3 минуты. Попробуйте позже."
-      } else if ((res.status == 400) && (res["error"] == "error")){
-        this.thankYouMessage = "Что-то пошло не так, попробуйсте позже."
-      } else {
-        this.thankYouMessage = "Что-то пошло не так, попробуйсте позже."
-      }
-      this.preloader = false;
-      this.sendButtonDisabled = false;
-      this.thankYouFlag = true;
-    });
+        this.thankYouFlag = true;
+      });
   }
 
-  requestResult(req){
-    
+  requestResult(req) {
+
   }
 
 

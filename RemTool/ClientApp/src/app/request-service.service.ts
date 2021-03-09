@@ -10,7 +10,7 @@ export class RequestServiceService {
 
   invokeEvent: Subject<any> = new Subject();
 
-  callMethodOfSecondComponent(e) {
-    this.invokeEvent.next(e);
+  public callMethodOfSecondComponent() {
+    this.invokeEvent.next();
   }
 }

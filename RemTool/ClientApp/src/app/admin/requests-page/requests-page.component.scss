@@ -57,7 +57,7 @@ h1 {
   width: 46px;
 }
 
-#request-done:checked + .request-done {
+.request-done-input:checked + .request-done {
   background-color: var(--green-color);
   color: var(--light-color);
   border-color: var(--green-color);

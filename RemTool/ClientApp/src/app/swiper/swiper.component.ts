@@ -11,17 +11,42 @@ import { SendRequestComponent } from '../send-request/send-request.component';
   styleUrls: ['./swiper.component.scss'],
 })
 export class SwiperComponent implements OnInit {
+  // reqObj: RequestServiceService = new RequestServiceService();
   
   constructor(
     public reqService: RequestServiceService
   ) { }
+
   
   ngOnInit(): void {
+    function sendRequest(obj){
+      // let reqService: RequestServiceService;
+      // console.log('swiper send req');
+      obj.callMethodOfSecondComponent();
+    }
+
+    var reqObj = this.reqService;
+    // this.reqService.callMethodOfSecondComponent
+
     Swiper.use([Navigation, Pagination, Autoplay]);
     const swiper = new Swiper('.swiper-container', {
       // Optional parameters
       direction: 'horizontal',
       loop: true,
+      on: {
+        click: function(){
+          // console.log(this.$el);
+        },
+        init: function(){
+          let swiperReqBtns = document.querySelectorAll('.swiper-request');
+          for (let i = 0; i < swiperReqBtns.length; i++) {
+            swiperReqBtns[i].addEventListener('click', function(){
+              sendRequest(reqObj);
+            });
+            // console.log(swiperReqBtns[i]);
+          }
+        }
+      },
     
       // If we need pagination
       pagination: {
@@ -41,9 +66,9 @@ export class SwiperComponent implements OnInit {
     })
   }
 
-  sendRequest(e) {
-    console.log('swiper send req');
-    this.reqService.callMethodOfSecondComponent(e);
-  }
+  // sendRequest(e) {
+  //   console.log('swiper send req');
+  //   this.reqService.callMethodOfSecondComponent(e);
+  // }
 
 }

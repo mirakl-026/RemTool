@@ -25,6 +25,7 @@ import { SendRequestComponent } from './send-request/send-request.component';
 import { filter } from 'rxjs/operators';
 import { Scroll } from '@angular/router';
 import { RequestServiceService } from './request-service.service';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { RequestServiceService } from './request-service.service';
     WeRepairBlockComponent,
     TopPreloaderComponent,
     SendRequestComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
