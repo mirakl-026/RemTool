@@ -39,11 +39,21 @@ export class SwiperComponent implements OnInit {
         },
         init: function(){
           let swiperReqBtns = document.querySelectorAll('.swiper-request');
+          let linksTelegram = document.querySelectorAll('.link-telegram');
+          let linksWhatsapp = document.querySelectorAll('.link-whatsapp');
+          // document.querySelector('.link-telegram').setAttribute('href', 'https://t.me/remtool');
+          // document.querySelector('.link-whatsapp').setAttribute('href', 'https://api.whatsapp.com/send?phone={{+79262478603}}');
           for (let i = 0; i < swiperReqBtns.length; i++) {
             swiperReqBtns[i].addEventListener('click', function(){
               sendRequest(reqObj);
             });
             // console.log(swiperReqBtns[i]);
+          }
+          for (let i = 0; i < linksTelegram.length; i++) {
+            linksTelegram[i].setAttribute('href', 'https://t.me/remtool');
+          }
+          for (let i = 0; i < linksWhatsapp.length; i++) {
+            linksWhatsapp[i].setAttribute('href', 'https://api.whatsapp.com/send?phone={{+79262478603}}');
           }
         }
       },
