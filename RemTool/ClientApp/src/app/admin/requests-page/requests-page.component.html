@@ -15,8 +15,8 @@
     <div class="request-header">
       <!-- <div class="request-header__id">ID: {{req.id}}</div> -->
       <div class="request-header__name">От кого: {{req.name}}</div>
-      <div class="request-header__date">Дата: {{req.sendedDate}}</div>
-      <div class="request-header__time">Время: {{req.sendedTime}}</div>
+      <div class="request-header__date">Дата: {{reqDate[i]}}</div>
+      <div class="request-header__time">Время: {{reqTime[i]}}</div>
       <a href="mailto:{{req.email}}">{{req.email}}</a>
       <button class="request-delete button_light" (click)="deleteRtRequest(i)" ondblclick="return">X</button>
       <input style="display: none;" [ngModel]="doneArr[i]" class="request-done-input" id="request-done{{i}}" name="request-done" type="checkbox" (click)="requestDone(req.id, i, $event)">

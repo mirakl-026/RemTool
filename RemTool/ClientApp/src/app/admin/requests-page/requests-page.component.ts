@@ -20,6 +20,8 @@ export class RequestsPageComponent implements OnInit {
   editIndex = 0;
   doneArr: boolean[] = [];
   reqText: string[] = [];
+  reqDate: string[] = [];
+  reqTime: string[] = [];
 
   constructor(
     private http: HttpClient
@@ -54,14 +56,18 @@ export class RequestsPageComponent implements OnInit {
 
   // получить все заявки
   getAllRtRequests() {
+    function byField(field) {
+      return (a, b) => a[field] > b[field] ? -1 : 1;
+    }
     this.http.get(this.urlRtRequests)
       .subscribe((data: RtRequest[]) => {
         this.requests = data;
+        this.requests.sort(byField('sendedTime'));
         this.doneArr = [];
         this.reqText = [];
         for (let i = 0; i < this.requests.length; i++) {          
           let date = new Date(parseInt(this.requests[i].sendedTime) * 1000);
-          this.requests[i].sendedDate = String(date.getDate()) + "." + String(date.getMonth() + 1) + "." + String(date.getFullYear() + "г");
+          this.reqDate[i] = String(date.getDate()) + "." + String(date.getMonth() + 1) + "." + String(date.getFullYear() + "г");
           let hours: string = "";
           let minutes: string = "";
           if (String(date.getHours()).length < 2) {
@@ -74,7 +80,7 @@ export class RequestsPageComponent implements OnInit {
           } else {
             minutes = String(date.getMinutes());
           }
-          this.requests[i].sendedTime = hours + ":" + minutes;
+          this.reqTime[i] = hours + ":" + minutes;
           if (this.requests[i].reqInfo.substr(this.requests[i].reqInfo.length - 6, this.requests[i].reqInfo.length - 1) == '<done>') {
             this.reqText.push(this.requests[i].reqInfo.substr(0, this.requests[i].reqInfo.length - 6));
             this.doneArr.push(true);
