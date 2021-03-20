@@ -344,3 +344,4 @@ ClientApp/node_modules/
 _сredentials/
 _сredentials/*
 _сredentials/**
+/RemTool/_credentials
