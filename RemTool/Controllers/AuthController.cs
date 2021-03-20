@@ -13,13 +13,51 @@ using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace RemTool.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
-    { 
+    {
+        private string credPath;
+        private string admEmail;
+        private string admPass;
+
+        public AuthController(IWebHostEnvironment env)
+        {
+            credPath = env.ContentRootPath + "/_credentials/";
+
+            string logPath = credPath + "adm_log.txt";
+            FileInfo fileLog = new FileInfo(logPath);
+            if (fileLog.Exists)
+            {
+                using (StreamReader sr = new StreamReader(logPath, Encoding.Default))
+                {
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        admEmail = line;
+                    }
+                }
+            }
+
+            string pasPath = credPath + "adm_pas.txt";
+            FileInfo filePas = new FileInfo(pasPath);
+            if (filePas.Exists)
+            {
+                using (StreamReader sr = new StreamReader(pasPath, Encoding.Default))
+                {
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        admPass = line;
+                    }
+                }
+            }
+        }
 
         [Route("CheckAuth")]
         [HttpGet]
@@ -36,7 +74,11 @@ namespace RemTool.Controllers
             if (request == null)
                 return BadRequest("Invalid user request");
 
-            if (request.Email == "admin@gmail.com" && request.Password == "iddqd1idkfa2")
+            if (admEmail == null || admPass == null)
+                return BadRequest("Cant");
+
+            //if (request.Email == "admin@gmail.com" && request.Password == "iddqd1idkfa2")
+            if (request.Email == admEmail && request.Password == admPass)
             {
                 var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("whoWillSaveYouNow?123456789+-"));
                 var credentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
