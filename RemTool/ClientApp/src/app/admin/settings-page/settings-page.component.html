@@ -2,22 +2,41 @@
   <!-- <button class="button_light" (click)="createBackup()">Создать бекап</button> -->
   <!-- <button class="button_light" (click)="restoreSite()">Восстановить сайт</button> -->
   <!-- Загрузка картинки на сервер -->
-<form class="upload-btn" [formGroup]="newBackupForm" (change)="uploadBackup(newBackupForm.value)">
-  <label class="button_light" for="newBackup">Загрузить бэкап на сервер</label>
-  <input type="file" id="newBackup" formControlName="newBackup" (change)="onSelectFile($event)" style="display: none;">
-</form>
+  <form class="upload-btn" [formGroup]="newBackupForm" (change)="uploadBackup(newBackupForm.value)">
+    <label class="button_light" for="newBackup">Загрузить бэкап на сервер</label>
+    <input type="file" id="newBackup" formControlName="newBackup" (change)="onSelectFile($event)"
+      style="display: none;">
+  </form>
   <button class="button_light download-btn" (click)="downloadBackup($event)">Скачать бэкап</button>
 </section>
 
+<section class="save">
+  <button class="button_ok" (click)="saveMailSettings($event)">Сохранить настройки</button>
+  <button class="button_light" (click)="resetMailSettings($event)">Сбросить настройки</button>
+</section>
+
 <section class="mail-settings">
-  <h4>Настройки почты</h4>
+  <h4>Настройки контактов</h4>
+  <div class="mail-settings__item">
+    <label for="contacts-phone">Номер телефона</label>
+    <input id="contacts-phone" type="text" size="40">
+  </div>
+  <div class="mail-settings__item">
+    <label for="contacts-Email">Адрес электронной почты</label>
+    <input id="contacts-Email" type="text" size="40">
+  </div>
+</section>
+
+<section class="mail-settings">
+  <h4>Настройки заявок</h4>
   <div class="mail-settings__item">
     <label for="mail-to-admin">
       <input id="mail-to-admin" type="checkbox" [(ngModel)]="mailSettings$.sendNotificationToHQ" />
-      Отправлять заявки администратору</label>
+      Отправлять заявки администратору
+    </label>
   </div>
   <div class="mail-settings__item">
-    <label for="admin-email">Адрес администратора</label>
+    <label for="admin-email">Адрес почты администратора</label>
     <input id="admin-email" type="text" size="40" [(ngModel)]="mailSettings$.hQeMail">
   </div>
   <div class="mail-settings__item">
@@ -45,9 +64,8 @@
     <label for="smtp-port">SMTP порт</label>
     <input id="smtp-port" type="text" size="40" [(ngModel)]="mailSettings$.smtpServer_Port">
   </div>
-  
-  <button class="button_ok" (click)="saveMailSettings($event)">Сохранить настройки</button>
-  <button class="button_light" (click)="resetMailSettings($event)">Сбросить настройки</button>
+
+
 </section>
 
 

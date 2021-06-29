@@ -22,6 +22,7 @@ export class SettingsPageComponent implements OnInit {
 
   newBackupForm: FormGroup;
   mailSettings$: MailSettings;
+  contactsSettings$: ContactsSettings;
 
   ngOnInit(): void {
     this.mailSettings$ = new MailSettings;
@@ -37,6 +38,11 @@ export class SettingsPageComponent implements OnInit {
     this.newBackupForm = new FormGroup({
       newBackup: new FormControl(null)
     });
+
+    this.contactsSettings$ = new ContactsSettings;
+    this.contactsSettings$.phoneNumber = "";
+    this.contactsSettings$.email = "";
+    this.getContactsSettings();
   }
 
 
@@ -44,7 +50,7 @@ export class SettingsPageComponent implements OnInit {
     this.http.get("api/Backup/PackToZip").subscribe();
 
   }
-  restoreSite(){
+  restoreSite() {
     this.http.get("api/Backup/UnpackFromZip").subscribe();
   }
 
@@ -87,6 +93,15 @@ export class SettingsPageComponent implements OnInit {
     this.http.get("api/RtMailSettings")
       .subscribe((data: MailSettings) => {
         this.mailSettings$ = data;
+      });
+  }
+
+  // загрузка настроек контактов
+  getContactsSettings() {
+    //this.mailSettings = new MailSettings();
+    this.http.get("api/RtContactsSettings")
+      .subscribe((data: ContactsSettings) => {
+        this.contactsSettings$ = data;
       });
   }
 
@@ -143,6 +158,7 @@ export class SettingsPageComponent implements OnInit {
   saveMailSettings(e) {
     e.target.blur();
     this.http.put("api/RtMailSettings", this.mailSettings$).subscribe();
+    this.http.put("api/RtContactsSettings", this.contactsSettings$).subscribe();
   }
 
   resetMailSettings(e) {
@@ -163,26 +179,33 @@ export class SettingsPageComponent implements OnInit {
 export class MailSettings {
 
   constructor(
-        // флаг об отправке оповещений на почту админа
-        public sendNotificationToHQ?: boolean,
+    // флаг об отправке оповещений на почту админа
+    public sendNotificationToHQ?: boolean,
 
-        // почта админа для оповещений
-        public hQeMail?: string,
+    // почта админа для оповещений
+    public hQeMail?: string,
 
-        // флаг об отправке на почту клиенту
-        public sendNotificationToClient?: boolean, 
+    // флаг об отправке на почту клиенту
+    public sendNotificationToClient?: boolean,
 
-        // сообщение по умолчанию в письме запросящему
-        public defaultMessageToClient?: string,
+    // сообщение по умолчанию в письме запросящему
+    public defaultMessageToClient?: string,
 
-        // почта за счёт которой идёт отправка
-        public credentials_Name?: string,
+    // почта за счёт которой идёт отправка
+    public credentials_Name?: string,
 
-        public credentials_Pass?: string, 
+    public credentials_Pass?: string,
 
-        // SMTP сервер предоставляющий услуги отправки почты
-        public smtpServer_Host?: string,
+    // SMTP сервер предоставляющий услуги отправки почты
+    public smtpServer_Host?: string,
 
-        public smtpServer_Port?: string,
-  ){ }
+    public smtpServer_Port?: string,
+  ) { }
+}
+
+export class ContactsSettings {
+  constructor(
+    public phoneNumber?: string,
+    public email?: string
+  ) { }
 }
