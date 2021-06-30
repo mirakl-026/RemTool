@@ -43,7 +43,13 @@ export class MainLayoutComponent implements OnInit {
 
   map: boolean = false;
 
+  contactsSettings$: ContactsSettings;
+
   ngOnInit(): void {
+    this.http.get("api/getcontacts")
+      .subscribe((data: ContactsSettings) => {
+        this.contactsSettings$ = data;
+      });
     this.searchForm = new FormGroup({
       data: new FormControl(null, [Validators.minLength(2), Validators.maxLength(20)])
     });
@@ -237,4 +243,11 @@ export class MainLayoutComponent implements OnInit {
   // hidePreloader() {
   //   this.preloader = false;
   // }
+}
+
+class ContactsSettings {
+  constructor(
+    public phoneNumber?: string,
+    public email?: string
+  ) { }
 }
