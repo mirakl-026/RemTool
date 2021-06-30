@@ -14,7 +14,9 @@ export class ContactsPageComponent implements OnInit {
 
   contactsSettings$: ContactsSettings;
 
+
   ngOnInit(): void {
+    this.contactsSettings$ = new ContactsSettings;
     document.title = 'Ремонт строительного инструмента';
 
     this.http.get("api/metadata/getmetadata")

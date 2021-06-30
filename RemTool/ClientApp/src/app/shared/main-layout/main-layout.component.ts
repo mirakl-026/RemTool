@@ -46,6 +46,8 @@ export class MainLayoutComponent implements OnInit {
   contactsSettings$: ContactsSettings;
 
   ngOnInit(): void {
+    this.contactsSettings$ = new ContactsSettings;
+
     this.http.get("api/metadata/getmetadata")
       .subscribe((data: ContactsSettings) => {
         this.contactsSettings$ = data;
