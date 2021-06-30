@@ -19,7 +19,7 @@ import { RequestsPageComponent } from './requests-page/requests-page.component';
         SparePartsPageComponent,
         SettingsPageComponent,
         RequestsPageComponent,
-        
+
     ],
     imports: [
         CommonModule,
@@ -29,8 +29,8 @@ import { RequestsPageComponent } from './requests-page/requests-page.component';
         RouterModule.forChild([
             {
                 path: '', component: AdminLayoutComponent, children: [
-                    {path: '', redirectTo: '/admin/tooltypes', pathMatch: 'full'},
-                    {path: 'login', component: LoginPageComponent},
+                    { path: '', redirectTo: '/admin/tooltypes', pathMatch: 'full' },
+                    { path: 'login', component: LoginPageComponent },
                     // { path: 'spareparts', component: SparePartsPageComponent },
                     // { path: 'tooltypes', component: ToolTypePageComponent },
                     // { path: 'spareparts', component: SparePartsPageComponent, canActivate: [AuthGuard] },

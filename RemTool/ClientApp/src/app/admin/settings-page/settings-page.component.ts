@@ -22,6 +22,7 @@ export class SettingsPageComponent implements OnInit {
 
   newBackupForm: FormGroup;
   mailSettings$: MailSettings;
+  contactsSettings$: ContactsSettings;
 
   ngOnInit(): void {
     this.mailSettings$ = new MailSettings;
@@ -37,6 +38,11 @@ export class SettingsPageComponent implements OnInit {
     this.newBackupForm = new FormGroup({
       newBackup: new FormControl(null)
     });
+
+    this.contactsSettings$ = new ContactsSettings;
+    this.contactsSettings$.phoneNumber = "";
+    this.contactsSettings$.email = "";
+    this.getContactsSettings();
   }
 
 
@@ -44,7 +50,7 @@ export class SettingsPageComponent implements OnInit {
     this.http.get("api/Backup/PackToZip").subscribe();
 
   }
-  restoreSite(){
+  restoreSite() {
     this.http.get("api/Backup/UnpackFromZip").subscribe();
   }
 
@@ -90,59 +96,19 @@ export class SettingsPageComponent implements OnInit {
       });
   }
 
-
-  // методы измения настроек почты
-  /*
-  changeNotificationToHQ() {
-    if (this.mailSettings.sendNotificationToHQ == false) {
-      this.http.put("api/RtMailSettings/ChangeFlag_notificationToHQ?value=true", {}).subscribe();
-      this.getMailSettings();
-    }
-    else {
-      this.http.put("api/RtMailSettings/ChangeFlag_notificationToHQ?value=false", {}).subscribe();
-      this.getMailSettings();
-    }
+  // загрузка настроек контактов
+  getContactsSettings() {
+    //this.mailSettings = new MailSettings();
+    this.http.get("api/metadata/getmetadata")
+      .subscribe((data: ContactsSettings) => {
+        this.contactsSettings$ = data;
+      });
   }
-
-  saveHQeMail() {
-    this.http.put("api/RtMailSettings/ChangeHQeMail?eMail=" + this.mailSettings.hQeMail, {}).subscribe();
-  }
-
-  changeNotificationToClient() {
-    if (this.mailSettings.sendNotificationToClient == false) {
-      this.http.put("api/RtMailSettings/ChangeFlag_notificationToClient?value=true", {}).subscribe();
-      this.getMailSettings();
-    }
-    else {
-      this.http.put("api/RtMailSettings/ChangeFlag_notificationToClient?value=false", {}).subscribe();
-      this.getMailSettings();
-    }
-  }
-
-  saveDefaultMessage() {
-    this.http.put("api/RtMailSettings/ChangeDefaultMessageToClient?message=" + this.mailSettings.defaultMessageToClient, {}).subscribe();
-  }
-
-  saveCredentialsName() {
-    this.http.put("api/RtMailSettings/ChangeCredentials_Name?credentialsName=" + this.mailSettings.credentials_Name, {}).subscribe();
-  }
-
-  saveCredentialsPass() {
-    this.http.put("api/RtMailSettings/ChangeCredentials_Pass?credentialsPass=" + this.mailSettings.credentials_Pass, {}).subscribe();
-  }
-
-  saveSMTP_Host() {
-    this.http.put("api/RtMailSettings/ChangeSmtpServer_Host?smtp_host=" + this.mailSettings.smtpServer_Host, {}).subscribe();
-  }
-
-  saveSMTP_Pass() {
-    this.http.put("api/RtMailSettings/ChangeSmtpServer_Port?smtp_port=" + this.mailSettings.smtpServer_Port, {}).subscribe();
-  }
-  */
 
   saveMailSettings(e) {
     e.target.blur();
     this.http.put("api/RtMailSettings", this.mailSettings$).subscribe();
+    this.http.post("api/metadata/setcontacts", this.contactsSettings$).subscribe();
   }
 
   resetMailSettings(e) {
@@ -163,26 +129,36 @@ export class SettingsPageComponent implements OnInit {
 export class MailSettings {
 
   constructor(
-        // флаг об отправке оповещений на почту админа
-        public sendNotificationToHQ?: boolean,
+    // флаг об отправке оповещений на почту админа
+    public sendNotificationToHQ?: boolean,
 
-        // почта админа для оповещений
-        public hQeMail?: string,
+    // почта админа для оповещений
+    public hQeMail?: string,
 
-        // флаг об отправке на почту клиенту
-        public sendNotificationToClient?: boolean, 
+    // флаг об отправке на почту клиенту
+    public sendNotificationToClient?: boolean,
 
-        // сообщение по умолчанию в письме запросящему
-        public defaultMessageToClient?: string,
+    // сообщение по умолчанию в письме запросящему
+    public defaultMessageToClient?: string,
 
-        // почта за счёт которой идёт отправка
-        public credentials_Name?: string,
+    // почта за счёт которой идёт отправка
+    public credentials_Name?: string,
 
-        public credentials_Pass?: string, 
+    public credentials_Pass?: string,
 
-        // SMTP сервер предоставляющий услуги отправки почты
-        public smtpServer_Host?: string,
+    // SMTP сервер предоставляющий услуги отправки почты
+    public smtpServer_Host?: string,
 
-        public smtpServer_Port?: string,
-  ){ }
+    public smtpServer_Port?: string,
+  ) { }
+}
+
+class ContactsSettings {
+  constructor(
+    public phoneNumber?: string,
+    public email?: string
+  ) {
+    phoneNumber = "";
+    email = ""
+  }
 }

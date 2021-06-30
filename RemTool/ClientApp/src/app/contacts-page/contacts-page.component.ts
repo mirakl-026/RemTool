@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,10 +8,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactsPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private http: HttpClient,
+  ) { }
+
+  contactsSettings$: ContactsSettings;
+
 
   ngOnInit(): void {
+    this.contactsSettings$ = new ContactsSettings;
     document.title = 'Ремонт строительного инструмента';
+
+    this.http.get("api/metadata/getmetadata")
+      .subscribe((data: ContactsSettings) => {
+        this.contactsSettings$ = data;
+      });
+
+
   }
 
+}
+
+class ContactsSettings {
+  constructor(
+    public phoneNumber?: string,
+    public email?: string
+  ) {
+    phoneNumber = "";
+    email = ""
+  }
 }

@@ -1,4 +1,4 @@
-.backup, .mail-settings {
+.backup, .mail-settings, .save {
     margin-top: 16px;
     width: 100%;
     max-width: 700px;
@@ -17,7 +17,11 @@
     }
 }
 
-.backup {
+.save {
+    margin-bottom: 16px;
+}
+
+.backup, .save {
     display: flex;
     flex-wrap: wrap;
     margin-top: 20px;
@@ -27,6 +31,7 @@
     margin-right: 16px;
 }
 
-.upload-btn, .download-btn {
+.upload-btn, .download-btn, .button_ok {
     margin-bottom: 20px;
+    margin-right: 16px;
 }
