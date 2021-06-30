@@ -9,15 +9,15 @@
     <div class="contacts__item">
         <h3 class="contacts__title">Телефон</h3>
         <p class="contacts__text">
-            <a href="tel: +7 (915) 387 29 99">
-                +7 (915) 387 29 99
+            <a href="tel: {{contactsSettings$.phoneNumber}}">
+                {{contactsSettings$.phoneNumber}}
             </a>
         </p>
     </div>
     <div class="contacts__item">
         <h3 class="contacts__title">Электронная почта</h3>
         <p class="contacts__text">
-            <a href="mailto:remtul@list.ru">remtul@list.ru</a>
+            <a href="mailto:{{contactsSettings$.email}}">{{contactsSettings$.email}}</a>
         </p>
     </div>
     <div class="contacts__item">
@@ -35,7 +35,7 @@
                 <td>вс:</td>
                 <td>вых</td>
             </tr>
-            
+
         </table>
     </div>
 </div>

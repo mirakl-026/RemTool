@@ -15,13 +15,13 @@ import { ToolType } from 'src/app/DataService/toolType';
   styleUrls: ['./main-layout.component.scss']
 })
 export class MainLayoutComponent implements OnInit {
-  
+
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
     // private preloaderService: PreloaderService
-    ) { }
-    
+  ) { }
+
   searchForm: FormGroup;
   dropMenuFlag: boolean = false;
 
@@ -46,7 +46,7 @@ export class MainLayoutComponent implements OnInit {
   contactsSettings$: ContactsSettings;
 
   ngOnInit(): void {
-    this.http.get("api/getcontacts")
+    this.http.get("api/metadata/getmetadata")
       .subscribe((data: ContactsSettings) => {
         this.contactsSettings$ = data;
       });
@@ -70,7 +70,7 @@ export class MainLayoutComponent implements OnInit {
         this.searchPlaceholder = 'Найти инструмент или услугу';
       }
     });
-    
+
     if (window.matchMedia("(max-width: 683.98px)").matches) {
       this.searchMobile = true;
     } else {
@@ -105,9 +105,9 @@ export class MainLayoutComponent implements OnInit {
     }
   }
 
-  arrowRight(type){
+  arrowRight(type) {
     if (window.matchMedia("(hover: hover)").matches) {
-      if (type =='electrom') {
+      if (type == 'electrom') {
         this.sideElectro = true;
       } else if (type == 'benzom') {
         this.sideFuel = true;
@@ -125,21 +125,21 @@ export class MainLayoutComponent implements OnInit {
         this.sideRest = true;
       }
     } else {
-      if (type =='electro') {
+      if (type == 'electro') {
         this.sideElectro = !this.sideElectro;
-      } else if (type =='benzo') {
+      } else if (type == 'benzo') {
         this.sideFuel = !this.sideFuel;
-      } else if (type =='garden') {
+      } else if (type == 'garden') {
         this.sideGarden = !this.sideGarden;
-      } else if (type =='compressor') {
+      } else if (type == 'compressor') {
         this.sideCompressors = !this.sideCompressors;
-      } else if (type =='generator') {
+      } else if (type == 'generator') {
         this.sideGenerators = !this.sideGenerators;
-      } else if (type =='welding') {
+      } else if (type == 'welding') {
         this.sideWelding = !this.sideWelding;
-      } else if (type =='heatgun') {
+      } else if (type == 'heatgun') {
         this.sideHeatguns = !this.sideHeatguns;
-      } else if (type =='rest') {
+      } else if (type == 'rest') {
         this.sideRest = !this.sideRest;
       }
     }
@@ -163,9 +163,9 @@ export class MainLayoutComponent implements OnInit {
   }
   searchIds$: string[] = [];
 
-  searchFocuseSet(e){
-    if(this.resultHover) {
-      if(e == 'focus'){
+  searchFocuseSet(e) {
+    if (this.resultHover) {
+      if (e == 'focus') {
 
       }
     }
@@ -174,7 +174,7 @@ export class MainLayoutComponent implements OnInit {
 
   // preloader: boolean = this.preloaderService.isLoading();
 
-  searchTool(data){
+  searchTool(data) {
     if (!!this.searchForm.value.data) {
       if (this.searchForm.value.data.length > 1) {
         this.searchPreloader = true;
@@ -226,13 +226,13 @@ export class MainLayoutComponent implements OnInit {
     }
   }
 
-  resetSearch(){
+  resetSearch() {
     this.searchForm.value.data = '';
     document.getElementById('search').focus();
     // document.querySelector('#search').focus();
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this.map = true;
   }
 
