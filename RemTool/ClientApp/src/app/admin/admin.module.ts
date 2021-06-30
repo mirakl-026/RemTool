@@ -35,7 +35,7 @@ import { RequestsPageComponent } from './requests-page/requests-page.component';
                     // { path: 'tooltypes', component: ToolTypePageComponent },
                     // { path: 'spareparts', component: SparePartsPageComponent, canActivate: [AuthGuard] },
                     { path: 'tooltypes', component: ToolTypePageComponent, canActivate: [AuthGuard] },
-                    { path: 'settings', component: SettingsPageComponent },
+                    { path: 'settings', component: SettingsPageComponent, canActivate: [AuthGuard] },
                     { path: 'requests', component: RequestsPageComponent, canActivate: [AuthGuard] },
                 ]
             }
