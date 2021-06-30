@@ -30,7 +30,6 @@ namespace RemTool.Controllers
             return await db.ReadMetaDataAsync();
         }
 
-
         // GET api/MetaData/GetPhoneNumber
         [HttpGet("GetPhoneNumber")]
         public async Task<string> GetPhoneNumber()
@@ -39,13 +38,35 @@ namespace RemTool.Controllers
             return md.PhoneNumber;
         }
 
+        // GET api/MetaData/GetPhoneNumber
+        [HttpGet("GetEmail")]
+        public async Task<string> GetEmail()
+        {
+            MetaData md = await db.ReadMetaDataAsync();
+            return md.Email;
+        }
+
         // POST /api/metadata/setphonenumber?number=124
         [HttpPost("SetPhoneNumber")]
+        [Authorize]
         public void SetPhoneNumber(string number)
         {
             MetaData md = db.ReadMetaData();
             md.PhoneNumber = number;
             db.UpdateMetaData(md);
+        }
+
+        [HttpPost("SetContacts")]
+        [Authorize]
+        public IActionResult SetContacts(MetaData conSet)
+        {
+            MetaData md = new MetaData()
+            {
+                PhoneNumber = conSet.PhoneNumber,
+                Email = conSet.Email
+            };
+            db.UpdateMetaData(md);
+            return Ok();
         }
     }
 }

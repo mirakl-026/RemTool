@@ -18,5 +18,7 @@ namespace RemTool.Models
 
         // флаг об отправке оповещений на почту админа
         public string PhoneNumber { get; set; }
+
+        public string Email { get; set; }
     }
 }

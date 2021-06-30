@@ -235,7 +235,8 @@ namespace RemTool
                 // если объекта нет - то создать по умолчанию
                 MetaData md = new MetaData()
                 {
-                    PhoneNumber = "+70123456789"
+                    PhoneNumber = "+70123456789",
+                    Email = "a@b"
                 };
 
                 _rtMetaData.InsertOne(md);
