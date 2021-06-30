@@ -39,7 +39,7 @@ namespace RemTool.Controllers
             return md.PhoneNumber;
         }
 
-        // POST api/MetaData/SetPhoneNumber
+        // POST /api/metadata/setphonenumber?number=124
         [HttpPost("SetPhoneNumber")]
         public void SetPhoneNumber(string number)
         {
