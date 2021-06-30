@@ -45,7 +45,7 @@ namespace RemTool
             services.AddSingleton<IRemToolMongoDBsettings>(sp =>
                 sp.GetRequiredService<IOptions<RemToolMongoDBsettings>>().Value);
 
-
+            services.AddSingleton<IMetaDataService, MetaDataService>();
             services.AddSingleton<IRtMailSettingsService, RtMailSettingsService>();
             services.AddSingleton<RtMailMessageService>();
             services.AddTransient<IFileImageService, FileImageService>();
@@ -104,6 +104,7 @@ namespace RemTool
 
             InitMainFolders(env.WebRootPath, env.ContentRootPath);
             InitRtMailSettings();
+            InitMetaData();
 
             app.UseStaticFiles();
             if (!env.IsDevelopment())
@@ -217,6 +218,27 @@ namespace RemTool
 
                 _rtMailSettingsCol.InsertOne(rtms);
 
+            }
+        }
+
+        public void InitMetaData()
+        {
+            // первоначальная инициализация метаданных - телефон и т.д.
+            var client = new MongoClient("mongodb://localhost:27017");
+            var database = client.GetDatabase("RemTool");
+
+            var _rtMetaData = database.GetCollection<MetaData>("RtMetaData");
+
+            // проверка существования объекта
+            if (_rtMetaData.Find(new BsonDocument()).FirstOrDefault() == null)
+            {
+                // если объекта нет - то создать по умолчанию
+                MetaData md = new MetaData()
+                {
+                    PhoneNumber = "+70123456789"
+                };
+
+                _rtMetaData.InsertOne(md);
             }
         }
     }
