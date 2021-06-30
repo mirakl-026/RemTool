@@ -153,9 +153,12 @@ export class MailSettings {
   ) { }
 }
 
-export class ContactsSettings {
+class ContactsSettings {
   constructor(
     public phoneNumber?: string,
     public email?: string
-  ) { }
+  ) {
+    phoneNumber = "";
+    email = ""
+  }
 }

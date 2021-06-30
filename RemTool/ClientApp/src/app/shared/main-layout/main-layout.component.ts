@@ -249,5 +249,8 @@ class ContactsSettings {
   constructor(
     public phoneNumber?: string,
     public email?: string
-  ) { }
+  ) {
+    phoneNumber = "";
+    email = ""
+  }
 }
