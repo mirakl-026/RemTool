@@ -99,7 +99,7 @@ export class SettingsPageComponent implements OnInit {
   // загрузка настроек контактов
   getContactsSettings() {
     //this.mailSettings = new MailSettings();
-    this.http.get("api/metadata/getcontacts")
+    this.http.get("api/metadata/getmetadata")
       .subscribe((data: ContactsSettings) => {
         this.contactsSettings$ = data;
       });

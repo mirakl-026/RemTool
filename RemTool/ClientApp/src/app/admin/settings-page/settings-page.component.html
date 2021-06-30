@@ -19,11 +19,11 @@
   <h4>Настройки контактов</h4>
   <div class="mail-settings__item">
     <label for="contacts-phone">Номер телефона</label>
-    <input id="contacts-phone" type="text" size="40">
+    <input id="contacts-phone" type="text" size="40" [(ngModel)]="contactsSettings$.phoneNumber">
   </div>
   <div class="mail-settings__item">
     <label for="contacts-Email">Адрес электронной почты</label>
-    <input id="contacts-Email" type="text" size="40">
+    <input id="contacts-Email" type="text" size="40" [(ngModel)]="contactsSettings$.email">
   </div>
 </section>
 
